@@ -141,4 +141,4 @@ Pasos de puesta en marcha y limitaciones: `automation/whatsapp/README.md`.
 - Toto: aprobar el aviso de privacidad (SPEC-004), revisar a YCloud como proveedor que recibe los chats y si hay que informar que parte de las respuestas son automáticas. Sin esa aprobación no se envía el formulario a números desconocidos.
 - Francisco: pasar el número a WhatsApp Business App y, tras 7 días, conectarlo a YCloud.
 - Técnicos: cargar secretos y desplegar en modo sombra, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra las cuentas reales.
-- SPEC-003: acordar si el asistente envía solicitudes internas de disponibilidad a Nico y Frank o solo las prepara para Francisco.
+- SPEC-003: decidido el 2026-10-08 que el asistente puede preguntar por sí mismo a Nico o a Frank la disponibilidad para un día y hora; falta conectarlo y, fuera de la ventana de 24 horas, una plantilla aprobada.

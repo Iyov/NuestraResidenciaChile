@@ -102,14 +102,21 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - El número de NRC usa hoy WhatsApp normal, no WhatsApp Business App. La coexistencia exige Business App, así que antes hay que pasar el número a esa aplicación y usarla con normalidad al menos 7 días (requisito citado por proveedores; confirmar al conectar).
 - Francisco aprobó el 2026-10-08 el texto MSG-05 ("Mucho gusto. Cuéntame, ¿en qué te puedo ayudar?"). Siguen pendientes las respuestas descriptivas que dependen de Don Humberto.
 
+**SPEC-003 — visitas (lógica local; nada conectado):**
+
+- `automation/visits/` valida horarios y modela los estados de la visita con pruebas sintéticas (`node --test automation/visits/visits.test.cjs`). No envía mensajes ni escribe en la hoja.
+- Decidido por Francisco el 2026-10-08: la visita dura cerca de 30 minutos y se reserva una hora; Nico y Frank manejan su horario y solo responden sí o no. Festivos: calendario público de Google "Festivos en Chile" (lista guardada en `automation/visits/holidays-cl.json`, 2026–2031; `node automation/visits/holidays.cjs` la actualiza). Sin plazo fijo de espera a los anfitriones. El asistente puede preguntarles por sí mismo la disponibilidad para un día y hora y esperar la respuesta; nada más por ahora.
+- Confirmado por Francisco el 2026-10-08 (segunda ronda): 11:30 y 16:00 son inicios válidos; no se trabaja ningún festivo, así que también bloquean las "Celebración" del calendario de Google (lectura de "todos los festivos"); texto de la pregunta a los anfitriones: "Hola Nico, cómo estás?, buenas tardes!, tienes disponibilidad para una visita el martes 13 de octubre a las 10:30?", con nombre y saludo según la hora.
+- Elección de implementación: la solicitud vuelve a Francisco a las 24 horas o al llegar la hora pedida.
+- Días puente, cierres y feriados que Google no publique no se detectan solos: se agregan a mano en `extra` de `holidays-cl.json`.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
 - Confirmar el responsable legal de los datos, datos de contacto de privacidad y períodos de retención.
 - Don Humberto debe validar las respuestas descriptivas y la frase de trayectoria de `specs/002-faq-base.md`. El asistente no puede inferir elegibilidad ni inventar esos datos.
 - Pasar el número de NRC a WhatsApp Business App, esperar 7 días de uso y conectarlo a YCloud. No asumir que Chrome DEV es un runtime.
-- Confirmar si el asistente puede enviar por sí mismo solicitudes internas de disponibilidad a Nico y Frank, o solo preparar mensajes para Francisco. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
-- Definir cómo resolver aceptaciones simultáneas, tiempo de espera a los anfitriones, duración de visita y fuente autoritativa del calendario de festivos chilenos.
+- SPEC-003: conectar la pregunta a los anfitriones con WhatsApp (depende de SPEC-002) y resolver a qué visita responde un anfitrión con varias preguntas abiertas. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
 - Acordar cadencia/formato de informes y línea base de métricas.
 - Auditar la cuenta actual de Google Ads, confirmar distribución de los USD 80 y consentimientos antes de habilitar conversiones avanzadas/importaciones.
 - Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
