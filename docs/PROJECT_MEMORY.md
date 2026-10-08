@@ -1,0 +1,87 @@
+# Memoria de proyecto — Nuestra Residencia Chile
+
+**Actualizada:** 2026-10-08. Esta memoria guarda decisiones reutilizables para futuras sesiones; los datos de prospectos/residentes no pertenecen aquí.
+
+## Propósito y objetivo comercial
+
+- Apoyar `https://nuestraresidenciachile.cl/` y reducir el trabajo manual de captación, seguimiento, atención, informes y marketing.
+- Objetivo indicado por NRC: llegar a **dos ingresos de residentes al mes**. Es un objetivo de negocio, no una promesa de resultados de publicidad.
+- Trabajo del usuario: generar y gestionar las comunicaciones con prospectos y atribuir el origen de cada ingreso.
+- El sitio WordPress es externo a este repositorio. `Backup/` no es el código WordPress activo.
+
+## Roles acordados
+
+| Rol | Responsabilidad acordada |
+|---|---|
+| Don Humberto | Dueño y sponsor de NRC; aprueba decisiones comerciales, hechos institucionales y presupuesto que requiera acuerdo del contratante. |
+| Francisco | Responsable de comunicaciones y seguimiento de prospectos; consulta disponibilidad a los anfitriones y confirma la visita al prospecto. |
+| Nicolás y Frank | Anfitriones que ejecutan las visitas que Francisco les asigna. No gestionan prospectos directamente en el flujo diseñado. |
+| Toto / Cristian Soto | Abogado y colaborador del proyecto; debe revisar el aviso y la política de privacidad antes de publicarlos. |
+
+## Sistemas y fuentes
+
+- El formulario público de Google enlazado desde `/contact/` inserta cada envío en una hoja de respuestas de Google. La copia local del 2026-10-08 sirve para entender su estructura, no es la fuente viva.
+- El formulario público explica que un especialista de NRC contactará para resolver dudas y coordinar una visita. Los campos visibles incluyen datos de contacto, nombre del adulto mayor, autovalencia y origen del contacto.
+- La exportación contiene encabezados de seguimiento y atribución publicitaria además de datos de contacto. No reproducir filas, nombres, teléfonos, emails, comentarios, IPs ni identificadores de publicidad en documentación o prompts.
+- El formulario no muestra un campo específico de preferencia/permiso WhatsApp ni un aviso de privacidad propio de NRC. Los consentimientos de medición/personalización publicitaria no equivalen automáticamente a permiso WhatsApp.
+- La hoja de respuestas tiene la pestaña `Respuestas de formulario 1` en la exportación revisada. Confirmar nombre y encabezados de la hoja viva antes de instalar scripts.
+
+## Decisiones funcionales confirmadas
+
+1. **Fuente de verdad inicial:** mantener la hoja de respuestas de Google como registro operativo; no migrar a CRM antes de entender el flujo.
+2. **ID:** entero secuencial por prospecto/adulto mayor, conservando IDs existentes 1–21; el siguiente prospecto nuevo recibe 22. Una fila realmente vacía no es un prospecto ni consume ID.
+3. **Color de seguimiento:** verde significa que la persona no ha desistido; rojo significa que desistió y no se deben iniciar más intentos. No confundir este estado con la etapa comercial; un ingreso firmado puede seguir en verde sin requerir seguimiento.
+4. **Ingreso directo por WhatsApp sin fila previa:** compartir el enlace del formulario; no crear automáticamente otro lead/ID.
+5. **Comunicaciones:** Francisco es responsable de la comunicación con prospectos. El asistente puede contestar de inmediato FAQs con hechos aprobados y derivar a Francisco lo que no pueda resolver con certeza. La prospección saliente a registros existentes se mantiene como borrador para revisión/envío manual en la primera etapa.
+6. **Visitas:** solo lunes a viernes entre 10:00–11:30 y 14:00–16:00, hora `America/Santiago`; nunca sábados, domingos ni festivos. No hay excepciones por disponibilidad del anfitrión.
+7. **Confirmación de anfitrión:** Francisco consulta por WhatsApp a Nico y Frank; el primero que confirme disponibilidad recibe la asignación. Si ambos confirman prácticamente al mismo tiempo y no se puede establecer el orden, resolver con Francisco. Francisco envía la confirmación final al prospecto, con fecha, hora y dirección de la residencia.
+8. **Seguridad:** no usar automatización de clics/cookies de Chrome como integración. Las credenciales nunca se copian a repositorios, prompts o logs.
+
+## Contrato y atribución
+
+El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato original antes de modificar términos comerciales. En resumen:
+
+- Honorario fijo mensual indicado: $300.000 líquidos.
+- Presupuesto publicitario aproximado: USD 80 mensuales para Meta u otra plataforma acordada por las partes. Francisco expresó intención de reasignarlo a Google Ads; confirmar el acuerdo requerido con Don Humberto antes de gastar.
+- Comisión: 50% de la cuota de ingreso; el contrato la estima en aproximadamente $500.000 líquidos a la fecha de firma, no como monto fijo. Se devenga al firmar el ingreso y recibir la residencia el pago.
+- El contrato cubre marketing, sitio/SEO/contenido, atención inicial de prospectos e informes, además de obligaciones de confidencialidad y entrega de activos.
+- Registrar canal y evidencia de atribución de forma que se pueda revisar el origen comercial; no presentar una comisión como devengada antes del evento contractual indicado.
+
+## Implementación existente
+
+- `automation/apps-script/AssignLeadId.gs` contiene un activador instalable para asignar el ID en la columna `#`. Usa bloqueo, ignora filas vacías, no sobreescribe IDs, reutiliza un ID si coincide el nombre normalizado del adulto mayor y el teléfono normalizado, y se detiene ante IDs coincidentes en conflicto.
+- Esa heurística de coincidencia es conservadora y solo compara teléfono + nombre del adulto mayor; contactos alternativos/números cambiados pueden requerir reconciliación manual.
+- El código, la guía y pruebas sintéticas están en el repositorio. **El activador no está instalado en la hoja viva** y no se ha conectado WhatsApp.
+- Prueba local: `node --test automation/apps-script/AssignLeadId.test.cjs`.
+- El intento de acceso con `clasp` no obtuvo permiso para crear un proyecto vinculado a la hoja viva. No se hizo `push` de código ni se instaló un trigger. La opción `clasp create --type sheets` creó una hoja auxiliar vacía por defecto; no contiene datos ni código NRC y debe eliminarse o reutilizarse conscientemente, no confundirse con la hoja de respuestas.
+
+## Requisitos de privacidad y atención
+
+- La solicitud del formulario permite responder a la consulta en el contexto que se explicó, pero el canal WhatsApp y los seguimientos posteriores deben quedar claros en el aviso/formulario antes de automatizarlos.
+- Meta exige opt-in para mensajes de negocio; una conversación entrante abre una ventana de servicio de 24 horas. Fuera de ella aplican plantillas aprobadas y las reglas de opt-in. El color verde no demuestra por sí solo un permiso.
+- La Ley chilena 21.719 tiene vigencia diferida al 2026-12-01. Revisar con abogado la política, la base de tratamiento y el texto exacto; no presentar una propuesta de aviso como asesoría legal.
+- Tratar nombre del adulto mayor y autovalencia como datos de alta sensibilidad; revisar si deben recogerse en el primer contacto y limitar quién/qué sistema los recibe.
+- No enviar la hoja completa a un modelo. Limitar las herramientas a búsqueda/actualización de prospecto por ID y estados permitidos; no guardar transcripciones completas; redactar logs.
+
+## Decisiones abiertas / bloqueos
+
+- Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
+- Confirmar el responsable legal de los datos, datos de contacto de privacidad y períodos de retención.
+- Aprobar una base factual para FAQs: servicios, tarifas, disponibilidad, condiciones de ingreso, horarios y afirmaciones de salud/equipo. El agente no puede inferir elegibilidad ni inventar esos datos.
+- Elegir runtime de WhatsApp: Meta Business Agent si NRC es elegible, WhatsApp Business Platform/Cloud API o proveedor autorizado. Validar elegibilidad/coexistencia del número actual y permisos. No asumir que Chrome DEV es un runtime.
+- Confirmar si el asistente puede enviar por sí mismo solicitudes internas de disponibilidad a Nico y Frank, o solo preparar mensajes para Francisco. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
+- Definir cómo resolver aceptaciones simultáneas, tiempo de espera a los anfitriones, duración de visita y fuente autoritativa del calendario de festivos chilenos.
+- Habilitar acceso autorizado a la hoja viva para revisar encabezados; para desplegar el script se requiere permiso de escritura a la columna `#` bajo una cuenta NRC controlada.
+- Acordar cadencia/formato de informes y línea base de métricas.
+- Auditar la cuenta actual de Google Ads, confirmar distribución de los USD 80 y consentimientos antes de habilitar conversiones avanzadas/importaciones.
+- Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
+- Gmail fue parte de la visión inicial, pero sus etiquetas, alcance, nivel de acceso y reglas de respuesta no están definidos; mantenerlo en descubrimiento.
+
+## Referencias operativas
+
+- [Ley 21.719 — BCN](https://www.bcn.cl/leychile/navegar?idNorma=1209272)
+- [WhatsApp: opt-in](https://developers.facebook.com/docs/whatsapp/overview/getting-opt-in/)
+- [WhatsApp: ventana de servicio y plantillas](https://developers.facebook.com/docs/whatsapp/conversation-types/)
+- [Google Apps Script: activadores instalables](https://developers.google.com/apps-script/guides/triggers/installable)
+- [Google Search: guía SEO](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- [Google Ads: Data Manager para enhanced conversions for leads](https://support.google.com/google-ads/answer/15707550?hl=en)

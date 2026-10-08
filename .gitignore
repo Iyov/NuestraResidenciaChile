@@ -1,0 +1,21 @@
+/*.txt
+/Backup/
+/.clasp.json
+/automation/apps-script/.clasp*.json
+/data/*.xlsx
+/data/*.xlsm
+/data/*.csv
+/data/*.tsv
+/InformesNRC/*.xlsx
+/InformesNRC/**/*.xlsx
+/InformesNRC/*.xlsm
+/InformesNRC/**/*.xlsm
+/InformesNRC/*.csv
+/InformesNRC/**/*.csv
+/Contrato/
+/InformesNRC/Informe de Gestión de Prospectos y Residentes*.pdf
+# Posibles datos de prospectos; revisar antes de publicar
+/InformesNRC/**/*Respuestas*.pdf
+/InformesNRC/**/Prospectos*.jpg
+/InformesNRC/**/Form Contacto*.jpg
+/InformesNRC/Informe Nuestra Residencia *.pdf
