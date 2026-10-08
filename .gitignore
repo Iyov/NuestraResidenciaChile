@@ -19,3 +19,5 @@
 /InformesNRC/**/Prospectos*.jpg
 /InformesNRC/**/Form Contacto*.jpg
 /InformesNRC/Informe Nuestra Residencia *.pdf
+# Caché local de wrangler (Cloudflare)
+.wrangler/
