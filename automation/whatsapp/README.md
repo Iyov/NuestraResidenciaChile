@@ -35,12 +35,12 @@ La hoja no se abre desde el Worker. La atiende una aplicación web de Apps Scrip
 
 Está activo salvo que `SHADOW_MODE` valga exactamente `off`. En modo sombra ningún mensaje llega a un prospecto: Francisco recibe "Modo sombra · habría respondido: …" con el texto aprobado, además de los avisos normales. Los comandos y las pausas funcionan igual.
 
-## Puesta en marcha (nada de esto se ha hecho)
+## Puesta en marcha (solo el paso 2 está hecho)
 
 Cada paso lo ejecuta Francisco con las cuentas de NRC. Los secretos se escriben en la terminal o en el panel correspondiente, nunca en el repositorio ni en un chat.
 
 1. **Hoja.** Desde `automation/apps-script/`: `clasp push`. En el editor de Apps Script, ejecutar `setupNrcWhatsAppSheet` (crea la pestaña `WhatsApp`). En Configuración del proyecto → Propiedades de la secuencia de comandos, crear `NRC_WHATSAPP_ADAPTER_TOKEN` con un valor aleatorio de 32 caracteres o más. Implementar → Nueva implementación → Aplicación web, ejecutar como la cuenta de NRC, acceso "Cualquier usuario". Guardar la URL que termina en `/exec`.
-2. **Cloudflare.** Crear la cuenta con el correo de NRC. Desde `automation/whatsapp/`: `npx wrangler login`, `npx wrangler d1 create nrc-whatsapp-frontdesk`, copiar el `database_id` a `wrangler.toml` y ejecutar `npx wrangler d1 execute nrc-whatsapp-frontdesk --remote --file schema.sql`.
+2. **Cloudflare (hecho el 2026-10-08).** Cuenta creada con el correo de NRC, equipo conectado con `npx wrangler login`, base D1 `nrc-whatsapp-frontdesk` creada, su `database_id` anotado en `wrangler.toml` y tablas de `schema.sql` aplicadas. En otro equipo basta con `npx wrangler login` desde `automation/whatsapp/`.
 3. **Secretos.** `npx wrangler secret put <NOMBRE>` para cada uno: `YCLOUD_API_KEY`, `NRC_BUSINESS_PHONE`, `NRC_OWNER_PHONE`, `SHEET_ADAPTER_URL`, `SHEET_ADAPTER_TOKEN`, `STATE_KEY_SECRET` (aleatorio, 32 caracteres o más) y `YCLOUD_WEBHOOK_SECRET` (se obtiene en el paso 5).
 4. **Despliegue.** `npx wrangler deploy`. Queda en modo sombra.
 5. **YCloud.** Con el número ya en WhatsApp Business App y conectado en coexistencia: crear un webhook hacia `https://<worker>/webhook/ycloud` con los eventos `whatsapp.inbound_message.received` y `whatsapp.smb.message.echoes`, y guardar su secreto como `YCLOUD_WEBHOOK_SECRET`.

@@ -14,11 +14,11 @@ type = "Text"
 globs = ["**/*.md"]
 fallthrough = true
 
-# Fill database_id with the value printed by `wrangler d1 create nrc-whatsapp-frontdesk`.
+# Created on 2026-10-08 in the NRC Cloudflare account; the id is not a secret.
 [[d1_databases]]
 binding = "DB"
 database_name = "nrc-whatsapp-frontdesk"
-database_id = ""
+database_id = "fba3a2ca-41f8-4a29-9048-c5655056a8e8"
 
 [vars]
 # Anything other than "off" keeps shadow mode on: nothing is sent to prospects.

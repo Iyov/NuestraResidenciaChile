@@ -140,5 +140,5 @@ Pasos de puesta en marcha y limitaciones: `automation/whatsapp/README.md`.
 - Don Humberto: validar las respuestas descriptivas y la frase de trayectoria del Anexo A (FAQ-01, 04, 05, 06, 07 y 11).
 - Toto: aprobar el aviso de privacidad (SPEC-004), revisar a YCloud como proveedor que recibe los chats y si hay que informar que parte de las respuestas son automáticas. Sin esa aprobación no se envía el formulario a números desconocidos.
 - Francisco: pasar el número a WhatsApp Business App y, tras 7 días, conectarlo a YCloud.
-- Técnicos: crear la cuenta de Cloudflare con el correo de NRC, desplegar en modo sombra, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra las cuentas reales.
+- Técnicos: cargar secretos y desplegar en modo sombra, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra las cuentas reales.
 - SPEC-003: acordar si el asistente envía solicitudes internas de disponibilidad a Nico y Frank o solo las prepara para Francisco.
