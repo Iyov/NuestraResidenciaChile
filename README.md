@@ -24,7 +24,8 @@ Requiere Node.js; desde la raíz:
 
 ```sh
 node --test automation/apps-script/AssignLeadId.test.cjs
-node --test automation/whatsapp/frontdesk.test.cjs automation/whatsapp/ycloud.test.cjs
+node --test automation/whatsapp/frontdesk.test.cjs automation/whatsapp/ycloud.test.cjs automation/whatsapp/service.test.cjs
+node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 ```
 
 No existe flujo local para compilar o desplegar el WordPress, instalar activadores de Google ni conectar WhatsApp.

@@ -9,16 +9,42 @@ Requisitos y decisiones: [`specs/002-whatsapp-frontdesk.md`](../../specs/002-wha
 - `knowledge.cjs`: lee las filas `FAQ-xx` y `MSG-xx` del anexo de la especificación. Solo las que están en estado `aprobada` se pueden enviar; cambiar un texto o aprobarlo se hace en el anexo, no aquí.
 - `classifier.cjs`: reglas de palabras clave. Devuelve un ID de respuesta, un saludo, un cierre o una derivación con motivo. Los temas reservados (salud, disponibilidad, pagos, reclamos, no contactar, persona o sistema) siempre derivan.
 - `frontdesk.cjs`: decide qué hacer con cada evento. No tiene código de red ni de hoja; todo efecto pasa por puertos inyectados.
-- `ycloud.cjs`: valida la firma de los webhooks de YCloud, traduce sus eventos a los de `frontdesk.cjs` y envía texto por su API. Escrito a partir de los ejemplos de su documentación; **no se ha probado contra la cuenta real**.
-- `frontdesk.test.cjs`, `ycloud.test.cjs`: pruebas con datos ficticios.
+- `ycloud.cjs`: valida la firma de los webhooks de YCloud, traduce sus eventos y envía texto por su API. Escrito desde los ejemplos de su documentación; **no se ha probado contra la cuenta real**.
+- `sheet.cjs`: cliente de `automation/apps-script/WhatsAppSheetAdapter.gs`, que es lo único que toca la hoja.
+- `store.cjs` y `schema.sql`: eventos ya procesados y estado de cada chat en una base D1 de Cloudflare. Las claves de chat se guardan como hash con clave, así que la base no contiene teléfonos.
+- `service.cjs`: une las piezas y aplica el modo sombra.
+- `worker.mjs` y `wrangler.toml`: entrada y configuración del Worker de Cloudflare. `worker.mjs` no tiene prueba propia; se comprobó que empaqueta con `wrangler deploy --dry-run`.
+- `*.test.cjs`: pruebas con datos ficticios.
 
 ## Prueba
 
-Desde la raíz del repositorio:
+Desde la raíz del repositorio (Node.js 22.13 o superior, por `node:sqlite`):
 
 ```sh
-node --test automation/whatsapp/frontdesk.test.cjs automation/whatsapp/ycloud.test.cjs
+node --test automation/whatsapp/frontdesk.test.cjs automation/whatsapp/ycloud.test.cjs automation/whatsapp/service.test.cjs
+node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 ```
+
+## Dónde corre
+
+Decidido por Francisco el 2026-10-08: un Worker de Cloudflare en plan gratuito, con una base D1 para el estado y una tarea programada cada 15 minutos para los recordatorios. Verificar los límites del plan gratuito al crear la cuenta.
+
+La hoja no se abre desde el Worker. La atiende una aplicación web de Apps Script dentro del proyecto `NRC Auto Lead ID`, que se ejecuta con la cuenta de NRC y ofrece solo tres operaciones: buscar por teléfono (devuelve ID y nombre de contacto), buscar teléfonos por ID y agregar una fila a la pestaña `WhatsApp`. Así no hace falta una cuenta de servicio de Google con acceso a toda la hoja.
+
+## Modo sombra
+
+Está activo salvo que `SHADOW_MODE` valga exactamente `off`. En modo sombra ningún mensaje llega a un prospecto: Francisco recibe "Modo sombra · habría respondido: …" con el texto aprobado, además de los avisos normales. Los comandos y las pausas funcionan igual.
+
+## Puesta en marcha (nada de esto se ha hecho)
+
+Cada paso lo ejecuta Francisco con las cuentas de NRC. Los secretos se escriben en la terminal o en el panel correspondiente, nunca en el repositorio ni en un chat.
+
+1. **Hoja.** Desde `automation/apps-script/`: `clasp push`. En el editor de Apps Script, ejecutar `setupNrcWhatsAppSheet` (crea la pestaña `WhatsApp`). En Configuración del proyecto → Propiedades de la secuencia de comandos, crear `NRC_WHATSAPP_ADAPTER_TOKEN` con un valor aleatorio de 32 caracteres o más. Implementar → Nueva implementación → Aplicación web, ejecutar como la cuenta de NRC, acceso "Cualquier usuario". Guardar la URL que termina en `/exec`.
+2. **Cloudflare.** Crear la cuenta con el correo de NRC. Desde `automation/whatsapp/`: `npx wrangler login`, `npx wrangler d1 create nrc-whatsapp-frontdesk`, copiar el `database_id` a `wrangler.toml` y ejecutar `npx wrangler d1 execute nrc-whatsapp-frontdesk --remote --file schema.sql`.
+3. **Secretos.** `npx wrangler secret put <NOMBRE>` para cada uno: `YCLOUD_API_KEY`, `NRC_BUSINESS_PHONE`, `NRC_OWNER_PHONE`, `SHEET_ADAPTER_URL`, `SHEET_ADAPTER_TOKEN`, `STATE_KEY_SECRET` (aleatorio, 32 caracteres o más) y `YCLOUD_WEBHOOK_SECRET` (se obtiene en el paso 5).
+4. **Despliegue.** `npx wrangler deploy`. Queda en modo sombra.
+5. **YCloud.** Con el número ya en WhatsApp Business App y conectado en coexistencia: crear un webhook hacia `https://<worker>/webhook/ycloud` con los eventos `whatsapp.inbound_message.received` y `whatsapp.smb.message.echoes`, y guardar su secreto como `YCLOUD_WEBHOOK_SECRET`.
+6. **Salir del modo sombra.** Solo tras revisar los resultados y con SPEC-004 aprobada: cambiar `SHADOW_MODE` a `off` en `wrangler.toml` y volver a desplegar.
 
 ## Qué hace
 
@@ -30,17 +56,18 @@ node --test automation/whatsapp/frontdesk.test.cjs automation/whatsapp/ycloud.te
 | Mensaje enviado por Francisco desde la app | El chat queda en pausa y la derivación pendiente se cierra |
 | `reactivar 22`, `reactivar todos`, `pausar 22`, `estado` desde el número de Francisco | Cambia o informa las pausas, solo por ID |
 | Evento repetido | Se ignora |
+| Falla al procesar un mensaje | No se reintenta contra el prospecto; Francisco recibe un aviso genérico |
 | `sendDueReminders` (tarea programada) | Un recordatorio por derivación con más de 2 horas, entre 9:00 y 21:00 de Santiago |
 
 El servicio solo responde a mensajes entrantes; no tiene ninguna ruta para iniciar una conversación con un prospecto.
 
 ## Qué falta para un piloto
 
-1. Probar `ycloud.cjs` contra la cuenta real: firma, formato de los dos eventos y envío. Pendientes conocidos: los avisos a Francisco fuera de la ventana de 24 horas necesitan una plantilla, que no está implementada; y no está verificado que se pueda responder a un contacto que llega sin teléfono.
-2. Adaptador de la hoja: leer `#`, `Teléfono` y `Tu Nombre y Apellido` de `Respuestas de formulario 1` y agregar filas a la pestaña `WhatsApp`.
-3. Almacén persistente para eventos procesados y estado de cada chat, con escritura atómica; el de las pruebas vive en memoria.
-4. Alojamiento, secretos y tarea programada para los recordatorios.
-5. Modo sombra antes de enviar nada a prospectos.
+1. La puesta en marcha de arriba, que depende de pasar el número a WhatsApp Business App y esperar 7 días.
+2. Probar `ycloud.cjs` contra la cuenta real: firma, formato de los dos eventos y envío.
+3. Plantilla de aviso para cuando Francisco no le ha escrito al número de NRC en 24 horas. Sin ella, ese aviso falla y solo queda el registro del Worker.
+4. Verificar si se puede responder a un contacto que llega sin teléfono.
+5. Dos mensajes simultáneos del mismo chat pueden pisar el estado entre sí; con el volumen de NRC es improbable, pero no está resuelto.
 
 ## Datos
 

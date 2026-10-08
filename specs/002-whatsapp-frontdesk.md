@@ -100,7 +100,7 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 2. Pasar el número de NRC de WhatsApp normal a WhatsApp Business App y usarla al menos 7 días; después, conectarlo a YCloud en coexistencia cuando el servicio esté listo para el modo sombra (Francisco; requiere iniciar sesión con Facebook y escanear un QR desde la app). La cuenta de YCloud ya existe.
 3. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y crear la pestaña `WhatsApp`.
 4. Hecho: reactivación por comandos y avisos por WhatsApp, definidos el 2026-10-08.
-5. Hecho en local: clasificador, manejador de eventos y adaptador de YCloud con pruebas sintéticas. Falta probar el adaptador contra la cuenta real, escribir el adaptador de la hoja y el almacén de estado, y elegir alojamiento.
+5. Hecho en local: clasificador, manejador de eventos, adaptadores de YCloud y de la hoja, almacén de estado y Worker con modo sombra, con pruebas sintéticas. Falta desplegar y probar contra las cuentas reales.
 6. Piloto en modo sombra: el servicio propone la respuesta a Francisco y no envía nada.
 7. Con SPEC-004 aprobada, activar las respuestas automáticas (el envío ya fue autorizado por Francisco para las filas aprobadas).
 
@@ -126,12 +126,19 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 
 ## Implementación local
 
-`automation/whatsapp/` contiene la lógica del asistente y sus pruebas sintéticas (`node --test automation/whatsapp/frontdesk.test.cjs`). Lee los textos y estados directamente del Anexo A. **No está conectada a WhatsApp, a YCloud ni a la hoja**: faltan los adaptadores y el alojamiento. Ver `automation/whatsapp/README.md`.
+`automation/whatsapp/` contiene la lógica del asistente, los adaptadores y sus pruebas sintéticas. Lee los textos y estados directamente del Anexo A. **No está conectada a WhatsApp, a YCloud ni a la hoja, ni desplegada.**
+
+- **Alojamiento (confirmado por Francisco, 2026-10-08):** Worker de Cloudflare en plan gratuito, base D1 para el estado y tarea programada para los recordatorios.
+- **Hoja:** aplicación web de Apps Script en el proyecto de la hoja (`automation/apps-script/WhatsAppSheetAdapter.gs`), con token compartido y tres operaciones: buscar por teléfono, buscar teléfonos por ID y agregar una fila a la pestaña `WhatsApp`. El servicio nunca recibe una fila completa.
+- **Modo sombra por defecto:** ningún mensaje llega a un prospecto hasta que se desactive explícitamente.
+- **Fallas:** un evento que falla no se reintenta contra el prospecto; Francisco recibe un aviso genérico.
+
+Pasos de puesta en marcha y limitaciones: `automation/whatsapp/README.md`.
 
 ## Pendientes antes de piloto
 
 - Don Humberto: validar las respuestas descriptivas y la frase de trayectoria del Anexo A (FAQ-01, 04, 05, 06, 07 y 11).
 - Toto: aprobar el aviso de privacidad (SPEC-004), revisar a YCloud como proveedor que recibe los chats y si hay que informar que parte de las respuestas son automáticas. Sin esa aprobación no se envía el formulario a números desconocidos.
 - Francisco: pasar el número a WhatsApp Business App y, tras 7 días, conectarlo a YCloud.
-- Técnicos: adaptador de la hoja, almacén de estado, alojamiento, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra la cuenta real.
+- Técnicos: crear la cuenta de Cloudflare con el correo de NRC, desplegar en modo sombra, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra las cuentas reales.
 - SPEC-003: acordar si el asistente envía solicitudes internas de disponibilidad a Nico y Frank o solo las prepara para Francisco.

@@ -1,14 +1,13 @@
-const fs = require('node:fs');
-const path = require('node:path');
-
-const DEFAULT_SOURCE = path.join(__dirname, '..', '..', 'specs', '002-faq-base.md');
-
 /**
  * Reads the answer base from the SPEC-002 annex so the approved wording has a
  * single source. Only rows whose state starts with "aprobada" may be sent.
  */
-function loadKnowledge(sourcePath = DEFAULT_SOURCE) {
-  return parseKnowledge(fs.readFileSync(sourcePath, 'utf8'));
+function loadKnowledge(sourcePath) {
+  // Required here so parseKnowledge stays usable where there is no file system (the hosted worker).
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const source = sourcePath || path.join(__dirname, '..', '..', 'specs', '002-faq-base.md');
+  return parseKnowledge(fs.readFileSync(source, 'utf8'));
 }
 
 function parseKnowledge(markdown) {

@@ -46,3 +46,16 @@ node --test automation/apps-script/AssignLeadId.test.cjs
 ```
 
 Las pruebas usan datos sintéticos y no acceden a Google.
+
+## Acceso del asistente de WhatsApp a la hoja (no subido)
+
+`WhatsAppSheetAdapter.gs` es una aplicación web para el asistente de SPEC-002. **Todavía no está en el proyecto de Google**: como esta carpeta está vinculada al proyecto vivo, el próximo `clasp push` lo subirá. Subirlo no lo activa; solo funciona después de crear el token y publicar la aplicación web a mano.
+
+- Ofrece tres operaciones y exige un token compartido: buscar por teléfono (devuelve `#` y nombre de contacto de las filas que ya tienen ID), buscar teléfonos por `#` y agregar una fila a la pestaña `WhatsApp`.
+- No modifica `Respuestas de formulario 1` y nunca devuelve una fila completa.
+- Los valores que escribe se validan contra una lista cerrada de tipos; no acepta texto libre.
+- Pasos de publicación: `automation/whatsapp/README.md`.
+
+```sh
+node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
+```

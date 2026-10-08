@@ -7,6 +7,7 @@ const FRONTDESK_DEFAULTS = Object.freeze({
   reminderEndHour: 21,
 });
 
+const FAILURE_NOTICE = 'No pude procesar un mensaje de Nuestra Residencia. Revisa el WhatsApp de NRC.';
 const COMMAND_HELP = 'No reconozco ese comando. Puedes usar: reactivar 22, reactivar todos, pausar 22 o estado.';
 
 /**
@@ -30,8 +31,33 @@ function createFrontdesk(ports, options) {
   const classify = ports.classify || classifyMessage;
   const log = ports.log || function () {};
 
-  async function handleInbound(event) {
+  /**
+   * An event is marked as processed before anything is sent, so a failure never
+   * repeats messages to a prospect on retry. Francisco gets a generic notice instead.
+   */
+  async function guarded(event, work) {
     if (!(await store.markProcessed(event.eventId))) return 'duplicate';
+    try {
+      return await work();
+    } catch (error) {
+      try {
+        await messenger.notifyOwner(FAILURE_NOTICE);
+      } catch (noticeError) {
+        // Nothing else can be done here; the log entry below is the only trace.
+      }
+      return finish(event, null, 'error');
+    }
+  }
+
+  function handleInbound(event) {
+    return guarded(event, () => processInbound(event));
+  }
+
+  function handleEcho(event) {
+    return guarded(event, () => processEcho(event));
+  }
+
+  async function processInbound(event) {
 
     const phone = normalizePhone(event.phone);
     if (phone && phone === ownerPhone) return finish(event, null, await handleOwnerCommand(event));
@@ -136,9 +162,7 @@ function createFrontdesk(ports, options) {
   }
 
   /** A message Francisco sent from the WhatsApp Business app: he owns that chat from now on. */
-  async function handleEcho(event) {
-    if (!(await store.markProcessed(event.eventId))) return 'duplicate';
-
+  async function processEcho(event) {
     const key = normalizePhone(event.phone) || event.chatId;
     if (key === ownerPhone) return 'ignored';
 

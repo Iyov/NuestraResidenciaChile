@@ -281,6 +281,19 @@ test('AC-009: logs, sheet rows and notices carry no phone or message text', asyn
   assert.deepEqual(Object.keys(logs[0]).sort(), ['eventId', 'outcome', 'prospectId']);
 });
 
+test('a failure midway alerts Francisco and is not retried against the prospect', async () => {
+  const { frontdesk, sent, notices, logs, rows } = setup();
+  const event = { eventId: 'boom', chatId: KNOWN, phone: KNOWN, kind: 'text', text: 'precio', at: AFTERNOON };
+  rows.push = () => { throw new Error('sheet unavailable'); };
+
+  assert.equal(await frontdesk.handleInbound(event), 'error');
+  assert.equal(await frontdesk.handleInbound(event), 'duplicate');
+
+  assert.equal(sent.length, 2);
+  assert.deepEqual(notices, ['No pude procesar un mensaje de Nuestra Residencia. Revisa el WhatsApp de NRC.']);
+  assert.deepEqual(logs[logs.length - 1], { eventId: 'boom', prospectId: null, outcome: 'error' });
+});
+
 test('classifier: closed set of intents', () => {
   const faq = (text) => classifyMessage(text).faqId;
   const motive = (text) => classifyMessage(text).motive;
