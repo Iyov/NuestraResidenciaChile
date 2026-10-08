@@ -20,7 +20,7 @@
 
 ## Sistemas y fuentes
 
-- El formulario público de Google enlazado desde `/contact/` inserta cada envío en una hoja de respuestas de Google. La copia local del 2026-10-08 sirve para entender su estructura, no es la fuente viva.
+- El formulario público de Google enlazado desde `/contact/` inserta cada envío en una hoja de respuestas de Google. La copia local del 2026-10-08 (`data/Nuestra Residencia Chile (Respuestas) 2026-10-08.xlsx`, excluida de Git) sirve para entender su estructura, no es la fuente viva.
 - El formulario público explica que un especialista de NRC contactará para resolver dudas y coordinar una visita. Los campos visibles incluyen datos de contacto, nombre del adulto mayor, autovalencia y origen del contacto.
 - La exportación contiene encabezados de seguimiento y atribución publicitaria además de datos de contacto. No reproducir filas, nombres, teléfonos, emails, comentarios, IPs ni identificadores de publicidad en documentación o prompts.
 - El formulario no muestra un campo específico de preferencia/permiso WhatsApp ni un aviso de privacidad propio de NRC. Los consentimientos de medición/personalización publicitaria no equivalen automáticamente a permiso WhatsApp.
@@ -51,9 +51,10 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 - `automation/apps-script/AssignLeadId.gs` contiene un activador instalable para asignar el ID en la columna `#`. Usa bloqueo, ignora filas vacías, no sobreescribe IDs, reutiliza un ID si coincide el nombre normalizado del adulto mayor y el teléfono normalizado, y se detiene ante IDs coincidentes en conflicto.
 - Esa heurística de coincidencia es conservadora y solo compara teléfono + nombre del adulto mayor; contactos alternativos/números cambiados pueden requerir reconciliación manual.
-- El código, la guía y pruebas sintéticas están en el repositorio. **El activador no está instalado en la hoja viva** y no se ha conectado WhatsApp.
+- El código, la guía y pruebas sintéticas están en el repositorio. El 2026-10-08 se subió el código con `clasp` al proyecto `NRC Auto Lead ID`, vinculado a la hoja viva y creado con la cuenta NRC (`nuestraresidenciachile@gmail.com`). Francisco ejecutó `installNrcLeadIdTrigger` ese día sin errores (pestaña y encabezados vivos validados por el instalador). Un envío de prueba con datos ficticios recibió el ID 22: **el flujo está activo en la hoja viva**. No se ha conectado WhatsApp.
 - Prueba local: `node --test automation/apps-script/AssignLeadId.test.cjs`.
-- El intento de acceso con `clasp` no obtuvo permiso para crear un proyecto vinculado a la hoja viva. No se hizo `push` de código ni se instaló un trigger. La opción `clasp create --type sheets` creó una hoja auxiliar vacía por defecto; no contiene datos ni código NRC y debe eliminarse o reutilizarse conscientemente, no confundirse con la hoja de respuestas.
+- Francisco decidió no usar copia de prueba: se despliega directo en la hoja viva y se valida con el primer envío real.
+- Un intento anterior de acceso con `clasp` (otra cuenta) no obtuvo permiso para crear un proyecto vinculado a la hoja viva. En ese intento no se hizo `push` ni se instaló un trigger. La opción `clasp create --type sheets` creó una hoja auxiliar vacía por defecto; no contiene datos ni código NRC y debe eliminarse o reutilizarse conscientemente, no confundirse con la hoja de respuestas.
 
 ## Requisitos de privacidad y atención
 
@@ -63,6 +64,25 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - Tratar nombre del adulto mayor y autovalencia como datos de alta sensibilidad; revisar si deben recogerse en el primer contacto y limitar quién/qué sistema los recibe.
 - No enviar la hoja completa a un modelo. Limitar las herramientas a búsqueda/actualización de prospecto por ID y estados permitidos; no guardar transcripciones completas; redactar logs.
 
+## Pendientes para continuar (al 2026-10-08)
+
+**SPEC-001 — ID automático (activo):**
+
+- Decidir si se borra la fila de prueba "Juan Perez" (ID 22) de la hoja viva: si se borra, el siguiente prospecto recibe 22; si se conserva, recibe 23.
+- En Google solo se probó el caso de prospecto nuevo. Ante un envío sin `#`, revisar **Ejecuciones** en el proyecto `NRC Auto Lead ID`.
+- `clasp` quedó autenticado en este equipo con la cuenta NRC; `.clasp.json` es local. Para subir cambios: `clasp push` desde `automation/apps-script/`.
+- La hoja auxiliar vacía creada por un `clasp create --type sheets` anterior (otra cuenta) sigue sin eliminar.
+
+**SPEC-004 — aviso de privacidad del formulario (borrador, no publicado):**
+
+- El texto propuesto está en `specs/004-form-privacy-and-consent.md`. El formulario vivo no se ha modificado.
+- Toto debe aprobar el texto y resolver: si Hotel Melado Humberto Piemonte SpA es quien opera la residencia y trata los datos; si la ley obliga a nombrar al representante legal; si la autovalencia es dato sensible que requiere consentimiento de la persona mayor; y si las dos casillas de autorización son adecuadas.
+- Definir el plazo de conservación (sugerencia de trabajo: 12 meses) y confirmar que `contacto@nuestraresidenciachile.cl` es un buzón atendido.
+- Redactar y publicar la Política de Privacidad en el sitio; el aviso la enlaza y hoy no existe.
+- Contrastar la frase sobre proveedores con el uso real de Google Ads/Meta antes de publicar.
+- No exponer datos personales de don Humberto en el aviso; solo los de la sociedad que la ley exija.
+- Tras la aprobación: aplicar descripción y dos casillas en el Google Form (agrega columnas a la hoja; el script de IDs no se ve afectado) y registrar la versión del aviso.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
@@ -71,7 +91,6 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - Elegir runtime de WhatsApp: Meta Business Agent si NRC es elegible, WhatsApp Business Platform/Cloud API o proveedor autorizado. Validar elegibilidad/coexistencia del número actual y permisos. No asumir que Chrome DEV es un runtime.
 - Confirmar si el asistente puede enviar por sí mismo solicitudes internas de disponibilidad a Nico y Frank, o solo preparar mensajes para Francisco. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
 - Definir cómo resolver aceptaciones simultáneas, tiempo de espera a los anfitriones, duración de visita y fuente autoritativa del calendario de festivos chilenos.
-- Habilitar acceso autorizado a la hoja viva para revisar encabezados; para desplegar el script se requiere permiso de escritura a la columna `#` bajo una cuenta NRC controlada.
 - Acordar cadencia/formato de informes y línea base de métricas.
 - Auditar la cuenta actual de Google Ads, confirmar distribución de los USD 80 y consentimientos antes de habilitar conversiones avanzadas/importaciones.
 - Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.

@@ -1,6 +1,6 @@
 # SPEC-001 — ID automático de prospecto
 
-**Estado:** código local implementado y pruebas sintéticas aprobadas; pendiente instalar y validar el activador en Google. No desplegado.
+**Estado:** código subido el 2026-10-08 al proyecto Apps Script `NRC Auto Lead ID`, vinculado a la hoja viva bajo la cuenta NRC; pruebas sintéticas locales aprobadas. `installNrcLeadIdTrigger` se ejecutó sin errores ese mismo día con la cuenta NRC. **Flujo activo:** Francisco verificó ese día un envío de prueba con datos ficticios por el formulario público, que recibió el ID 22.
 
 ## Problema y resultado
 
@@ -34,11 +34,10 @@ Cada envío real del Google Form crea una fila en la hoja `Respuestas de formula
 
 - Fuente: `automation/apps-script/AssignLeadId.gs`; instalación manual y pruebas: `automation/apps-script/README.md`.
 - La deduplicación es intencionalmente conservadora: nombre del adulto mayor + teléfono. Cambios de número/contacto requieren revisión; el código no fusiona por nombre solamente.
-- No existe conexión de despliegue desde este repositorio a la hoja. No afirmar que los IDs automáticos estén activos hasta verificar una respuesta real bajo control de NRC.
+- `clasp` (autenticado con la cuenta NRC) vincula esta carpeta al proyecto de la hoja viva mediante `.clasp.json` local, no versionado. Para actualizar el código en Google: `clasp push` desde `automation/apps-script/`.
 
 ## Pendientes de operación
 
-- Confirmar que la pestaña viva y encabezados coinciden con la exportación del 2026-10-08.
-- Dar permiso Editor a la cuenta autenticada por `clasp` o autenticarlo con la cuenta propietaria de la hoja. El intento actual fue rechazado por Google antes de instalar.
-- Ejecutar en copia de prueba bajo la cuenta propietaria NRC; revisar activador y ejecuciones.
-- Instalar en producción y observar el primer envío válido antes de declarar el flujo activo.
+- Francisco decidió el 2026-10-08 no crear copia de prueba y desplegar directamente en la hoja viva; la validación en Google de AC-009 se reemplazó por un envío de prueba en la hoja viva, que recibió el ID 22.
+- La fila de prueba ocupa el ID 22: si se elimina, el siguiente prospecto recibirá 22; si se conserva, recibirá 23.
+- Solo se probó en Google el caso de prospecto nuevo; duplicados, conflictos y concurrencia están cubiertos por las pruebas locales. Revisar **Ejecuciones** si un envío queda sin ID.

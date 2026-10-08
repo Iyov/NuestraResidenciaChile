@@ -27,6 +27,39 @@
 - **AC-005:** opt-out se propaga a todos los flujos de prospección; una nueva consulta entrante se atiende sin reactivar campañas automáticamente.
 - **AC-006:** no se envían datos personales a analítica/Ads/LLM sin configuración y autorización revisadas.
 
+## Borrador de texto para el formulario (2026-10-08) — no publicado
+
+Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está aplicada al formulario vivo. Los campos entre corchetes son hechos que NRC debe confirmar; no publicar con corchetes pendientes. La razón social y el RUT los entregó Francisco el 2026-10-08; el correo viene de la página de contacto del sitio.
+
+### Descripción del formulario
+
+> Queremos acompañarte en esta nueva etapa. Déjanos tus datos y un especialista de Nuestra Residencia Chile se pondrá en contacto contigo por teléfono, WhatsApp o correo electrónico para resolver tus dudas, conocer tus necesidades y agendar una visita personalizada. Tu tranquilidad y la de tu familia son nuestra prioridad.
+>
+> **Confidencialidad y protección de tus datos**
+>
+> - **Quién es responsable:** Hotel Melado Humberto Piemonte SpA, RUT 77.060.284-K, que opera Nuestra Residencia – Senior Living, Camino Las Flores 10961, Las Condes, Santiago.
+> - **Para qué usamos tus datos:** solo para responder tu solicitud, orientarte y coordinar tu visita. No te enviaremos publicidad ni novedades salvo que lo autorices más abajo.
+> - **Confidencialidad:** tus datos y los del adulto mayor son confidenciales. Solo accede a ellos el equipo de Nuestra Residencia Chile a cargo de tu solicitud, que está obligado a guardar reserva. No vendemos tus datos. [Solo los reciben los proveedores tecnológicos que nos prestan servicio para operar este formulario, como Google.]
+> - **Datos del adulto mayor:** al enviar el formulario declaras que la persona mayor está informada o que actúas en su representación. La respuesta sobre autovalencia es solo referencial para orientarte; no es una evaluación ni condiciona el ingreso.
+> - **Cuánto tiempo los guardamos:** [PLAZO — no figura en ningún documento; sugerencia de trabajo: 12 meses] desde tu último contacto con nosotros, o hasta que nos pidas eliminarlos.
+> - **Tus derechos:** puedes pedir acceso, rectificación, supresión, oposición, portabilidad o bloqueo de tus datos, y retirar tu autorización en cualquier momento, escribiendo a contacto@nuestraresidenciachile.cl. Tratamos tus datos conforme a la Ley N° 19.628 y a la Ley N° 21.719 de Protección de Datos Personales, vigente desde el 1 de diciembre de 2026.
+> - Más información en nuestra Política de Privacidad: [ENLACE].
+
+### Preguntas nuevas al final del formulario
+
+1. **Casilla obligatoria:** "He leído el aviso de confidencialidad y protección de datos y autorizo a Nuestra Residencia Chile a contactarme por teléfono, WhatsApp o correo electrónico para responder esta solicitud."
+2. **Casilla opcional, separada de la anterior (AC-003):** "Además, acepto recibir información y novedades de Nuestra Residencia Chile por WhatsApp o correo electrónico. Puedo darme de baja cuando quiera."
+
+### Puntos que Toto y Don Humberto deben resolver antes de publicar
+
+- Responsable: confirmar que Hotel Melado Humberto Piemonte SpA es la entidad que opera la residencia y trata los datos. El contrato de servicios y la resolución sanitaria están a nombre de don Humberto como persona natural, no de la sociedad.
+- Instrucción de Francisco (2026-10-08): el aviso no expone datos personales de don Humberto (RUT personal, correo o teléfono propios); solo los datos de la sociedad que la ley exija. Toto debe indicar si la ley obliga a nombrar al representante legal.
+- Plazo de conservación: ningún documento lo define. Confirmar también que `contacto@nuestraresidenciachile.cl` es un buzón atendido para solicitudes de derechos.
+- Si la frase sobre proveedores es exacta: la hoja guarda identificadores de Google Ads, y cualquier envío a Ads/Meta o a un proveedor de IA debe quedar descrito (AC-006).
+- Si la autovalencia es dato sensible de salud que exige consentimiento expreso de la propia persona mayor, o si conviene sacarla del primer formulario.
+- Si las dos casillas son la forma adecuada de documentar el permiso, y cómo se registra la versión del aviso aceptada (AC-004).
+- Existencia y enlace de la Política de Privacidad completa en el sitio.
+
 ## Referencias
 
 - [Ley 21.719, BCN — vigencia diferida al 2026-12-01](https://www.bcn.cl/leychile/navegar?idNorma=1209272)

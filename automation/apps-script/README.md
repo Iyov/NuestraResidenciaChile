@@ -11,9 +11,13 @@
 - No modifica color, estado comercial, comentarios ni otros datos del prospecto.
 - La concurrencia se serializa con `LockService`. El código no registra nombres, teléfonos ni valores de celdas.
 
+## Estado en Google
+
+Desde el 2026-10-08 el código está en el proyecto `NRC Auto Lead ID`, vinculado a la hoja real bajo la cuenta NRC, con el activador instalado y verificado (un envío de prueba recibió el ID 22). `.clasp.json` es local y no se versiona; para subir cambios, ejecutar `clasp push` desde esta carpeta con `clasp` autenticado en la cuenta NRC.
+
 ## Instalación en Google
 
-El repositorio conserva el código fuente, pero no instala el activador en Google por sí solo. La instalación requiere acceso de edición a la hoja y debe hacerla quien administre la cuenta NRC:
+Pasos para reinstalar o instalar en otra hoja. La instalación requiere acceso de edición a la hoja y debe hacerla quien administre la cuenta NRC:
 
 1. En una **copia de prueba** de la hoja de respuestas, abre **Extensiones → Apps Script**.
 2. Copia `AssignLeadId.gs` al proyecto de Apps Script vinculado a esa hoja.

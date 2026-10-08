@@ -7,10 +7,10 @@ Las especificaciones son la fuente de requisitos funcionales y aceptación. Un e
 | Especificación | Estado actual | Próximo gate |
 |---|---|---|
 | [Constitución](constitution.md) | Principios vigentes | Revisar si cambian permisos o sensibilidad de datos |
-| [001 — Auto-ID](001-auto-lead-id.md) | Código local y 9 pruebas; no desplegado | Validar copia de prueba y activar en cuenta NRC |
+| [001 — Auto-ID](001-auto-lead-id.md) | Código subido al proyecto Apps Script vinculado a la hoja viva (2026-10-08) y verificado con un envío de prueba que recibió el ID 22 | Revisar **Ejecuciones** si algún envío queda sin ID |
 | [002 — Atención WhatsApp](002-whatsapp-frontdesk.md) | Funcionalidad planificada | Aprobar base de respuestas, runtime, consentimiento y takeover |
 | [003 — Visitas](003-visit-coordination.md) | Reglas acordadas; integración pendiente | Resolver duración, festivos, timeout y permiso de enviar solicitudes internas |
-| [004 — Privacidad del formulario](004-form-privacy-and-consent.md) | Pendiente de abogado | Confirmar responsable, bases/finalidades y aviso con Toto |
+| [004 — Privacidad del formulario](004-form-privacy-and-consent.md) | Borrador de aviso redactado (2026-10-08); pendiente de abogado, no publicado | Confirmar responsable, bases/finalidades y aviso con Toto |
 | [005 — Captación y marketing](005-acquisition-content-and-reporting.md) | Alcance inicial; falta auditoría | Baseline, presupuesto mutuo, hechos aprobados y métricas |
 | [006 — Gmail](006-gmail-triage.md) | Backlog de descubrimiento | Definir buzón, filtros, datos y acciones permitidas |
 

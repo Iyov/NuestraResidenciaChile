@@ -4,7 +4,7 @@ Proyecto para apoyar la captación y seguimiento de prospectos de Nuestra Reside
 
 ## Estado actual
 
-- **ID de prospecto:** código local en [`automation/apps-script/AssignLeadId.gs`](automation/apps-script/AssignLeadId.gs). Asigna el siguiente ID al recibir una respuesta válida; el activador debe instalarse manualmente en la hoja real. Aún no está instalado en Google.
+- **ID de prospecto:** código en [`automation/apps-script/AssignLeadId.gs`](automation/apps-script/AssignLeadId.gs), subido el 2026-10-08 al proyecto Apps Script vinculado a la hoja real. Asigna el siguiente ID al recibir una respuesta válida; el activador se instaló ese día con la cuenta NRC y se verificó con un envío de prueba (ID 22). Está activo.
 - **WhatsApp, informes, Google Ads, SEO, blog/redes y Gmail:** requisitos y especificaciones; no asumir que están implementados.
 - **Web activa:** [nuestraresidenciachile.cl](https://nuestraresidenciachile.cl/), WordPress externo. Los archivos de `Backup/` son respaldos, no código de producción.
 
