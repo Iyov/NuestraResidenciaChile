@@ -83,12 +83,27 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - No exponer datos personales de don Humberto en el aviso; solo los de la sociedad que la ley exija.
 - Tras la aprobación: aplicar descripción y dos casillas en el Google Form (agrega columnas a la hoja; el script de IDs no se ve afectado) y registrar la versión del aviso.
 
+**SPEC-002 — atención por WhatsApp (borradores; nada desplegado):**
+
+- `specs/002-faq-base.md` propone 11 respuestas y 3 mensajes fijos. Francisco definió el 2026-10-08: habitación individual 32 UF + IVA mensuales (cerca de $1.550.000 a esa fecha), visitas de lunes a viernes 10:00–11:30 y 14:00–16:00, correo `nuestraresidenciachile@gmail.com` y tono cálido, humano y respetuoso con tuteo. También decidió que el asistente escribe como Francisco Barrientos y no se presenta como asistente virtual; si alguien pregunta si habla con una persona o un sistema automático, deriva a Francisco. La comunicación virtual no tiene horario: el asistente responde a cualquier hora y solo las visitas tienen horario. Quedan abiertas D-1 y D-2: revisión legal de esa identidad con Toto y frase de experiencia (Don Humberto).
+- **Precio que se comunica:** siempre el de la habitación individual. La habitación doble comunicada nunca se ha contratado y es poco probable que se pida; su valor de referencia es $2.500.000 mensuales por ambas habitaciones (valor promocional). No ofrecerlo por iniciativa propia; si alguien pregunta por la doble, el asistente deriva a Francisco.
+- Por decisión de Francisco no se modifican el brochure 2026 (muestra $1.500.000 para la individual) ni la página `/contact/` del sitio; el asistente usa los valores que él definió.
+- Runtime decidido por Francisco el 2026-10-08: Cloud API en coexistencia con WhatsApp Business App, a través de YCloud en plan gratuito (se prioriza no tener costo fijo). Cuenta no creada y número no conectado todavía. Se descartaron las conexiones no oficiales que emulan WhatsApp Web (habituales en flujos de n8n) por riesgo de bloqueo del número.
+- En coexistencia los grupos no se sincronizan y las listas de difusión quedan de solo lectura: la coordinación con Nico y Frank (SPEC-003) sería por chats individuales.
+- Francisco autorizó el 2026-10-08 que el asistente envíe por sí mismo respuestas a preguntas introductorias o fáciles (filas aprobadas de la base); seguimientos y mensajes iniciados por el negocio siguen como borradores. Los avisos de derivación le llegan por WhatsApp a su número personal.
+- Confirmado por Francisco el 2026-10-08: aviso con ID, nombre corto del contacto y motivo, con un recordatorio a las 2 horas entre 9:00 y 21:00; comandos `reactivar N`, `reactivar todos`, `pausar N` y `estado` desde su número personal; el asistente escribe solo en una pestaña nueva `WhatsApp` y no toca la de respuestas; textos MSG-02, MSG-03 y FAQ-10 aprobados.
+- La primera versión clasifica con reglas de palabras clave, sin modelo de lenguaje: sin costo y sin enviar texto a terceros.
+- `automation/whatsapp/` tiene la lógica del asistente con pruebas sintéticas (`node --test automation/whatsapp/frontdesk.test.cjs`). Incluye un adaptador de YCloud escrito desde su documentación y sin probar contra la cuenta real. Es solo local: faltan el adaptador de la hoja, el almacén persistente y el alojamiento.
+- Francisco creó la cuenta de YCloud el 2026-10-08; el registro le exigió validar el número de NRC por WhatsApp. Fue solo un código de verificación: el número no quedó conectado.
+- El número de NRC usa hoy WhatsApp normal, no WhatsApp Business App. La coexistencia exige Business App, así que antes hay que pasar el número a esa aplicación y usarla con normalidad al menos 7 días (requisito citado por proveedores; confirmar al conectar).
+- Francisco aprobó el 2026-10-08 el texto MSG-05 ("Mucho gusto. Cuéntame, ¿en qué te puedo ayudar?"). Siguen pendientes las respuestas descriptivas que dependen de Don Humberto.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
 - Confirmar el responsable legal de los datos, datos de contacto de privacidad y períodos de retención.
-- Aprobar una base factual para FAQs: servicios, tarifas, disponibilidad, condiciones de ingreso, horarios y afirmaciones de salud/equipo. El agente no puede inferir elegibilidad ni inventar esos datos.
-- Elegir runtime de WhatsApp: Meta Business Agent si NRC es elegible, WhatsApp Business Platform/Cloud API o proveedor autorizado. Validar elegibilidad/coexistencia del número actual y permisos. No asumir que Chrome DEV es un runtime.
+- Don Humberto debe validar las respuestas descriptivas y la frase de trayectoria de `specs/002-faq-base.md`. El asistente no puede inferir elegibilidad ni inventar esos datos.
+- Pasar el número de NRC a WhatsApp Business App, esperar 7 días de uso y conectarlo a YCloud. No asumir que Chrome DEV es un runtime.
 - Confirmar si el asistente puede enviar por sí mismo solicitudes internas de disponibilidad a Nico y Frank, o solo preparar mensajes para Francisco. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
 - Definir cómo resolver aceptaciones simultáneas, tiempo de espera a los anfitriones, duración de visita y fuente autoritativa del calendario de festivos chilenos.
 - Acordar cadencia/formato de informes y línea base de métricas.

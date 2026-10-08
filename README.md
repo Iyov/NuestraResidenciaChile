@@ -5,13 +5,14 @@ Proyecto para apoyar la captación y seguimiento de prospectos de Nuestra Reside
 ## Estado actual
 
 - **ID de prospecto:** código en [`automation/apps-script/AssignLeadId.gs`](automation/apps-script/AssignLeadId.gs), subido el 2026-10-08 al proyecto Apps Script vinculado a la hoja real. Asigna el siguiente ID al recibir una respuesta válida; el activador se instaló ese día con la cuenta NRC y se verificó con un envío de prueba (ID 22). Está activo.
-- **WhatsApp, informes, Google Ads, SEO, blog/redes y Gmail:** requisitos y especificaciones; no asumir que están implementados.
+- **Atención por WhatsApp:** lógica y pruebas sintéticas en [`automation/whatsapp/`](automation/whatsapp/README.md). Solo local: sin número conectado, sin despliegue y sin mensajes enviados.
+- **Informes, Google Ads, SEO, blog/redes y Gmail:** requisitos y especificaciones; no asumir que están implementados.
 - **Web activa:** [nuestraresidenciachile.cl](https://nuestraresidenciachile.cl/), WordPress externo. Los archivos de `Backup/` son respaldos, no código de producción.
 
 ## Documentación del proyecto
 
 - [`AGENTS.md`](AGENTS.md): instrucciones breves para agentes que trabajen en este repositorio.
-- [`docs/PROJECT_MEMORY.md`](docs/PROJECT_MEMORY.md): contexto, decisiones confirmadas, estado actual y pendientes.
+- [`MEMORY.md`](MEMORY.md): contexto, decisiones confirmadas, estado actual y pendientes.
 - [`specs/README.md`](specs/README.md): índice de especificaciones, estado y flujo SDD.
 - [`specs/constitution.md`](specs/constitution.md): principios y controles comunes del proyecto.
 - [`specs/`](specs/): especificaciones funcionales, criterios de aceptación, dependencias y decisiones abiertas por función.
@@ -23,6 +24,7 @@ Requiere Node.js; desde la raíz:
 
 ```sh
 node --test automation/apps-script/AssignLeadId.test.cjs
+node --test automation/whatsapp/frontdesk.test.cjs automation/whatsapp/ycloud.test.cjs
 ```
 
 No existe flujo local para compilar o desplegar el WordPress, instalar activadores de Google ni conectar WhatsApp.
