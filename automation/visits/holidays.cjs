@@ -9,11 +9,12 @@ const GOOGLE_HOLIDAYS_URL =
 const SNAPSHOT_PATH = path.join(__dirname, 'holidays-cl.json');
 
 /**
- * Reads the calendar file and keeps every entry: Francisco decided on
- * 2026-10-08 that no holiday is worked, so Google's "Celebración" entries
- * (Jueves Santo, Corpus Christi…) block a visit like a "Día festivo". A year
- * counts as covered only when it has both 1 January and 25 December, so a year
- * cut off at the edge of the feed stays unverifiable.
+ * Reads the calendar file and keeps only the entries Google labels "Día
+ * festivo": Francisco decided on 2026-10-08 that what blocks a visit is the
+ * official holiday, so the "Celebración" entries (Jueves Santo, Corpus
+ * Christi…) stay working days. A year counts as covered only when it has both
+ * 1 January and 25 December, so a year cut off at the edge of the feed stays
+ * unverifiable.
  */
 function parseGoogleHolidayIcs(text) {
   const lines = String(text).replace(/\r?\n[ \t]/g, '').split(/\r?\n/);
@@ -24,7 +25,7 @@ function parseGoogleHolidayIcs(text) {
     if (line === 'BEGIN:VEVENT') {
       event = {};
     } else if (line === 'END:VEVENT') {
-      if (event && event.start) {
+      if (event && event.start && event.official) {
         for (const date of eventDates(event.start, event.end)) {
           const year = date.slice(0, 4);
           (byYear[year] = byYear[year] || new Set()).add(date);
@@ -37,6 +38,7 @@ function parseGoogleHolidayIcs(text) {
       const value = line.slice(separator + 1);
       if (name === 'DTSTART') event.start = toDate(value);
       if (name === 'DTEND') event.end = toDate(value);
+      if (name === 'DESCRIPTION') event.official = /^Día festivo/.test(value);
     }
   }
 

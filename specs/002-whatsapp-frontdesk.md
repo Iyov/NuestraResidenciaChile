@@ -10,7 +10,7 @@ Responder consultas entrantes de NRC con rapidez, resolver FAQs aprobadas, mante
 
 - El asistente puede contestar de inmediato FAQs solo desde una base factual aprobada.
 - Francisco es el responsable de todas las comunicaciones comerciales con prospectos. El asistente representa su flujo operativo; ante dudas, deriva a Francisco.
-- Si una persona escribe directamente por WhatsApp y no existe en la hoja, el asistente comparte el enlace al formulario. No crea una fila ni un ID por iniciativa propia.
+- Las respuestas aprobadas se envían a cualquier número, esté o no en la hoja: son datos públicos (decisión de Francisco, 2026-10-08). Si la persona no existe en la hoja, el asistente le ofrece además el enlace al formulario, una vez. No crea una fila ni un ID por iniciativa propia.
 - Si el teléfono identifica un prospecto existente, se conserva su ID y se registra una interacción mínima.
 - Los seguimientos salientes históricos a personas verdes son borradores para revisión/envío manual en la primera etapa.
 - Los datos rojos bloquean intentos salientes de seguimiento. Una consulta entrante nueva se puede contestar sin reactivar automáticamente el seguimiento.
@@ -26,32 +26,33 @@ Responder consultas entrantes de NRC con rapidez, resolver FAQs aprobadas, mante
 
 ## WhatsApp y cumplimiento
 
-- Preferir WhatsApp Business Platform/Cloud API o solución aprobada; evaluar Meta Business Agent si la cuenta resulta elegible.
+- Canal decidido: Cloud API en coexistencia con WhatsApp Business App, a través de YCloud (ver Runtime).
 - No automatizar clics/cookies del perfil Chrome DEV ni leer archivos de credenciales.
 - Validar opt-in y expectativas de canal antes de mensajes iniciados por el negocio. El formulario actualmente promete que NRC contactará para responder y coordinar visita, pero no especifica WhatsApp ni marketing continuo.
 - Meta documenta una ventana de servicio de 24 horas tras el mensaje/llamada del usuario; fuera de ella aplican plantillas aprobadas y reglas de opt-in.
-- Verificar el número empresarial actual, elegibilidad, coexistencia con WhatsApp Business App, permisos, costos, webhooks y proveedor antes de decidir runtime.
+- Al conectar el número, confirmar contra la cuenta real lo que hoy solo consta en documentación: elegibilidad, los 7 días de uso de WhatsApp Business App, costos y formato de los webhooks.
 
 ## Actualización de hoja
 
-- Resolver por teléfono normalizado más nombre del adulto mayor y presentar conflictos para revisión; nunca actualizar una fila solo porque el modelo “cree” que coincide.
-- Escribir únicamente campos aprobados: ID, etapa, estado de seguimiento, fecha/hora del último contacto, próxima acción y resumen mínimo. Las columnas exactas y un eventual tab de eventos están pendientes de revisar en la hoja viva.
-- No copiar la hoja completa ni transcripciones al modelo. Evitar guardar salud/detalles familiares; redactar logs.
+- Resolver por teléfono normalizado. Si el teléfono coincide con más de un ID, no se elige: se deriva a Francisco y no se escribe en ninguna fila.
+- En `Respuestas de formulario 1` el servicio escribe una sola celda por prospecto: la columna `WhatsApp`, con el último evento (decisión de Francisco, 2026-10-08). El historial completo va en la pestaña `WhatsApp`. Detalle en las decisiones de la tercera ronda.
+- `Seguimiento` (activo / desistió), `Estado` y `Comentario` son solo de Francisco; el servicio no los escribe.
+- No copiar la hoja completa ni transcripciones a ningún servicio externo. Evitar guardar salud/detalles familiares; redactar logs.
 - Webhook procesado de manera idempotente; estados de mensaje entrante, enviado, entregado y error no deben duplicar cambios.
 
 ## Criterios de aceptación
 
 - **AC-001:** una FAQ conocida se responde con contenido aprobado y sin inventar datos.
 - **AC-002:** una pregunta fuera de la base se deriva a Francisco y no recibe respuesta especulativa.
-- **AC-003:** prospecto existente mantiene su ID; el mensaje actualiza solo los campos autorizados.
-- **AC-004:** contacto nuevo recibe el formulario, sin fila/ID creados por WhatsApp.
+- **AC-003:** prospecto existente mantiene su ID; el mensaje actualiza solo su celda `WhatsApp` y agrega una fila a la pestaña de eventos.
+- **AC-004:** contacto nuevo recibe las respuestas aprobadas y, una vez, el formulario; sin fila/ID creados por WhatsApp.
 - **AC-005:** rojo nunca origina un mensaje saliente de prospección; una consulta entrante puede recibir respuesta contextual.
 - **AC-006:** cuando Francisco toma control, el bot se silencia para ese chat.
 - **AC-007:** fuera de ventana, no se envía mensaje libre; se aplica plantilla autorizada o se espera intervención humana.
 - **AC-008:** evento webhook repetido no duplica respuesta, nota ni cambio de estado.
 - **AC-009:** ningún log, test o resumen expone PII o transcripción completa.
 
-## Runtime: opciones y recomendación
+## Runtime: opciones evaluadas y decisión
 
 Revisado el 2026-10-08 contra la documentación de Meta; costos de terceros y disponibilidad en Chile están sin verificar.
 
@@ -65,7 +66,7 @@ Revisado el 2026-10-08 contra la documentación de Meta; costos de terceros y di
 | Requisito de alta | Solo mediante un Solution Partner o Tech Provider de Meta (Embedded Signup); app ≥ 2.24.17 | Alta directa en Meta Business; sin intermediario | Según prensa, despliegue global desde junio de 2026 por regiones y dentro de planes de pago; elegibilidad en Chile sin confirmar |
 | Se pierde | Grupos no se sincronizan; listas de difusión quedan de solo lectura; mensajes temporales, de una sola vista y ubicación en vivo se desactivan; se desvinculan WhatsApp para Windows y WearOS; hay que abrir la app al menos cada ~14 días | Toda la app en ese número | Control y trazabilidad |
 
-**Recomendación: opción A.** Es la única que cumple AC-003 a AC-008 sin quitarle la app a Francisco, y el takeover sale casi gratis: basta con que él escriba en el chat. Su costo es depender de un proveedor que haga el alta; debe entregar los webhooks crudos (incluido `smb_message_echoes`) a nuestro servicio y no imponer su propio bot. La opción C sirve solo como contestador genérico y no puede sostener las reglas de esta especificación.
+**Decidido: opción A, a través de YCloud** (Francisco, 2026-10-08). Es la única que cumple AC-003 a AC-008 sin quitarle la app a Francisco, y el takeover sale casi gratis: basta con que él escriba en el chat. Su costo es depender de un proveedor que haga el alta; debe entregar los webhooks crudos (incluido `smb_message_echoes`) a nuestro servicio y no imponer su propio bot. La opción C sirve solo como contestador genérico y no puede sostener las reglas de esta especificación.
 
 Dos consecuencias de A para otras especificaciones:
 
@@ -74,15 +75,15 @@ Dos consecuencias de A para otras especificaciones:
 
 Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las respuestas libres dentro de las 24 horas siguientes al último mensaje de la persona no se cobran; se cobran las plantillas de marketing y las de utilidad enviadas fuera de esa ventana. El piloto de este spec solo responde dentro de la ventana.
 
-## Plan técnico propuesto (sujeto a aprobar la opción A)
+## Plan técnico
 
-1. **Servicio webhook** pequeño y propio (función serverless bajo cuenta NRC). Apps Script no sirve como receptor: no expone las cabeceras para validar la firma `X-Hub-Signature-256` y responde con redirección.
-2. **Por cada evento entrante:** validar firma → descartar si el ID de mensaje ya fue procesado (AC-008) → si el chat está en takeover, no responder (AC-006) → buscar el teléfono normalizado en la hoja.
-3. **Número desconocido:** enviar MSG-02 (formulario); no crear fila ni ID (AC-004).
-4. **Número conocido:** clasificar el texto contra el Anexo A. Coincidencia clara con una fila `aprobada` → enviar su texto literal (AC-001). Cualquier otro caso → MSG-03 y aviso a Francisco (AC-002). Si el teléfono coincide con más de una fila, no escribir en la hoja y avisar a Francisco.
+1. **Servicio webhook** pequeño y propio: Worker de Cloudflare bajo cuenta NRC. Apps Script no sirve como receptor: no expone las cabeceras de la firma del webhook y responde con redirección.
+2. **Por cada evento entrante:** validar la firma de YCloud → descartar si el ID de mensaje ya fue procesado (AC-008) → si el chat está en takeover, no responder (AC-006) → buscar el teléfono normalizado en la hoja.
+3. **Cualquier número:** clasificar el texto contra el Anexo A. Coincidencia clara con una fila `aprobada` → enviar su texto literal (AC-001). Cualquier otro caso → MSG-03 y aviso a Francisco (AC-002). Si el teléfono coincide con más de un ID, no escribir en ninguna fila y avisar a Francisco.
+4. **Número desconocido, además:** MSG-02 (formulario) una vez por chat, después de su primera respuesta o en lugar de la derivación si la primera consulta no tiene respuesta aprobada; si insiste, se deriva. Reclamos, peticiones de no ser contactado y la pregunta por persona o sistema se derivan sin formulario. Nunca se crea fila ni ID (AC-004).
 5. **Clasificación:** primera versión con reglas de palabras clave, que devuelven un ID del Anexo A o `derivar`; no redactan la respuesta. Si más adelante se usa un modelo de lenguaje, recibirá solo el texto del mensaje y la lista de IDs/consultas, nunca filas de la hoja, nombres ni teléfonos.
 6. **Takeover:** un `smb_message_echoes` en un chat lo marca como tomado por Francisco. Se reactiva solo por acción explícita suya (propuesta: comandos en el chat de avisos; ver Decisiones y propuestas del 2026-10-08).
-7. **Escritura en la hoja:** propuesta: solo en una pestaña `WhatsApp` de eventos, mediante una cuenta de servicio con acceso solo a esa hoja; lectura de `#` y `Teléfono` en la pestaña de respuestas.
+7. **Hoja:** mediante una aplicación web de Apps Script con token compartido, que solo ofrece tres operaciones. Lee `#`, `Teléfono` y `Tu Nombre y Apellido`; escribe una fila por evento en la pestaña `WhatsApp` y el último evento en la columna `WhatsApp` del prospecto.
 8. **Rojo:** el servicio no tiene ninguna ruta de envío iniciada por el negocio; solo responde a mensajes entrantes dentro de la ventana (AC-005, AC-007). Fuera de ventana no envía nada y avisa a Francisco.
 9. **Registros:** ID de evento, ID de prospecto, ID de FAQ o `derivar`, resultado. Sin texto de mensajes, nombres ni teléfonos (AC-009).
 
@@ -92,17 +93,19 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 - Texto del prospecto que intenta dar instrucciones al modelo → el modelo solo puede elegir un ID de una lista cerrada; no puede generar hechos ni activar envíos.
 - Respuesta equivocada sobre salud o admisión → esas categorías no existen en la tabla; siempre derivan.
 - Duplicados por reintentos de Meta → registro de IDs procesados.
-- Fuga de datos → el modelo no ve la hoja; la cuenta de servicio no ve otras hojas; los secretos viven en el gestor de secretos del proveedor, nunca en el repositorio.
+- Fuga de datos → el servicio nunca recibe una fila completa; la aplicación web de la hoja exige un token y solo acepta valores de una lista cerrada; los secretos viven en el gestor de secretos de Cloudflare y en las propiedades del proyecto de Apps Script, nunca en el repositorio.
 
 ### Tareas, en orden
 
-1. Aprobar el Anexo A y sus decisiones abiertas D-1 y D-2 (Don Humberto, Francisco).
-2. Pasar el número de NRC de WhatsApp normal a WhatsApp Business App y usarla al menos 7 días; después, conectarlo a YCloud en coexistencia cuando el servicio esté listo para el modo sombra (Francisco; requiere iniciar sesión con Facebook y escanear un QR desde la app). La cuenta de YCloud ya existe.
-3. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y crear la pestaña `WhatsApp`.
-4. Hecho: reactivación por comandos y avisos por WhatsApp, definidos el 2026-10-08.
-5. Hecho en local: clasificador, manejador de eventos, adaptadores de YCloud y de la hoja, almacén de estado y Worker con modo sombra, con pruebas sintéticas. Falta desplegar y probar contra las cuentas reales.
-6. Piloto en modo sombra: el servicio propone la respuesta a Francisco y no envía nada.
-7. Con SPEC-004 aprobada, activar las respuestas automáticas (el envío ya fue autorizado por Francisco para las filas aprobadas).
+1. Aprobar las filas pendientes del Anexo A y su decisión D-2 (Don Humberto).
+2. Pasar el número de NRC de WhatsApp normal a WhatsApp Business App y usarla al menos 7 días (Francisco). No envía datos a YCloud, así que puede hacerse ya.
+3. **Antes de conectar el número:** Toto revisa a YCloud como proveedor y resuelve D-1 (SPEC-004). Desde que el número se conecta, YCloud recibe todos sus chats, aunque el asistente esté en modo sombra (orden decidido por Francisco, 2026-10-08).
+4. Conectar el número a YCloud en coexistencia (Francisco; requiere iniciar sesión con Facebook y escanear un QR desde la app). La cuenta de YCloud ya existe.
+5. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y ejecutar `setupNrcWhatsAppSheet`, que crea la pestaña `WhatsApp`. Las columnas `Seguimiento` (P) y `WhatsApp` (Q) ya las creó Francisco a mano el 2026-10-08; la función no las duplica.
+6. Hecho: reactivación por comandos y avisos por WhatsApp, definidos el 2026-10-08.
+7. Hecho en local: clasificador, manejador de eventos, adaptadores de YCloud y de la hoja, almacén de estado y Worker con modo sombra, con pruebas sintéticas. Falta desplegar y probar contra las cuentas reales.
+8. Piloto en modo sombra: el servicio propone la respuesta a Francisco y no envía nada.
+9. Con el aviso de privacidad de SPEC-004 aprobado y publicado, salir del modo sombra (el envío ya fue autorizado por Francisco para las filas aprobadas). Es una sola condición para todas las respuestas automáticas: el formulario se ofrece junto con ellas, así que no se activan por separado.
 
 ## Decisiones y propuestas del 2026-10-08
 
@@ -121,15 +124,25 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 - **Cierre de una derivación:** cuando Francisco le escribe al prospecto desde la app; eso además pausa el asistente en ese chat.
 - **Ventana del aviso:** si Francisco no le ha escrito al número de NRC en las últimas 24 horas, el aviso sale como plantilla de utilidad aprobada por Meta, con un costo pequeño. Enviar `estado` una vez al día lo evita.
 - **Comandos**, solo desde el número personal de Francisco, en el chat de avisos: `reactivar 22`, `reactivar todos`, `pausar 22` y `estado`. El asistente nunca se reactiva solo.
-- **Hoja:** el servicio no escribe en `Respuestas de formulario 1`; de ella solo lee `#`, `Teléfono` y `Tu Nombre y Apellido` (este último solo para el nombre corto del aviso). Escribe en una pestaña nueva `WhatsApp`, una fila por evento: fecha y hora, `#`, tipo (`FAQ-xx`, `derivado: motivo`, `formulario enviado`, `tomado por Francisco`, `pausado`, `reactivado`) y derivación (`pendiente` o `resuelta`). Sin texto de mensajes, nombres ni teléfonos. `Estado` y `Comentario` siguen siendo solo de Francisco. Encabezados tomados de la exportación local del 2026-10-08; confirmar en la hoja viva.
+- **Hoja** (la escritura cambió en la tercera ronda, más abajo): el servicio no escribe en `Respuestas de formulario 1`; de ella solo lee `#`, `Teléfono` y `Tu Nombre y Apellido` (este último solo para el nombre corto del aviso). Escribe en una pestaña nueva `WhatsApp`, una fila por evento: fecha y hora, `#`, tipo (`FAQ-xx`, `derivado: motivo`, `formulario enviado`, `tomado por Francisco`, `pausado`, `reactivado`) y derivación (`pendiente` o `resuelta`). Sin texto de mensajes, nombres ni teléfonos. `Estado` y `Comentario` siguen siendo solo de Francisco. Encabezados tomados de la exportación local del 2026-10-08; confirmar en la hoja viva.
 - **Clasificación:** la primera versión usa reglas de palabras clave, sin modelo de lenguaje: no tiene costo y ningún texto sale a un tercero. Si un mensaje toca un tema reservado, coincide con varias respuestas o con ninguna, se deriva.
+
+**Decidido por Francisco el 2026-10-08 (tercera ronda, al revisar las especificaciones):**
+
+- **Respuestas a números desconocidos:** las filas `aprobada` se envían a cualquiera; el formulario pasa a ser el paso siguiente y no un requisito para recibir respuesta.
+- **Identidad:** el asistente escribe siempre como Francisco. D-1 sigue abierta solo como revisión de Toto.
+- **Nombre:** se pregunta solo cuando no se sabe. Si el número está en la hoja, el saludo usa el primer nombre del formulario (MSG-06); el saludo se envía una vez por chat.
+- **Columna `WhatsApp`:** en `Respuestas de formulario 1`, una celda por prospecto con su último evento, por ejemplo `2026-10-09 15:00 · FAQ-08` o `2026-10-09 15:05 · derivado: disponibilidad · pendiente`. Se escribe en todas las filas que comparten el ID. Es la única celda de esa pestaña que el servicio modifica. La pestaña `WhatsApp` se mantiene como historial, porque los eventos de números sin ID no tienen fila donde escribirse (elección de implementación).
+- **Columna `Seguimiento`:** reemplaza al color como dato legible: `activo` o `desistió`. La llena Francisco; el servicio no la lee ni la escribe, porque no tiene envíos salientes. Todo flujo saliente futuro debe leerla, y una celda vacía o con otro valor bloquea el envío, igual que `desistió` (así lo modela `automation/consent/`). Falta llenarla para las filas existentes.
+- **Orden legal:** Toto revisa a YCloud antes de conectar el número, no después del modo sombra.
+- **Precio:** el valor real es 32 UF + IVA; los $1.550.000 incluyen el IVA y son solo referencia (FAQ-08 corregida).
 
 ## Implementación local
 
 `automation/whatsapp/` contiene la lógica del asistente, los adaptadores y sus pruebas sintéticas. Lee los textos y estados directamente del Anexo A. **No está conectada a WhatsApp, a YCloud ni a la hoja, ni desplegada.**
 
 - **Alojamiento (confirmado por Francisco, 2026-10-08):** Worker de Cloudflare en plan gratuito, base D1 para el estado y tarea programada para los recordatorios.
-- **Hoja:** aplicación web de Apps Script en el proyecto de la hoja (`automation/apps-script/WhatsAppSheetAdapter.gs`), con token compartido y tres operaciones: buscar por teléfono, buscar teléfonos por ID y agregar una fila a la pestaña `WhatsApp`. El servicio nunca recibe una fila completa.
+- **Hoja:** aplicación web de Apps Script en el proyecto de la hoja (`automation/apps-script/WhatsAppSheetAdapter.gs`), con token compartido y tres operaciones: buscar por teléfono, buscar teléfonos por ID y registrar un evento (una fila en la pestaña `WhatsApp` y el último evento en la columna `WhatsApp` del prospecto). El servicio nunca recibe una fila completa.
 - **Modo sombra por defecto:** ningún mensaje llega a un prospecto hasta que se desactive explícitamente.
 - **Fallas:** un evento que falla no se reintenta contra el prospecto; Francisco recibe un aviso genérico.
 
@@ -138,7 +151,8 @@ Pasos de puesta en marcha y limitaciones: `automation/whatsapp/README.md`.
 ## Pendientes antes de piloto
 
 - Don Humberto: validar las respuestas descriptivas y la frase de trayectoria del Anexo A (FAQ-01, 04, 05, 06, 07 y 11).
-- Toto: aprobar el aviso de privacidad (SPEC-004), revisar a YCloud como proveedor que recibe los chats y si hay que informar que parte de las respuestas son automáticas. Sin esa aprobación no se envía el formulario a números desconocidos.
-- Francisco: pasar el número a WhatsApp Business App y, tras 7 días, conectarlo a YCloud.
+- Toto, antes de conectar el número: revisar a YCloud como proveedor que recibe los chats y si hay que informar que parte de las respuestas son automáticas (D-1).
+- Toto, antes de salir del modo sombra: aprobar el aviso de privacidad (SPEC-004).
+- Francisco: pasar el número a WhatsApp Business App y, tras 7 días y con la revisión de Toto, conectarlo a YCloud. Llenar `Seguimiento` en las filas existentes.
 - Técnicos: cargar secretos y desplegar en modo sombra, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra las cuentas reales.
 - SPEC-003: decidido el 2026-10-08 que el asistente puede preguntar por sí mismo a Nico o a Frank la disponibilidad para un día y hora; falta conectarlo y, fuera de la ventana de 24 horas, una plantilla aprobada.

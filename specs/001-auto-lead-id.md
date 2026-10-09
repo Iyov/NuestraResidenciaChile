@@ -9,7 +9,7 @@ Cada envío real del Google Form crea una fila en la hoja `Respuestas de formula
 ## Requisitos
 
 - **REQ-001:** procesar únicamente la fila entregada por un activador instalable de Spreadsheet `On form submit`.
-- **REQ-002:** conservar IDs existentes 1–21; el siguiente prospecto no duplicado recibe 22, luego `max(#)+1`.
+- **REQ-002:** conservar los IDs existentes; cada prospecto no duplicado recibe `max(#)+1`. Al desplegar había IDs 1–21 y el primero asignado por el script fue el 22.
 - **REQ-003:** ignorar la fila en blanco y envíos sin marca temporal; si un envío tiene marca temporal pero carece de teléfono o nombre del adulto mayor, fallar sin asignar y dejar error genérico para revisión.
 - **REQ-004:** no sobrescribir un `#` existente; repetición del mismo evento es idempotente.
 - **REQ-005:** conservar el ID si coincide el nombre normalizado del adulto mayor y teléfono normalizado; si la misma identidad tiene varios IDs distintos, detener para reconciliación manual.
@@ -28,7 +28,7 @@ Cada envío real del Google Form crea una fila en la hoja `Respuestas de formula
 - **AC-006:** si una identidad coincide con dos IDs previos diferentes, no se elige automáticamente; la celda queda intacta y la ejecución falla con mensaje sin datos personales.
 - **AC-007:** un ID existente no se sobrescribe, incluso si no sigue la secuencia actual.
 - **AC-008:** activador sobre otra pestaña no escribe.
-- **AC-009:** el test local `node --test automation/apps-script/AssignLeadId.test.cjs` pasa; la copia de prueba en Google se valida antes del activador real.
+- **AC-009:** el test local `node --test automation/apps-script/AssignLeadId.test.cjs` pasa. La validación en una copia de prueba de Google se reemplazó por un envío de prueba en la hoja viva (ver Pendientes de operación).
 
 ## Implementación actual
 

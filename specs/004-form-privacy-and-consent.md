@@ -1,6 +1,6 @@
 # SPEC-004 — Aviso, finalidades y datos del formulario
 
-**Estado:** pendiente de revisión jurídica; no modificar el formulario automáticamente.
+**Estado:** borradores de aviso y de [Política de Privacidad](004-privacy-policy-draft.md) redactados; registro de permisos en `local` (`automation/consent/`, 2026-10-08) con pruebas sintéticas; pendiente de revisión jurídica, nada publicado; no modificar el formulario automáticamente.
 
 ## Situación conocida
 
@@ -29,7 +29,7 @@
 
 ## Borrador de texto para el formulario (2026-10-08) — no publicado
 
-Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está aplicada al formulario vivo. Los campos entre corchetes son hechos que NRC debe confirmar; no publicar con corchetes pendientes. La razón social y el RUT los entregó Francisco el 2026-10-08; el correo viene de la página de contacto del sitio.
+Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está aplicada al formulario vivo. Los campos entre corchetes son hechos que NRC debe confirmar; no publicar con corchetes pendientes. La razón social y el RUT los entregó Francisco el 2026-10-08; el correo es el del proyecto, `nuestraresidenciachile@gmail.com` (decisión de Francisco, 2026-10-08; la página de contacto del sitio muestra otro y no se modifica).
 
 ### Descripción del formulario
 
@@ -39,10 +39,10 @@ Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está apli
 >
 > - **Quién es responsable:** Hotel Melado Humberto Piemonte SpA, RUT 77.060.284-K, que opera Nuestra Residencia – Senior Living, Camino Las Flores 10961, Las Condes, Santiago.
 > - **Para qué usamos tus datos:** solo para responder tu solicitud, orientarte y coordinar tu visita. No te enviaremos publicidad ni novedades salvo que lo autorices más abajo.
-> - **Confidencialidad:** tus datos y los del adulto mayor son confidenciales. Solo accede a ellos el equipo de Nuestra Residencia Chile a cargo de tu solicitud, que está obligado a guardar reserva. No vendemos tus datos. [Solo los reciben los proveedores tecnológicos que nos prestan servicio para operar este formulario, como Google.]
+> - **Confidencialidad:** tus datos y los del adulto mayor son confidenciales. Solo accede a ellos el equipo de Nuestra Residencia Chile a cargo de tu solicitud, que está obligado a guardar reserva. No vendemos tus datos. Para atenderte nos apoyamos en servicios tecnológicos de terceros, que tratan tus datos solo por encargo nuestro, para los fines de este aviso y con resguardos de seguridad.
 > - **Datos del adulto mayor:** al enviar el formulario declaras que la persona mayor está informada o que actúas en su representación. La respuesta sobre autovalencia es solo referencial para orientarte; no es una evaluación ni condiciona el ingreso.
 > - **Cuánto tiempo los guardamos:** [PLAZO — no figura en ningún documento; sugerencia de trabajo: 12 meses] desde tu último contacto con nosotros, o hasta que nos pidas eliminarlos.
-> - **Tus derechos:** puedes pedir acceso, rectificación, supresión, oposición, portabilidad o bloqueo de tus datos, y retirar tu autorización en cualquier momento, escribiendo a contacto@nuestraresidenciachile.cl. Tratamos tus datos conforme a la Ley N° 19.628 y a la Ley N° 21.719 de Protección de Datos Personales, vigente desde el 1 de diciembre de 2026.
+> - **Tus derechos:** puedes pedir acceso, rectificación, supresión, oposición, portabilidad o bloqueo de tus datos, y retirar tu autorización en cualquier momento, escribiendo a nuestraresidenciachile@gmail.com. Tratamos tus datos conforme a la Ley N° 19.628 y a la Ley N° 21.719 de Protección de Datos Personales, vigente desde el 1 de diciembre de 2026.
 > - Más información en nuestra Política de Privacidad: [ENLACE].
 
 ### Preguntas nuevas al final del formulario
@@ -54,11 +54,46 @@ Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está apli
 
 - Responsable: confirmar que Hotel Melado Humberto Piemonte SpA es la entidad que opera la residencia y trata los datos. El contrato de servicios y la resolución sanitaria están a nombre de don Humberto como persona natural, no de la sociedad.
 - Instrucción de Francisco (2026-10-08): el aviso no expone datos personales de don Humberto (RUT personal, correo o teléfono propios); solo los datos de la sociedad que la ley exija. Toto debe indicar si la ley obliga a nombrar al representante legal.
-- Plazo de conservación: ningún documento lo define. Confirmar también que `contacto@nuestraresidenciachile.cl` es un buzón atendido para solicitudes de derechos.
-- Si la frase sobre proveedores es exacta: la hoja guarda identificadores de Google Ads, y cualquier envío a Ads/Meta o a un proveedor de IA debe quedar descrito (AC-006).
+- Plazo de conservación: ningún documento lo define. El buzón para solicitudes de derechos es `nuestraresidenciachile@gmail.com` (Francisco, 2026-10-08).
+- Proveedores: por preferencia de Francisco (2026-10-08) el aviso habla de "terceros" sin nombrarlos. Hoy son Google y WhatsApp/Meta; YCloud y Cloudflare se suman al conectar el asistente (SPEC-002). Toto debe indicar si la ley exige nombrarlos o indicar sus categorías, y revisar a YCloud antes de que se conecte el número. Además, la hoja guarda identificadores de Google Ads, y cualquier envío a Ads/Meta o a un proveedor de IA debe quedar descrito (AC-006).
 - Si la autovalencia es dato sensible de salud que exige consentimiento expreso de la propia persona mayor, o si conviene sacarla del primer formulario.
 - Si las dos casillas son la forma adecuada de documentar el permiso, y cómo se registra la versión del aviso aceptada (AC-004).
-- Existencia y enlace de la Política de Privacidad completa en el sitio.
+- Existencia y enlace de la Política de Privacidad completa en el sitio. Hay un borrador en [004-privacy-policy-draft.md](004-privacy-policy-draft.md), con sus propios puntos por verificar.
+
+## Implementación local
+
+`automation/consent/` contiene solo lógica, sin red ni hoja: **no lee respuestas, no envía mensajes y ningún flujo la usa todavía.**
+
+- `consent.cjs`: convierte las dos casillas de una respuesta en un registro de permiso con finalidad, canales, fecha, fuente y versión del aviso (AC-004); registra retiros; y responde la única pregunta que todo envío saliente debe hacer antes de escribirle a un prospecto (`mayContact`).
+- Prueba: `node --test automation/consent/consent.test.cjs`.
+
+Cómo quedó aplicado (elecciones de implementación sobre el borrador; cambian si Toto cambia las casillas):
+
+- **Finalidades y canales:** `solicitud` por teléfono, WhatsApp o correo; `novedades` por WhatsApp o correo. La casilla de la solicitud no cubre novedades (AC-003).
+- **Versión del aviso:** el formulario no guarda qué texto vio la persona, así que la versión es la que estaba publicada en el momento del envío, según una lista de versiones con su fecha de publicación. La lista está vacía hasta que se publique un aviso.
+- **Filas sin registro:** las anteriores al aviso (incluidos los IDs existentes) y las que no traen la casilla obligatoria no cuentan como permiso. Ningún envío automático sale hacia ellas; quedan para gestión manual de Francisco.
+- **Rojo:** una fila en rojo, o cuyo color no se informa, bloquea todo envío saliente.
+- **Retiro:** se puede retirar solo `novedades` o pedir que no se contacte más (todas las finalidades y canales). Lo segundo también se registra para un prospecto sin registro previo. La fecha del primer retiro no se mueve.
+- **Consulta entrante:** responder a un mensaje que la persona acaba de enviar siempre está permitido y no modifica el registro: no reactiva seguimientos ni novedades (AC-005).
+- **AC-006:** no hay código. Ningún flujo envía datos a analítica, Ads o un modelo de lenguaje, y no existe una autorización que modelar.
+
+## Plan de aplicación tras la aprobación
+
+Pasos manuales, en este orden; ninguno está hecho:
+
+1. Toto aprueba aviso y política; se reemplazan todos los corchetes.
+2. Publicar la Política de Privacidad en el sitio WordPress y anotar su URL y versión.
+3. En el Google Form: reemplazar la descripción y agregar las dos casillas al final (la primera obligatoria). Forms agrega dos columnas al final de la hoja; el script de IDs busca sus columnas por encabezado y no se ve afectado.
+4. Anotar la fecha y hora de publicación como primera versión del aviso; esa lista es la entrada de `createNoticeHistory`.
+5. Enviar una respuesta de prueba con datos ficticios y comprobar que recibe ID y que las dos columnas se llenan.
+6. Antes de activar cualquier envío iniciado por NRC (seguimientos, novedades), conectar ese flujo a `mayContact` y decidir dónde se guardan los retiros.
+
+## Pendientes
+
+- Dónde se guardan los retiros y quién los registra. El asistente de WhatsApp ya deriva a Francisco los mensajes del tipo "no me contacten"; hoy eso no deja un registro de retiro.
+- Cómo se atienden las solicitudes de derechos que lleguen por correo (responsable y plazo).
+- Qué hacer con los prospectos anteriores al aviso: mantenerlos en gestión manual o pedirles autorización.
+- Auditar cookies y etiquetas del sitio antes de publicar la sección correspondiente de la política.
 
 ## Referencias
 

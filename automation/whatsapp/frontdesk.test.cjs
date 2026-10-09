@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const test = require('node:test');
 
 const { classifyMessage, MOTIVES } = require('./classifier.cjs');
-const { createFrontdesk, normalizePhone, shortName } = require('./frontdesk.cjs');
+const { createFrontdesk, firstName, normalizePhone, shortName } = require('./frontdesk.cjs');
 const { loadKnowledge, parseKnowledge } = require('./knowledge.cjs');
 
 // Synthetic fixtures only: no real prospect, phone or message appears in this file.
@@ -143,18 +143,61 @@ test('audio or files are handed over', async () => {
   assert.match(notices[0], /motivo: audio o archivo$/);
 });
 
-test('AC-004: an unknown number gets the form once and no ID', async () => {
+test('AC-004: an unknown number gets the approved answer, the form once and no ID', async () => {
   const { inbound, sent, notices, rows } = setup();
 
-  assert.equal(await inbound(STRANGER, 'Hola, ¿cuánto cuesta?'), 'form-sent');
-  assert.equal(await inbound(STRANGER, '¿Me pueden responder?'), 'derived');
+  assert.equal(await inbound(STRANGER, 'Hola, ¿cuánto cuesta?'), 'FAQ-08');
+  assert.equal(await inbound(STRANGER, 'y cómo agendo una visita'), 'FAQ-02');
+  assert.equal(await inbound(STRANGER, '¿Aceptan mascotas?'), 'derived');
   assert.equal(await inbound(STRANGER, '¿Hola?'), 'awaiting-owner');
 
-  assert.deepEqual(texts(sent), ['¡Hola, buenas tardes! Soy Prueba.', 'Texto formulario.']);
+  assert.deepEqual(texts(sent), [
+    '¡Hola, buenas tardes! Soy Prueba.',
+    'Texto precio.',
+    'Texto formulario.',
+    'Texto visita.',
+    'Texto derivación.',
+  ]);
   assert.deepEqual(notices, [
     'Tienes una respuesta pendiente de Nuestra Residencia · sin ID · motivo: número desconocido',
   ]);
-  assert.deepEqual(rows.map((row) => row.prospectId), [null, null]);
+  assert.deepEqual(rows.map((row) => [row.prospectId, row.type]), [
+    [null, 'FAQ-08'],
+    [null, 'formulario enviado'],
+    [null, 'FAQ-02'],
+    [null, 'derivado: número desconocido'],
+  ]);
+});
+
+test('an unknown number with a question outside the base gets the form before any handover', async () => {
+  const { inbound, sent, notices } = setup();
+
+  assert.equal(await inbound(STRANGER, '¿Hay cupos disponibles?'), 'form-sent');
+  assert.deepEqual(notices, []);
+  assert.equal(await inbound(STRANGER, '¿Hay cupos disponibles?'), 'derived');
+
+  assert.deepEqual(texts(sent), ['¡Hola, buenas tardes! Soy Prueba.', 'Texto formulario.', 'Texto derivación.']);
+  assert.match(notices[0], /· sin ID · motivo: disponibilidad$/);
+});
+
+test('an unknown number that asks not to be contacted is handed over without the form', async () => {
+  const { inbound, sent, notices } = setup();
+
+  assert.equal(await inbound(STRANGER, 'No me escriban más'), 'derived');
+
+  assert.ok(!texts(sent).includes('Texto formulario.'));
+  assert.match(notices[0], /· sin ID · motivo: petición de no ser contactado$/);
+});
+
+test('the greeting uses the name from the form and asks for it only when it is unknown', async () => {
+  const named = '| MSG-06 | saludo con nombre | ¡Hola {nombre}, buenas tardes! Soy Prueba. | aprobada (Prueba, 2026-01-01) |';
+  const { inbound, sent } = setup(ANSWER_BASE + '\n' + named);
+
+  await inbound(KNOWN, 'precio', { at: NIGHT });
+  await inbound(STRANGER, 'precio');
+
+  assert.equal(sent[0].text, '¡Hola Ana, buenas noches! Soy Prueba.');
+  assert.equal(sent[2].text, '¡Hola, buenas tardes! Soy Prueba.');
 });
 
 test('a phone that matches two IDs is handed over without choosing one', async () => {
@@ -169,9 +212,10 @@ test('a phone that matches two IDs is handed over without choosing one', async (
 test('a message without a phone is treated as an unknown number', async () => {
   const { inbound, sent } = setup();
 
-  assert.equal(await inbound(null, 'precio', { chatId: 'user-abc' }), 'form-sent');
+  assert.equal(await inbound(null, 'precio', { chatId: 'user-abc' }), 'FAQ-08');
 
-  assert.deepEqual(sent.map((message) => message.chatId), ['user-abc', 'user-abc']);
+  assert.deepEqual(texts(sent), ['¡Hola, buenas tardes! Soy Prueba.', 'Texto precio.', 'Texto formulario.']);
+  assert.deepEqual(sent.map((message) => message.chatId), ['user-abc', 'user-abc', 'user-abc']);
 });
 
 test('AC-006: once Francisco writes from the app the assistant stays silent', async () => {
@@ -323,16 +367,23 @@ test('helpers', () => {
   assert.equal(shortName('  ana   prueba ficticia '), 'ana P.');
   assert.equal(shortName('Ana'), 'Ana');
   assert.equal(shortName(''), '');
+  assert.equal(firstName('ANA P.'), 'Ana');
+  assert.equal(firstName('josé'), 'José');
+  assert.equal(firstName('. P.'), '');
+  assert.equal(firstName(''), '');
 });
 
 test('the SPEC-002 annex parses and its required messages are approved', () => {
   const knowledge = loadKnowledge();
 
-  ['MSG-01', 'MSG-02', 'MSG-03', 'MSG-05', 'FAQ-02', 'FAQ-03', 'FAQ-08'].forEach((id) => {
+  ['MSG-01', 'MSG-02', 'MSG-03', 'MSG-05', 'MSG-06', 'FAQ-02', 'FAQ-03', 'FAQ-08'].forEach((id) => {
     assert.ok(knowledge.isApproved(id), id + ' should be approved');
   });
   assert.match(knowledge.approvedText('MSG-01'), /buenas tardes/);
+  assert.match(knowledge.approvedText('MSG-06'), /^¡Hola \{nombre\}, buenas tardes!/);
+  assert.ok(!knowledge.approvedText('MSG-06').includes('?'));
   assert.match(knowledge.approvedText('FAQ-08'), /32 UF \+ IVA/);
+  assert.match(knowledge.approvedText('FAQ-08'), /IVA incluido/);
   assert.ok(!/2\.500\.000|doble/i.test(knowledge.approvedText('FAQ-08')));
   assert.equal(knowledge.approvedText('FAQ-11'), null);
 });

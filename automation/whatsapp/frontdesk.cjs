@@ -8,6 +8,8 @@ const FRONTDESK_DEFAULTS = Object.freeze({
 });
 
 const FAILURE_NOTICE = 'No pude procesar un mensaje de Nuestra Residencia. Revisa el WhatsApp de NRC.';
+// A form link is the wrong answer to these; they go straight to Francisco.
+const NO_FORM_MOTIVES = [MOTIVES.noContact, MOTIVES.complaint, MOTIVES.identity];
 const COMMAND_HELP = 'No reconozco ese comando. Puedes usar: reactivar 22, reactivar todos, pausar 22 o estado.';
 
 /**
@@ -70,47 +72,43 @@ function createFrontdesk(ports, options) {
     let outcome;
     if (chat.paused) {
       outcome = 'paused';
-    } else if (ids.length === 0) {
-      outcome = await handleUnknownNumber(event, chat);
     } else if (ids.length > 1) {
       // Never pick a prospect on behalf of Francisco: no ID is recorded for this chat.
       outcome = await derive(event, chat, MOTIVES.outOfBase);
     } else {
-      chat.prospectId = ids[0];
-      chat.shortName = shortName(matches[0].contactName);
-      outcome = await handleKnownProspect(event, chat);
+      if (ids.length === 1) {
+        chat.prospectId = ids[0];
+        chat.shortName = shortName(matches[0].contactName);
+      }
+      outcome = await respond(event, chat);
     }
 
     await store.putChat(key, chat);
     return finish(event, chat.prospectId, outcome);
   }
 
-  async function handleUnknownNumber(event, chat) {
-    const formText = knowledge.approvedText('MSG-02');
-    if (!chat.formSent && formText) {
-      await greetOnce(event, chat);
-      await messenger.send(event.chatId, formText);
-      chat.formSent = true;
-      await events.append({ at: event.at, prospectId: null, type: 'formulario enviado', derivation: '' });
-      return 'form-sent';
-    }
-    // Unknown numbers never get a row or an ID from WhatsApp; Francisco decides what follows.
-    return derive(event, chat, MOTIVES.unknownNumber, { silent: true });
-  }
-
-  async function handleKnownProspect(event, chat) {
+  /**
+   * Approved answers are public facts, so a number that is not in the sheet gets
+   * them too, followed once by the form. Unknown numbers never get a row or an
+   * ID from WhatsApp.
+   */
+  async function respond(event, chat) {
     if (chat.pending) return 'awaiting-owner';
-    if (event.kind !== 'text') return derive(event, chat, MOTIVES.attachment);
 
-    const result = classify(event.text) || {};
+    const known = chat.prospectId !== null;
+    const result = event.kind === 'text'
+      ? classify(event.text) || {}
+      : { intent: 'derive', motive: MOTIVES.attachment };
 
     if (result.intent === 'faq') {
       const answer = knowledge.approvedText(result.faqId);
-      if (!answer) return derive(event, chat, MOTIVES.outOfBase);
-      await greetOnce(event, chat);
-      await messenger.send(event.chatId, answer);
-      await events.append({ at: event.at, prospectId: chat.prospectId, type: result.faqId, derivation: '' });
-      return result.faqId;
+      if (answer) {
+        await greetOnce(event, chat);
+        await messenger.send(event.chatId, answer);
+        await events.append({ at: event.at, prospectId: chat.prospectId, type: result.faqId, derivation: '' });
+        if (!known) await offerForm(event, chat);
+        return result.faqId;
+      }
     }
 
     if (result.intent === 'closing') return 'no-reply';
@@ -126,18 +124,31 @@ function createFrontdesk(ports, options) {
         chat.followUpSent = true;
         return 'MSG-05';
       }
-      return derive(event, chat, MOTIVES.outOfBase);
     }
 
     const motive = Object.values(MOTIVES).includes(result.motive) ? result.motive : MOTIVES.outOfBase;
-    return derive(event, chat, motive);
+    if (known || NO_FORM_MOTIVES.includes(motive)) return derive(event, chat, motive);
+
+    if (await offerForm(event, chat)) return 'form-sent';
+    return derive(event, chat, motive === MOTIVES.outOfBase ? MOTIVES.unknownNumber : motive);
   }
 
-  async function derive(event, chat, motive, deriveOptions) {
+  /** The form is offered once per chat; true when it was sent now. */
+  async function offerForm(event, chat) {
+    const formText = knowledge.approvedText('MSG-02');
+    if (chat.formSent || !formText) return false;
+    await greetOnce(event, chat);
+    await messenger.send(event.chatId, formText);
+    chat.formSent = true;
+    await events.append({ at: event.at, prospectId: null, type: 'formulario enviado', derivation: '' });
+    return true;
+  }
+
+  async function derive(event, chat, motive) {
     if (chat.pending) return 'awaiting-owner';
 
     const handoverText = knowledge.approvedText('MSG-03');
-    if (!(deriveOptions && deriveOptions.silent) && handoverText) {
+    if (handoverText) {
       await greetOnce(event, chat);
       await messenger.send(event.chatId, handoverText);
     }
@@ -153,9 +164,12 @@ function createFrontdesk(ports, options) {
     return 'derived';
   }
 
+  /** MSG-01 asks for the name; MSG-06 uses the one from the form when the sheet has it. */
   async function greetOnce(event, chat) {
     if (chat.greeted) return;
-    const greeting = knowledge.approvedText('MSG-01');
+    const name = firstName(chat.shortName);
+    const named = name ? knowledge.approvedText('MSG-06') : null;
+    const greeting = named ? named.replace('{nombre}', () => name) : knowledge.approvedText('MSG-01');
     if (!greeting) return;
     await messenger.send(event.chatId, greeting.replace(/buenas tardes/i, greetingForHour(event.at)));
     chat.greeted = true;
@@ -314,6 +328,13 @@ function shortName(fullName) {
   return parts.length === 1 ? parts[0] : parts[0] + ' ' + parts[1].charAt(0).toUpperCase() + '.';
 }
 
+/** "ana P." -> "Ana". Empty when the form value does not look like a name, so the greeting asks for it. */
+function firstName(name) {
+  const word = String(name === null || name === undefined ? '' : name).trim().split(/\s+/)[0];
+  if (!/^\p{L}{2,}$/u.test(word)) return '';
+  return word.charAt(0).toLocaleUpperCase('es') + word.slice(1).toLocaleLowerCase('es');
+}
+
 // Same rules as normalizeNrcPhone_ in automation/apps-script/AssignLeadId.gs, so both flows agree on identity.
 function normalizePhone(value) {
   let digits = String(value === null || value === undefined ? '' : value).replace(/\D/g, '');
@@ -334,4 +355,4 @@ function hourInZone(at, timeZone) {
     .format(new Date(toMillis(at))));
 }
 
-module.exports = { createFrontdesk, normalizePhone, shortName };
+module.exports = { createFrontdesk, firstName, normalizePhone, shortName };

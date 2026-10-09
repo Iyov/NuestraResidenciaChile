@@ -29,7 +29,7 @@ node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 
 Decidido por Francisco el 2026-10-08: un Worker de Cloudflare en plan gratuito, con una base D1 para el estado y una tarea programada cada 15 minutos para los recordatorios. Verificar los límites del plan gratuito al crear la cuenta.
 
-La hoja no se abre desde el Worker. La atiende una aplicación web de Apps Script dentro del proyecto `NRC Auto Lead ID`, que se ejecuta con la cuenta de NRC y ofrece solo tres operaciones: buscar por teléfono (devuelve ID y nombre de contacto), buscar teléfonos por ID y agregar una fila a la pestaña `WhatsApp`. Así no hace falta una cuenta de servicio de Google con acceso a toda la hoja.
+La hoja no se abre desde el Worker. La atiende una aplicación web de Apps Script dentro del proyecto `NRC Auto Lead ID`, que se ejecuta con la cuenta de NRC y ofrece solo tres operaciones: buscar por teléfono (devuelve ID y nombre de contacto), buscar teléfonos por ID y registrar un evento (una fila en la pestaña `WhatsApp` y el último evento en la columna `WhatsApp` del prospecto). Así no hace falta una cuenta de servicio de Google con acceso a toda la hoja.
 
 ## Modo sombra
 
@@ -39,19 +39,19 @@ Está activo salvo que `SHADOW_MODE` valga exactamente `off`. En modo sombra nin
 
 Cada paso lo ejecuta Francisco con las cuentas de NRC. Los secretos se escriben en la terminal o en el panel correspondiente, nunca en el repositorio ni en un chat.
 
-1. **Hoja.** Desde `automation/apps-script/`: `clasp push`. En el editor de Apps Script, ejecutar `setupNrcWhatsAppSheet` (crea la pestaña `WhatsApp`). En Configuración del proyecto → Propiedades de la secuencia de comandos, crear `NRC_WHATSAPP_ADAPTER_TOKEN` con un valor aleatorio de 32 caracteres o más. Implementar → Nueva implementación → Aplicación web, ejecutar como la cuenta de NRC, acceso "Cualquier usuario". Guardar la URL que termina en `/exec`.
+1. **Hoja.** Desde `automation/apps-script/`: `clasp push`. En el editor de Apps Script, ejecutar `setupNrcWhatsAppSheet` (crea la pestaña `WhatsApp` y las columnas `Seguimiento` y `WhatsApp` en la pestaña de respuestas). Llenar `Seguimiento` con `activo` o `desistió` en las filas existentes. En Configuración del proyecto → Propiedades de la secuencia de comandos, crear `NRC_WHATSAPP_ADAPTER_TOKEN` con un valor aleatorio de 32 caracteres o más. Implementar → Nueva implementación → Aplicación web, ejecutar como la cuenta de NRC, acceso "Cualquier usuario". Guardar la URL que termina en `/exec`.
 2. **Cloudflare (hecho el 2026-10-08).** Cuenta creada con el correo de NRC, equipo conectado con `npx wrangler login`, base D1 `nrc-whatsapp-frontdesk` creada, su `database_id` anotado en `wrangler.toml` y tablas de `schema.sql` aplicadas. En otro equipo basta con `npx wrangler login` desde `automation/whatsapp/`.
 3. **Secretos.** `npx wrangler secret put <NOMBRE>` para cada uno: `YCLOUD_API_KEY`, `NRC_BUSINESS_PHONE`, `NRC_OWNER_PHONE`, `SHEET_ADAPTER_URL`, `SHEET_ADAPTER_TOKEN`, `STATE_KEY_SECRET` (aleatorio, 32 caracteres o más) y `YCLOUD_WEBHOOK_SECRET` (se obtiene en el paso 5).
 4. **Despliegue.** `npx wrangler deploy`. Queda en modo sombra.
-5. **YCloud.** Con el número ya en WhatsApp Business App y conectado en coexistencia: crear un webhook hacia `https://<worker>/webhook/ycloud` con los eventos `whatsapp.inbound_message.received` y `whatsapp.smb.message.echoes`, y guardar su secreto como `YCLOUD_WEBHOOK_SECRET`.
+5. **YCloud.** Solo después de que Toto revise a YCloud como proveedor (SPEC-004): desde que el número se conecta, YCloud recibe todos sus chats, también en modo sombra. Con el número ya en WhatsApp Business App y conectado en coexistencia: crear un webhook hacia `https://<worker>/webhook/ycloud` con los eventos `whatsapp.inbound_message.received` y `whatsapp.smb.message.echoes`, y guardar su secreto como `YCLOUD_WEBHOOK_SECRET`.
 6. **Salir del modo sombra.** Solo tras revisar los resultados y con SPEC-004 aprobada: cambiar `SHADOW_MODE` a `off` en `wrangler.toml` y volver a desplegar.
 
 ## Qué hace
 
 | Evento | Resultado |
 |---|---|
-| Mensaje de un número con un único ID en la hoja | Respuesta aprobada, o texto de derivación más aviso a Francisco |
-| Mensaje de un número que no está en la hoja | Saludo y formulario, una vez; si insiste, aviso a Francisco. Nunca crea fila ni ID |
+| Mensaje de un número con un único ID en la hoja | Saludo con el nombre del formulario y respuesta aprobada, o texto de derivación más aviso a Francisco |
+| Mensaje de un número que no está en la hoja | Saludo que pregunta el nombre, la respuesta aprobada si existe y el formulario, una vez. Sin respuesta aprobada: primero el formulario y, si insiste, derivación. Reclamos, peticiones de no ser contactado y la pregunta por persona o sistema se derivan sin formulario. Nunca crea fila ni ID |
 | Mensaje de un número con varios ID, o sin teléfono | Deriva sin elegir un ID |
 | Mensaje enviado por Francisco desde la app | El chat queda en pausa y la derivación pendiente se cierra |
 | `reactivar 22`, `reactivar todos`, `pausar 22`, `estado` desde el número de Francisco | Cambia o informa las pausas, solo por ID |

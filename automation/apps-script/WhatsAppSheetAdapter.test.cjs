@@ -10,14 +10,16 @@ const scriptSource = ['AssignLeadId.gs', 'WhatsAppSheetAdapter.gs']
   .join('\n');
 
 const TOKEN = 'synthetic-token-0123456789abcdef0123456789';
-const headers = ['Marca temporal', '#', 'Tu Nombre y Apellido', 'Email', 'Teléfono', 'Nombre del Adulto Mayor', 'Estado', 'Comentario'];
+const formHeaders = ['Marca temporal', '#', 'Tu Nombre y Apellido', 'Email', 'Teléfono', 'Nombre del Adulto Mayor', 'Estado', 'Comentario'];
+const addedHeaders = ['Seguimiento', 'WhatsApp'];
+const LAST_EVENT = formHeaders.length + 1;
 
 // Synthetic rows only.
-function responseRows() {
+function responseRows(withAddedColumns) {
   const row = (id, contact, phone) =>
     [new Date('2026-10-08T12:00:00Z'), id, contact, 'contacto@example.test', phone, 'Persona de prueba', 'Sí', 'Nota privada'];
   return [
-    headers.slice(),
+    formHeaders.concat(withAddedColumns ? addedHeaders : []),
     row(14, 'Luis Ejemplo', '+56 9 0000 0014'),
     row(22, 'Ana Prueba Ficticia', '900000022'),
     row(22, 'Ana Prueba Ficticia', '+56900000023'),
@@ -28,7 +30,7 @@ function responseRows() {
 class FakeSheet {
   constructor(name, rows) { Object.assign(this, { name, rows }); }
   getName() { return this.name; }
-  getLastColumn() { return this.rows[0] ? this.rows[0].length : 0; }
+  getLastColumn() { return Math.max(0, ...this.rows.map((row) => row.length)); }
   getLastRow() { return this.rows.length; }
   appendRow(row) { this.rows.push(row); }
   getRange(row, column, rowCount = 1, columnCount = 1) {
@@ -37,12 +39,20 @@ class FakeSheet {
     return {
       getValues: read,
       getDisplayValues: () => read().map((cells) => cells.map((value) => String(value))),
+      setValue: (value) => {
+        while (this.rows.length < row) this.rows.push([]);
+        const cells = this.rows[row - 1];
+        while (cells.length < column - 1) cells.push('');
+        cells[column - 1] = value;
+      },
     };
   }
 }
 
-function createContext({ token = TOKEN, withEventsSheet = true } = {}) {
-  const sheets = new Map([['Respuestas de formulario 1', new FakeSheet('Respuestas de formulario 1', responseRows())]]);
+function createContext({ token = TOKEN, withEventsSheet = true, withAddedColumns = true } = {}) {
+  const sheets = new Map([
+    ['Respuestas de formulario 1', new FakeSheet('Respuestas de formulario 1', responseRows(withAddedColumns))],
+  ]);
   if (withEventsSheet) sheets.set('WhatsApp', new FakeSheet('WhatsApp', [['Fecha y hora', '#', 'Tipo', 'Derivación']]));
 
   const spreadsheet = {
@@ -58,6 +68,10 @@ function createContext({ token = TOKEN, withEventsSheet = true } = {}) {
       createTextOutput: (text) => ({ text, setMimeType() { return this; } }),
     },
     ScriptApp: { EventType: {}, getProjectTriggers: () => [] },
+    // Santiago is UTC-3 on the dates used here.
+    Utilities: {
+      formatDate: (date) => new Date(date.getTime() - 3 * 60 * 60 * 1000).toISOString().slice(0, 16).replace('T', ' '),
+    },
     console: { warn: () => {}, error: () => {} },
   };
   vm.runInNewContext(scriptSource, context, { filename: 'WhatsAppSheetAdapter.gs' });
@@ -83,9 +97,12 @@ test('findPhonesById returns normalized phones', () => {
   assert.deepEqual(call({ action: 'findPhonesById', id: 'x' }), { phones: [] });
 });
 
-test('appendEvent writes one validated row to the events tab only', () => {
+test('appendEvent writes one row to the events tab and only the WhatsApp cell of that prospect', () => {
   const { call, sheets } = createContext();
-  const before = JSON.stringify(sheets.get('Respuestas de formulario 1').rows);
+  const responses = sheets.get('Respuestas de formulario 1').rows;
+  const withoutLastEvent = () =>
+    JSON.stringify(responses.map((row) => Array.from({ length: LAST_EVENT }, (_, column) => row[column] ?? '')));
+  const before = withoutLastEvent();
 
   assert.deepEqual(call({ action: 'appendEvent', at: '2026-10-09T18:00:00Z', prospectId: 22, type: 'FAQ-08', derivation: '' }), { ok: true });
   assert.deepEqual(call({ action: 'appendEvent', at: '2026-10-09T18:01:00Z', prospectId: null, type: 'derivado: número desconocido', derivation: 'pendiente' }), { ok: true });
@@ -96,7 +113,22 @@ test('appendEvent writes one validated row to the events tab only', () => {
   assert.equal(JSON.stringify(rows[1]), JSON.stringify(['2026-10-09T18:00:00.000Z', 22, 'FAQ-08', '']));
   assert.equal(typeof rows[1][0].getTime, 'function');
   assert.equal(JSON.stringify(rows[2].slice(1)), JSON.stringify(['', 'derivado: número desconocido', 'pendiente']));
-  assert.equal(JSON.stringify(sheets.get('Respuestas de formulario 1').rows), before);
+  assert.equal(withoutLastEvent(), before);
+  // Both rows of ID 22 get the latest event; ID 14, the row without ID and the header stay as they were.
+  assert.deepEqual(responses.map((row) => row[LAST_EVENT] || ''),
+    ['WhatsApp', '', '2026-10-09 15:00 · FAQ-08', '2026-10-09 15:00 · FAQ-08', '']);
+
+  call({ action: 'appendEvent', at: '2026-10-09T18:05:00Z', prospectId: 22, type: 'derivado: disponibilidad', derivation: 'pendiente' });
+  assert.equal(responses[2][LAST_EVENT], '2026-10-09 15:05 · derivado: disponibilidad · pendiente');
+});
+
+test('appendEvent writes nothing when the WhatsApp column is missing', () => {
+  const { call, sheets } = createContext({ withAddedColumns: false });
+
+  const failed = call({ action: 'appendEvent', at: '2026-10-09T18:00:00Z', prospectId: 22, type: 'FAQ-08', derivation: '' });
+
+  assert.deepEqual(failed, { error: 'The response sheet is missing a required header.' });
+  assert.equal(sheets.get('WhatsApp').rows.length, 1);
 });
 
 test('appendEvent rejects free text and malformed values', () => {
@@ -131,11 +163,14 @@ test('errors never include sheet values', () => {
   assert.match(JSON.parse(context.doPost({ postData: { contents: 'not json' } }).text).error, /./);
 });
 
-test('setup creates the events tab once', () => {
-  const { context, sheets } = createContext({ withEventsSheet: false });
+test('setup creates the events tab and the two columns once', () => {
+  const { context, sheets } = createContext({ withEventsSheet: false, withAddedColumns: false });
+  const responses = sheets.get('Respuestas de formulario 1').rows;
 
   context.setupNrcWhatsAppSheet();
   context.setupNrcWhatsAppSheet();
 
+  assert.deepEqual(responses[0], formHeaders.concat(addedHeaders));
+  assert.ok(responses.slice(1).every((row) => row.length === formHeaders.length));
   assert.equal(JSON.stringify(sheets.get('WhatsApp').rows), JSON.stringify([['Fecha y hora', '#', 'Tipo', 'Derivación']]));
 });

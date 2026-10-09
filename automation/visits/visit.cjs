@@ -8,8 +8,9 @@ const VISIT_STATES = Object.freeze({
 });
 
 const DESISTED = 'prospecto desistió';
-// Francisco, 2026-10-08: no fixed wait; the hosts sometimes take many hours.
+// The hosts sometimes take many hours; Francisco accepted 24 hours as the wait on 2026-10-08.
 const DEFAULT_HOST_WAIT_MS = 24 * 60 * 60 * 1000;
+const HOST_BUTTON = /^visita:(.+):(si|no)$/;
 const HOST_YES = ['si', 'si puedo', 'puedo', 'yo puedo', 'si yo puedo', 'si tengo', 'tengo', 'si tengo disponibilidad'];
 const HOST_NO = ['no', 'no puedo', 'yo no puedo', 'no no puedo', 'no tengo', 'no no tengo', 'no tengo disponibilidad'];
 const NRC_ADDRESS = 'Camino Las Flores 10961, Las Condes';
@@ -85,7 +86,28 @@ function availabilityQuestion(schedule, visit, hostName, now) {
   );
 }
 
-/** true, false, or null when the answer is anything but a plain yes or no; null goes to Francisco. */
+/**
+ * Reply buttons sent with the question. Their ids are not shown to the host
+ * and carry the visit, so a host with several open questions answers exactly one.
+ */
+function availabilityButtons(visit) {
+  return [
+    { id: `visita:${visit.visitId}:si`, title: 'Sí puedo' },
+    { id: `visita:${visit.visitId}:no`, title: 'No puedo' },
+  ];
+}
+
+/** { visitId, accepts } for a pressed button, or null when the id is not one of ours. */
+function parseHostButton(id) {
+  const match = HOST_BUTTON.exec(String(id === null || id === undefined ? '' : id));
+  return match ? { visitId: match[1], accepts: match[2] === 'si' } : null;
+}
+
+/**
+ * For a typed answer, which carries no visit: usable only when the host has a
+ * single open question. true, false, or null when the answer is anything but a
+ * plain yes or no; null goes to Francisco.
+ */
 function parseHostReply(text) {
   const plain = String(text === null || text === undefined ? '' : text)
     .normalize('NFD')
@@ -188,11 +210,13 @@ module.exports = {
   NRC_ADDRESS,
   VISIT_STATES,
   assignByOwner,
+  availabilityButtons,
   availabilityQuestion,
   closeVisit,
   confirmByOwner,
   confirmationDetails,
   expireVisit,
+  parseHostButton,
   parseHostReply,
   recordHostReply,
   requestVisit,

@@ -11,11 +11,13 @@ const {
   NRC_ADDRESS,
   VISIT_STATES,
   assignByOwner,
+  availabilityButtons,
   availabilityQuestion,
   closeVisit,
   confirmByOwner,
   confirmationDetails,
   expireVisit,
+  parseHostButton,
   parseHostReply,
   recordHostReply,
   requestVisit,
@@ -188,6 +190,14 @@ test('the question to a host greets by the Santiago hour and says nothing about 
   assert.match(availabilityQuestion(schedule, visit, 'Frank', '2026-10-09T01:00:00Z'), /buenas noches!/);
 });
 
+test('the reply buttons carry the visit, so an answer names the question it belongs to', () => {
+  const buttons = availabilityButtons(pendingVisit());
+  assert.deepEqual(buttons.map((button) => button.title), ['Sí puedo', 'No puedo']);
+  assert.deepEqual(parseHostButton(buttons[0].id), { visitId: 'V-1', accepts: true });
+  assert.deepEqual(parseHostButton(buttons[1].id), { visitId: 'V-1', accepts: false });
+  for (const id of ['visita:V-1:quizas', 'si', '', null]) assert.equal(parseHostButton(id), null);
+});
+
 test('only a plain yes or no counts as a host answer', () => {
   for (const text of ['Sí', 'si', 'SÍ!', 'Sí, puedo', 'puedo', 'sí tengo']) assert.equal(parseHostReply(text), true);
   for (const text of ['No', 'no puedo', 'No, no puedo.', 'no tengo']) assert.equal(parseHostReply(text), false);
@@ -196,7 +206,7 @@ test('only a plain yes or no counts as a host answer', () => {
   }
 });
 
-test('every entry of the calendar file blocks its days, celebrations included', () => {
+test('only the official holidays of the calendar file block their days, not the celebrations', () => {
   const event = (start, end, description) => [
     'BEGIN:VEVENT',
     `DTSTART;VALUE=DATE:${start}`,
@@ -214,14 +224,14 @@ test('every entry of the calendar file blocks its days, celebrations included', 
     'END:VCALENDAR',
   ].join('\r\n');
   assert.deepEqual(parseGoogleHolidayIcs(ics), {
-    2030: ['2030-01-01', '2030-04-18', '2030-09-18', '2030-09-19', '2030-12-25'],
+    2030: ['2030-01-01', '2030-09-18', '2030-09-19', '2030-12-25'],
   });
 });
 
-test('the saved holiday list blocks holidays and celebrations and leaves a working day open', () => {
+test('the saved holiday list blocks official holidays and leaves celebrations and working days open', () => {
   const schedule = createVisitSchedule(loadHolidayCalendar());
   assert.equal(schedule.check(HOLIDAY_MONDAY, '10:30').reason, REJECTIONS.holiday);
-  assert.equal(schedule.check('2026-12-31', '10:30').reason, REJECTIONS.holiday); // "Celebración" in Google's calendar
+  assert.equal(schedule.check('2026-12-31', '10:30').ok, true); // "Celebración" in Google's calendar
   assert.equal(schedule.check(TUESDAY, '10:30').ok, true);
 });
 
