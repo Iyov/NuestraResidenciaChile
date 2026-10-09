@@ -1,6 +1,6 @@
 # SPEC-007 — Recontacto por WhatsApp a prospectos activos
 
-**Estado:** etapa 1 en `local` (2026-10-09): código y pruebas en `automation/apps-script/Reactivation.gs`, sin subir al proyecto de la hoja. Nada enviado; la etapa 2 no está implementada. Cubre R3 de [requirements.md](requirements.md). Francisco aprobó los textos y la cadencia ese día.
+**Estado:** etapa 1 subida al proyecto de la hoja viva el 2026-10-09 (`automation/apps-script/Reactivation.gs`); falta la primera ejecución de `buildNrcReactivationDrafts`, así que la pestaña `Recontacto` todavía no existe. Nada enviado; la etapa 2 no está implementada. Cubre R3 de [requirements.md](requirements.md). Francisco aprobó los textos y la cadencia ese día.
 
 ## Problema y resultado
 
@@ -43,7 +43,7 @@ Resultado: cada prospecto activo recibe una invitación concreta a visitar la re
 
 ## Etapa 1 — envío de un toque (no requiere despliegue)
 
-Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas (`node --test automation/apps-script/Reactivation.test.cjs`). **Escrito el 2026-10-09; no está subido al proyecto de la hoja.**
+Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas (`node --test automation/apps-script/Reactivation.test.cjs`). **Subido al proyecto de la hoja viva el 2026-10-09 con `clasp push`; falta que Francisco ejecute `buildNrcReactivationDrafts`, y hasta entonces no hay pestaña `Recontacto` y el activador no agrega borradores.**
 
 `buildNrcReactivationDrafts`, ejecutada desde el editor:
 
@@ -106,7 +106,7 @@ Con el número conectado (SPEC-002), el Worker envía la secuencia:
 ## Tareas
 
 1. Hecho el 2026-10-09: Francisco aprobó RC-01 a RC-05 y la cadencia, con envíos también en fin de semana.
-2. Hecho en local el 2026-10-09: `buildNrcReactivationDrafts` con pruebas sintéticas. Falta `clasp push` y la primera ejecución supervisada.
+2. Hecho en local el 2026-10-09: `buildNrcReactivationDrafts` con pruebas sintéticas. Subido con `clasp push` ese día. Falta la primera ejecución supervisada.
 3. Primer ciclo manual con los prospectos activos; medir respuestas y visitas.
 4. Toto: base para el envío automático.
 5. Plantillas en YCloud, ruta de envío en el Worker con modo sombra, lectura de `Seguimiento` por el adaptador.

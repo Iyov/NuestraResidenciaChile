@@ -61,7 +61,7 @@ Las pruebas usan datos sintéticos y no acceden a Google.
 node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 ```
 
-## Recontacto y primer contacto (local, sin subir)
+## Recontacto y primer contacto (subido el 2026-10-09, sin ejecutar)
 
 `Reactivation.gs` (SPEC-007 y SPEC-014, etapa 1) prepara borradores de WhatsApp en la pestaña `Recontacto`. No envía nada: Francisco abre cada enlace, envía y marca `Enviado`.
 
@@ -69,7 +69,7 @@ node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 - El activador del formulario agrega una fila con el primer mensaje cuando asigna un ID nuevo, solo si la pestaña ya existe.
 - `onEdit`: activador simple que anota la fecha al marcar `Enviado`. No toca ninguna otra pestaña.
 
-No pide permisos nuevos. Subirlo con `clasp push` cambia lo que corre en la hoja viva, incluido el activador de ID.
+No pide permisos nuevos. Se subió con `clasp push` el 2026-10-09 junto con el cambio del activador de ID. Falta que Francisco ejecute `buildNrcReactivationDrafts` desde el editor: hasta entonces la pestaña no existe y el activador no agrega borradores.
 
 Prueba: `node --test automation/apps-script/Reactivation.test.cjs`.
 

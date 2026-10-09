@@ -14,7 +14,7 @@ Cada envío real del Google Form crea una fila en la hoja `Respuestas de formula
 - **REQ-004:** no sobrescribir un `#` existente; repetición del mismo evento es idempotente.
 - **REQ-005:** conservar el ID si coincide el nombre normalizado del adulto mayor y teléfono normalizado; si la misma identidad tiene varios IDs distintos, detener para reconciliación manual.
 - **REQ-006:** serializar ejecución concurrente mediante `LockService`.
-- **REQ-007:** en la pestaña de respuestas, escribir solo en la celda `#`. Desde el 2026-10-09 el código local agrega además, para un ID nuevo, una fila a la pestaña `Recontacto` cuando existe (SPEC-014, etapa 1); ese cambio no está subido. No modificar color, estado, comentarios, datos de respuesta, comisión ni valores de Ads.
+- **REQ-007:** en la pestaña de respuestas, escribir solo en la celda `#`. Desde el 2026-10-09 el activador agrega además, para un ID nuevo, una fila a la pestaña `Recontacto` cuando existe (SPEC-014, etapa 1); subido ese día. Con ese código no ha entrado todavía ningún formulario real. No modificar color, estado, comentarios, datos de respuesta, comisión ni valores de Ads.
 - **REQ-008:** no registrar valores, nombre, teléfono o email en logs.
 - **REQ-009:** trigger y hoja quedan bajo una cuenta NRC controlada. La instalación y autorización son manuales.
 

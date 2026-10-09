@@ -1,6 +1,6 @@
 # SPEC-014 — Del formulario a la visita
 
-**Estado:** etapa 1 en `local` (2026-10-09), sin subir al proyecto de la hoja; el resto es `borrador`. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la envía el asistente a su nombre y le avisa (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
+**Estado:** etapa 1 subida al proyecto de la hoja viva el 2026-10-09, inactiva hasta que exista la pestaña `Recontacto`; el resto es `borrador`. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la envía el asistente a su nombre y le avisa (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
 
 ## Problema y resultado
 
@@ -57,7 +57,7 @@ Quien llena el formulario pide que lo contacten para resolver dudas y coordinar 
 
 ## Etapa 1 — antes de conectar el número
 
-Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas. **Escrito el 2026-10-09; no está subido al proyecto de la hoja.**
+Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas. **Subido al proyecto de la hoja viva el 2026-10-09 con `clasp push`; falta que Francisco ejecute `buildNrcReactivationDrafts`, y hasta entonces no hay pestaña `Recontacto` y el activador no agrega borradores.**
 
 Cuando el activador del formulario asigna un ID nuevo, agrega a la pestaña `Recontacto` (SPEC-007) una fila con PC-01 listo y su enlace `https://wa.me/...`. Francisco la abre en el teléfono de NRC, envía con un toque y marca `Enviado`. Si no hay respuesta, los mensajes siguientes son RC-04 y RC-05, con la misma cadencia.
 
@@ -102,7 +102,7 @@ Arranca en modo sombra: Francisco ve lo que el asistente habría enviado.
 ## Tareas
 
 1. Hecho el 2026-10-09: Francisco aprobó el flujo y PC-01 a PC-07. La confirmación de la visita la envía el asistente a su nombre (REQ-005).
-2. Hecho en local el 2026-10-09: borrador de PC-01 desde el activador, con pruebas sintéticas. Falta `clasp push` y un envío de prueba supervisado.
+2. Hecho en local el 2026-10-09: borrador de PC-01 desde el activador, con pruebas sintéticas. Subido con `clasp push` ese día. Falta crear la pestaña y un envío de prueba supervisado.
 3. Toto: canal WhatsApp en el aviso (SPEC-004).
 4. Etapa 2: aviso hoja → Worker, lectura de día y hora, plantillas, botón de visita realizada.
 5. Piloto en modo sombra con los primeros prospectos nuevos.
