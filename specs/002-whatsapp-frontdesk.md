@@ -97,7 +97,7 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 
 ### Tareas, en orden
 
-1. Hecho el 2026-10-08: Don Humberto aprobó las filas pendientes del Anexo A y cerró D-2. Falta cotejar FAQ-12 a FAQ-16 palabra por palabra con el sitio y el brochure.
+1. Hecho el 2026-10-08: Don Humberto aprobó las filas pendientes del Anexo A y cerró D-2. FAQ-12 a FAQ-16 se cotejaron con el sitio y el brochure el 2026-10-09 (ver Anexo A).
 2. Pasar el número de NRC de WhatsApp normal a WhatsApp Business App y usarla al menos 7 días (Francisco). No envía datos a YCloud, así que puede hacerse ya.
 3. **Antes de conectar el número:** Toto revisa a YCloud como proveedor y resuelve D-1 (SPEC-004). Desde que el número se conecta, YCloud recibe todos sus chats, aunque el asistente esté en modo sombra (orden decidido por Francisco, 2026-10-08).
 4. Conectar el número a YCloud en coexistencia (Francisco; requiere iniciar sesión con Facebook y escanear un QR desde la app). La cuenta de YCloud ya existe.

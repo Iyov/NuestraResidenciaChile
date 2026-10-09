@@ -55,7 +55,7 @@ Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está apli
 - Responsable: confirmar que Hotel Melado Humberto Piemonte SpA es la entidad que opera la residencia y trata los datos. El contrato de servicios y la resolución sanitaria están a nombre de don Humberto como persona natural, no de la sociedad.
 - Instrucción de Francisco (2026-10-08): el aviso no expone datos personales de don Humberto (RUT personal, correo o teléfono propios); solo los datos de la sociedad que la ley exija. Toto debe indicar si la ley obliga a nombrar al representante legal.
 - Plazo de conservación: ningún documento lo define. El buzón para solicitudes de derechos es `nuestraresidenciachile@gmail.com` (Francisco, 2026-10-08).
-- Proveedores: por preferencia de Francisco (2026-10-08) el aviso habla de "terceros" sin nombrarlos. Hoy son Google y WhatsApp/Meta; YCloud y Cloudflare se suman al conectar el asistente (SPEC-002). Toto debe indicar si la ley exige nombrarlos o indicar sus categorías, y revisar a YCloud antes de que se conecte el número. Además, la hoja guarda identificadores de Google Ads, y cualquier envío a Ads/Meta o a un proveedor de IA debe quedar descrito (AC-006).
+- Proveedores: por preferencia de Francisco (2026-10-08) el aviso habla de "terceros" sin nombrarlos. Hoy son Google y WhatsApp/Meta; YCloud y Cloudflare se suman al conectar el asistente (SPEC-002). Toto debe indicar si la ley exige nombrarlos o indicar sus categorías, y revisar a YCloud antes de que se conecte el número. Además, la hoja tiene columnas para identificadores de Google Ads, hoy vacías (revisado el 2026-10-09), y cualquier envío a Ads/Meta o a un proveedor de IA debe quedar descrito (AC-006).
 - Si la autovalencia es dato sensible de salud que exige consentimiento expreso de la propia persona mayor, o si conviene sacarla del primer formulario.
 - Si las dos casillas son la forma adecuada de documentar el permiso, y cómo se registra la versión del aviso aceptada (AC-004).
 - Existencia y enlace de la Política de Privacidad completa en el sitio. Hay un borrador en [004-privacy-policy-draft.md](004-privacy-policy-draft.md), con sus propios puntos por verificar.
@@ -93,7 +93,8 @@ Pasos manuales, en este orden; ninguno está hecho:
 - Dónde se guardan los retiros y quién los registra. El asistente de WhatsApp ya deriva a Francisco los mensajes del tipo "no me contacten"; hoy eso no deja un registro de retiro.
 - Cómo se atienden las solicitudes de derechos que lleguen por correo (responsable y plazo).
 - Qué hacer con los prospectos anteriores al aviso: mantenerlos en gestión manual o pedirles autorización.
-- Auditar cookies y etiquetas del sitio antes de publicar la sección correspondiente de la política.
+- Cookies del sitio: auditadas el 2026-10-09 (Google Analytics 4 y Google Ads activos, sin banner; detalle en las notas de la política). Falta que Toto diga si se necesita un banner de consentimiento y, si es así, instalarlo en el WordPress.
+- La hoja tiene una columna `Edad` que el aviso no menciona: confirmar de dónde sale y agregarla al aviso si se sigue usando.
 
 ## Referencias
 

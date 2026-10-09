@@ -21,8 +21,8 @@ Acompaña al aviso del formulario de [SPEC-004](004-form-privacy-and-consent.md)
 > ## 2. Qué datos tratamos
 >
 > - **Datos de quien nos contacta:** nombre, correo electrónico y teléfono.
-> - **Datos de la persona mayor:** su nombre y la respuesta que nos das sobre su autovalencia. Esa respuesta es solo referencial: no es una evaluación ni condiciona el ingreso.
-> - **Cómo nos conociste:** el origen del contacto que indicas en el formulario [y los datos que permiten saber desde qué anuncio o búsqueda llegaste al sitio].
+> - **Datos de la persona mayor:** su nombre, [su edad] y la respuesta que nos das sobre su autovalencia. Esa respuesta es solo referencial: no es una evaluación ni condiciona el ingreso.
+> - **Cómo nos conociste:** el origen del contacto que indicas en el formulario.
 > - **Tu conversación con nosotros:** los mensajes que intercambiamos por teléfono, WhatsApp o correo, y el estado de tu solicitud (por ejemplo, si coordinamos una visita).
 > - **Tus autorizaciones:** qué autorizaste, cuándo y con qué versión del aviso.
 >
@@ -83,7 +83,11 @@ Acompaña al aviso del formulario de [SPEC-004](004-form-privacy-and-consent.md)
 >
 > ## 9. Sitio web y cookies
 >
-> [DESCRIPCIÓN DE LAS COOKIES Y HERRAMIENTAS DE MEDICIÓN REALMENTE INSTALADAS EN EL SITIO]
+> Nuestro sitio usa herramientas de terceros para medir las visitas y saber si nuestra publicidad funciona. Esas herramientas guardan cookies en tu navegador y registran datos de navegación, como las páginas que visitas, el tipo de dispositivo, tu ubicación aproximada y si llegaste desde un anuncio. No nos permiten saber tu nombre ni tus datos de contacto.
+>
+> [CÓMO SE ACEPTAN O RECHAZAN ESTAS COOKIES — A DEFINIR POR EL ABOGADO] También puedes bloquearlas o borrarlas desde la configuración de tu navegador; el sitio sigue funcionando.
+>
+> El formulario de contacto y el botón de WhatsApp son servicios de terceros que se rigen además por sus propias políticas de privacidad.
 >
 > ## 10. Cambios a esta política
 >
@@ -99,11 +103,20 @@ Hechos que el texto afirma y hay que verificar antes de publicar:
 
 - **Sección 1.** Mismas dudas del aviso: si la sociedad es quien opera la residencia y trata los datos, y si hay que nombrar al representante legal. Instrucción de Francisco: no exponer datos personales de don Humberto.
 - **Correo.** El aviso y esta política usan `nuestraresidenciachile@gmail.com`, el correo del proyecto (decisión de Francisco, 2026-10-08). La página de contacto del sitio muestra `contacto@nuestraresidenciachile.cl` y no se modifica.
-- **Sección 2, origen del contacto.** La hoja de respuestas tiene columnas de atribución publicitaria además del origen declarado. Confirmar qué se guarda y cómo llega ahí antes de describirlo.
+- **Sección 2, origen del contacto.** Revisado el 2026-10-09 en la copia local de la hoja (solo encabezados y conteos): las doce columnas de atribución publicitaria (`ID de transacción` a `Atributos de sesión`, incluidas `GCLID`, `Dirección IP` y los dos consentimientos de anuncios) existen pero están vacías en las 21 filas. El único origen que se guarda por prospecto es el `Origen del Contacto` que la persona declara, así que se quitó el corchete. Si esas columnas empiezan a llenarse, la sección 2 debe decirlo.
+- **Sección 2, edad y seguimiento.** La hoja tiene una columna `Edad` (llena en 15 de 21 filas) que el aviso no menciona; va entre corchetes hasta confirmar de dónde sale. Las columnas de seguimiento (`Agendo Visita`, `Fecha Visita`, `Hora Visita`, `Ingresó?`, `Estado`, `Comentario`, `Fecha Eval 5i`, `Hora Eval 5i`, `Fecha Ingreso`, `Comisión`) quedan cubiertas por "el estado de tu solicitud". `Comentario` es texto libre y no se leyó: si ahí se anotan antecedentes de salud, la frase "no te pedimos antecedentes médicos" sigue siendo cierta, pero la política tendría que decir que se registran.
 - **Sección 3.** Base de legitimidad de cada finalidad, en especial la medición de canales, y si la respuesta sobre autovalencia es un dato sensible que exige consentimiento expreso de la propia persona mayor o conviene sacarla del primer formulario.
 - **Sección 5, proveedores.** Por preferencia de Francisco (2026-10-08) el texto habla de "terceros" sin nombrarlos. Hoy operan Google (formulario, hoja, Gmail) y WhatsApp/Meta; YCloud y Cloudflare están elegidos para el asistente de WhatsApp pero no conectados (SPEC-002). Toto debe indicar si la ley exige nombrarlos o indicar sus categorías.
 - **Sección 5, publicidad e IA.** La frase es cierta hoy: el asistente clasifica con reglas, sin modelo de lenguaje, y no hay conversiones avanzadas ni importaciones a Google Ads/Meta. Si SPEC-005 las habilita, la frase deja de ser cierta y hay que cambiarla antes (AC-006).
 - **Sección 6.** Ningún documento define el plazo; 12 meses es una sugerencia de trabajo. El paso a "contrato de residencia" supone que ese contrato regula los datos del residente: confirmar.
 - **Sección 7.** Plazo legal de respuesta y nombre/estado de la autoridad de control según la Ley 21.719: que los indique Toto.
 - **Sección 8.** La verificación en dos pasos se afirma sin haberla comprobado en las cuentas de NRC. Confirmar o quitar.
-- **Sección 9.** No se ha auditado qué cookies, píxeles o etiquetas tiene el WordPress activo. No publicar esta sección sin esa revisión.
+- **Sección 9, qué tiene el sitio.** Revisado el 2026-10-09 leyendo el código público de 22 páginas (inicio, contacto, servicios, nosotros y blog); no se abrió un navegador, así que las cookies se deducen de las etiquetas y no se observaron una a una.
+  - Google Analytics 4 (`G-SS6ZFD2T3D`) y la etiqueta de Google Ads (`AW-18362783645`), instaladas por el plugin Site Kit by Google en todas las páginas. Cookies esperables: `_ga`, `_ga_<id>` y `_gcl_au`.
+  - Google Tag Manager (`GTM-M5JMMTZV`): el contenedor carga, pero no tiene etiquetas propias.
+  - Modo de consentimiento de Google: niega las cookies por defecto solo a visitantes de Europa. En Chile quedan permitidas sin preguntar. El plugin WP Consent API está instalado, pero no hay ningún banner de cookies.
+  - Sin píxel de Meta, Hotjar, Clarity, TikTok ni LinkedIn.
+  - Otros terceros: Google Fonts (el navegador pide las fuentes a Google), el botón de WhatsApp de Join.chat y el formulario de Google incrustado en `/contact/`. Maps, Instagram, Facebook y YouTube aparecen solo como enlaces.
+- **Sección 9, para Toto.** Si la Ley 21.719 exige consentimiento previo para las cookies de medición y publicidad y, por tanto, un banner. Hoy no existe forma de rechazarlas en el sitio.
+- **Sección 9 y sección 5.** La frase "no enviamos tus datos personales a plataformas de publicidad" vale para los datos del formulario. El sitio sí envía datos de navegación a Google Ads; por eso la sección 9 lo dice. Qué hace esa etiqueta (conversiones, remarketing) se ve en la cuenta de Google Ads (SPEC-005).
+- **Sección 9, nombres.** Sigue la preferencia de Francisco de hablar de "terceros"; Toto debe indicar si aquí hay que nombrar a Google.
