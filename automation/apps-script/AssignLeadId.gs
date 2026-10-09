@@ -146,6 +146,11 @@ function assignNrcLeadIdOnFormSubmit(event) {
 
     idCell.setValue(idToWrite);
     SpreadsheetApp.flush();
+
+    // SPEC-014: a new prospect gets a first-contact draft. Defined in Reactivation.gs.
+    if (matchingId === null && typeof queueNrcFirstContactSafely_ === 'function') {
+      queueNrcFirstContactSafely_(sheet, idToWrite);
+    }
   } finally {
     lock.releaseLock();
   }

@@ -1,6 +1,6 @@
 # SPEC-007 — Recontacto por WhatsApp a prospectos activos
 
-**Estado:** `borrador` (2026-10-09). Nada implementado ni enviado. Cubre R3 de [requirements.md](requirements.md). Francisco aprobó los textos y la cadencia ese día.
+**Estado:** etapa 1 en `local` (2026-10-09): código y pruebas en `automation/apps-script/Reactivation.gs`, sin subir al proyecto de la hoja. Nada enviado; la etapa 2 no está implementada. Cubre R3 de [requirements.md](requirements.md). Francisco aprobó los textos y la cadencia ese día.
 
 ## Problema y resultado
 
@@ -43,14 +43,28 @@ Resultado: cada prospecto activo recibe una invitación concreta a visitar la re
 
 ## Etapa 1 — envío de un toque (no requiere despliegue)
 
-Función de Apps Script en el proyecto de la hoja, `buildNrcReactivationDrafts`:
+Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas (`node --test automation/apps-script/Reactivation.test.cjs`). **Escrito el 2026-10-09; no está subido al proyecto de la hoja.**
 
-1. Lee `#`, `Tu Nombre y Apellido`, `Teléfono`, `Seguimiento`, `Agendo Visita` y `Visita realizada`.
-2. Crea o reemplaza la pestaña `Recontacto` con una fila por prospecto que entra: `#`, segmento, toque que corresponde, texto listo y enlace `https://wa.me/<teléfono>?text=<texto>`.
-3. Francisco abre la pestaña en el teléfono de NRC, toca el enlace, revisa y envía. Marca `enviado` en la fila.
-4. La función se vuelve a ejecutar cuando toca el siguiente toque; usa las marcas `enviado` y su fecha para decidir quién sigue.
+`buildNrcReactivationDrafts`, ejecutada desde el editor:
 
-Los datos no salen de la hoja ni pasan por un modelo. El registro de ejecución lleva solo cantidades.
+1. Lee `#`, `Tu Nombre y Apellido`, `Teléfono`, `Seguimiento`, `Agendo Visita`, `Fecha Visita`, `Visita realizada` y `Marca temporal`.
+2. Crea la pestaña `Recontacto` si no existe y agrega una fila por cada prospecto al que le toca un mensaje: `#`, segmento, número de toque, mensaje, texto listo, enlace `https://wa.me/<teléfono>?text=<texto>`, casilla `Enviado`, `Fecha de envío` y casilla `Respondió`. No borra las filas enviadas: son el historial del que sale el toque siguiente.
+3. Francisco abre la pestaña en el teléfono de NRC, toca el enlace, revisa, envía y marca `Enviado`. La fecha se anota sola al marcar.
+4. Si la persona contesta, Francisco marca `Respondió` y no se le prepara nada más.
+5. La función se vuelve a ejecutar cuando se quiera: agrega el segundo mensaje a los 4 días del primero y el tercero a los 10, y nunca un cuarto.
+
+Cómo quedó aplicado:
+
+- Los textos están copiados en el código; la prueba falla si difieren de la tabla aprobada de arriba.
+- Varias filas con el mismo ID dan un solo borrador; si una de ellas no está `activo`, el ID queda fuera.
+- Un valor de `Agendo Visita` o `Visita realizada` que no sea Sí, No o vacío no se interpreta: la función devuelve el número de fila para revisarlo y no prepara mensaje.
+- Un prospecto con `Fecha Visita` de hoy o futura, sin visita realizada, queda fuera.
+- Si un prospecto deja de estar `activo`, su borrador sin enviar se retira de la pestaña.
+- Una fila marcada `Enviado` sin fecha detiene la secuencia de ese prospecto hasta que se corrija.
+- El horario de 10:00 a 19:00 y la regla de las 48 horas de conversación abierta no se controlan en esta etapa: el envío lo hace Francisco.
+- Para abrir un ciclo nuevo a un prospecto se borran sus filas de `Recontacto`.
+
+Los datos no salen de la hoja ni pasan por un modelo. El registro de ejecución lleva solo cantidades y números de fila.
 
 ## Etapa 2 — envío automático
 
@@ -92,7 +106,7 @@ Con el número conectado (SPEC-002), el Worker envía la secuencia:
 ## Tareas
 
 1. Hecho el 2026-10-09: Francisco aprobó RC-01 a RC-05 y la cadencia, con envíos también en fin de semana.
-2. `buildNrcReactivationDrafts` con pruebas sintéticas; `clasp push`; primera ejecución supervisada.
+2. Hecho en local el 2026-10-09: `buildNrcReactivationDrafts` con pruebas sintéticas. Falta `clasp push` y la primera ejecución supervisada.
 3. Primer ciclo manual con los prospectos activos; medir respuestas y visitas.
 4. Toto: base para el envío automático.
 5. Plantillas en YCloud, ruta de envío en el Worker con modo sombra, lectura de `Seguimiento` por el adaptador.

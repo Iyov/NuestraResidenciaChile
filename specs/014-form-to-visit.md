@@ -1,6 +1,6 @@
 # SPEC-014 — Del formulario a la visita
 
-**Estado:** `borrador` (2026-10-09). Nada implementado. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la envía el asistente a su nombre y le avisa (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
+**Estado:** etapa 1 en `local` (2026-10-09), sin subir al proyecto de la hoja; el resto es `borrador`. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la envía el asistente a su nombre y le avisa (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
 
 ## Problema y resultado
 
@@ -57,7 +57,15 @@ Quien llena el formulario pide que lo contacten para resolver dudas y coordinar 
 
 ## Etapa 1 — antes de conectar el número
 
-El activador del formulario ya corre en la hoja. Se le agrega un paso: al asignar el ID, envía a Francisco un correo con el ID, el segmento y un enlace `https://wa.me/...` con PC-01 listo. Francisco lo abre en el teléfono de NRC y envía con un toque. El correo no lleva nombre ni teléfono visibles; el teléfono va dentro del enlace.
+Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas. **Escrito el 2026-10-09; no está subido al proyecto de la hoja.**
+
+Cuando el activador del formulario asigna un ID nuevo, agrega a la pestaña `Recontacto` (SPEC-007) una fila con PC-01 listo y su enlace `https://wa.me/...`. Francisco la abre en el teléfono de NRC, envía con un toque y marca `Enviado`. Si no hay respuesta, los mensajes siguientes son RC-04 y RC-05, con la misma cadencia.
+
+- Solo actúa si la pestaña `Recontacto` ya existe; se crea con la primera ejecución de `buildNrcReactivationDrafts`.
+- Un formulario repetido que reutiliza un ID no genera otra fila (REQ-001).
+- Una fila recién llegada todavía no tiene `Seguimiento`: en este paso, y solo en este, la celda vacía se acepta, porque la persona acaba de pedir que la contacten. `desistió` y `residente` siguen bloqueando.
+- Si este paso falla, el ID queda asignado igual y la ejecución anota un error genérico.
+- Se descartó avisar por correo: el proyecto de la hoja habría necesitado un permiso nuevo para enviar correo y, hasta que Francisco lo autorizara, el activador que asigna los ID habría fallado. Nadie avisa a Francisco de la fila nueva; la ve al abrir la pestaña.
 
 Los pasos 3 a 8 siguen a mano en esta etapa. Reduce el primer contacto a un toque, que es donde hoy se pierde más tiempo.
 
@@ -87,18 +95,18 @@ Arranca en modo sombra: Francisco ve lo que el asistente habría enviado.
 
 ## Cómo volver atrás
 
-- **Etapa 1:** propiedad `NRC_FIRST_CONTACT_EMAIL` vacía en el proyecto de la hoja; el activador sigue asignando ID y deja de enviar el correo.
+- **Etapa 1:** borrar la pestaña `Recontacto`; el activador sigue asignando ID y deja de agregar borradores.
 - **Etapa 2:** `FIRST_CONTACT_MODE` distinto de `on` en `wrangler.toml`. Lo ya agendado sigue anotado en la hoja y Francisco lo continúa a mano.
 - Un mensaje enviado no se retira: por eso el modo sombra.
 
 ## Tareas
 
 1. Hecho el 2026-10-09: Francisco aprobó el flujo y PC-01 a PC-07. La confirmación de la visita la envía el asistente a su nombre (REQ-005).
-2. Etapa 1: paso de correo en el activador, con pruebas sintéticas y un envío de prueba supervisado.
+2. Hecho en local el 2026-10-09: borrador de PC-01 desde el activador, con pruebas sintéticas. Falta `clasp push` y un envío de prueba supervisado.
 3. Toto: canal WhatsApp en el aviso (SPEC-004).
 4. Etapa 2: aviso hoja → Worker, lectura de día y hora, plantillas, botón de visita realizada.
 5. Piloto en modo sombra con los primeros prospectos nuevos.
 
 ## Decisiones abiertas
 
-- A qué correo llega el aviso de la etapa 1.
+- Cómo se entera Francisco de que hay un borrador nuevo en `Recontacto` (propuesta: sumarlo a los avisos del buzón de SPEC-006, que ya tiene permiso para enviar correo).
