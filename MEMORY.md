@@ -133,6 +133,13 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - Los informes de julio y agosto entregados a don Humberto nombran prospectos e incluyen una captura de la hoja. Los siguientes van solo con cantidades.
 - Elecciones de implementación: el embudo sigue a las consultas del mes hasta hoy; los costos reparten todo el gasto entre todas las consultas; los identificadores de clic de Google no se guardan mientras Toto no lo apruebe.
 
+**SPEC-006 — avisos del buzón de NRC (activo desde el 2026-10-09):**
+
+- Decidido por Francisco el 2026-10-09: solo el buzón `nuestraresidenciachile@gmail.com`; leer y avisar, sin etiquetar, marcar, archivar ni responder; Apps Script con reglas, sin modelo de lenguaje; aviso solo cuando llega una consulta o algo urgente, sin resumen diario.
+- `automation/gmail/GmailTriage.gs` revisa la bandeja cada 15 minutos, pide solo encabezados y extracto, y envía un correo con tipo, hora y enlace (`node --test automation/gmail/GmailTriage.test.cjs`). Se subió el 2026-10-09 al proyecto independiente `NRC Gmail Triage` de la cuenta NRC, separado del de la hoja para no tocar sus permisos.
+- Francisco informó el 2026-10-09 que creó la propiedad `NRC_GMAIL_ALERT_TO`, ejecutó `previewNrcGmailTriage`, e instaló el activador con `installNrcGmailTriageTrigger`. Falta el correo de prueba desde otra cuenta; no constan aquí los conteos de la vista previa.
+- Elecciones de implementación: el aviso no lleva remitente ni asunto; todo correo escrito por una persona avisa, aunque sea una oferta comercial; los avisos de cuenta se detectan solo por el asunto.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
@@ -143,7 +150,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - Acordar cadencia y destinatarios del informe; el formato quedó definido en `automation/acquisition/report.cjs`.
 - Google Ads: campaña "Autovalentes zona oriente - Búsqueda" activa desde el 2026-10-09, $2.600 al día (detalle en la spec 005). Pendiente revisarla a la semana e importar `contact_link_click` como conversión. Al operar Google Ads desde el Chrome de Francisco, el entorno bloquea de forma intermitente los pasos que comprometen gasto y Google pide confirmar identidad: el clic de publicar y esa confirmación los hace Francisco. Revisar consentimientos antes de habilitar conversiones avanzadas/importaciones.
 - Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
-- Gmail fue parte de la visión inicial, pero sus etiquetas, alcance, nivel de acceso y reglas de respuesta no están definidos; mantenerlo en descubrimiento.
+- SPEC-006: enviar el correo de prueba, confirmar que el aviso llega y ajustar las reglas con las primeras semanas de avisos.
 
 ## Referencias operativas
 

@@ -2,6 +2,7 @@
 /Backup/
 /.clasp.json
 /automation/apps-script/.clasp*.json
+/automation/gmail/.clasp*.json
 /data/*.xlsx
 /data/*.xlsm
 /data/*.csv

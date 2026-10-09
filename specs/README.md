@@ -12,7 +12,7 @@ Las especificaciones son la fuente de requisitos funcionales y aceptación. Un e
 | [003 — Visitas](003-visit-coordination.md) | Reglas acordadas; validación de horarios y estados de la visita `local` en `automation/visits/` con pruebas sintéticas (2026-10-08); integración pendiente | Conectar la pregunta a los anfitriones con WhatsApp (depende de SPEC-002) |
 | [004 — Privacidad del formulario](004-form-privacy-and-consent.md) | Borradores de aviso y de [Política de Privacidad](004-privacy-policy-draft.md) redactados; registro de permisos `local` en `automation/consent/` con pruebas sintéticas (2026-10-08); pendiente de abogado, nada publicado | Confirmar responsable, bases/finalidades, aviso y política con Toto |
 | [005 — Captación y marketing](005-acquisition-content-and-reporting.md) | Tope de gasto de $80.000 al mes (2026-10-09); [línea base y auditoría](005-baseline-2026-10.md) del 2026-10-09, con lectura de Google Ads, Analytics y Search Console; embudo, tope, atribución, control de publicación e informe `local` en `automation/acquisition/` con pruebas sintéticas; nada conectado | Campaña de búsqueda activa desde el 2026-10-09 ($2.600 al día): revisarla a la semana, importar el evento de contacto como conversión y agregar `Fecha Pago` a la hoja |
-| [006 — Gmail](006-gmail-triage.md) | Backlog de descubrimiento | Definir buzón, filtros, datos y acciones permitidas |
+| [006 — Gmail](006-gmail-triage.md) | Alcance definido el 2026-10-09 (solo buzón NRC, leer y avisar); código en `automation/gmail/` con pruebas sintéticas, subido al proyecto `NRC Gmail Triage`; activador instalado por Francisco el 2026-10-09 | Enviar el correo de prueba, confirmar que el aviso llega y ajustar las reglas con las primeras semanas |
 
 ## Flujo SDD
 
