@@ -21,7 +21,7 @@ Los ocho requerimientos iniciales de Francisco y la especificación que cubre ca
 | [011 — Posicionamiento y sitio](011-seo-and-site.md) | `borrador` (2026-10-09); nada implementado | Acceso al WordPress y paquete de medición |
 | [012 — Informe para Don Humberto](012-management-report.md) | `borrador` (2026-10-09); formato `local` en `automation/acquisition/report.cjs` | `Fecha Pago`, `getNrcMonthlyCounts` e informe de septiembre |
 | [013 — Operación de Google Ads](013-google-ads-operation.md) | `borrador` (2026-10-09); campaña activa, sin conversión medida ni rutina | Importar la conversión y primera revisión semanal el 2026-10-19 |
-| [014 — Del formulario a la visita](014-form-to-visit.md) | `borrador` (2026-10-09); flujo y textos PC-01 a PC-07 aprobados por Francisco ese día; nada implementado | Francisco decide quién confirma la visita; paso de correo en el activador del formulario |
+| [014 — Del formulario a la visita](014-form-to-visit.md) | `borrador` (2026-10-09); flujo y textos PC-01 a PC-07 aprobados por Francisco ese día; nada implementado | Paso de correo en el activador del formulario |
 | [006 — Gmail](006-gmail-triage.md) | Alcance definido el 2026-10-09 (solo buzón NRC, leer y avisar); código en `automation/gmail/` con pruebas sintéticas, subido al proyecto `NRC Gmail Triage`; activador instalado por Francisco el 2026-10-09 | Enviar el correo de prueba, confirmar que el aviso llega y ajustar las reglas con las primeras semanas |
 
 ## Flujo SDD

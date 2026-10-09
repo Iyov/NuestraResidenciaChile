@@ -1,6 +1,6 @@
 # SPEC-014 — Del formulario a la visita
 
-**Estado:** `borrador` (2026-10-09). Nada implementado. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. Queda sin responder quién envía la confirmación de la visita (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
+**Estado:** `borrador` (2026-10-09). Nada implementado. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la sigue enviando él (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
 
 ## Problema y resultado
 
@@ -8,7 +8,7 @@ El 2026-10-09 entraron los primeros prospectos desde que el ID es automático. E
 
 Las otras especificaciones cubren pedazos: SPEC-002 y 008 responden a quien escribe, SPEC-003 coordina con los anfitriones, SPEC-007 recontacta a los antiguos y SPEC-009 anota en la hoja. Ninguna inicia la conversación con un prospecto nuevo ni une los pasos.
 
-Resultado: desde que llega una respuesta del formulario hasta que la visita está realizada y anotada, Francisco no tiene que hacer nada, salvo en los casos que se le derivan.
+Resultado: desde que llega una respuesta del formulario hasta que la visita está realizada y anotada, Francisco solo envía la confirmación de la visita y atiende los casos que se le derivan.
 
 ## Flujo
 
@@ -16,7 +16,7 @@ Resultado: desde que llega una respuesta del formulario hasta que la visita est�
 2. **Primer mensaje (PC-01)** al teléfono del formulario, dentro de los 5 minutos siguientes si es entre 9:00 y 21:00 de Santiago; si no, a las 9:00.
 3. **La persona propone día y hora.** El asistente lo interpreta. Si no está claro, pregunta (PC-02). Si cae fuera del horario de visitas o en festivo, ofrece las dos ventanas válidas más cercanas (PC-03). Estado: `visita solicitada`.
 4. **Pregunta a los anfitriones** (SPEC-003): Nico y Frank reciben la consulta con botones; el primero que acepta queda asignado.
-5. **Confirmación al prospecto (PC-04)** apenas un anfitrión acepta, con día, hora y dirección. Estado: `visita agendada`; se llenan `Agendo Visita`, `Fecha Visita` y `Hora Visita`. Francisco recibe un aviso, no una tarea.
+5. **Confirmación al prospecto (PC-04):** cuando un anfitrión acepta, Francisco recibe el aviso con el ID, el día, la hora y el anfitrión, y le escribe él mismo al prospecto desde la app (Francisco, 2026-10-09: "me aceptan Nico o Frank y yo les escribo directo"). El aviso trae PC-04 ya armado para copiar. Cuando su mensaje sale, el estado pasa a `visita agendada` y se llenan `Agendo Visita`, `Fecha Visita` y `Hora Visita`.
 6. **Si ningún anfitrión puede o no responden en el plazo**, el asistente ofrece al prospecto otros horarios (PC-03) y repite el paso 4. Al segundo intento fallido, deriva a Francisco.
 7. **Recordatorio (PC-05)** el día anterior a las 18:00; para una visita de lunes, el viernes.
 8. **Después de la visita** el anfitrión marca "Visita realizada" o "No vino". Realizada → estado `visita realizada` y, al día siguiente a las 11:00, PC-06. No vino → PC-07, una vez.
@@ -44,7 +44,7 @@ En PC-05, "mañana" se reemplaza por "el lunes" cuando el recordatorio sale un v
 - **REQ-002:** no sale si `Seguimiento` no es `activo`, si la fila no tiene teléfono válido o si esa persona ya está conversando por WhatsApp.
 - **REQ-003:** la interpretación del día y la hora devuelve una fecha y una hora exactas o "no claro"; nunca adivina. Toda fecha pasa por `automation/visits/schedule.cjs` antes de preguntar a un anfitrión.
 - **REQ-004:** nunca se confirma una visita al prospecto sin que un anfitrión haya aceptado.
-- **REQ-005:** la confirmación la envía el asistente. Esto cambia la decisión 7 de `MEMORY.md` y AC-004 de SPEC-003, que dejaban la confirmación final en manos de Francisco.
+- **REQ-005:** la confirmación la envía Francisco, no el asistente (decisión 7 de `MEMORY.md` y AC-004 de SPEC-003, reafirmadas por él el 2026-10-09). El asistente reconoce la confirmación por el mensaje que Francisco envía en ese chat después de la aceptación del anfitrión; el comando `confirmada N` hace lo mismo. Ese mensaje no detiene los pasos siguientes del flujo (recordatorio y mensajes posteriores a la visita). Si pasan 2 horas sin confirmación, el aviso se repite una vez.
 - **REQ-006:** si la persona cambia o cancela, el asistente avisa al anfitrión asignado, libera la visita y vuelve al paso 3.
 - **REQ-007:** se deriva a Francisco, sin insistir al prospecto: dos intentos sin anfitrión, una respuesta que no se entiende tras PC-02, y todo tema reservado de SPEC-008.
 - **REQ-008:** los mensajes iniciados por NRC (PC-01, PC-05, PC-06, PC-07, y PC-04 cuando pasaron más de 24 horas desde el último mensaje de la persona) salen como plantillas aprobadas por Meta, con costo por mensaje.
@@ -77,9 +77,9 @@ Arranca en modo sombra: Francisco ve lo que el asistente habría enviado.
 - **AC-001:** un formulario válido recibido a las 15:00 genera PC-01 antes de las 15:05; uno recibido a las 23:00 lo genera a las 9:00.
 - **AC-002:** un segundo formulario del mismo prospecto no genera otro PC-01.
 - **AC-003:** "el sábado" o "a las 18:00" reciben PC-03 con dos opciones válidas; nunca se pregunta a un anfitrión por un horario inválido.
-- **AC-004:** el prospecto recibe PC-04 solo después de un "sí" de un anfitrión, con el día, la hora y la dirección correctos.
+- **AC-004:** el asistente nunca envía la confirmación. Tras el "sí" de un anfitrión, Francisco recibe un aviso con el día, la hora, el anfitrión y PC-04 armado.
 - **AC-005:** dos rechazos o silencios de los anfitriones terminan en una derivación a Francisco, no en un tercer intento.
-- **AC-006:** la hoja queda con `Agendo Visita`, `Fecha Visita`, `Hora Visita` y el estado correctos sin intervención de Francisco.
+- **AC-006:** la hoja queda con `Agendo Visita`, `Fecha Visita`, `Hora Visita` y el estado correctos apenas Francisco envía la confirmación, sin que él toque la hoja.
 - **AC-007:** el recordatorio sale una vez, el día hábil anterior.
 - **AC-008:** una visita marcada como realizada deja `Visita realizada` y el estado al día, y genera PC-06 al día siguiente.
 - **AC-009:** un prospecto `desistió` no recibe ningún mensaje de este flujo.
@@ -93,7 +93,7 @@ Arranca en modo sombra: Francisco ve lo que el asistente habría enviado.
 
 ## Tareas
 
-1. Hecho el 2026-10-09: Francisco aprobó el flujo y PC-01 a PC-07. Falta su respuesta sobre REQ-005.
+1. Hecho el 2026-10-09: Francisco aprobó el flujo y PC-01 a PC-07. La confirmación de la visita la envía él (REQ-005).
 2. Etapa 1: paso de correo en el activador, con pruebas sintéticas y un envío de prueba supervisado.
 3. Toto: canal WhatsApp en el aviso (SPEC-004).
 4. Etapa 2: aviso hoja → Worker, lectura de día y hora, plantillas, botón de visita realizada.
@@ -101,5 +101,4 @@ Arranca en modo sombra: Francisco ve lo que el asistente habría enviado.
 
 ## Decisiones abiertas
 
-- Si el asistente confirma la visita por sí solo (REQ-005) o Francisco quiere aprobar cada una con un toque.
 - A qué correo llega el aviso de la etapa 1.
