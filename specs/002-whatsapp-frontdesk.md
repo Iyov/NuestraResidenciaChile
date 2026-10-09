@@ -101,7 +101,7 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 2. Pasar el número de NRC de WhatsApp normal a WhatsApp Business App y usarla al menos 7 días (Francisco). No envía datos a YCloud, así que puede hacerse ya.
 3. **Antes de conectar el número:** Toto revisa a YCloud como proveedor y resuelve D-1 (SPEC-004). Desde que el número se conecta, YCloud recibe todos sus chats, aunque el asistente esté en modo sombra (orden decidido por Francisco, 2026-10-08).
 4. Conectar el número a YCloud en coexistencia (Francisco; requiere iniciar sesión con Facebook y escanear un QR desde la app). La cuenta de YCloud ya existe.
-5. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y ejecutar `setupNrcWhatsAppSheet`, que crea la pestaña `WhatsApp`. Las columnas `Seguimiento` (P) y `WhatsApp` (Q) ya las creó Francisco a mano el 2026-10-08; la función no las duplica.
+5. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y ejecutar `setupNrcWhatsAppSheet`, que crea la pestaña `WhatsApp`. Las columnas `Seguimiento` (Q desde el 2026-10-09) y `WhatsApp` (Q) ya las creó Francisco a mano el 2026-10-08; la función no las duplica.
 6. Hecho: reactivación por comandos y avisos por WhatsApp, definidos el 2026-10-08.
 7. Hecho en local: clasificador, manejador de eventos, adaptadores de YCloud y de la hoja, almacén de estado y Worker con modo sombra, con pruebas sintéticas. El adaptador de la hoja se subió al proyecto de Apps Script el 2026-10-08 y está inactivo (sin token ni aplicación web publicada). Falta desplegar el Worker y probar contra las cuentas reales.
 8. Piloto en modo sombra: el servicio propone la respuesta a Francisco y no envía nada.

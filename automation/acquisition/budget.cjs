@@ -1,25 +1,20 @@
-// Monthly advertising cap of SPEC-005, confirmed by Francisco on 2026-10-08.
-const MONTHLY_CAP_USD = 80;
+// Monthly advertising cap of SPEC-005, set by Francisco on 2026-10-09. It is
+// in pesos because that is how the Google Ads account is billed.
+const MONTHLY_CAP_CLP = 80000;
 
 const NEEDS_APPROVAL = 'falta confirmación humana';
 
 /**
- * The account is billed in pesos and the cap is in dollars, so the caller
- * gives the exchange rate it wants to use: there is no default rate here.
- *
- * spend: { spentClp, clpPerUsd, configuredMonthlyMaxClp, capUsd }
+ * spend: { spentClp, configuredMonthlyMaxClp, capClp }
  *   configuredMonthlyMaxClp  the monthly maximum set in the campaign, if known
  * Returns { capClp, spentClp, used, over, remainingClp, configuredOver }.
  * configuredOver is null when the campaign maximum was not given.
  */
 function checkSpend(spend) {
-  const capUsd = spend.capUsd === undefined ? MONTHLY_CAP_USD : spend.capUsd;
-  for (const [name, value] of [['capUsd', capUsd], ['clpPerUsd', spend.clpPerUsd]]) {
-    if (!(typeof value === 'number' && value > 0)) throw new Error(`${name} must be a positive number.`);
-  }
+  const capClp = spend.capClp === undefined ? MONTHLY_CAP_CLP : spend.capClp;
+  if (!(typeof capClp === 'number' && capClp > 0)) throw new Error('capClp must be a positive number.');
   if (!(typeof spend.spentClp === 'number' && spend.spentClp >= 0)) throw new Error('spentClp must be a number.');
 
-  const capClp = Math.round(capUsd * spend.clpPerUsd);
   const configured = spend.configuredMonthlyMaxClp;
   return {
     capClp,
@@ -44,4 +39,4 @@ function reviewChange(change, approval) {
   return { ok: true, approvedBy: by, approvedAt: new Date(at).toISOString() };
 }
 
-module.exports = { MONTHLY_CAP_USD, NEEDS_APPROVAL, checkSpend, reviewChange };
+module.exports = { MONTHLY_CAP_CLP, NEEDS_APPROVAL, checkSpend, reviewChange };

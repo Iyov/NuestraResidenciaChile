@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const test = require('node:test');
 
-const { MONTHLY_CAP_USD, NEEDS_APPROVAL, checkSpend, reviewChange } = require('./budget.cjs');
+const { MONTHLY_CAP_CLP, NEEDS_APPROVAL, checkSpend, reviewChange } = require('./budget.cjs');
 const { MISSING, mayPublish } = require('./content.cjs');
 const { OUTCOMES, blendedCosts, monthlyFunnel, readSheetRow } = require('./funnel.cjs');
 const { findPii } = require('./pii.cjs');
@@ -134,17 +134,18 @@ test('AC-001: identifiable data cannot travel in a campaign link or an analytics
   assert.throws(() => safeEventParams({ label: '11.111.111-1' }));
 });
 
-test('AC-003: spend is compared with the approved cap at the given exchange rate', () => {
-  assert.equal(MONTHLY_CAP_USD, 80);
-  const within = checkSpend({ spentClp: 60000, clpPerUsd: 1000 });
+test('AC-003: spend is compared with the approved monthly cap', () => {
+  assert.equal(MONTHLY_CAP_CLP, 80000);
+  const within = checkSpend({ spentClp: 60000 });
   assert.deepEqual(within, { capClp: 80000, spentClp: 60000, used: 0.75, over: false, remainingClp: 20000, configuredOver: null });
 
-  const over = checkSpend({ spentClp: 90000, clpPerUsd: 1000, configuredMonthlyMaxClp: 150000 });
+  const over = checkSpend({ spentClp: 90000, configuredMonthlyMaxClp: 150000 });
   assert.equal(over.over, true);
   assert.equal(over.remainingClp, 0);
   assert.equal(over.configuredOver, true);
 
-  assert.throws(() => checkSpend({ spentClp: 1000 }), /clpPerUsd/);
+  assert.equal(checkSpend({ spentClp: 0, configuredMonthlyMaxClp: 80000 }).configuredOver, false);
+  assert.throws(() => checkSpend({}), /spentClp/);
 });
 
 test('AC-003: a budget or campaign change waits for a named person', () => {
@@ -184,7 +185,7 @@ test('AC-005: the management report shows counts, the cap and unknown stages', (
   const report = renderMonthlyReport({
     funnel,
     previous: monthlyFunnel(MARCH, '2027-02'),
-    spend: checkSpend({ spentClp: 72000, clpPerUsd: 1000, configuredMonthlyMaxClp: 150000 }),
+    spend: checkSpend({ spentClp: 72000, configuredMonthlyMaxClp: 150000 }),
     costs: blendedCosts(funnel, 72000),
     web: { visitors: 1380, paidShare: 0.5, organicClicks: null },
     nextSteps: ['Revisar el máximo mensual de la campaña.'],
