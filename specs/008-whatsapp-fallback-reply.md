@@ -76,7 +76,7 @@ Si Francisco escribe en el chat antes del plazo, el asistente calla, igual que h
 ## Tareas
 
 1. Hecho el 2026-10-09: Francisco aprobó RS-01 a RS-08 con cambios en RS-03 y RS-07, fijó el plazo en 30 minutos y nombró a Frank como segundo contacto.
-2. [`008-facts.md`](008-facts.md) redactado el 2026-10-09 con 14 hechos del brochure y el sitio, todos `pendiente`; falta la aprobación.
+2. [`008-facts.md`](008-facts.md) redactado el 2026-10-09 con 14 hechos del brochure y el sitio, aprobados por Francisco ese día.
 3. Temporizador de respaldo en el Worker y nivel 3, con pruebas sintéticas. No necesita modelo.
 4. Toto: D-1 y el proveedor del modelo.
 5. Nivel 2: llamada al modelo, comprobación de hechos y pruebas con consultas ficticias, incluidas las que intentan sacar un precio o un diagnóstico.

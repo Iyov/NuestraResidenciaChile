@@ -1,6 +1,6 @@
 # SPEC-008 · Anexo — Base de hechos para respuestas redactadas
 
-**Estado:** borrador del 2026-10-09. **Ningún hecho está aprobado ni en uso.** Complementa el [Anexo A](002-faq-base.md): aquí van solo hechos que el Anexo A no cubre. El nivel 2 de [SPEC-008](008-whatsapp-fallback-reply.md) puede usar únicamente las filas `aprobada` de ambos documentos.
+**Estado:** los 14 hechos fueron aprobados por Francisco el 2026-10-09. **Ninguno está en uso:** SPEC-008 no está implementada. Complementa el [Anexo A](002-faq-base.md): aquí van solo hechos que el Anexo A no cubre. El nivel 2 de [SPEC-008](008-whatsapp-fallback-reply.md) puede usar únicamente las filas `aprobada` de ambos documentos.
 
 Fuentes leídas el 2026-10-09: `Brochure/Brochure Nuestra Residencia Chile 2026.pdf` y las páginas de inicio y `/contact/` del sitio público. Cada fila repite algo que NRC ya publica; no agrega nada nuevo.
 
@@ -14,20 +14,20 @@ Fuentes leídas el 2026-10-09: `Brochure/Brochure Nuestra Residencia Chile 2026.
 
 | ID | Hecho | Fuente | Dueño | Estado |
 |---|---|---|---|---|
-| H-01 | Cada habitación tiene una cama de hasta 2 plazas. | Brochure 2026 | Don Humberto | pendiente |
-| H-02 | Las tres comidas diarias son desayuno, almuerzo y once o cena. | Brochure 2026 | Don Humberto | pendiente |
-| H-03 | Cada residente puede traer sus pertenencias y su mobiliario: cama, televisor y muebles. | Brochure 2026 | Don Humberto | pendiente |
-| H-04 | La limpieza y el mantenimiento cubren las habitaciones y las áreas comunes. | Brochure 2026 | Don Humberto | pendiente |
-| H-05 | Las habitaciones tienen aire acondicionado y WiFi de alta velocidad. | Brochure 2026 | Don Humberto | pendiente |
-| H-06 | La habitación doble comunicada está pensada para parejas, familiares o amigos que quieren compartir sin perder privacidad. | Brochure 2026 | Don Humberto | pendiente |
-| H-07 | La residencia tiene jardines y áreas verdes, con senderos interiores para caminar. | Brochure 2026 | Don Humberto | pendiente |
-| H-08 | Hay espacios para conversar, leer y descansar, que los residentes pueden compartir con familiares y amigos. | Brochure 2026 | Don Humberto | pendiente |
-| H-09 | La actividad física incluye programas adaptados de equilibrio y fortalecimiento. | Brochure 2026, sitio | Don Humberto | pendiente |
-| H-10 | La estimulación cognitiva incluye ejercicios de memoria, lectura, reflexión y talleres intelectuales. | Brochure 2026 | Don Humberto | pendiente |
-| H-11 | La vida comunitaria incluye encuentros sociales, proyectos colectivos y espacios de diálogo. | Brochure 2026, sitio | Don Humberto | pendiente |
-| H-12 | Además de los talleres, hay charlas educativas. | Sitio (inicio) | Don Humberto | pendiente |
-| H-13 | En el entorno de la residencia hay centros de salud, comercio y áreas verdes. | Brochure 2026 | Don Humberto | pendiente |
-| H-14 | La visita para conocer la residencia es sin compromiso. | Brochure 2026 | Francisco | pendiente |
+| H-01 | Cada habitación tiene una cama de hasta 2 plazas. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-02 | Las tres comidas diarias son desayuno, almuerzo y once o cena. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-03 | Cada residente puede traer sus pertenencias y su mobiliario: cama, televisor y muebles. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-04 | La limpieza y el mantenimiento cubren las habitaciones y las áreas comunes. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-05 | Las habitaciones tienen aire acondicionado y WiFi de alta velocidad. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-06 | La habitación doble comunicada está pensada para parejas, familiares o amigos que quieren compartir sin perder privacidad. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-07 | La residencia tiene jardines y áreas verdes, con senderos interiores para caminar. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-08 | Hay espacios para conversar, leer y descansar, que los residentes pueden compartir con familiares y amigos. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-09 | La actividad física incluye programas adaptados de equilibrio y fortalecimiento. | Brochure 2026, sitio | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-10 | La estimulación cognitiva incluye ejercicios de memoria, lectura, reflexión y talleres intelectuales. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-11 | La vida comunitaria incluye encuentros sociales, proyectos colectivos y espacios de diálogo. | Brochure 2026, sitio | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-12 | Además de los talleres, hay charlas educativas. | Sitio (inicio) | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-13 | En el entorno de la residencia hay centros de salud, comercio y áreas verdes. | Brochure 2026 | Don Humberto | aprobada (Francisco, 2026-10-09) |
+| H-14 | La visita para conocer la residencia es sin compromiso. | Brochure 2026 | Francisco | aprobada (Francisco, 2026-10-09) |
 
 ## Publicado, pero fuera de la base
 

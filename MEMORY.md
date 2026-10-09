@@ -150,8 +150,9 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - **Precio en pesos (Francisco, 2026-10-09):** el equivalente de 32 UF + IVA se comunica como número cerrado, redondeado a la decena de mil más cercana. Al 2026-10-09: UF $41.130,94 × 32 × 1,19 = $1.566.266 → "cerca de $1.570.000". FAQ-08 y RS-03 llevan el mismo monto y se recalculan juntas cada mes; la mención de $1.550.000 más arriba es la cifra anterior.
 - **Sin llamadas (Francisco, 2026-10-09):** atiende a los prospectos solo por WhatsApp y no quiere llamar a nadie. Ningún texto, flujo o propuesta debe ofrecer ni comprometer una llamada suya. RS-07 quedó en "Te escribe Francisco Barrientos, asesor de Nuestra Residencia Chile."
 - Aceptado por Francisco el 2026-10-09: el plazo de respaldo corre entre 8:00 y 22:00; fuera de ese horario el asistente responde de inmediato.
-- `specs/008-facts.md` tiene 14 hechos del brochure y el sitio, todos pendientes de aprobación. `specs/013-ads-log.md` registra los cambios de publicidad.
-- Falta que Francisco confirme la lista de estados de SPEC-009.
+- `specs/008-facts.md` tiene 14 hechos del brochure y el sitio, aprobados por Francisco el 2026-10-09. `specs/013-ads-log.md` registra los cambios de publicidad.
+- Francisco aprobó el 2026-10-09 la lista de estados y las reglas de SPEC-009. No se ha revisado qué valores tiene hoy `Estado` en la hoja viva.
+- Con esto no queda ninguna aprobación de Francisco pendiente en SPEC-007, 008 ni 009; lo que sigue es implementar, empezando por `buildNrcReactivationDrafts`.
 - El correo de acuerdos del 2026-05-28 dice que los USD 80 de publicidad salen de los $300.000; el contrato los pone aparte, como presupuesto del contratante. Se sigue el contrato.
 - El contrato (cláusula tercera C) obliga a entregar el número con WhatsApp Business; hoy usa WhatsApp normal.
 - Los informes de julio muestran una cuenta de TikTok y publicidad en Instagram y TikTok; ese gasto no está registrado en ninguna parte.

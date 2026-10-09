@@ -22,7 +22,7 @@ Resultado: toda consulta nueva por WhatsApp crea su prospecto con ID, y el estad
 
 ## Estados
 
-El asistente escribe en `Estado` solo valores de esta lista, y solo con el evento que los respalda:
+Lista y reglas aprobadas por Francisco el 2026-10-09. El asistente escribe en `Estado` solo valores de esta lista, y solo con el evento que los respalda:
 
 | Estado | Evento que lo produce | Quién |
 |---|---|---|
@@ -80,7 +80,7 @@ Ninguna devuelve una fila completa ni acepta un nombre de columna como parámetr
 
 ## Tareas
 
-1. Confirmar en la hoja viva los valores que hoy tiene `Estado` y acordar con Francisco la lista final.
+1. Lista aprobada por Francisco el 2026-10-09. Falta revisar en la hoja viva qué valores tiene hoy `Estado`: los que no estén en la lista quedan como están (REQ-008).
 2. Prueba con datos ficticios del riesgo de la pestaña de Forms.
 3. Asignador de ID compartido entre `AssignLeadId.gs` y el adaptador, con el cambio de coincidencia por teléfono y sus pruebas.
 4. Las cuatro operaciones del adaptador y los comandos nuevos, con pruebas sintéticas.
@@ -89,5 +89,4 @@ Ninguna devuelve una fila completa ni acepta un nombre de columna como parámetr
 
 ## Decisiones abiertas
 
-- Lista final de estados y si conviven con los valores actuales de `Estado`.
 - Si un saludo sin consulta debe crear prospecto tras el segundo mensaje.
