@@ -37,7 +37,7 @@ const FAQ_RULES = [
   ['FAQ-10', /\bpagina\b|\bsitio\b|\bweb\b|\bmas informacion|\bfotos\b|\binstagram|\bfacebook/],
   ['FAQ-11', /\bexperiencia|\bquien(es)? (esta|estan) detras|\bduenos?\b|\btrayectoria|\bquien dirige/],
   ['FAQ-12', /\bseguridad|\bguardias?\b|\bvigilancia/],
-  ['FAQ-13', /\bprofesionales|\bequipo\b|\bpersonal\b|\benfermer|\bgeriatra|\bkinesiolog|\bquien(es)? (trabajan|atienden)/],
+  ['FAQ-13', /\bprofesionales|\bequipo\b|\bpersonal\b|\benfermer|\bkinesiolog|\bquien(es)? (trabajan|atienden)/],
   ['FAQ-14', /\bmenus?\b|\bnutricionista|\balimentacion/],
   ['FAQ-15', /\baccesib/],
   ['FAQ-16', /\bcuantas (habitaciones|piezas)/],

@@ -11,7 +11,6 @@ Las especificaciones son la fuente de requisitos funcionales y aceptación. Un e
 | [002 — Atención WhatsApp](002-whatsapp-frontdesk.md) | Reglas, [base de respuestas](002-faq-base.md) y proveedor (YCloud) definidos el 2026-10-08; lógica `local` en `automation/whatsapp/` con pruebas sintéticas; sin conexión a WhatsApp ni despliegue | Pasar el número a WhatsApp Business App, revisión de YCloud por Toto y desplegar en Cloudflare en modo sombra. Las respuestas del Anexo A quedaron todas aprobadas el 2026-10-08 |
 | [003 — Visitas](003-visit-coordination.md) | Reglas acordadas; validación de horarios y estados de la visita `local` en `automation/visits/` con pruebas sintéticas (2026-10-08); integración pendiente | Conectar la pregunta a los anfitriones con WhatsApp (depende de SPEC-002) |
 | [004 — Privacidad del formulario](004-form-privacy-and-consent.md) | Borradores de aviso y de [Política de Privacidad](004-privacy-policy-draft.md) redactados; registro de permisos `local` en `automation/consent/` con pruebas sintéticas (2026-10-08); pendiente de abogado, nada publicado | Confirmar responsable, bases/finalidades, aviso y política con Toto |
-| [005 — Captación y marketing](005-acquisition-content-and-reporting.md) | Alcance inicial; presupuesto de USD 80/mes para Google Ads confirmado (2026-10-08); falta auditoría | Auditoría de la cuenta, baseline, hechos aprobados y métricas |
 | [006 — Gmail](006-gmail-triage.md) | Backlog de descubrimiento | Definir buzón, filtros, datos y acciones permitidas |
 
 ## Flujo SDD
@@ -19,7 +18,7 @@ Las especificaciones son la fuente de requisitos funcionales y aceptación. Un e
 1. Registrar problema, personas afectadas, objetivo y límites en la especificación correspondiente.
 2. Aclarar las decisiones abiertas y marcar las aceptadas en `MEMORY.md`.
 3. Escribir plan técnico, permisos, amenazas/privacidad, tareas y criterios verificables antes de código.
-4. Probar primero con datos sintéticos y entorno/copia de prueba; usar pruebas de integración autorizadas antes de producción.
+4. Probar primero con datos sintéticos en local. La primera prueba real puede ser en una copia o en el sistema vivo, supervisada por Francisco, con datos ficticios y con la sección "Cómo volver atrás" de la especificación ya escrita.
 5. Revisar criterios, publicar estado real (`local`, `test`, `deployed`) y registrar incidencias/decisiones.
 
-Este repositorio aún no tiene instalación de Spec Kit ni configuración OpenCode de agentes/Skills/MCP. El flujo de arriba es documental; no ejecutar comandos `/speckit.*` ni suponer conectores instalados.
+Este repositorio aún no tiene instalación de Spec Kit ni configuración de agentes, Skills o MCP; siguen previstos para el trabajo interno (ver "Modelo de agentes" en la constitución). El flujo de arriba es documental; no ejecutar comandos `/speckit.*` ni suponer conectores instalados.

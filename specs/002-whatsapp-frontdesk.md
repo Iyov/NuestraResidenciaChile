@@ -148,6 +148,18 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 
 Pasos de puesta en marcha y limitaciones: `automation/whatsapp/README.md`.
 
+## Cómo volver atrás
+
+Escrito antes del despliegue; ningún paso se ha probado contra las cuentas reales. Van del más suave al más drástico.
+
+- **Un chat:** Francisco escribe en ese chat desde la app, o envía `pausar N`. El asistente calla ahí hasta `reactivar N`.
+- **Todas las respuestas a prospectos:** volver `SHADOW_MODE` a cualquier valor distinto de `off` en `wrangler.toml` y desplegar de nuevo. El asistente sigue registrando y avisando, pero nada llega a un prospecto.
+- **Cortar la entrada:** desactivar o eliminar el webhook en el panel de YCloud. El Worker deja de recibir eventos; WhatsApp Business App sigue funcionando igual para Francisco.
+- **Cortar el acceso a la hoja:** en Apps Script, **Implementar → Administrar implementaciones** → archivar la aplicación web, o cambiar el valor de `NRC_WHATSAPP_ADAPTER_TOKEN`. El Worker falla al consultar la hoja y Francisco recibe el aviso genérico de falla.
+- **Volver a una versión anterior del Worker:** `npx wrangler rollback`, o eliminar el Worker desde el panel de Cloudflare.
+- **Sacar a YCloud:** desconectar la coexistencia desde WhatsApp Business App o desde el panel de YCloud; el número queda solo en la app.
+- **Hoja:** la pestaña `WhatsApp` y la columna `WhatsApp` son solo registro; se pueden vaciar o borrar sin afectar los IDs ni el resto de la fila. El asistente no escribe en ninguna otra celda.
+
 ## Pendientes antes de piloto
 
 - Hecho: Don Humberto aprobó el 2026-10-08 (informado por Francisco) FAQ-01, 04, 05, 06 y 07 tal cual; fijó la experiencia en "más de 15 años" sin cargos, lugares ni su nombre (FAQ-11); confirmó el precio de 32 UF + IVA; y pidió agregar las frases publicadas del sitio y el brochure, que ahora son FAQ-12 a FAQ-16 (seguridad 24/7, equipo profesional, menús, accesibilidad y 32 habitaciones). Las preguntas sobre la situación de una persona (salud, movilidad, medicamentos, una emergencia) y la disponibilidad se siguen derivando.

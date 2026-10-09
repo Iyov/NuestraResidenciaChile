@@ -36,6 +36,15 @@ Cada envío real del Google Form crea una fila en la hoja `Respuestas de formula
 - La deduplicación es intencionalmente conservadora: nombre del adulto mayor + teléfono. Cambios de número/contacto requieren revisión; el código no fusiona por nombre solamente.
 - `clasp` (autenticado con la cuenta NRC) vincula esta carpeta al proyecto de la hoja viva mediante `.clasp.json` local, no versionado. Para actualizar el código en Google: `clasp push` desde `automation/apps-script/`.
 
+## Cómo volver atrás
+
+Ninguno de estos pasos se ha tenido que usar.
+
+- **Detener la asignación:** en el editor de Apps Script del proyecto `NRC Auto Lead ID`, **Activadores** → eliminar el activador de `On form submit`. Los envíos siguen llegando a la hoja sin `#` y Francisco vuelve a asignarlo a mano. Los IDs ya escritos no cambian.
+- **Reactivar:** ejecutar `installNrcLeadIdTrigger` desde el editor.
+- **Deshacer un ID mal asignado:** corregir la celda `#` a mano, o usar **Archivo → Historial de versiones** de la hoja. El script nunca sobrescribe un `#` existente.
+- **Volver a un código anterior:** recuperar el archivo desde Git (`git checkout <commit> -- automation/apps-script/AssignLeadId.gs`) y subirlo con `clasp push`.
+
 ## Pendientes de operación
 
 - Francisco decidió el 2026-10-08 no crear copia de prueba y desplegar directamente en la hoja viva; la validación en Google de AC-009 se reemplazó por un envío de prueba en la hoja viva, que recibió el ID 22.

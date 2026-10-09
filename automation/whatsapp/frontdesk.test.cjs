@@ -355,6 +355,8 @@ test('classifier: closed set of intents', () => {
 
   // The general answers never cover one person's situation.
   assert.equal(motive('Mi papá está enfermo, ¿hay enfermeras?'), MOTIVES.health);
+  // FAQ-13 names nurses and kinesiologists only; other specialities go to Francisco.
+  assert.equal(motive('¿Tienen geriatra?'), MOTIVES.outOfBase);
   assert.equal(motive('¿Es accesible para silla de ruedas?'), MOTIVES.health);
   assert.equal(motive('¿Qué hacen en una emergencia?'), MOTIVES.complaint);
   assert.equal(motive('¿Cuántas habitaciones quedan disponibles?'), MOTIVES.availability);

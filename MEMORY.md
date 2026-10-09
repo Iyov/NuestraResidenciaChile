@@ -1,6 +1,6 @@
 # Memoria de proyecto — Nuestra Residencia Chile
 
-**Actualizada:** 2026-10-08. Esta memoria guarda decisiones reutilizables para futuras sesiones; los datos de prospectos/residentes no pertenecen aquí.
+**Actualizada:** 2026-10-09. Esta memoria guarda decisiones reutilizables para futuras sesiones; los datos de prospectos/residentes no pertenecen aquí.
 
 ## Propósito y objetivo comercial
 
@@ -36,6 +36,8 @@
 6. **Visitas:** solo lunes a viernes entre 10:00–11:30 y 14:00–16:00, hora `America/Santiago`; nunca sábados, domingos ni festivos. No hay excepciones por disponibilidad del anfitrión.
 7. **Confirmación de anfitrión:** Francisco consulta por WhatsApp a Nico y Frank; el primero que confirme disponibilidad recibe la asignación. Si ambos confirman prácticamente al mismo tiempo y no se puede establecer el orden, resolver con Francisco. Francisco envía la confirmación final al prospecto, con fecha, hora y dirección de la residencia.
 8. **Seguridad:** no usar automatización de clics/cookies de Chrome como integración. Las credenciales nunca se copian a repositorios, prompts o logs.
+9. **Pruebas y vuelta atrás (Francisco, 2026-10-09):** la primera prueba real puede hacerse en el sistema vivo si es supervisada, usa datos ficticios y la especificación tiene escrita su sección "Cómo volver atrás" (ya la tienen SPEC-001 y SPEC-002).
+10. **Agentes, Skills y MCP:** siguen previstos para el trabajo interno, pero no hay nada instalado. La atención a prospectos es un servicio propio (Worker + Apps Script), no un agente. Detalle en "Modelo de agentes" de `specs/constitution.md`.
 
 ## Contrato y atribución
 
@@ -120,6 +122,15 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - La pregunta a Nico y Frank lleva dos botones ("Sí puedo" / "No puedo") con el ID de visita oculto, para saber a qué visita responden. Casi siempre saldrá como plantilla pagada, porque ellos no suelen escribirle al número de NRC; Francisco lo aceptó. Falta crear la plantilla.
 - Días puente, cierres y feriados que Google no publique no se detectan solos: se agregan a mano en `extra` de `holidays-cl.json`.
 
+**SPEC-005 — captación e informes (lógica local; nada conectado):**
+
+- `automation/acquisition/` calcula el embudo mensual, compara el gasto con el tope, clasifica el origen de una consulta, controla la publicación de contenido y arma el informe para dirección (`node --test automation/acquisition/acquisition.test.cjs`). No lee la hoja ni llama a Google.
+- Línea base y auditoría externa del 2026-10-09 en `specs/005-baseline-2026-10.md`: 21 consultas, 16 con visita agendada, 1 ingreso. No se entró a Google Ads, Search Console ni Analytics.
+- El formulario es un Google Form incrustado: el sitio no ve los envíos, Analytics marca 0 eventos clave y ninguna consulta se puede atribuir a un anuncio. Las columnas de atribución de la hoja están vacías.
+- La hoja no tiene columnas para visita realizada ni para pago recibido; el código espera `Visita realizada` y `Fecha Pago` y, mientras no existan, informa "sin dato".
+- Los informes de julio y agosto entregados a don Humberto nombran prospectos e incluyen una captura de la hoja. Los siguientes van solo con cantidades.
+- Elecciones de implementación: el embudo sigue a las consultas del mes hasta hoy; los costos reparten todo el gasto entre todas las consultas; los identificadores de clic de Google no se guardan mientras Toto no lo apruebe.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
@@ -127,8 +138,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - El asistente no puede inferir elegibilidad ni inventar datos: las respuestas de `specs/002-faq-base.md` describen la residencia en general y nunca dicen si una persona puede ingresar.
 - Pasar el número de NRC a WhatsApp Business App, esperar 7 días de uso y, con la revisión de YCloud por Toto hecha, conectarlo. No asumir que Chrome DEV es un runtime.
 - SPEC-003: conectar la pregunta a los anfitriones con WhatsApp (depende de SPEC-002), crear la plantilla con botones y decidir dónde se registra la visita por prospecto. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
-- Acordar cadencia/formato de informes y línea base de métricas.
-- Auditar la cuenta actual de Google Ads y revisar consentimientos antes de habilitar conversiones avanzadas/importaciones.
+- Acordar cadencia y destinatarios del informe; el formato quedó definido en `automation/acquisition/report.cjs`.
 - Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
 - Gmail fue parte de la visión inicial, pero sus etiquetas, alcance, nivel de acceso y reglas de respuesta no están definidos; mantenerlo en descubrimiento.
 
