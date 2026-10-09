@@ -49,4 +49,6 @@ Ninguno de estos pasos se ha tenido que usar.
 
 - Francisco decidió el 2026-10-08 no crear copia de prueba y desplegar directamente en la hoja viva; la validación en Google de AC-009 se reemplazó por un envío de prueba en la hoja viva, que recibió el ID 22.
 - Francisco eliminó la fila de prueba el 2026-10-08, así que el siguiente prospecto real recibirá el 22.
+- Primeros prospectos reales, 2026-10-09: dos envíos del formulario (10:37 y 10:44) recibieron los ID 22 y 23 de forma automática, confirmado por Francisco; ambas ejecuciones figuran como completadas. Francisco tuvo que llenar a mano el proceso de esos dos prospectos, que es el hueco de [SPEC-009](009-whatsapp-lead-registry.md).
+- El script no deja registro de lo que hizo en cada ejecución: "Completada" no distingue un ID nuevo de una fila que ya tenía ID. Propuesto y sin hacer: anotar el resultado y el número de fila, sin datos de la persona.
 - Solo se probó en Google el caso de prospecto nuevo; duplicados, conflictos y concurrencia están cubiertos por las pruebas locales. Revisar **Ejecuciones** si un envío queda sin ID.
