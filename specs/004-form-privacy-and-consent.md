@@ -40,7 +40,7 @@ Propuesta de trabajo para revisión de Toto; no es asesoría legal ni está apli
 > - **Quién es responsable:** Hotel Melado Humberto Piemonte SpA, RUT 77.060.284-K, que opera Nuestra Residencia – Senior Living, Camino Las Flores 10961, Las Condes, Santiago.
 > - **Para qué usamos tus datos:** solo para responder tu solicitud, orientarte y coordinar tu visita. No te enviaremos publicidad ni novedades salvo que lo autorices más abajo.
 > - **Confidencialidad:** tus datos y los del adulto mayor son confidenciales. Solo accede a ellos el equipo de Nuestra Residencia Chile a cargo de tu solicitud, que está obligado a guardar reserva. No vendemos tus datos. Para atenderte nos apoyamos en servicios tecnológicos de terceros, que tratan tus datos solo por encargo nuestro, para los fines de este aviso y con resguardos de seguridad.
-> - **Datos del adulto mayor:** al enviar el formulario declaras que la persona mayor está informada o que actúas en su representación. La respuesta sobre autovalencia es solo referencial para orientarte; no es una evaluación ni condiciona el ingreso.
+> - **Datos del adulto mayor:** al enviar el formulario declaras que la persona mayor está informada o que actúas en su representación. La edad y la respuesta sobre autovalencia son solo referenciales para orientarte; no son una evaluación ni condicionan el ingreso.
 > - **Cuánto tiempo los guardamos:** [PLAZO — no figura en ningún documento; sugerencia de trabajo: 12 meses] desde tu último contacto con nosotros, o hasta que nos pidas eliminarlos.
 > - **Tus derechos:** puedes pedir acceso, rectificación, supresión, oposición, portabilidad o bloqueo de tus datos, y retirar tu autorización en cualquier momento, escribiendo a nuestraresidenciachile@gmail.com. Tratamos tus datos conforme a la Ley N° 19.628 y a la Ley N° 21.719 de Protección de Datos Personales, vigente desde el 1 de diciembre de 2026.
 > - Más información en nuestra Política de Privacidad: [ENLACE].
@@ -94,7 +94,7 @@ Pasos manuales, en este orden; ninguno está hecho:
 - Cómo se atienden las solicitudes de derechos que lleguen por correo (responsable y plazo).
 - Qué hacer con los prospectos anteriores al aviso: mantenerlos en gestión manual o pedirles autorización.
 - Cookies del sitio: auditadas el 2026-10-09 (Google Analytics 4 y Google Ads activos, sin banner; detalle en las notas de la política). Falta que Toto diga si se necesita un banner de consentimiento y, si es así, instalarlo en el WordPress.
-- La hoja tiene una columna `Edad` que el aviso no menciona: confirmar de dónde sale y agregarla al aviso si se sigue usando.
+- Edad de la persona mayor: hoy Francisco la pregunta al conversar y la anota en la hoja; decidió el 2026-10-09 agregarla como pregunta del formulario. El aviso y la política ya la mencionan. Falta agregar la pregunta al Google Form (la hoja ya tiene la columna `Edad`).
 
 ## Referencias
 
