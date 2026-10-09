@@ -1,6 +1,6 @@
 # SPEC-014 — Del formulario a la visita
 
-**Estado:** `borrador` (2026-10-09). Nada implementado; textos pendientes de aprobación. Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
+**Estado:** `borrador` (2026-10-09). Nada implementado. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. Queda sin responder quién envía la confirmación de la visita (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
 
 ## Problema y resultado
 
@@ -24,17 +24,17 @@ Resultado: desde que llega una respuesta del formulario hasta que la visita est�
 
 Cualquier pregunta que la persona haga en el camino se responde con SPEC-002 y SPEC-008 y el flujo continúa.
 
-## Mensajes (pendientes de aprobación de Francisco)
+## Mensajes (aprobados por Francisco el 2026-10-09)
 
 | ID | Cuándo | Texto propuesto | Estado |
 |---|---|---|---|
-| PC-01 | Primer mensaje tras el formulario | Hola {nombre}, ¿cómo estás? Te escribe Francisco Barrientos, de Nuestra Residencia Chile. Recibí tu solicitud y con gusto te ayudo. ¿Te gustaría agendar una visita para conocer la residencia? Recibimos de lunes a viernes, de 10:00 a 11:30 o de 14:00 a 16:00. ¿Qué día te acomoda? | pendiente |
-| PC-02 | No queda claro el día o la hora | Para no equivocarme, ¿te refieres al {día} a las {hora}? | pendiente |
-| PC-03 | El horario pedido no es válido o ningún anfitrión puede | Ese horario no lo tengo disponible. ¿Te acomoda el {opción 1} o el {opción 2}? | pendiente |
-| PC-04 | Un anfitrión aceptó | ¡Listo, {nombre}! Tu visita queda confirmada para el {día} a las {hora}. Te esperamos en Camino Las Flores 10961, Las Condes. Cualquier cosa, me escribes por aquí. | pendiente |
-| PC-05 | Día anterior a la visita | Hola {nombre}, te recuerdo tu visita de mañana, {día}, a las {hora}, en Camino Las Flores 10961, Las Condes. ¿Me confirmas que vienes? | pendiente |
-| PC-06 | Día siguiente a una visita realizada | Hola {nombre}, gracias por visitarnos. ¿Qué les pareció la residencia? Quedo atento a cualquier duda que haya quedado. | pendiente |
-| PC-07 | La persona no llegó a la visita | Hola {nombre}, te esperábamos hoy y no alcanzamos a vernos. Si quieres, buscamos otro día que te acomode. | pendiente |
+| PC-01 | Primer mensaje tras el formulario | Hola {nombre}, ¿cómo estás? Te escribe Francisco Barrientos, de Nuestra Residencia Chile. Recibí tu solicitud y con gusto te ayudo. ¿Te gustaría agendar una visita para conocer la residencia? Recibimos de lunes a viernes, de 10:00 a 11:30 o de 14:00 a 16:00. ¿Qué día te acomoda? | aprobada (Francisco, 2026-10-09) |
+| PC-02 | No queda claro el día o la hora | Para no equivocarme, ¿te refieres al {día} a las {hora}? | aprobada (Francisco, 2026-10-09) |
+| PC-03 | El horario pedido no es válido o ningún anfitrión puede | Ese horario no lo tengo disponible. ¿Te acomoda el {opción 1} o el {opción 2}? | aprobada (Francisco, 2026-10-09) |
+| PC-04 | Un anfitrión aceptó | ¡Listo, {nombre}! Tu visita queda confirmada para el {día} a las {hora}. Te esperamos en Camino Las Flores 10961, Las Condes. Cualquier cosa, me escribes por aquí. | aprobada (Francisco, 2026-10-09) |
+| PC-05 | Día anterior a la visita | Hola {nombre}, te recuerdo tu visita de mañana, {día}, a las {hora}, en Camino Las Flores 10961, Las Condes. ¿Me confirmas que vienes? | aprobada (Francisco, 2026-10-09) |
+| PC-06 | Día siguiente a una visita realizada | Hola {nombre}, gracias por visitarnos. ¿Qué les pareció la residencia? Quedo atento a cualquier duda que haya quedado. | aprobada (Francisco, 2026-10-09) |
+| PC-07 | La persona no llegó a la visita | Hola {nombre}, te esperábamos hoy y no alcanzamos a vernos. Si quieres, buscamos otro día que te acomode. | aprobada (Francisco, 2026-10-09) |
 
 En PC-05, "mañana" se reemplaza por "el lunes" cuando el recordatorio sale un viernes.
 
@@ -93,7 +93,7 @@ Arranca en modo sombra: Francisco ve lo que el asistente habría enviado.
 
 ## Tareas
 
-1. Francisco aprueba o corrige PC-01 a PC-07 y REQ-005.
+1. Hecho el 2026-10-09: Francisco aprobó el flujo y PC-01 a PC-07. Falta su respuesta sobre REQ-005.
 2. Etapa 1: paso de correo en el activador, con pruebas sintéticas y un envío de prueba supervisado.
 3. Toto: canal WhatsApp en el aviso (SPEC-004).
 4. Etapa 2: aviso hoja → Worker, lectura de día y hora, plantillas, botón de visita realizada.
