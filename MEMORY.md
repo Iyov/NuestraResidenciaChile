@@ -15,7 +15,7 @@
 |---|---|
 | Don Humberto | Dueño y sponsor de NRC; aprueba decisiones comerciales, hechos institucionales y presupuesto que requiera acuerdo del contratante. |
 | Francisco | Responsable de comunicaciones y seguimiento de prospectos; consulta disponibilidad a los anfitriones y confirma la visita al prospecto. |
-| Nicolás y Frank | Anfitriones que ejecutan las visitas que Francisco les asigna. No gestionan prospectos directamente en el flujo diseñado. |
+| Nicolás y Frank | Anfitriones que ejecutan las visitas que Francisco les asigna. No gestionan prospectos directamente en el flujo diseñado. Nicolás Gabler es nieto de Don Humberto y también administra la residencia; Frank es la mano derecha y vive en ella. |
 | Toto / Cristian Soto | Abogado y colaborador del proyecto; debe revisar el aviso y la política de privacidad antes de publicarlos. |
 
 ## Sistemas y fuentes
@@ -38,6 +38,8 @@
 8. **Seguridad:** no usar automatización de clics/cookies de Chrome como integración. Las credenciales nunca se copian a repositorios, prompts o logs.
 9. **Pruebas y vuelta atrás (Francisco, 2026-10-09):** la primera prueba real puede hacerse en el sistema vivo si es supervisada, usa datos ficticios y la especificación tiene escrita su sección "Cómo volver atrás" (ya la tienen SPEC-001 y SPEC-002).
 10. **Agentes, Skills y MCP:** siguen previstos para el trabajo interno, pero no hay nada instalado. La atención a prospectos es un servicio propio (Worker + Apps Script), no un agente. Detalle en "Modelo de agentes" de `specs/constitution.md`.
+
+11. **Los requerimientos iniciales mandan (Francisco, 2026-10-09):** deben cumplirse los ocho requerimientos de `specs/requirements.md` tal como los pidió, no lo que ya había. Eso reemplaza la decisión 4 (WhatsApp ahora crea prospecto e ID) y la parte de la 5 que dejaba el recontacto solo como borrador manual y las derivaciones sin respuesta. El diseño está en SPEC-007 a SPEC-013, todas en `borrador`: sus textos, plazos y listas de estados son propuestas hasta que Francisco las apruebe, y nada de eso está implementado.
 
 ## Contrato y atribución
 
@@ -66,7 +68,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - Tratar nombre del adulto mayor y autovalencia como datos de alta sensibilidad; revisar si deben recogerse en el primer contacto y limitar quién/qué sistema los recibe.
 - No enviar la hoja completa a un modelo. Limitar las herramientas a búsqueda/actualización de prospecto por ID y estados permitidos; no guardar transcripciones completas; redactar logs.
 
-## Pendientes para continuar (al 2026-10-08)
+## Pendientes para continuar (al 2026-10-09)
 
 **SPEC-001 — ID automático (activo):**
 
@@ -92,7 +94,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 **SPEC-002 — atención por WhatsApp (borradores; nada desplegado):**
 
-- `specs/002-faq-base.md` tiene 16 respuestas, todas aprobadas, y 5 mensajes fijos (MSG-01, 02, 03, 05 y 06). Francisco definió el 2026-10-08: habitación individual 32 UF + IVA mensuales (el valor real; cerca de $1.550.000 con IVA incluido a esa fecha, solo como referencia), visitas de lunes a viernes 10:00–11:30 y 14:00–16:00, correo `nuestraresidenciachile@gmail.com` y tono cálido, humano y respetuoso con tuteo. También decidió, y reafirmó al revisar las specs, que el asistente escribe siempre como Francisco Barrientos y no se presenta como asistente virtual; si alguien pregunta si habla con una persona o un sistema automático, deriva a Francisco. La comunicación virtual no tiene horario: el asistente responde a cualquier hora y solo las visitas tienen horario. Queda abierta D-1: revisión legal de esa identidad con Toto.
+- `specs/002-faq-base.md` tiene 16 respuestas, todas aprobadas, y 5 mensajes fijos (MSG-01, 02, 03, 05 y 06). Francisco definió el 2026-10-08: habitación individual 32 UF + IVA mensuales (el valor real; cerca de $1.570.000 con IVA incluido desde el 2026-10-09, solo como referencia), visitas de lunes a viernes 10:00–11:30 y 14:00–16:00, correo `nuestraresidenciachile@gmail.com` y tono cálido, humano y respetuoso con tuteo. También decidió, y reafirmó al revisar las specs, que el asistente escribe siempre como Francisco Barrientos y no se presenta como asistente virtual; si alguien pregunta si habla con una persona o un sistema automático, deriva a Francisco. La comunicación virtual no tiene horario: el asistente responde a cualquier hora y solo las visitas tienen horario. Queda abierta D-1: revisión legal de esa identidad con Toto.
 - **Precio que se comunica:** siempre el de la habitación individual. La habitación doble comunicada nunca se ha contratado y es poco probable que se pida; su valor de referencia es $2.500.000 mensuales por ambas habitaciones (valor promocional). No ofrecerlo por iniciativa propia; si alguien pregunta por la doble, el asistente deriva a Francisco.
 - Por decisión de Francisco no se modifican el brochure 2026 (muestra $1.500.000 para la individual) ni la página `/contact/` del sitio; el asistente usa los valores que él definió.
 - Runtime decidido por Francisco el 2026-10-08: Cloud API en coexistencia con WhatsApp Business App, a través de YCloud en plan gratuito (se prioriza no tener costo fijo). Cuenta de YCloud creada; falta pasar el número a WhatsApp Business App y conectarlo. Se descartaron las conexiones no oficiales que emulan WhatsApp Web (habituales en flujos de n8n) por riesgo de bloqueo del número.
@@ -139,6 +141,20 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - `automation/gmail/GmailTriage.gs` revisa la bandeja cada 15 minutos, pide solo encabezados y extracto, y envía un correo con tipo, hora y enlace (`node --test automation/gmail/GmailTriage.test.cjs`). Se subió el 2026-10-09 al proyecto independiente `NRC Gmail Triage` de la cuenta NRC, separado del de la hoja para no tocar sus permisos.
 - Francisco informó el 2026-10-09 que creó la propiedad `NRC_GMAIL_ALERT_TO`, ejecutó `previewNrcGmailTriage`, e instaló el activador con `installNrcGmailTriageTrigger`. Falta el correo de prueba desde otra cuenta; no constan aquí los conteos de la vista previa.
 - Elecciones de implementación: el aviso no lleva remitente ni asunto; todo correo escrito por una persona avisa, aunque sea una oferta comercial; los avisos de cuenta se detectan solo por el asunto.
+
+**SPEC-007 a SPEC-013 — requerimientos sin cubrir (borradores del 2026-10-09; nada implementado):**
+
+- 007 recontacto a los verdes (R3), 008 respuesta de respaldo (R7), 009 prospectos y estado desde WhatsApp (R8), 010 blog y redes (R6), 011 posicionamiento y sitio (R2), 012 informe para Don Humberto (R4), 013 operación de Google Ads (R5). Orden de trabajo y bloqueos en `specs/requirements.md`.
+- Lo primero es la etapa 1 de SPEC-007: no depende de conectar el número ni de ningún despliegue.
+- Aprobado por Francisco el 2026-10-09: RC-01 a RC-05 tal cual, con envíos cualquier día entre 10:00 y 19:00 (también fin de semana, nunca de madrugada); RS-01 a RS-08, con RS-03 indicando el equivalente en pesos y RS-07 diciendo solo que escribe Francisco Barrientos, sin mencionar un asistente; plazo de respaldo de 30 minutos, porque no estará pendiente del teléfono; Frank como segundo contacto de reclamos y urgencias.
+- **Precio en pesos (Francisco, 2026-10-09):** el equivalente de 32 UF + IVA se comunica como número cerrado, redondeado a la decena de mil más cercana. Al 2026-10-09: UF $41.130,94 × 32 × 1,19 = $1.566.266 → "cerca de $1.570.000". FAQ-08 y RS-03 llevan el mismo monto y se recalculan juntas cada mes; la mención de $1.550.000 más arriba es la cifra anterior.
+- **Sin llamadas (Francisco, 2026-10-09):** atiende a los prospectos solo por WhatsApp y no quiere llamar a nadie. Ningún texto, flujo o propuesta debe ofrecer ni comprometer una llamada suya. RS-07 quedó en "Te escribe Francisco Barrientos, asesor de Nuestra Residencia Chile."
+- Aceptado por Francisco el 2026-10-09: el plazo de respaldo corre entre 8:00 y 22:00; fuera de ese horario el asistente responde de inmediato.
+- `specs/008-facts.md` tiene 14 hechos del brochure y el sitio, todos pendientes de aprobación. `specs/013-ads-log.md` registra los cambios de publicidad.
+- Falta que Francisco confirme la lista de estados de SPEC-009.
+- El correo de acuerdos del 2026-05-28 dice que los USD 80 de publicidad salen de los $300.000; el contrato los pone aparte, como presupuesto del contratante. Se sigue el contrato.
+- El contrato (cláusula tercera C) obliga a entregar el número con WhatsApp Business; hoy usa WhatsApp normal.
+- Los informes de julio muestran una cuenta de TikTok y publicidad en Instagram y TikTok; ese gasto no está registrado en ninguna parte.
 
 ## Decisiones abiertas / bloqueos
 

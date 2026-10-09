@@ -2,6 +2,8 @@
 
 Las especificaciones son la fuente de requisitos funcionales y aceptación. Un estado de especificación **no** prueba que la integración esté desplegada.
 
+Los ocho requerimientos iniciales de Francisco y la especificación que cubre cada uno están en [requirements.md](requirements.md). Son la vara del proyecto: si una especificación anterior los recorta, manda la nueva que ahí se indica.
+
 ## Estado
 
 | Especificación | Estado actual | Próximo gate |
@@ -12,6 +14,13 @@ Las especificaciones son la fuente de requisitos funcionales y aceptación. Un e
 | [003 — Visitas](003-visit-coordination.md) | Reglas acordadas; validación de horarios y estados de la visita `local` en `automation/visits/` con pruebas sintéticas (2026-10-08); integración pendiente | Conectar la pregunta a los anfitriones con WhatsApp (depende de SPEC-002) |
 | [004 — Privacidad del formulario](004-form-privacy-and-consent.md) | Borradores de aviso y de [Política de Privacidad](004-privacy-policy-draft.md) redactados; registro de permisos `local` en `automation/consent/` con pruebas sintéticas (2026-10-08); pendiente de abogado, nada publicado | Confirmar responsable, bases/finalidades, aviso y política con Toto |
 | [005 — Captación y marketing](005-acquisition-content-and-reporting.md) | Tope de gasto de $80.000 al mes (2026-10-09); [línea base y auditoría](005-baseline-2026-10.md) del 2026-10-09, con lectura de Google Ads, Analytics y Search Console; embudo, tope, atribución, control de publicación e informe `local` en `automation/acquisition/` con pruebas sintéticas; nada conectado | Campaña de búsqueda activa desde el 2026-10-09 ($2.600 al día): revisarla a la semana, importar el evento de contacto como conversión y agregar `Fecha Pago` a la hoja |
+| [007 — Recontacto a prospectos activos](007-prospect-reactivation.md) | `borrador` (2026-10-09); textos RC-01 a RC-05 y cadencia aprobados por Francisco ese día; nada implementado | Función `buildNrcReactivationDrafts` y primer ciclo manual |
+| [008 — Respuesta de respaldo en WhatsApp](008-whatsapp-fallback-reply.md) | `borrador` (2026-10-09); textos RS-01 a RS-08 y plazo de 30 minutos aprobados por Francisco ese día; nada implementado | Toto revisa RS-07 y el proveedor del modelo; redactar la base de hechos |
+| [009 — Prospectos y estado desde WhatsApp](009-whatsapp-lead-registry.md) | `borrador` (2026-10-09); nada implementado | Confirmar los valores actuales de `Estado` y probar el alta de filas en la pestaña de Forms |
+| [010 — Blog y redes](010-blog-and-social.md) | `borrador` (2026-10-09); nada implementado | Inventario de cuentas y contraseña de aplicación del WordPress |
+| [011 — Posicionamiento y sitio](011-seo-and-site.md) | `borrador` (2026-10-09); nada implementado | Acceso al WordPress y paquete de medición |
+| [012 — Informe para Don Humberto](012-management-report.md) | `borrador` (2026-10-09); formato `local` en `automation/acquisition/report.cjs` | `Fecha Pago`, `getNrcMonthlyCounts` e informe de septiembre |
+| [013 — Operación de Google Ads](013-google-ads-operation.md) | `borrador` (2026-10-09); campaña activa, sin conversión medida ni rutina | Importar la conversión y primera revisión semanal el 2026-10-19 |
 | [006 — Gmail](006-gmail-triage.md) | Alcance definido el 2026-10-09 (solo buzón NRC, leer y avisar); código en `automation/gmail/` con pruebas sintéticas, subido al proyecto `NRC Gmail Triage`; activador instalado por Francisco el 2026-10-09 | Enviar el correo de prueba, confirmar que el aviso llega y ajustar las reglas con las primeras semanas |
 
 ## Flujo SDD

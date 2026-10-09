@@ -1,0 +1,93 @@
+# SPEC-009 — Prospectos y estado en la hoja desde WhatsApp
+
+**Estado:** `borrador` (2026-10-09). Nada implementado. Cubre R8 de [requirements.md](requirements.md). Reemplaza dos reglas de [SPEC-002](002-whatsapp-frontdesk.md): que un número nuevo no crea fila ni ID, y que `Estado` y `Seguimiento` los escribe solo Francisco.
+
+## Problema y resultado
+
+La hoja tiene 21 prospectos, todos entrados por el formulario. Quien consulta por WhatsApp y no llena el formulario no existe en la hoja: no se cuenta, no se le hace seguimiento y no deja evidencia de primer contacto, que es lo que respalda la comisión (contrato, cláusula tercera C). El avance de cada prospecto lo anota Francisco a mano.
+
+Resultado: toda consulta nueva por WhatsApp crea su prospecto con ID, y el estado de cada prospecto se mueve con lo que pasa en la conversación.
+
+## Alta de prospectos
+
+- **REQ-001:** un número que no está en la hoja y hace una consulta sobre la residencia recibe una fila nueva en `Respuestas de formulario 1` y el siguiente ID.
+- **REQ-002:** cuenta como consulta todo mensaje que el clasificador resuelve como una fila del Anexo A o deriva por disponibilidad, precio, salud o autovalencia, o visita.
+- **REQ-003:** no crean prospecto: reclamos, mensajes de residentes o sus familias, peticiones de no ser contactado, ofertas comerciales, mensajes que no son texto y saludos sin consulta. En esos casos Francisco recibe el aviso y puede crear el prospecto con el comando `registrar`.
+- **REQ-004:** la fila nueva lleva marca temporal, teléfono, nombre de contacto si la persona lo dio (si no, vacío), origen `WhatsApp`, `Seguimiento` = `activo` y `Estado` = `nuevo`. Los datos de la persona mayor quedan vacíos.
+- **REQ-005:** el ID lo asigna la misma función y el mismo bloqueo que usa SPEC-001, para que un envío de formulario y un alta por WhatsApp simultáneos no reciban el mismo número.
+- **REQ-006:** el asistente sigue ofreciendo el formulario una vez (MSG-02) para completar los datos. Si la persona lo llena desde el mismo teléfono, la fila del formulario reutiliza el ID. Esto cambia REQ-005 de SPEC-001: cuando la fila previa no tiene nombre de persona mayor y su origen es `WhatsApp`, basta la coincidencia de teléfono.
+- **REQ-007:** un mismo teléfono nunca genera dos ID.
+
+**Riesgo a comprobar antes de activar:** la pestaña es la de respuestas de Google Forms. Hay que verificar, con datos ficticios, que una fila agregada por el script no se pisa ni se desordena con el siguiente envío del formulario. Si falla, las altas van a una pestaña `Prospectos WhatsApp` que comparte la secuencia de ID.
+
+## Estados
+
+El asistente escribe en `Estado` solo valores de esta lista, y solo con el evento que los respalda:
+
+| Estado | Evento que lo produce | Quién |
+|---|---|---|
+| `nuevo` | Alta por WhatsApp o envío de formulario | Asistente |
+| `en conversación` | La persona escribió y recibió respuesta | Asistente |
+| `recontactado` | Se envió un toque de SPEC-007 | Asistente |
+| `visita solicitada` | La persona pidió visita o propuso día | Asistente |
+| `visita agendada` | Francisco confirmó la visita (SPEC-003) | Asistente; llena además `Agendo Visita`, `Fecha Visita` y `Hora Visita` |
+| `visita realizada` | El anfitrión lo confirma con un botón, o Francisco envía `visitó N` | Asistente; llena `Visita realizada` |
+| `sin respuesta` | Tres toques de SPEC-007 sin respuesta | Asistente |
+| `desistió` | La persona pide no ser contactada o dice con claridad que ya no le interesa | Asistente; pone además `Seguimiento` = `desistió` |
+| `ingresó` | Contrato de ingreso firmado | Solo Francisco |
+
+Reglas:
+
+- **REQ-008:** el estado solo avanza. El asistente no vuelve atrás un estado ni reemplaza un valor que no esté en la lista: si Francisco escribió otra cosa, la celda es suya.
+- **REQ-009:** `desistió` exige una frase explícita. Un "lo voy a pensar" o un silencio no lo son; ante la duda, se deriva.
+- **REQ-010:** `Ingresó?`, `Comisión`, `Fecha Pago` y `Seguimiento` = `residente` no los toca el asistente.
+- **REQ-011:** el asistente no escribe texto libre: ni `Comentario`, ni resúmenes de la conversación, ni datos de salud.
+- **REQ-012:** cada cambio de estado deja una fila en la pestaña `WhatsApp` con fecha, `#`, estado anterior y nuevo.
+- **REQ-013:** el retiro de RS-06 (SPEC-008) queda registrado aquí. Con esto se resuelve el pendiente de SPEC-004 sobre dónde se guardan los retiros.
+
+Comandos nuevos, solo desde el número personal de Francisco: `registrar` (crea el prospecto del último aviso), `visitó N`, `estado N <valor>` (fija cualquier valor de la lista, también hacia atrás) y `descartar N` (`Seguimiento` = `descartado`; el ID no se reutiliza).
+
+## Adaptador de la hoja
+
+`WhatsAppSheetAdapter.gs` suma cuatro operaciones tipadas a las tres actuales:
+
+- `crearProspecto(teléfono, nombre)` → devuelve el ID.
+- `cambiarEstado(#, estado)` → rechaza valores fuera de la lista y retrocesos.
+- `registrarVisita(#, fecha, hora)` y `marcarVisitaRealizada(#)`.
+- `leerSeguimiento(#)` → devuelve solo el valor, para SPEC-007.
+
+Ninguna devuelve una fila completa ni acepta un nombre de columna como parámetro. Las columnas se buscan por encabezado.
+
+## Criterios de aceptación
+
+- **AC-001:** con ID 1–21, la primera consulta de un número nuevo crea una fila con ID 22 y `Estado` = `nuevo`.
+- **AC-002:** un segundo mensaje del mismo número no crea otra fila.
+- **AC-003:** un alta por WhatsApp y un envío de formulario simultáneos reciben ID distintos y consecutivos.
+- **AC-004:** el formulario llenado después desde el mismo teléfono conserva el ID.
+- **AC-005:** un reclamo, una oferta comercial o un audio no crean prospecto.
+- **AC-006:** cada estado de la tabla se escribe solo con su evento, y ningún otro mensaje lo cambia.
+- **AC-007:** un valor escrito a mano fuera de la lista no se sobrescribe.
+- **AC-008:** `desistió` deja también `Seguimiento` = `desistió` y bloquea SPEC-007.
+- **AC-009:** el asistente nunca escribe `Ingresó?`, `Comisión`, `Fecha Pago` ni `Comentario`.
+- **AC-010:** evento repetido no duplica filas ni cambios.
+- **AC-011:** registros y pruebas sin teléfonos, nombres ni texto de mensajes.
+
+## Cómo volver atrás
+
+- Propiedad `NRC_WHATSAPP_WRITE_MODE` del proyecto de Apps Script: `eventos` deja al adaptador como en SPEC-002 (solo columna y pestaña `WhatsApp`); `completo` activa altas y estados.
+- Una fila creada por error: `descartar N`, o borrarla a mano si es la última.
+- Un estado mal puesto: `estado N <valor>` o el historial de versiones de la hoja. La pestaña `WhatsApp` conserva el valor anterior de cada cambio.
+
+## Tareas
+
+1. Confirmar en la hoja viva los valores que hoy tiene `Estado` y acordar con Francisco la lista final.
+2. Prueba con datos ficticios del riesgo de la pestaña de Forms.
+3. Asignador de ID compartido entre `AssignLeadId.gs` y el adaptador, con el cambio de coincidencia por teléfono y sus pruebas.
+4. Las cuatro operaciones del adaptador y los comandos nuevos, con pruebas sintéticas.
+5. Botón "Visita realizada" para los anfitriones (SPEC-003).
+6. Activar con `NRC_WHATSAPP_WRITE_MODE` = `completo`, supervisado, con un número ficticio.
+
+## Decisiones abiertas
+
+- Lista final de estados y si conviven con los valores actuales de `Estado`.
+- Si un saludo sin consulta debe crear prospecto tras el segundo mensaje.

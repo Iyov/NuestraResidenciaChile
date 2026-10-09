@@ -1,6 +1,7 @@
 # Nuestra Residencia Chile
 
 - Objetivo: apoyar `https://nuestraresidenciachile.cl/` y automatizar captación, seguimiento, informes y marketing digital; las funciones pendientes siguen siendo metas, no asumir que están desplegadas.
+- `specs/requirements.md` lista los ocho requerimientos iniciales de Francisco y la especificación que cubre cada uno; son la vara del proyecto. SPEC-007 a SPEC-013 son borradores sin código.
 - Antes de cambiar una integración, revisar `README.md`, `MEMORY.md`, `specs/README.md` y la especificación pertinente; sus estados distinguen lo local, lo pendiente y lo desplegado.
 - La web activa es WordPress externa. `Backup/` contiene respaldos `.rar`; no tratarlos como código activo ni sobrescribirlos.
 - `automation/apps-script/AssignLeadId.gs` contiene el primer flujo de automatización: activador instalable de Google Sheets para asignar IDs. Está desplegado y activo en la hoja viva desde el 2026-10-08 (proyecto `NRC Auto Lead ID`, cuenta NRC); los cambios se suben con `clasp push`; ver `automation/apps-script/README.md`.

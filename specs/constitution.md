@@ -17,7 +17,7 @@
 
 Hay dos planos distintos y no se mezclan:
 
-- **Atención a prospectos (runtime):** un servicio persistente propio, no un agente. Hoy es un Worker de Cloudflare que recibe los webhooks de YCloud y responde con textos aprobados, más una aplicación web de Apps Script como único acceso a la hoja (SPEC-002). No usa modelo de lenguaje.
+- **Atención a prospectos (runtime):** un servicio persistente propio, no un agente. Hoy es un Worker de Cloudflare que recibe los webhooks de YCloud y responde con textos aprobados, más una aplicación web de Apps Script como único acceso a la hoja (SPEC-002). Hoy no usa modelo de lenguaje; SPEC-008 (borrador) prevé uno solo para redactar respuestas de respaldo con hechos aprobados, sin recibir datos de la hoja.
 - **Trabajo interno (implementación, informes, marketing):** un asistente de código interactivo (Claude Code u OpenCode; ambos leen `AGENTS.md`). Por sí solo no escucha mensajes 24/7 ni reemplaza al runtime.
 
 El plan original de sumar Skills, MCP y agentes al trabajo interno sigue vigente, pero **nada de eso está instalado todavía**:

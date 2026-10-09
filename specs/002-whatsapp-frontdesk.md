@@ -2,6 +2,12 @@
 
 **Estado:** `local`. Reglas, base de respuestas ([Anexo A](002-faq-base.md)) y proveedor definidos el 2026-10-08; la lógica y el adaptador de YCloud están en `automation/whatsapp/` con pruebas sintéticas. No hay número conectado, servicio desplegado ni mensaje enviado a prospectos.
 
+**Reglas reemplazadas el 2026-10-09** (ver [requirements.md](requirements.md)); las tres especificaciones nuevas están en borrador y este documento describe lo que el código hace hoy:
+
+- Una consulta derivada ya no espera a Francisco sin límite: [SPEC-008](008-whatsapp-fallback-reply.md).
+- Un número nuevo sí crea fila e ID, y el asistente sí escribe `Estado` y `Seguimiento` con una lista cerrada: [SPEC-009](009-whatsapp-lead-registry.md).
+- El recontacto saliente tiene flujo propio: [SPEC-007](007-prospect-reactivation.md).
+
 ## Objetivo
 
 Responder consultas entrantes de NRC con rapidez, resolver FAQs aprobadas, mantener el expediente correcto en la hoja y escalar a Francisco cuando se requiera criterio o información no confirmada.
@@ -101,9 +107,9 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 2. Pasar el número de NRC de WhatsApp normal a WhatsApp Business App y usarla al menos 7 días (Francisco). No envía datos a YCloud, así que puede hacerse ya.
 3. **Antes de conectar el número:** Toto revisa a YCloud como proveedor y resuelve D-1 (SPEC-004). Desde que el número se conecta, YCloud recibe todos sus chats, aunque el asistente esté en modo sombra (orden decidido por Francisco, 2026-10-08).
 4. Conectar el número a YCloud en coexistencia (Francisco; requiere iniciar sesión con Facebook y escanear un QR desde la app). La cuenta de YCloud ya existe.
-5. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y ejecutar `setupNrcWhatsAppSheet`, que crea la pestaña `WhatsApp`. Las columnas `Seguimiento` (Q desde el 2026-10-09) y `WhatsApp` (Q) ya las creó Francisco a mano el 2026-10-08; la función no las duplica.
+5. Confirmar en la hoja viva los encabezados `#`, `Teléfono` y `Tu Nombre y Apellido`, y ejecutar `setupNrcWhatsAppSheet`, que crea la pestaña `WhatsApp`. Las columnas `Seguimiento` (Q desde el 2026-10-09) y `WhatsApp` (R) ya las creó Francisco a mano el 2026-10-08; la función no las duplica.
 6. Hecho: reactivación por comandos y avisos por WhatsApp, definidos el 2026-10-08.
-7. Hecho en local: clasificador, manejador de eventos, adaptadores de YCloud y de la hoja, almacén de estado y Worker con modo sombra, con pruebas sintéticas. El adaptador de la hoja se subió al proyecto de Apps Script el 2026-10-08 y está inactivo (sin token ni aplicación web publicada). Falta desplegar el Worker y probar contra las cuentas reales.
+7. Hecho en local: clasificador, manejador de eventos, adaptadores de YCloud y de la hoja, almacén de estado y Worker con modo sombra, con pruebas sintéticas. El adaptador de la hoja se subió al proyecto de Apps Script el 2026-10-08 y está inactivo (token creado como propiedad del proyecto; aplicación web sin publicar). Falta desplegar el Worker y probar contra las cuentas reales.
 8. Piloto en modo sombra: el servicio propone la respuesta a Francisco y no envía nada.
 9. Con el aviso de privacidad de SPEC-004 aprobado y publicado, salir del modo sombra (el envío ya fue autorizado por Francisco para las filas aprobadas). Es una sola condición para todas las respuestas automáticas: el formulario se ofrece junto con ellas, así que no se activan por separado.
 
@@ -135,7 +141,7 @@ Costo de mensajes en la plataforma (modelo por mensaje, desde 2025-07-01): las r
 - **Columna `WhatsApp`:** en `Respuestas de formulario 1`, una celda por prospecto con su último evento, por ejemplo `2026-10-09 15:00 · FAQ-08` o `2026-10-09 15:05 · derivado: disponibilidad · pendiente`. Se escribe en todas las filas que comparten el ID. Es la única celda de esa pestaña que el servicio modifica. La pestaña `WhatsApp` se mantiene como historial, porque los eventos de números sin ID no tienen fila donde escribirse (elección de implementación).
 - **Columna `Seguimiento`:** reemplaza al color como dato legible: `activo`, `desistió` o `residente` (ya ingresó; Francisco confirmó el 2026-10-08 que lo usa). Solo `activo` permite un envío saliente. Francisco llenó la columna el 2026-10-08; `inspectNrcFollowUpColumn` la revisa desde el editor y devuelve solo conteos y números de fila. La llena Francisco; el servicio no la lee ni la escribe, porque no tiene envíos salientes. Todo flujo saliente futuro debe leerla, y una celda vacía o con otro valor bloquea el envío, igual que `desistió` (así lo modela `automation/consent/`).
 - **Orden legal:** Toto revisa a YCloud antes de conectar el número, no después del modo sombra.
-- **Precio:** el valor real es 32 UF + IVA; los $1.550.000 incluyen el IVA y son solo referencia (FAQ-08 corregida).
+- **Precio:** el valor real es 32 UF + IVA; el monto en pesos incluye el IVA y es solo referencia (FAQ-08 corregida; $1.570.000 desde el 2026-10-09).
 
 ## Implementación local
 
@@ -165,6 +171,6 @@ Escrito antes del despliegue; ningún paso se ha probado contra las cuentas real
 - Hecho: Don Humberto aprobó el 2026-10-08 (informado por Francisco) FAQ-01, 04, 05, 06 y 07 tal cual; fijó la experiencia en "más de 15 años" sin cargos, lugares ni su nombre (FAQ-11); confirmó el precio de 32 UF + IVA; y pidió agregar las frases publicadas del sitio y el brochure, que ahora son FAQ-12 a FAQ-16 (seguridad 24/7, equipo profesional, menús, accesibilidad y 32 habitaciones). Las preguntas sobre la situación de una persona (salud, movilidad, medicamentos, una emergencia) y la disponibilidad se siguen derivando.
 - Toto, antes de conectar el número: revisar a YCloud como proveedor que recibe los chats y si hay que informar que parte de las respuestas son automáticas (D-1).
 - Toto, antes de salir del modo sombra: aprobar el aviso de privacidad (SPEC-004).
-- Francisco: pasar el número a WhatsApp Business App y, tras 7 días y con la revisión de Toto, conectarlo a YCloud. Llenar `Seguimiento` en las filas existentes.
+- Francisco: pasar el número a WhatsApp Business App y, tras 7 días y con la revisión de Toto, conectarlo a YCloud. `Seguimiento` ya está lleno en las filas existentes (2026-10-08).
 - Técnicos: cargar secretos y desplegar en modo sombra, plantilla de aviso para fuera de la ventana de 24 horas y prueba contra las cuentas reales.
 - SPEC-003: decidido el 2026-10-08 que el asistente puede preguntar por sí mismo a Nico o a Frank la disponibilidad para un día y hora; falta conectarlo y, fuera de la ventana de 24 horas, una plantilla aprobada.

@@ -5,11 +5,12 @@ Proyecto para apoyar la captación y seguimiento de prospectos de Nuestra Reside
 ## Estado actual
 
 - **ID de prospecto:** código en [`automation/apps-script/AssignLeadId.gs`](automation/apps-script/AssignLeadId.gs), subido el 2026-10-08 al proyecto Apps Script vinculado a la hoja real. Asigna el siguiente ID al recibir una respuesta válida; el activador se instaló ese día con la cuenta NRC y se verificó con un envío de prueba (ID 22). Está activo.
-- **Atención por WhatsApp:** lógica y pruebas sintéticas en [`automation/whatsapp/`](automation/whatsapp/README.md). Sin número conectado, sin Worker desplegado y sin mensajes enviados. Su acceso a la hoja (`automation/apps-script/WhatsAppSheetAdapter.gs`) se subió al proyecto de Apps Script el 2026-10-08 y está inactivo: falta el token y publicar la aplicación web.
+- **Atención por WhatsApp:** lógica y pruebas sintéticas en [`automation/whatsapp/`](automation/whatsapp/README.md). Sin número conectado, sin Worker desplegado y sin mensajes enviados. Su acceso a la hoja (`automation/apps-script/WhatsAppSheetAdapter.gs`) se subió al proyecto de Apps Script el 2026-10-08 y está inactivo: el token ya existe como propiedad del proyecto y falta publicar la aplicación web.
 - **Visitas y permisos del formulario:** lógica local con pruebas sintéticas en `automation/visits/` y `automation/consent/`; ningún flujo las usa todavía. El aviso y la política de privacidad son borradores sin aprobar.
 - **Captación e informes:** embudo mensual, tope de gasto, atribución, control de publicación e informe para dirección como lógica local con pruebas sintéticas en `automation/acquisition/`; ningún flujo la usa. La línea base y la auditoría del sitio están en [`specs/005-baseline-2026-10.md`](specs/005-baseline-2026-10.md).
 - **Avisos del buzón de NRC:** código y pruebas sintéticas en [`automation/gmail/`](automation/gmail/README.md), subido el 2026-10-09 a un proyecto de Apps Script propio de la cuenta NRC. Francisco lo autorizó e instaló el activador ese día: revisa la bandeja cada 15 minutos.
-- **Google Ads, SEO y blog/redes:** requisitos y especificaciones; no asumir que están implementados.
+- **Google Ads:** campaña de búsqueda activa desde el 2026-10-09, creada a mano en la cuenta ($2.600 al día); ningún código la opera. Detalle en [`specs/005-acquisition-content-and-reporting.md`](specs/005-acquisition-content-and-reporting.md).
+- **SEO y blog/redes:** requisitos y auditoría; no asumir que están implementados.
 - **Web activa:** [nuestraresidenciachile.cl](https://nuestraresidenciachile.cl/), WordPress externo. Los archivos de `Backup/` son respaldos, no código de producción.
 
 ## Documentación del proyecto
@@ -17,6 +18,7 @@ Proyecto para apoyar la captación y seguimiento de prospectos de Nuestra Reside
 - [`AGENTS.md`](AGENTS.md): instrucciones breves para agentes que trabajen en este repositorio.
 - [`MEMORY.md`](MEMORY.md): contexto, decisiones confirmadas, estado actual y pendientes.
 - [`specs/README.md`](specs/README.md): índice de especificaciones, estado y flujo SDD.
+- [`specs/requirements.md`](specs/requirements.md): los ocho requerimientos iniciales, qué especificación cubre cada uno y el orden de trabajo.
 - [`specs/constitution.md`](specs/constitution.md): principios y controles comunes del proyecto.
 - [`specs/`](specs/): especificaciones funcionales, criterios de aceptación, dependencias y decisiones abiertas por función.
 - [`automation/apps-script/README.md`](automation/apps-script/README.md): instalación manual, supuestos y prueba de la asignación de IDs.

@@ -86,6 +86,8 @@ Ninguno lee la hoja, llama a Google ni publica.
 
 ## Pendientes
 
+Desde el 2026-10-09 cada frente tiene su especificación, todas en borrador: operación de Google Ads en [SPEC-013](013-google-ads-operation.md), informe en [SPEC-012](012-management-report.md), sitio y posicionamiento en [SPEC-011](011-seo-and-site.md), blog y redes en [SPEC-010](010-blog-and-social.md). Los puntos de abajo se mantienen como lista de origen.
+
 - Revisar la campaña a la semana: términos de búsqueda reales, costo por clic y gasto contra el tope.
 - Importar `contact_link_click` a Google Ads como conversión.
 - Agregar a la hoja la columna `Fecha Pago`.

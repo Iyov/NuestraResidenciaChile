@@ -91,6 +91,8 @@ Pasos manuales, en este orden; ninguno está hecho:
 ## Pendientes
 
 - Dónde se guardan los retiros y quién los registra. El asistente de WhatsApp ya deriva a Francisco los mensajes del tipo "no me contacten"; hoy eso no deja un registro de retiro.
+- Propuesta en [SPEC-009](009-whatsapp-lead-registry.md) (borrador): el asistente registra el retiro poniendo `Estado` y `Seguimiento` en `desistió`.
+- Puntos nuevos para Toto desde el 2026-10-09: si la solicitud del formulario basta para el recontacto automático de [SPEC-007](007-prospect-reactivation.md), que contradice la elección de `automation/consent/` de tratar las filas anteriores al aviso como sin permiso; el texto RS-07 de [SPEC-008](008-whatsapp-fallback-reply.md), que responde "te escribe Francisco Barrientos" a quien pregunta si habla con una persona; y el proveedor del modelo de lenguaje de SPEC-008, que recibiría texto de conversaciones.
 - Cómo se atienden las solicitudes de derechos que lleguen por correo (responsable y plazo).
 - Qué hacer con los prospectos anteriores al aviso: mantenerlos en gestión manual o pedirles autorización.
 - Cookies del sitio: auditadas el 2026-10-09 (Google Analytics 4 y Google Ads activos, sin banner; detalle en las notas de la política). Falta que Toto diga si se necesita un banner de consentimiento y, si es así, instalarlo en el WordPress.
