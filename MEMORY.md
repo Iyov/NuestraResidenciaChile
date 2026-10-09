@@ -73,7 +73,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 **SPEC-001 — ID automático (activo):**
 
 - Francisco borró el 2026-10-08 la fila de prueba (ID 22) de la hoja viva: el siguiente prospecto real recibe el 22.
-- El 2026-10-09 entraron los primeros prospectos reales desde la instalación: los ID 22 y 23 se asignaron solos (confirmado por Francisco; dos ejecuciones completadas, 10:37 y 10:44). Francisco informó tres prospectos nuevos ese día y que en dos tuvo que hacer el proceso a mano; no consta cómo entró el tercero.
+- El 2026-10-09 entraron los primeros prospectos reales desde la instalación: los ID 22 y 23 se asignaron solos (confirmado por Francisco; dos ejecuciones completadas, 10:37 y 10:44). Francisco informó tres prospectos nuevos ese día y que en dos tuvo que hacer el proceso a mano. El tercero llegó por WhatsApp y a esa fecha no había llenado el formulario: no tiene fila ni ID, que es el caso que cubre SPEC-009.
 - En Google solo se probó el caso de prospecto nuevo. Ante un envío sin `#`, revisar **Ejecuciones** en el proyecto `NRC Auto Lead ID`.
 - `clasp` quedó autenticado en este equipo con la cuenta NRC; `.clasp.json` es local. Para subir cambios: `clasp push` desde `automation/apps-script/`.
 - La hoja auxiliar vacía creada por un `clasp create --type sheets` anterior (otra cuenta) sigue sin eliminar.
