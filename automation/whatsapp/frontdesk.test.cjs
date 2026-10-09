@@ -347,6 +347,17 @@ test('classifier: closed set of intents', () => {
   assert.equal(faq('¿Puedo ir de visita el sábado?'), 'FAQ-03');
   assert.equal(faq('cual es el valor mensual'), 'FAQ-08');
   assert.equal(faq('¿Tienen página web?'), 'FAQ-10');
+  assert.equal(faq('¿Tienen seguridad en la noche?'), 'FAQ-12');
+  assert.equal(faq('¿Hay enfermeras?'), 'FAQ-13');
+  assert.equal(faq('¿Quién diseña los menús?'), 'FAQ-14');
+  assert.equal(faq('¿El lugar es accesible?'), 'FAQ-15');
+  assert.equal(faq('¿Cuántas habitaciones tienen?'), 'FAQ-16');
+
+  // The general answers never cover one person's situation.
+  assert.equal(motive('Mi papá está enfermo, ¿hay enfermeras?'), MOTIVES.health);
+  assert.equal(motive('¿Es accesible para silla de ruedas?'), MOTIVES.health);
+  assert.equal(motive('¿Qué hacen en una emergencia?'), MOTIVES.complaint);
+  assert.equal(motive('¿Cuántas habitaciones quedan disponibles?'), MOTIVES.availability);
 
   assert.equal(motive('No me escriban más por favor'), MOTIVES.noContact);
   assert.equal(motive('¿Estoy hablando con un bot?'), MOTIVES.identity);
@@ -385,5 +396,10 @@ test('the SPEC-002 annex parses and its required messages are approved', () => {
   assert.match(knowledge.approvedText('FAQ-08'), /32 UF \+ IVA/);
   assert.match(knowledge.approvedText('FAQ-08'), /IVA incluido/);
   assert.ok(!/2\.500\.000|doble/i.test(knowledge.approvedText('FAQ-08')));
-  assert.equal(knowledge.approvedText('FAQ-11'), null);
+  assert.match(knowledge.approvedText('FAQ-11'), /más de 15 años de experiencia/);
+  assert.ok(!/disponibles/.test(knowledge.approvedText('FAQ-16')));
+  for (let number = 1; number <= 16; number += 1) {
+    const id = 'FAQ-' + String(number).padStart(2, '0');
+    assert.ok(knowledge.isApproved(id), id + ' should be approved');
+  }
 });

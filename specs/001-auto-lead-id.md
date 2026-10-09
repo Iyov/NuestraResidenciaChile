@@ -39,5 +39,5 @@ Cada envío real del Google Form crea una fila en la hoja `Respuestas de formula
 ## Pendientes de operación
 
 - Francisco decidió el 2026-10-08 no crear copia de prueba y desplegar directamente en la hoja viva; la validación en Google de AC-009 se reemplazó por un envío de prueba en la hoja viva, que recibió el ID 22.
-- La fila de prueba ocupa el ID 22: si se elimina, el siguiente prospecto recibirá 22; si se conserva, recibirá 23.
+- Francisco eliminó la fila de prueba el 2026-10-08, así que el siguiente prospecto real recibirá el 22.
 - Solo se probó en Google el caso de prospecto nuevo; duplicados, conflictos y concurrencia están cubiertos por las pruebas locales. Revisar **Ejecuciones** si un envío queda sin ID.

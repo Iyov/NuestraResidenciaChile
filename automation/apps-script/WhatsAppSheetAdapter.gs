@@ -3,8 +3,10 @@ const NRC_WHATSAPP_SHEET_CONFIG = Object.freeze({
   eventHeaders: ['Fecha y hora', '#', 'Tipo', 'Derivación'],
   contactNameHeader: 'Tu Nombre y Apellido',
   // Columns added to the response sheet by setupNrcWhatsAppSheet. `Seguimiento` is
-  // filled in by Francisco (activo / desistió); the adapter never reads or writes it.
+  // filled in by Francisco; the web app never reads or writes it.
   followUpHeader: 'Seguimiento',
+  // Compared after normalizeNrcText_, so "Desistió" matches "desistio".
+  followUpValues: ['activo', 'desistio', 'residente'],
   lastEventHeader: 'WhatsApp',
   timeZone: 'America/Santiago',
   tokenProperty: 'NRC_WHATSAPP_ADAPTER_TOKEN',
@@ -36,6 +38,38 @@ function setupNrcWhatsAppSheet(spreadsheetId) {
       responseSheet.getRange(NRC_LEAD_ID_CONFIG.headerRow, responseSheet.getLastColumn() + 1).setValue(header);
     }
   });
+}
+
+/**
+ * Read-only check of the `Seguimiento` column, run from the editor. Logs and
+ * returns counts and row numbers only, never prospect values. A cell that is
+ * blank or holds anything but activo / desistió / residente needs review:
+ * outbound flows treat it as "do not contact".
+ */
+function inspectNrcFollowUpColumn(spreadsheetId) {
+  const spreadsheet = openNrcSpreadsheet_(spreadsheetId);
+  if (!spreadsheet) throw new Error('Open this script from the NRC response spreadsheet.');
+
+  const sheet = getNrcResponseSheet_(spreadsheet);
+  const followUpColumn = findNrcHeaderColumn_(sheet, NRC_WHATSAPP_SHEET_CONFIG.followUpHeader);
+  if (followUpColumn < 0) throw new Error('The response sheet is missing a required header.');
+
+  const result = { rowsWithId: 0, activo: 0, desistio: 0, residente: 0, blankRows: [], otherValueRows: [] };
+  const dataRows = Math.max(0, sheet.getLastRow() - NRC_LEAD_ID_CONFIG.headerRow);
+  if (dataRows) {
+    const firstRow = NRC_LEAD_ID_CONFIG.headerRow + 1;
+    const ids = sheet.getRange(firstRow, getNrcLeadIdColumns_(sheet).id + 1, dataRows, 1).getDisplayValues();
+    const values = sheet.getRange(firstRow, followUpColumn + 1, dataRows, 1).getDisplayValues();
+    for (let index = 0; index < dataRows; index += 1) {
+      if (parseNrcId_(ids[index][0]) === null) continue;
+      result.rowsWithId += 1;
+      const value = normalizeNrcText_(values[index][0]);
+      if (NRC_WHATSAPP_SHEET_CONFIG.followUpValues.indexOf(value) >= 0) result[value] += 1;
+      else (value ? result.otherValueRows : result.blankRows).push(firstRow + index);
+    }
+  }
+  console.log(JSON.stringify(result));
+  return result;
 }
 
 /**

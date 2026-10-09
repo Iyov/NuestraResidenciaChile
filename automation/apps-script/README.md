@@ -47,9 +47,9 @@ node --test automation/apps-script/AssignLeadId.test.cjs
 
 Las pruebas usan datos sintéticos y no acceden a Google.
 
-## Acceso del asistente de WhatsApp a la hoja (no subido)
+## Acceso del asistente de WhatsApp a la hoja (subido, inactivo)
 
-`WhatsAppSheetAdapter.gs` es una aplicación web para el asistente de SPEC-002. **Todavía no está en el proyecto de Google**: como esta carpeta está vinculada al proyecto vivo, el próximo `clasp push` lo subirá. Subirlo no lo activa; solo funciona después de crear el token y publicar la aplicación web a mano.
+`WhatsAppSheetAdapter.gs` es una aplicación web para el asistente de SPEC-002. **Se subió al proyecto de Google el 2026-10-08 con `clasp push`, pero no está activo**: solo funciona después de ejecutar `setupNrcWhatsAppSheet` (hecho el 2026-10-08: la pestaña `WhatsApp` existe), crear el token y publicar la aplicación web a mano. Esos dos últimos pasos no están hechos.
 
 - Ofrece tres operaciones y exige un token compartido: buscar por teléfono (devuelve `#` y nombre de contacto de las filas que ya tienen ID), buscar teléfonos por `#` y registrar un evento: una fila en la pestaña `WhatsApp` y el último evento en la columna `WhatsApp` de las filas de ese `#`.
 - En `Respuestas de formulario 1` solo escribe esa celda y nunca devuelve una fila completa.

@@ -35,11 +35,11 @@ La hoja no se abre desde el Worker. La atiende una aplicación web de Apps Scrip
 
 Está activo salvo que `SHADOW_MODE` valga exactamente `off`. En modo sombra ningún mensaje llega a un prospecto: Francisco recibe "Modo sombra · habría respondido: …" con el texto aprobado, además de los avisos normales. Los comandos y las pausas funcionan igual.
 
-## Puesta en marcha (solo el paso 2 está hecho)
+## Puesta en marcha (hechos: el paso 2 y, del paso 1, el `clasp push` y las dos columnas)
 
 Cada paso lo ejecuta Francisco con las cuentas de NRC. Los secretos se escriben en la terminal o en el panel correspondiente, nunca en el repositorio ni en un chat.
 
-1. **Hoja.** Desde `automation/apps-script/`: `clasp push`. En el editor de Apps Script, ejecutar `setupNrcWhatsAppSheet` (crea la pestaña `WhatsApp` y las columnas `Seguimiento` y `WhatsApp` en la pestaña de respuestas). Llenar `Seguimiento` con `activo` o `desistió` en las filas existentes. En Configuración del proyecto → Propiedades de la secuencia de comandos, crear `NRC_WHATSAPP_ADAPTER_TOKEN` con un valor aleatorio de 32 caracteres o más. Implementar → Nueva implementación → Aplicación web, ejecutar como la cuenta de NRC, acceso "Cualquier usuario". Guardar la URL que termina en `/exec`.
+1. **Hoja.** Desde `automation/apps-script/`: `clasp push` (hecho el 2026-10-08). En el editor de Apps Script, ejecutar `setupNrcWhatsAppSheet` (crea la pestaña `WhatsApp`; las columnas `Seguimiento` y `WhatsApp` de la pestaña de respuestas ya las creó Francisco a mano ese día y la función no las duplica). Llenar `Seguimiento` con `activo` o `desistió` en las filas existentes. En Configuración del proyecto → Propiedades de la secuencia de comandos, crear `NRC_WHATSAPP_ADAPTER_TOKEN` con un valor aleatorio de 32 caracteres o más. Implementar → Nueva implementación → Aplicación web, ejecutar como la cuenta de NRC, acceso "Cualquier usuario". Guardar la URL que termina en `/exec`.
 2. **Cloudflare (hecho el 2026-10-08).** Cuenta creada con el correo de NRC, equipo conectado con `npx wrangler login`, base D1 `nrc-whatsapp-frontdesk` creada, su `database_id` anotado en `wrangler.toml` y tablas de `schema.sql` aplicadas. En otro equipo basta con `npx wrangler login` desde `automation/whatsapp/`.
 3. **Secretos.** `npx wrangler secret put <NOMBRE>` para cada uno: `YCLOUD_API_KEY`, `NRC_BUSINESS_PHONE`, `NRC_OWNER_PHONE`, `SHEET_ADAPTER_URL`, `SHEET_ADAPTER_TOKEN`, `STATE_KEY_SECRET` (aleatorio, 32 caracteres o más) y `YCLOUD_WEBHOOK_SECRET` (se obtiene en el paso 5).
 4. **Despliegue.** `npx wrangler deploy`. Queda en modo sombra.

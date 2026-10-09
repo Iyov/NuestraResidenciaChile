@@ -18,7 +18,8 @@ const RESERVED_RULES = [
   [MOTIVES.noContact, /\bno (me |nos )?(contacten|escriban|llamen|molesten)|\bborr(ar|en|a) mis datos|\bdejen? de (escribir|llamar|contactar)|\bno quiero (mas|recibir)|\bdar(me)? de baja/],
   [MOTIVES.complaint, /\breclamo|\bqueja|\bmolest[oa]\b|\bdenuncia|\burgen|\bemergencia|\bestafa/],
   [MOTIVES.identity, /\bbot\b|\brobot|inteligencia artificial|\bia\b|\bpersona real|\bhumano|\bmaquina|\bautomatic|\beres (tu|una persona|francisco)|\bde verdad eres/],
-  [MOTIVES.health, /\bsalud|\benferm|\bdiagnost|\bmedic|\bremedio|\balzheimer|\bdemencia|\bparkinson|\bsilla de ruedas|\bpostrad|\bautovalen|\bdependien|\bmovilidad|\bpanal|\boxigeno|\bdiabet|\bcuidados|\bcalifica|\bacv\b|\boperad|\bcaida/],
+  // "enfermeras" is a question about the team (FAQ-13), not about someone's health.
+  [MOTIVES.health, /\bsalud|\benferm(?!er)|\bdiagnost|\bmedic|\bremedio|\balzheimer|\bdemencia|\bparkinson|\bsilla de ruedas|\bpostrad|\bautovalen|\bdependien|\bmovilidad|\bpanal|\boxigeno|\bdiabet|\bcuidados|\bcalifica|\bacv\b|\boperad|\bcaida/],
   [MOTIVES.availability, /\bdisponib|\bcupos?\b|\bvacantes?\b|\bhay (habitacion|pieza|lugar|espacio)|\bquedan (habitacion|pieza)|\breserv|\bcotiza|\blista de espera|\bingresar\b|\bingreso\b/],
   [MOTIVES.commercial, /\bdescuento|\brebaja|\bpromo|\bdobles?\b|\bcompartid|\bmatrimonio|\bpareja|\bformas? de pago|\bcuota|\bcontrato|\bgarantia|\btransferencia|\btarjeta|\bboleta|\bfactura|\bisapre|\bfonasa|\bconvenio|\biva\b|\bnegocia/],
 ];
@@ -35,6 +36,11 @@ const FAQ_RULES = [
   ['FAQ-09', /\bcorreo|\bmail\b|\bemail\b|\botro medio|\bformulario/],
   ['FAQ-10', /\bpagina\b|\bsitio\b|\bweb\b|\bmas informacion|\bfotos\b|\binstagram|\bfacebook/],
   ['FAQ-11', /\bexperiencia|\bquien(es)? (esta|estan) detras|\bduenos?\b|\btrayectoria|\bquien dirige/],
+  ['FAQ-12', /\bseguridad|\bguardias?\b|\bvigilancia/],
+  ['FAQ-13', /\bprofesionales|\bequipo\b|\bpersonal\b|\benfermer|\bgeriatra|\bkinesiolog|\bquien(es)? (trabajan|atienden)/],
+  ['FAQ-14', /\bmenus?\b|\bnutricionista|\balimentacion/],
+  ['FAQ-15', /\baccesib/],
+  ['FAQ-16', /\bcuantas (habitaciones|piezas)/],
 ];
 
 const GREETING_WORDS = /\b(hola|holi|alo|buenas|buenos|dias|dia|tardes|noches|que tal|como (esta|estas|estan)|estimad[oa]s?|saludos)\b/g;
@@ -57,6 +63,8 @@ function classifyMessage(text) {
   let matches = FAQ_RULES.filter((rule) => rule[1].test(normalized)).map((rule) => rule[0]);
   // "¿Puedo ir el sábado?" is a visit question whose answer is the weekend one.
   if (matches.includes('FAQ-03')) matches = matches.filter((id) => id !== 'FAQ-02');
+  // "¿Cuántas habitaciones tienen?" asks for the count, not the room types.
+  if (matches.includes('FAQ-16')) matches = matches.filter((id) => id !== 'FAQ-05');
   if (matches.length === 1) return { intent: 'faq', faqId: matches[0] };
   if (matches.length > 1) return { intent: 'derive', motive: MOTIVES.outOfBase };
 

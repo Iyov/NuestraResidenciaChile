@@ -1,6 +1,6 @@
 # SPEC-005 — Captación, Ads, SEO, contenido e informes
 
-**Estado:** alcance de alto nivel; falta auditoría de cuentas, línea base y aprobación de presupuesto/fuentes.
+**Estado:** alcance de alto nivel; presupuesto de USD 80/mes para Google Ads confirmado (2026-10-08); falta auditoría de cuentas, línea base y aprobación de fuentes.
 
 ## Resultado esperado
 
@@ -15,7 +15,7 @@ La comisión contractual es el 50% de la cuota de ingreso (aprox. $500.000 líqu
 ## Google Ads
 
 - Auditar cuenta, facturación, campañas y conversiones existentes antes de crear/cambiar campañas.
-- Francisco manifestó intención de reasignar a Google el presupuesto de aprox. USD 80/mes contemplado en contrato para Meta u otro medio acordado; confirmar autorización mutua con Don Humberto antes de gastar.
+- Presupuesto: aprox. USD 80/mes, contemplado en contrato para Meta u otro medio acordado. Don Humberto confirmó destinarlo a Google Ads, según informó Francisco el 2026-10-08. Ese monto es el tope de gasto de AC-003.
 - Establecer límite de gasto, geografía/búsquedas de alta intención y medición del formulario/visita/ingreso antes de optimizar pujas.
 - Mantener leads iniciales como señal separada de visitas e ingresos. No enviar PII sin términos, base/consentimiento y configuración compatibles.
 - Google actualmente documenta Data Manager para conectar conversiones de leads; verificar interfaz/políticas de la cuenta durante implementación.
@@ -37,7 +37,7 @@ La comisión contractual es el 50% de la cuota de ingreso (aprox. $500.000 líqu
 
 ## Pendientes
 
-- Línea base de Search Console/Analytics/Ads y presupuesto mutuo autorizado.
+- Línea base de Search Console/Analytics/Ads.
 - Cadencia, destinatarios y plantilla del informe de Don Humberto.
 - Disponibilidad/capacidad actual, precios, condiciones y equipo realmente ofrecido.
 - Validar páginas locales existentes, testimonios, permisos de imagen y cuentas sociales.

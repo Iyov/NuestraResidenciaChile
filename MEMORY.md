@@ -42,7 +42,7 @@
 El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato original antes de modificar términos comerciales. En resumen:
 
 - Honorario fijo mensual indicado: $300.000 líquidos.
-- Presupuesto publicitario aproximado: USD 80 mensuales para Meta u otra plataforma acordada por las partes. Francisco expresó intención de reasignarlo a Google Ads; confirmar el acuerdo requerido con Don Humberto antes de gastar.
+- Presupuesto publicitario aproximado: USD 80 mensuales para Meta u otra plataforma acordada por las partes. Don Humberto confirmó destinarlo a Google Ads, según informó Francisco el 2026-10-08; no consta en el repositorio un respaldo escrito de ese acuerdo.
 - Comisión: 50% de la cuota de ingreso; el contrato la estima en aproximadamente $500.000 líquidos a la fecha de firma, no como monto fijo. Se devenga al firmar el ingreso y recibir la residencia el pago.
 - El contrato cubre marketing, sitio/SEO/contenido, atención inicial de prospectos e informes, además de obligaciones de confidencialidad y entrega de activos.
 - Registrar canal y evidencia de atribución de forma que se pueda revisar el origen comercial; no presentar una comisión como devengada antes del evento contractual indicado.
@@ -68,7 +68,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 **SPEC-001 — ID automático (activo):**
 
-- Decidir si se borra la fila de prueba "Juan Perez" (ID 22) de la hoja viva: si se borra, el siguiente prospecto recibe 22; si se conserva, recibe 23.
+- Francisco borró el 2026-10-08 la fila de prueba (ID 22) de la hoja viva: el siguiente prospecto real recibe el 22.
 - En Google solo se probó el caso de prospecto nuevo. Ante un envío sin `#`, revisar **Ejecuciones** en el proyecto `NRC Auto Lead ID`.
 - `clasp` quedó autenticado en este equipo con la cuenta NRC; `.clasp.json` es local. Para subir cambios: `clasp push` desde `automation/apps-script/`.
 - La hoja auxiliar vacía creada por un `clasp create --type sheets` anterior (otra cuenta) sigue sin eliminar.
@@ -88,7 +88,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 **SPEC-002 — atención por WhatsApp (borradores; nada desplegado):**
 
-- `specs/002-faq-base.md` propone 11 respuestas y 5 mensajes fijos (MSG-01, 02, 03, 05 y 06). Francisco definió el 2026-10-08: habitación individual 32 UF + IVA mensuales (el valor real; cerca de $1.550.000 con IVA incluido a esa fecha, solo como referencia), visitas de lunes a viernes 10:00–11:30 y 14:00–16:00, correo `nuestraresidenciachile@gmail.com` y tono cálido, humano y respetuoso con tuteo. También decidió, y reafirmó al revisar las specs, que el asistente escribe siempre como Francisco Barrientos y no se presenta como asistente virtual; si alguien pregunta si habla con una persona o un sistema automático, deriva a Francisco. La comunicación virtual no tiene horario: el asistente responde a cualquier hora y solo las visitas tienen horario. Quedan abiertas D-1 y D-2: revisión legal de esa identidad con Toto y frase de experiencia (Don Humberto).
+- `specs/002-faq-base.md` tiene 16 respuestas, todas aprobadas, y 5 mensajes fijos (MSG-01, 02, 03, 05 y 06). Francisco definió el 2026-10-08: habitación individual 32 UF + IVA mensuales (el valor real; cerca de $1.550.000 con IVA incluido a esa fecha, solo como referencia), visitas de lunes a viernes 10:00–11:30 y 14:00–16:00, correo `nuestraresidenciachile@gmail.com` y tono cálido, humano y respetuoso con tuteo. También decidió, y reafirmó al revisar las specs, que el asistente escribe siempre como Francisco Barrientos y no se presenta como asistente virtual; si alguien pregunta si habla con una persona o un sistema automático, deriva a Francisco. La comunicación virtual no tiene horario: el asistente responde a cualquier hora y solo las visitas tienen horario. Queda abierta D-1: revisión legal de esa identidad con Toto.
 - **Precio que se comunica:** siempre el de la habitación individual. La habitación doble comunicada nunca se ha contratado y es poco probable que se pida; su valor de referencia es $2.500.000 mensuales por ambas habitaciones (valor promocional). No ofrecerlo por iniciativa propia; si alguien pregunta por la doble, el asistente deriva a Francisco.
 - Por decisión de Francisco no se modifican el brochure 2026 (muestra $1.500.000 para la individual) ni la página `/contact/` del sitio; el asistente usa los valores que él definió.
 - Runtime decidido por Francisco el 2026-10-08: Cloud API en coexistencia con WhatsApp Business App, a través de YCloud en plan gratuito (se prioriza no tener costo fijo). Cuenta de YCloud creada; falta pasar el número a WhatsApp Business App y conectarlo. Se descartaron las conexiones no oficiales que emulan WhatsApp Web (habituales en flujos de n8n) por riesgo de bloqueo del número.
@@ -99,14 +99,15 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - `automation/whatsapp/` tiene la lógica del asistente con pruebas sintéticas (`node --test automation/whatsapp/frontdesk.test.cjs`). Incluye adaptador de YCloud (escrito desde su documentación, sin probar contra la cuenta real), cliente de la hoja, almacén de estado y Worker de Cloudflare con modo sombra activo por defecto. Nada está desplegado; los pasos están en `automation/whatsapp/README.md`.
 - El 2026-10-08 se creó la cuenta de Cloudflare con el correo de NRC, se conectó este equipo con `wrangler login` y se creó la base D1 `nrc-whatsapp-frontdesk` con sus dos tablas, vacía. El Worker no está desplegado y no hay secretos cargados.
 - El repositorio de GitHub se pasó a privado el 2026-10-08 (estaba público).
-- Alojamiento confirmado por Francisco el 2026-10-08: Worker de Cloudflare en plan gratuito con base D1. La hoja se atiende con una aplicación web de Apps Script (`automation/apps-script/WhatsAppSheetAdapter.gs`) que expone solo tres operaciones; ese archivo no se ha subido y un `clasp push` lo llevaría al proyecto vivo.
+- Alojamiento confirmado por Francisco el 2026-10-08: Worker de Cloudflare en plan gratuito con base D1. La hoja se atiende con una aplicación web de Apps Script (`automation/apps-script/WhatsAppSheetAdapter.gs`) que expone solo tres operaciones; ese archivo se subió al proyecto vivo con `clasp push` el 2026-10-08, pero está inactivo: Francisco ejecutó `setupNrcWhatsAppSheet` ese día y la pestaña `WhatsApp` existe, pero no existe el token `NRC_WHATSAPP_ADAPTER_TOKEN` y la aplicación web no está publicada.
 - El número de NRC está en un celular aparte, exclusivo de NRC; el número personal de Francisco está en otro equipo.
 - Francisco creó la cuenta de YCloud el 2026-10-08; el registro le exigió validar el número de NRC por WhatsApp. Fue solo un código de verificación: el número no quedó conectado.
 - Decidido por Francisco el 2026-10-08 al revisar las specs (tercera ronda): las respuestas aprobadas se envían a cualquier número y el formulario se ofrece después, una vez; el nombre se pregunta solo cuando no se sabe (MSG-01) y, si el número está en la hoja, el saludo usa el primer nombre del formulario (MSG-06); el asistente escribe el último evento de cada prospecto en una columna `WhatsApp` de `Respuestas de formulario 1` (única celda que toca ahí) y mantiene la pestaña `WhatsApp` como historial; Toto revisa a YCloud antes de conectar el número, porque desde ese momento recibe todos los chats aunque haya modo sombra.
-- Francisco creó a mano el 2026-10-08 las columnas `Seguimiento` (P) y `WhatsApp` (Q) en la hoja viva; el código las busca por encabezado, no por posición. `setupNrcWhatsAppSheet` no se ha ejecutado: sigue haciendo falta para crear la pestaña `WhatsApp` y no duplica las columnas que ya existen. Falta llenar `Seguimiento` en las filas existentes.
+- Francisco creó a mano el 2026-10-08 las columnas `Seguimiento` (P) y `WhatsApp` (Q) en la hoja viva; el código las busca por encabezado, no por posición. Francisco ejecutó `setupNrcWhatsAppSheet` el 2026-10-08 y la pestaña `WhatsApp` quedó creada. Se le puede dar formato, pero no cambiar su nombre ni el orden de sus cuatro columnas (A–D), ni escribir debajo de los datos. Francisco llenó `Seguimiento` ese día; valores: `activo`, `desistió` y `residente` (ya ingresó; Francisco confirmó ese día que lo usa). Solo `activo` permite envíos salientes. `inspectNrcFollowUpColumn` (en `WhatsAppSheetAdapter.gs`, subido al proyecto vivo el 2026-10-08) revisa la columna y devuelve solo conteos y números de fila.
 - Salir del modo sombra tiene una sola condición legal: aviso de privacidad de SPEC-004 aprobado y publicado. Vale para todas las respuestas automáticas, porque el formulario se ofrece junto con ellas.
 - El número de NRC usa hoy WhatsApp normal, no WhatsApp Business App. La coexistencia exige Business App, así que antes hay que pasar el número a esa aplicación y usarla con normalidad al menos 7 días (requisito citado por proveedores; confirmar al conectar).
-- Francisco aprobó el 2026-10-08 el texto MSG-05 ("Mucho gusto. Cuéntame, ¿en qué te puedo ayudar?"). Siguen pendientes las respuestas descriptivas que dependen de Don Humberto.
+- Francisco aprobó el 2026-10-08 el texto MSG-05 ("Mucho gusto. Cuéntame, ¿en qué te puedo ayudar?").
+- Don Humberto aprobó el 2026-10-08 (informado por Francisco) FAQ-01, 04, 05, 06 y 07 tal cual; fijó la experiencia en "más de 15 años" sin cargos, lugares ni su nombre (FAQ-11); confirmó el precio de 32 UF + IVA; y pidió agregar las frases publicadas del sitio y el brochure, que ahora son FAQ-12 a FAQ-16 (seguridad 24/7, equipo profesional, menús, accesibilidad y 32 habitaciones). La redacción de FAQ-12 a FAQ-16 sale de un resumen de esas fuentes y falta cotejarla palabra por palabra. El clasificador sigue derivando todo mensaje que hable de la situación de una persona (salud, silla de ruedas, medicamentos, una emergencia) y la disponibilidad.
 
 **SPEC-003 — visitas (lógica local; nada conectado):**
 
@@ -121,11 +122,11 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
 - Confirmar el responsable legal de los datos, datos de contacto de privacidad y períodos de retención.
-- Don Humberto debe validar las respuestas descriptivas y la frase de trayectoria de `specs/002-faq-base.md`. El asistente no puede inferir elegibilidad ni inventar esos datos.
+- El asistente no puede inferir elegibilidad ni inventar datos: las respuestas de `specs/002-faq-base.md` describen la residencia en general y nunca dicen si una persona puede ingresar.
 - Pasar el número de NRC a WhatsApp Business App, esperar 7 días de uso y, con la revisión de YCloud por Toto hecha, conectarlo. No asumir que Chrome DEV es un runtime.
 - SPEC-003: conectar la pregunta a los anfitriones con WhatsApp (depende de SPEC-002), crear la plantilla con botones y decidir dónde se registra la visita por prospecto. La confirmación final al prospecto queda a cargo de Francisco según lo acordado.
 - Acordar cadencia/formato de informes y línea base de métricas.
-- Auditar la cuenta actual de Google Ads, confirmar distribución de los USD 80 y consentimientos antes de habilitar conversiones avanzadas/importaciones.
+- Auditar la cuenta actual de Google Ads y revisar consentimientos antes de habilitar conversiones avanzadas/importaciones.
 - Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
 - Gmail fue parte de la visión inicial, pero sus etiquetas, alcance, nivel de acceso y reglas de respuesta no están definidos; mantenerlo en descubrimiento.
 

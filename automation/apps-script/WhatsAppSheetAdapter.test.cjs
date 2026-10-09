@@ -72,7 +72,7 @@ function createContext({ token = TOKEN, withEventsSheet = true, withAddedColumns
     Utilities: {
       formatDate: (date) => new Date(date.getTime() - 3 * 60 * 60 * 1000).toISOString().slice(0, 16).replace('T', ' '),
     },
-    console: { warn: () => {}, error: () => {} },
+    console: { log: () => {}, warn: () => {}, error: () => {} },
   };
   vm.runInNewContext(scriptSource, context, { filename: 'WhatsAppSheetAdapter.gs' });
 
@@ -173,4 +173,22 @@ test('setup creates the events tab and the two columns once', () => {
   assert.deepEqual(responses[0], formHeaders.concat(addedHeaders));
   assert.ok(responses.slice(1).every((row) => row.length === formHeaders.length));
   assert.equal(JSON.stringify(sheets.get('WhatsApp').rows), JSON.stringify([['Fecha y hora', '#', 'Tipo', 'Derivación']]));
+});
+
+test('the Seguimiento check returns counts and row numbers only', () => {
+  const { context, sheets } = createContext();
+  const rows = sheets.get('Respuestas de formulario 1').rows;
+  const FOLLOW_UP = formHeaders.length;
+  rows[1][FOLLOW_UP] = 'Activo';
+  rows[2][FOLLOW_UP] = ' Desistió ';
+  rows[3][FOLLOW_UP] = 'quizás';
+  rows.push(rows[1].slice(0, FOLLOW_UP).concat(['residente']), rows[1].slice(0, FOLLOW_UP));
+
+  const result = context.inspectNrcFollowUpColumn();
+
+  // Row 5 has no ID, so it is not counted; row 7 has an ID and a blank cell.
+  assert.equal(JSON.stringify(result), JSON.stringify({
+    rowsWithId: 5, activo: 1, desistio: 1, residente: 1, blankRows: [7], otherValueRows: [4],
+  }));
+  assert.ok(!/Ejemplo|quiz/.test(JSON.stringify(result)));
 });
