@@ -45,13 +45,13 @@ Resultado: cada prospecto activo recibe una invitación concreta a visitar la re
 
 Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas (`node --test automation/apps-script/Reactivation.test.cjs`). **Subido al proyecto de la hoja viva el 2026-10-09 con `clasp push`; falta que Francisco ejecute `buildNrcReactivationDrafts`, y hasta entonces no hay pestaña `Recontacto` y el activador no agrega borradores.**
 
-`buildNrcReactivationDrafts`, ejecutada desde el editor:
+`buildNrcReactivationDrafts` se ejecuta sola cada vez que alguien abre la hoja (desde el 2026-10-11; antes había que ejecutarla desde el editor, y todavía se puede):
 
 1. Lee `#`, `Tu Nombre y Apellido`, `Teléfono`, `Seguimiento`, `Agendo Visita`, `Fecha Visita`, `Visita realizada` y `Marca temporal`.
 2. Crea la pestaña `Recontacto` si no existe y agrega una fila por cada prospecto al que le toca un mensaje: `#`, segmento, número de toque, mensaje, texto listo, enlace `https://wa.me/<teléfono>?text=<texto>`, casilla `Enviado`, `Fecha de envío` y casilla `Respondió`. No borra las filas enviadas: son el historial del que sale el toque siguiente.
 3. Francisco abre la pestaña en el teléfono de NRC, toca el enlace, revisa, envía y marca `Enviado`. La fecha se anota sola al marcar.
-4. Si la persona contesta, Francisco elige en `Resultado` una de tres opciones: `quiere visita`, `sigue pensando` o `desistió`. Eso marca `Respondió` solo, deja de preparar mensajes y actualiza el estado del prospecto en la pestaña de respuestas (SPEC-009, etapa 1; subido el 2026-10-11). También puede marcar `Respondió` a mano, sin elegir resultado.
-5. La función se vuelve a ejecutar cuando se quiera: agrega el segundo mensaje a los 4 días del primero y el tercero a los 10, y nunca un cuarto.
+4. Si la persona contesta, Francisco elige en `Resultado` una de tres opciones: `quiere visita`, `sigue pensando` o `desistió`. Eso marca `Respondió` solo, deja de preparar mensajes y agrega una nota con fecha al `Estado` del prospecto en la pestaña de respuestas; con `desistió` cambia además `Seguimiento` e `Ingresó?` (SPEC-009, etapa 1; subido el 2026-10-11). También puede marcar `Respondió` a mano, sin elegir resultado.
+5. En cada apertura de la hoja agrega el segundo mensaje a los 4 días del primero y el tercero a los 10, y nunca un cuarto.
 
 Cómo quedó aplicado:
 
@@ -60,6 +60,7 @@ Cómo quedó aplicado:
 - Un valor de `Agendo Visita` o `Visita realizada` que no sea Sí, No o vacío no se interpreta: la función devuelve el número de fila para revisarlo y no prepara mensaje.
 - Un prospecto con `Fecha Visita` de hoy o futura, sin visita realizada, queda fuera.
 - Si un prospecto deja de estar `activo`, su borrador sin enviar se retira de la pestaña.
+- Un primer mensaje sin enviar se reescribe si el prospecto cambió de segmento. Pasó el 2026-10-11 con los ID 22 y 23: se prepararon como "visita pendiente" (RC-02) porque `Visita realizada` aún no estaba marcada; al marcarla Francisco, quedaron con el texto de después de la visita (RC-03).
 - Una fila marcada `Enviado` sin fecha detiene la secuencia de ese prospecto hasta que se corrija.
 - El horario de 10:00 a 19:00 y la regla de las 48 horas de conversación abierta no se controlan en esta etapa: el envío lo hace Francisco.
 - Un borrador marcado `Respondió` sin haberse enviado se conserva y no se vuelve a preparar; para que ese prospecto reciba mensaje hay que desmarcarlo.
@@ -108,7 +109,7 @@ Con el número conectado (SPEC-002), el Worker envía la secuencia:
 
 1. Hecho el 2026-10-09: Francisco aprobó RC-01 a RC-05 y la cadencia, con envíos también en fin de semana.
 2. Hecho en local el 2026-10-09: `buildNrcReactivationDrafts` con pruebas sintéticas. Subido con `clasp push` ese día. Francisco ejecutó `buildNrcReactivationDrafts` el 2026-10-11: 23 prospectos con ID, 10 borradores preparados, 13 fuera por no estar `activo`, ninguno sin teléfono y ninguna fila por revisar. Calza con la línea base (8 activos de 21) más los ID 22 y 23. La pestaña `Recontacto` existe desde ese día y el activador ya agrega el borrador de cada ID nuevo.
-3. Primer ciclo manual con los prospectos activos; medir respuestas y visitas. Los ID 22 y 23 ya fueron atendidos a mano por Francisco el 2026-10-09: se le indicó marcar `Respondió` en sus filas en vez de enviarles el borrador. Francisco envió el primer mensaje a 7 prospectos el 2026-10-11 desde WhatsApp Web con la sesión del número de NRC; el segundo corresponde desde el 2026-10-15. Ese día un prospecto respondió que eligió otra residencia y quedó en `desistió`. Francisco decidió no escribir todavía a los ID 22 y 23, porque sus visitas del viernes 9 están muy recientes, y actualizó él mismo sus estados; no consta a qué valor. El paso a paso de uso está en `automation/apps-script/README.md`.
+3. Primer ciclo manual con los prospectos activos; medir respuestas y visitas. Los ID 22 y 23 ya fueron atendidos a mano por Francisco el 2026-10-09: se le indicó marcar `Respondió` en sus filas en vez de enviarles el borrador. Francisco envió el primer mensaje a 7 prospectos el 2026-10-11 desde WhatsApp Web con la sesión del número de NRC; el segundo corresponde desde el 2026-10-15. Ese día un prospecto respondió que eligió otra residencia y quedó en `desistió`. Francisco decidió no escribir todavía a los ID 22 y 23, porque sus visitas del viernes 9 están muy recientes, y marcó él mismo su visita como realizada (`Visita realizada` = Si, `Estado` = "Visitó.", leído en la hoja ese día). El paso a paso de uso está en `automation/apps-script/README.md`.
 4. Toto: base para el envío automático.
 5. Plantillas en YCloud, ruta de envío en el Worker con modo sombra, lectura de `Seguimiento` por el adaptador.
 6. Salir del modo sombra con el aviso de SPEC-004 publicado.

@@ -11,15 +11,16 @@ const scriptSource = ['AssignLeadId.gs', 'WhatsAppSheetAdapter.gs', 'Reactivatio
 
 const RESPONSES = 'Respuestas de formulario 1';
 const headers = ['Marca temporal', '#', 'Tu Nombre y Apellido', 'Teléfono', 'Nombre del Adulto Mayor',
-  'Agendo Visita', 'Fecha Visita', 'Visita realizada', 'Seguimiento', 'WhatsApp', 'Estado'];
+  'Agendo Visita', 'Fecha Visita', 'Visita realizada', 'Seguimiento', 'WhatsApp', 'Estado', 'Ingresó?'];
 const FOLLOW_UP = 8;
 const STATUS = 10;
+const ADMISSION = 11;
 const NOW = new Date('2026-10-20T15:00:00Z');
 const OLD = new Date('2026-08-01T15:00:00Z');
 
 // Synthetic rows only.
 const row = (id, name, phone, scheduled, visited, followUp, extra = {}) =>
-  [extra.at || OLD, id, name, phone, 'Persona de prueba', scheduled, extra.visitDate || '', visited, followUp, '', extra.status || ''];
+  [extra.at || OLD, id, name, phone, 'Persona de prueba', scheduled, extra.visitDate || '', visited, followUp, '', extra.status || '', extra.admission ?? 'No Aún'];
 
 class FakeSheet {
   constructor(name, rows, parent) { Object.assign(this, { name, rows, parent }); }
@@ -72,8 +73,11 @@ function createContext(responseRows, { withTab = true, now = NOW } = {}) {
     ScriptApp: { EventType: {}, getProjectTriggers: () => [] },
     // Santiago is UTC-3 on the dates used here.
     Utilities: {
-      formatDate: (date, zone, pattern) =>
-        new Date(date.getTime() - 3 * 60 * 60 * 1000).toISOString().slice(0, pattern.length).replace('T', ' '),
+      formatDate: (date, zone, pattern) => {
+        const local = new Date(date.getTime() - 3 * 60 * 60 * 1000).toISOString();
+        if (pattern === 'dd/MM') return `${local.slice(8, 10)}/${local.slice(5, 7)}`;
+        return local.slice(0, pattern.length).replace('T', ' ');
+      },
     },
     console: { log: (text) => logs.push(text), warn: () => {}, error: (text) => logs.push(text) },
   };
@@ -318,36 +322,39 @@ function withDrafts(responseRows) {
   return run;
 }
 
-test('ticking Enviado on a re-contact marks the prospect as recontactado', () => {
+test('ticking Enviado adds a dated note after what Francisco wrote in Estado', () => {
   const run = withDrafts([
-    row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo'),
+    row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'Activo', { status: 'Visitó. Le Gustó' }),
     row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
   ]);
 
   run.edit(2, 7, true);
+  run.edit(2, 7, true);
 
-  assert.equal(run.responses[1][STATUS], 'recontactado');
+  assert.equal(run.responses[1][STATUS], 'Visitó. Le Gustó. Recontactado 20/10.');
   assert.equal(run.responses[2][STATUS], '');
 });
 
 test('choosing desistió closes the prospect and no later draft is prepared', () => {
   const run = withDrafts([
-    row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo'),
-    row(1, 'Ana Prueba', '56900000009', 'No', 'No', 'activo'),
-    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
+    row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'Activo', { status: 'Visitó.' }),
+    row(1, 'Ana Prueba', '56900000009', 'Sí', 'Sí', 'Activo'),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'Activo'),
   ]);
-  run.edit(2, 7, true);
 
   run.edit(2, 10, 'desistió');
 
   assert.equal(run.tab()[0][8], true);
   // Both rows of the ID change; the other prospect is untouched.
-  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS]]),
-    [['desistió', 'desistió'], ['desistió', 'desistió'], ['activo', '']]);
+  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS], cells[ADMISSION]]), [
+    ['Desistió', 'Visitó. Desistió 20/10.', 'Desistió'],
+    ['Desistió', 'Desistió 20/10.', 'Desistió'],
+    ['Activo', '', 'No Aún'],
+  ]);
   assert.equal(run.context.buildNrcReactivationDrafts().queued, 0);
 });
 
-test('the other results tick Respondió and move Estado without touching Seguimiento', () => {
+test('the other results tick Respondió and add their note without touching Seguimiento', () => {
   const run = withDrafts([
     row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo'),
     row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
@@ -357,26 +364,23 @@ test('the other results tick Respondió and move Estado without touching Seguimi
   run.edit(3, 10, 'Sigue pensando');
   run.edit(3, 10, 'otra cosa');
 
-  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS]]),
-    [['activo', 'visita solicitada'], ['activo', 'en conversación']]);
+  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS], cells[ADMISSION]]),
+    [['activo', 'Quiere visita 20/10.', 'No Aún'], ['activo', 'Sigue pensando 20/10.', 'No Aún']]);
   assert.deepEqual(run.tab().map((cells) => cells[8]), [true, true]);
 });
 
-test('Estado never moves backwards and a hand-written value is left alone', () => {
+test('a withdrawal never changes a resident or an admission that is already decided', () => {
   const run = withDrafts([
-    row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'activo', { status: 'Visita realizada' }),
-    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo', { status: 'Llamar en marzo' }),
-    row(3, 'Eva Ficticia', '56900000003', 'No', 'No', 'activo', { status: 'ingresó' }),
+    row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'activo', { admission: 'Ingresó' }),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
   ]);
+  run.responses[2][FOLLOW_UP] = 'Residente';
 
-  run.edit(2, 7, true);
-  run.edit(3, 10, 'quiere visita');
-  run.edit(4, 10, 'desistió');
+  run.edit(2, 10, 'desistió');
+  run.edit(3, 10, 'desistió');
 
-  assert.deepEqual(run.responses.slice(1).map((cells) => cells[STATUS]),
-    ['Visita realizada', 'Llamar en marzo', 'ingresó']);
-  // The withdrawal still blocks later drafts through Seguimiento.
-  assert.equal(run.responses[3][FOLLOW_UP], 'desistió');
+  assert.equal(run.responses[1][ADMISSION], 'Ingresó');
+  assert.equal(run.responses[2][FOLLOW_UP], 'Residente');
 });
 
 test('a draft marked as answered without being sent stays and is not queued again', () => {
@@ -397,4 +401,45 @@ test('a tab created before Resultado existed gets the header on the next run', (
   run.context.buildNrcReactivationDrafts();
 
   assert.equal(run.sheets.get('Recontacto').rows[0][9], 'Resultado');
+});
+
+test('an unsent draft follows the prospect when the visit is recorded later', () => {
+  const run = withDrafts([
+    row(1, 'Ana Prueba', '56900000001', 'Sí', 'No', 'activo'),
+    row(2, 'Luis Ejemplo', '56900000002', 'Sí', 'No', 'activo'),
+  ]);
+  run.edit(3, 7, true);
+  run.responses[1][7] = 'Sí';
+  run.responses[2][7] = 'Sí';
+
+  const result = run.context.buildNrcReactivationDrafts();
+
+  assert.equal(result.refreshed, 1);
+  assert.deepEqual(run.tab().map((cells) => [cells[0], cells[1], cells[3]]), [[1, 'C', 'RC-03'], [2, 'B', 'RC-02']]);
+  assert.match(run.tab()[0][4], /después de la visita/);
+  assert.equal(run.tab()[0][5], 'https://wa.me/56900000001?text=' + encodeURIComponent(run.tab()[0][4]));
+  // The message that was already sent is history and keeps its text.
+  assert.equal(run.tab()[1][6], true);
+});
+
+test('a run adds the note of messages sent before the notes existed, once', () => {
+  const run = withDrafts([row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'activo', { status: 'Visitó.' })]);
+  const cells = run.sheets.get('Recontacto').rows[1];
+  cells[6] = true;
+  cells[7] = new Date('2026-10-11T15:00:00Z');
+
+  run.context.buildNrcReactivationDrafts();
+  run.context.buildNrcReactivationDrafts();
+
+  assert.equal(run.responses[1][STATUS], 'Visitó. Recontactado 11/10.');
+});
+
+test('opening the spreadsheet refreshes the drafts only when the tab exists', () => {
+  const withTab = createContext([row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo')]);
+  withTab.context.onOpen();
+  assert.equal(withTab.tab().length, 1);
+
+  const withoutTab = createContext([row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo')], { withTab: false });
+  withoutTab.context.onOpen();
+  assert.equal(withoutTab.sheets.has('Recontacto'), false);
 });

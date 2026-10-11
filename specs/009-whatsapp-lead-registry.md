@@ -1,6 +1,6 @@
 # SPEC-009 — Prospectos y estado en la hoja desde WhatsApp
 
-**Estado:** etapa 1 activa desde el 2026-10-11 (estados escritos desde la pestaña `Recontacto`; ver la sección del mismo nombre). El alta de prospectos y la escritura desde WhatsApp siguen en `borrador`. Cubre R8 de [requirements.md](requirements.md). Reemplaza dos reglas de [SPEC-002](002-whatsapp-frontdesk.md): que un número nuevo no crea fila ni ID, y que `Estado` y `Seguimiento` los escribe solo Francisco.
+**Estado:** etapa 1 activa desde el 2026-10-11 (notas con fecha en `Estado` desde la pestaña `Recontacto`; ver la sección del mismo nombre). La lista cerrada de estados aprobada no calza con el uso real de la columna. El alta de prospectos y la escritura desde WhatsApp siguen en `borrador`. Cubre R8 de [requirements.md](requirements.md). Reemplaza dos reglas de [SPEC-002](002-whatsapp-frontdesk.md): que un número nuevo no crea fila ni ID, y que `Estado` y `Seguimiento` los escribe solo Francisco.
 
 ## Problema y resultado
 
@@ -49,20 +49,24 @@ Comandos nuevos, solo desde el número personal de Francisco: `registrar` (crea 
 
 ## Etapa 1 — estados desde la pestaña `Recontacto`
 
-Francisco pidió el 2026-10-11 no actualizar los estados a mano. Mientras el número no esté conectado, nadie puede leer las respuestas de WhatsApp, así que el estado se mueve con lo que él marca en `Recontacto` (`automation/apps-script/Reactivation.gs`, subido ese día):
+Francisco pidió el 2026-10-11 no actualizar los estados a mano. Mientras el número no esté conectado, nadie puede leer las respuestas de WhatsApp, así que la hoja se actualiza con lo que él marca en `Recontacto` (`automation/apps-script/Reactivation.gs`, subido ese día).
 
-| Lo que marca Francisco | `Estado` | `Seguimiento` |
+**La lista de estados aprobada no calza con la hoja viva.** Leída el 2026-10-11, la columna `Estado` no tiene estados sino notas de Francisco en texto libre, que va acumulando ("Visitó. Le gustó.", "Por visitar", "Está evaluando"). Reemplazarlas por un valor de la lista habría borrado información, y no reemplazarlas dejaba el código sin efecto. Por eso el código **agrega una nota con fecha al final** de lo que ya hay y no reemplaza nada. El dato que leen las máquinas sigue siendo `Seguimiento`.
+
+| Lo que marca Francisco | Nota que se agrega a `Estado` | Otros cambios |
 |---|---|---|
-| `Enviado` en un mensaje RC | `recontactado` | sin cambio |
-| `Resultado` = `quiere visita` | `visita solicitada` | sin cambio |
-| `Resultado` = `sigue pensando` | `en conversación` | sin cambio |
-| `Resultado` = `desistió` | `desistió` | `desistió` |
+| `Enviado` en un mensaje RC | `Recontactado 11/10.` (fecha de envío) | — |
+| `Enviado` en PC-01 | `Contactado 11/10.` | — |
+| `Resultado` = `quiere visita` | `Quiere visita 12/10.` | marca `Respondió` |
+| `Resultado` = `sigue pensando` | `Sigue pensando 12/10.` | marca `Respondió` |
+| `Resultado` = `desistió` | `Desistió 12/10.` | marca `Respondió`; `Seguimiento` = `Desistió`; `Ingresó?` = `Desistió` si estaba vacío o en `No Aún` |
 
-- Se escribe en todas las filas que comparten el ID.
-- Valen REQ-008 y REQ-010: el estado no retrocede, un valor escrito a mano fuera de la lista no se reemplaza, e `Ingresó?`, `Comisión` y `Comentario` no se tocan. `Seguimiento` = `residente` tampoco se cambia.
-- Un `desistió` sobre un valor a mano o sobre `ingresó` deja `Estado` como está, pero igual pone `Seguimiento` en `desistió`, que es lo que bloquea los envíos.
-- No se ha visto qué valores tiene hoy `Estado` en la hoja viva.
-- Quedan fuera de esta etapa `visita agendada`, `visita realizada` y `sin respuesta`, y el registro de cada cambio en la pestaña `WhatsApp` (REQ-012).
+- Se escribe en todas las filas que comparten el ID. Una nota que ya está no se repite.
+- `Ingresó?` con `desistió` es un cambio respecto de REQ-010: Francisco lo llenaba a mano en cada caso y pidió no tener esa tarea. El código nunca escribe `Ingresó`, ni toca `Comisión`, `Fecha Ingreso` ni `Comentario`, ni cambia un `Seguimiento` = `Residente`.
+- Cada actualización de la pestaña agrega la nota de los mensajes enviados antes de que existieran las notas.
+- Comprobado en la hoja viva el 2026-10-11: los 8 prospectos con mensaje enviado quedaron con `Recontactado 11/10.` al final de su `Estado`, sin perder lo anterior.
+- Pendiente de decidir con Francisco: si la lista cerrada de estados de arriba se abandona, o si se lleva en una columna nueva cuando el asistente escriba desde WhatsApp.
+- Fuera de esta etapa: el registro de cada cambio en la pestaña `WhatsApp` (REQ-012) y todo lo que depende de leer las respuestas.
 
 ## Adaptador de la hoja
 

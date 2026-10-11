@@ -6,13 +6,18 @@ const NRC_REACTIVATION_CONFIG = Object.freeze({
   repliedColumn: 9,
   outcomeColumn: 10,
   statusHeader: 'Estado',
-  // What Francisco picks in `Resultado`, and the `Estado` it leaves on the prospect (SPEC-009).
-  outcomes: { 'quiere visita': 'visita solicitada', 'sigue pensando': 'en conversación', 'desistió': 'desistió' },
+  admissionHeader: 'Ingresó?',
+  // `Estado` holds Francisco's running notes ("Visitó. Le gustó."), so the script adds a
+  // dated note at the end instead of replacing the cell.
+  outcomeNotes: { 'quiere visita': 'Quiere visita', 'sigue pensando': 'Sigue pensando', 'desistió': 'Desistió' },
   outcomeOptions: ['quiere visita', 'sigue pensando', 'desistió'],
-  withdrawnValue: 'desistió',
-  sentStatus: 'recontactado',
-  // Approved states in order, compared after normalizeNrcText_. `Estado` only moves forward.
-  statusOrder: ['nuevo', 'recontactado', 'en conversacion', 'visita solicitada', 'visita agendada', 'visita realizada'],
+  withdrawnOutcome: 'desistió',
+  // Written to `Seguimiento` and `Ingresó?` with the spelling Francisco uses.
+  withdrawnValue: 'Desistió',
+  // Values of `Ingresó?` that a withdrawal may replace, after normalizeNrcText_.
+  openAdmissionValues: ['', 'no aun'],
+  sentNote: 'Recontactado',
+  firstContactNote: 'Contactado',
   followUpHeader: 'Seguimiento',
   scheduledHeader: 'Agendo Visita',
   visitDateHeader: 'Fecha Visita',
@@ -77,6 +82,20 @@ function buildNrcReactivationDrafts(spreadsheetId) {
 }
 
 /**
+ * Simple trigger: opening the spreadsheet refreshes the drafts, so nobody has to
+ * run the function by hand. Does nothing until the `Recontacto` tab exists.
+ */
+function onOpen() {
+  try {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    if (!spreadsheet || !spreadsheet.getSheetByName(NRC_REACTIVATION_CONFIG.sheetName)) return;
+    buildNrcReactivationDrafts();
+  } catch (error) {
+    console.error('The Recontacto tab was not refreshed.');
+  }
+}
+
+/**
  * Called by the form-submit trigger after it assigns a new ID (SPEC-014, stage 1).
  * Does nothing until the `Recontacto` tab exists, and never lets a failure here
  * undo or block the ID assignment.
@@ -94,9 +113,9 @@ function queueNrcFirstContactSafely_(sheet, id) {
 
 /**
  * Simple trigger, limited to the `Recontacto` tab. Ticking `Enviado` stamps the
- * send date and marks the prospect as re-contacted; picking a `Resultado` ticks
- * `Respondió` and moves the prospect's `Estado` (and `Seguimiento` when the
- * person withdrew) in the response sheet. Nothing else is written there.
+ * send date and adds a dated note to the prospect's `Estado`; picking a
+ * `Resultado` ticks `Respondió` and adds its note, and a withdrawal also closes
+ * `Seguimiento` and `Ingresó?`. Nothing else is written in the response sheet.
  */
 function onEdit(e) {
   if (!e || !e.range) return;
@@ -112,55 +131,70 @@ function onEdit(e) {
   if (column === config.sentColumn && isNrcYes_(e.range.getValue())) {
     const sentAt = sheet.getRange(row, config.sentAtColumn);
     if (isBlankNrcValue_(sentAt.getValue())) sentAt.setValue(new Date());
-    // The first-contact text goes to someone who has just written; only re-contacts change the state.
-    if (id !== null && /^RC-/.test(String(sheet.getRange(row, 4).getValue()))) {
-      setNrcProspectStatus_(sheet.getParent(), id, config.sentStatus, false);
+    const date = nrcDateFromCell_(sentAt.getValue());
+    if (id !== null && date) {
+      addNrcProspectNote_(sheet.getParent(), id, nrcSentNote_(sheet.getRange(row, 4).getValue(), date), false);
     }
     return;
   }
 
   if (column === config.outcomeColumn && id !== null) {
     const outcome = String(e.range.getValue()).trim().toLowerCase();
-    const status = config.outcomes[outcome];
-    if (!status) return;
+    const note = config.outcomeNotes[outcome];
+    if (!note) return;
     sheet.getRange(row, config.repliedColumn).setValue(true);
-    setNrcProspectStatus_(sheet.getParent(), id, status, outcome === config.withdrawnValue);
+    addNrcProspectNote_(sheet.getParent(), id, note + ' ' + nrcShortDay_(new Date()), outcome === config.withdrawnOutcome);
   }
 }
 
+function nrcSentNote_(message, date) {
+  const config = NRC_REACTIVATION_CONFIG;
+  return (/^PC-/.test(String(message)) ? config.firstContactNote : config.sentNote) + ' ' + nrcShortDay_(date);
+}
+
+function nrcShortDay_(date) {
+  return Utilities.formatDate(date, NRC_REACTIVATION_CONFIG.timeZone, 'dd/MM');
+}
+
 /**
- * Writes an approved state in `Estado` of every row that carries the ID. A value
- * typed by hand that is not in the approved list is never replaced, and a state
- * never moves backwards. A withdrawal also sets `Seguimiento`, which blocks
- * every later draft.
+ * Adds a note at the end of `Estado` in every row that carries the ID, once: a
+ * note that is already there is not repeated and what Francisco wrote is kept.
+ * A withdrawal also sets `Seguimiento`, which blocks every later draft, and
+ * `Ingresó?` when it was still open.
  */
-function setNrcProspectStatus_(spreadsheet, id, status, withdrawn) {
+function addNrcProspectNote_(spreadsheet, id, note, withdrawn) {
   const config = NRC_REACTIVATION_CONFIG;
   const sheet = getNrcResponseSheet_(spreadsheet);
   const statusColumn = findNrcHeaderColumn_(sheet, config.statusHeader);
   const followUpColumn = findNrcHeaderColumn_(sheet, config.followUpHeader);
+  const admissionColumn = findNrcHeaderColumn_(sheet, config.admissionHeader);
   const dataRows = Math.max(0, sheet.getLastRow() - NRC_LEAD_ID_CONFIG.headerRow);
   if (!dataRows) return;
 
   const firstRow = NRC_LEAD_ID_CONFIG.headerRow + 1;
   const ids = sheet.getRange(firstRow, getNrcLeadIdColumns_(sheet).id + 1, dataRows, 1).getValues();
-  const wanted = normalizeNrcText_(status);
 
   for (let index = 0; index < dataRows; index += 1) {
     if (parseNrcId_(ids[index][0]) !== id) continue;
 
     if (statusColumn >= 0) {
       const cell = sheet.getRange(firstRow + index, statusColumn + 1);
-      const current = normalizeNrcText_(cell.getValue());
-      const currentRank = current ? config.statusOrder.indexOf(current) : -1;
-      const open = !current || currentRank >= 0 || current === 'sin respuesta';
-      const forward = withdrawn || config.statusOrder.indexOf(wanted) > currentRank;
-      if (open && forward) cell.setValue(status);
+      const current = String(cell.getValue()).trim();
+      if (normalizeNrcText_(current).indexOf(normalizeNrcText_(note)) < 0) {
+        const separator = !current ? '' : (/[.!?]$/.test(current) ? ' ' : '. ');
+        cell.setValue(current + separator + note + '.');
+      }
     }
-    if (withdrawn && followUpColumn >= 0) {
+    if (!withdrawn) continue;
+
+    if (followUpColumn >= 0) {
       const cell = sheet.getRange(firstRow + index, followUpColumn + 1);
       // `residente` is Francisco's to change.
       if (normalizeNrcText_(cell.getValue()) !== 'residente') cell.setValue(config.withdrawnValue);
+    }
+    if (admissionColumn >= 0) {
+      const cell = sheet.getRange(firstRow + index, admissionColumn + 1);
+      if (config.openAdmissionValues.indexOf(normalizeNrcText_(cell.getValue())) >= 0) cell.setValue(config.withdrawnValue);
     }
   }
 }
@@ -172,7 +206,7 @@ function queueNrcReactivation_(spreadsheet, options) {
 
   const result = {
     prospects: 0, queued: 0, alreadyQueued: 0, waiting: 0, finished: 0, replied: 0,
-    notActive: 0, noPhone: 0, upcomingVisit: 0, removed: 0, reviewRows: [],
+    notActive: 0, noPhone: 0, upcomingVisit: 0, removed: 0, refreshed: 0, reviewRows: [],
   };
   const prospects = readNrcReactivationProspects_(getNrcResponseSheet_(spreadsheet));
   const state = readNrcReactivationState_(tab);
@@ -183,20 +217,28 @@ function queueNrcReactivation_(spreadsheet, options) {
     if (options.onlyId !== undefined && prospect.id !== options.onlyId) return;
     result.prospects += 1;
 
-    const history = state[key] || { sent: [], pendingRows: [], replied: false, undated: false };
+    const history = state[key] || { sent: [], pending: [], replied: false, undated: false };
     const next = chooseNrcNextTouch_(prospect, history, options, result);
     if (!next) {
-      if (options.onlyId === undefined) Array.prototype.push.apply(stalePendingRows, history.pendingRows);
+      if (options.onlyId === undefined) {
+        history.pending.forEach(function (draft) { stalePendingRows.push(draft.row); });
+      }
       return;
     }
     if (next === 'keep') return;
 
     const text = fillNrcReactivationText_(config.messages[next.message], prospect.firstName);
-    tab.appendRow([
-      prospect.id, next.segment, next.touch, next.message, text,
-      'https://wa.me/' + prospect.phone + '?text=' + encodeURIComponent(text),
-      false, '', false, '',
-    ]);
+    const link = 'https://wa.me/' + prospect.phone + '?text=' + encodeURIComponent(text);
+    if (next.row) {
+      // An unsent draft whose prospect changed segment gets the text that now applies.
+      tab.getRange(next.row, 2).setValue(next.segment);
+      tab.getRange(next.row, 4).setValue(next.message);
+      tab.getRange(next.row, 5).setValue(text);
+      tab.getRange(next.row, 6).setValue(link);
+      result.refreshed += 1;
+      return;
+    }
+    tab.appendRow([prospect.id, next.segment, next.touch, next.message, text, link, false, '', false, '']);
     const row = tab.getLastRow();
     tab.getRange(row, config.sentColumn).insertCheckboxes();
     tab.getRange(row, config.repliedColumn).insertCheckboxes();
@@ -208,6 +250,15 @@ function queueNrcReactivation_(spreadsheet, options) {
     tab.deleteRow(row);
     result.removed += 1;
   });
+
+  // `Estado` gets the note of every message already sent; a note that is there is not repeated.
+  if (options.onlyId === undefined) {
+    Object.keys(state).forEach(function (key) {
+      state[key].sent.forEach(function (entry) {
+        addNrcProspectNote_(spreadsheet, Number(key), nrcSentNote_(entry.message, entry.date), false);
+      });
+    });
+  }
   return result;
 }
 
@@ -230,21 +281,30 @@ function chooseNrcNextTouch_(prospect, history, options, result) {
     result.upcomingVisit += 1;
     return null;
   }
-  if (history.pendingRows.length) { result.alreadyQueued += 1; return 'keep'; }
+  const segment = prospect.visited ? 'C' : (prospect.scheduled ? 'B' : 'A');
+  const fresh = segment === 'A' && prospect.submittedAt
+    && nrcDaysBetween_(prospect.submittedAt, options.now) <= config.freshLeadDays;
+  const first = fresh
+    ? { touch: 1, segment: 'nuevo', message: 'PC-01' }
+    : { touch: 1, segment: segment, message: { A: 'RC-01', B: 'RC-02', C: 'RC-03' }[segment] };
+
+  if (history.pending.length) {
+    result.alreadyQueued += 1;
+    const draft = history.pending[0];
+    // Only a first message depends on the segment; a first-contact draft is kept as it is.
+    const outdated = !history.sent.length && history.pending.length === 1
+      && /^RC-/.test(draft.message) && /^RC-/.test(first.message) && draft.message !== first.message;
+    if (!outdated) return 'keep';
+    first.row = draft.row;
+    return first;
+  }
   if (history.sent.length >= 3) { result.finished += 1; return 'keep'; }
   // A ticked row without a date cannot be scheduled from; leave it for review.
   if (history.undated) { result.waiting += 1; return 'keep'; }
+  if (!history.sent.length) return first;
 
-  const segment = prospect.visited ? 'C' : (prospect.scheduled ? 'B' : 'A');
-  if (!history.sent.length) {
-    const fresh = segment === 'A' && prospect.submittedAt
-      && nrcDaysBetween_(prospect.submittedAt, options.now) <= config.freshLeadDays;
-    if (fresh) return { touch: 1, segment: 'nuevo', message: 'PC-01' };
-    return { touch: 1, segment: segment, message: { A: 'RC-01', B: 'RC-02', C: 'RC-03' }[segment] };
-  }
-
-  const sinceFirst = nrcDaysBetween_(history.sent[0], options.now);
-  const sinceLast = nrcDaysBetween_(history.sent[history.sent.length - 1], options.now);
+  const sinceFirst = nrcDaysBetween_(history.sent[0].date, options.now);
+  const sinceLast = nrcDaysBetween_(history.sent[history.sent.length - 1].date, options.now);
   if (history.sent.length === 1 && sinceFirst >= config.secondTouchDays) {
     return { touch: 2, segment: segment, message: 'RC-04' };
   }
@@ -331,18 +391,18 @@ function readNrcReactivationState_(tab) {
     const id = parseNrcId_(cells[0]);
     if (id === null) return;
 
-    const entry = state[id] || (state[id] = { sent: [], pendingRows: [], replied: false, undated: false });
+    const entry = state[id] || (state[id] = { sent: [], pending: [], replied: false, undated: false });
     if (isNrcYes_(cells[config.repliedColumn - 1])) entry.replied = true;
     if (!isNrcYes_(cells[config.sentColumn - 1])) {
-      entry.pendingRows.push(index + 2);
+      entry.pending.push({ row: index + 2, message: String(cells[3]) });
       return;
     }
     const sentAt = nrcDateFromCell_(cells[config.sentAtColumn - 1]);
-    if (sentAt) entry.sent.push(sentAt);
+    if (sentAt) entry.sent.push({ date: sentAt, message: String(cells[3]) });
     else entry.undated = true;
   });
   Object.keys(state).forEach(function (key) {
-    state[key].sent.sort(function (a, b) { return a.getTime() - b.getTime(); });
+    state[key].sent.sort(function (a, b) { return a.date.getTime() - b.date.getTime(); });
   });
   return state;
 }
