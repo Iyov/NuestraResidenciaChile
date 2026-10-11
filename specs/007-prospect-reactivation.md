@@ -1,6 +1,6 @@
 # SPEC-007 — Recontacto por WhatsApp a prospectos activos
 
-**Estado:** etapa 1 subida al proyecto de la hoja viva el 2026-10-09 (`automation/apps-script/Reactivation.gs`); falta la primera ejecución de `buildNrcReactivationDrafts`, así que la pestaña `Recontacto` todavía no existe. Nada enviado; la etapa 2 no está implementada. Cubre R3 de [requirements.md](requirements.md). Francisco aprobó los textos y la cadencia ese día.
+**Estado:** etapa 1 subida al proyecto de la hoja viva el 2026-10-09 (`automation/apps-script/Reactivation.gs`); activa desde el 2026-10-11, cuando Francisco la ejecutó por primera vez y se creó la pestaña `Recontacto` con 10 borradores. No consta todavía ningún envío; la etapa 2 no está implementada. Cubre R3 de [requirements.md](requirements.md). Francisco aprobó los textos y la cadencia ese día.
 
 ## Problema y resultado
 
@@ -106,8 +106,8 @@ Con el número conectado (SPEC-002), el Worker envía la secuencia:
 ## Tareas
 
 1. Hecho el 2026-10-09: Francisco aprobó RC-01 a RC-05 y la cadencia, con envíos también en fin de semana.
-2. Hecho en local el 2026-10-09: `buildNrcReactivationDrafts` con pruebas sintéticas. Subido con `clasp push` ese día. Falta la primera ejecución supervisada.
-3. Primer ciclo manual con los prospectos activos; medir respuestas y visitas.
+2. Hecho en local el 2026-10-09: `buildNrcReactivationDrafts` con pruebas sintéticas. Subido con `clasp push` ese día. Francisco ejecutó `buildNrcReactivationDrafts` el 2026-10-11: 23 prospectos con ID, 10 borradores preparados, 13 fuera por no estar `activo`, ninguno sin teléfono y ninguna fila por revisar. Calza con la línea base (8 activos de 21) más los ID 22 y 23. La pestaña `Recontacto` existe desde ese día y el activador ya agrega el borrador de cada ID nuevo.
+3. Primer ciclo manual con los prospectos activos; medir respuestas y visitas. Los ID 22 y 23 ya fueron atendidos a mano por Francisco el 2026-10-09: se le indicó marcar `Respondió` en sus filas en vez de enviarles el borrador. Volver a ejecutar la función desde el 4.º día del primer envío para el segundo mensaje.
 4. Toto: base para el envío automático.
 5. Plantillas en YCloud, ruta de envío en el Worker con modo sombra, lectura de `Seguimiento` por el adaptador.
 6. Salir del modo sombra con el aviso de SPEC-004 publicado.

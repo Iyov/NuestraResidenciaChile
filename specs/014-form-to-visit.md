@@ -1,6 +1,6 @@
 # SPEC-014 — Del formulario a la visita
 
-**Estado:** etapa 1 subida al proyecto de la hoja viva el 2026-10-09, inactiva hasta que exista la pestaña `Recontacto`; el resto es `borrador`. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la envía el asistente a su nombre y le avisa (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
+**Estado:** etapa 1 subida al proyecto de la hoja viva el 2026-10-09, activa desde el 2026-10-11, cuando se creó la pestaña `Recontacto`; ningún formulario real ha pasado todavía por ella. El resto es `borrador`. Francisco aprobó ese día el flujo y los textos PC-01 a PC-07: es como lo hace hoy a mano. La confirmación de la visita la envía el asistente a su nombre y le avisa (REQ-005). Cubre el tramo de R3 y R8 de [requirements.md](requirements.md) que ninguna otra especificación tomaba: el primer mensaje a quien acaba de llenar el formulario y todo lo que sigue hasta que la visita queda hecha.
 
 ## Problema y resultado
 
