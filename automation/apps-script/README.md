@@ -69,6 +69,18 @@ node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 - El activador del formulario agrega una fila con el primer mensaje cuando asigna un ID nuevo, solo si la pestaña ya existe.
 - `onEdit`: activador simple, limitado a la pestaña `Recontacto`. Al marcar `Enviado` anota la fecha y, si es un recontacto, deja `Estado` = `recontactado`. Al elegir un `Resultado` marca `Respondió` y actualiza `Estado` del prospecto en la pestaña de respuestas; con `desistió` también cambia `Seguimiento`. No escribe ninguna otra celda de esa pestaña (subido el 2026-10-11).
 
+### Uso (Francisco)
+
+1. **Preparar mensajes:** en la hoja, **Extensiones → Apps Script**, abrir `Reactivation.gs`, elegir `buildNrcReactivationDrafts` en el selector de funciones y pulsar **Ejecutar**. El registro de ejecución muestra una línea con cantidades.
+2. **Enviar:** en la pestaña `Recontacto`, abrir el enlace de la fila. Se abre WhatsApp con el texto escrito; revisar y enviar. Sirve el teléfono de NRC o WhatsApp Web con la sesión del número de NRC; desde otro número, el mensaje saldría de ese número.
+3. **Marcar `Enviado`** en la fila. La fecha se anota sola.
+4. **Cuando la persona contesta,** elegir `Resultado`: `quiere visita`, `sigue pensando` o `desistió`. La hoja marca `Respondió` y actualiza `Estado` (y `Seguimiento` si desistió).
+5. **Repetir el paso 1** a los 4 días del primer envío y a los 10: agrega el segundo y el tercer mensaje a quienes no tengan `Respondió`.
+
+Esto no depende de conectar el número a YCloud ni de los 7 días en WhatsApp Business App: quien envía es Francisco, con el WhatsApp de siempre.
+
+Cantidades que devuelve la función: `queued` (mensajes preparados en esta ejecución), `alreadyQueued` (borradores que siguen sin enviar), `waiting` (enviados, dentro del plazo de espera), `finished` (ya recibieron los tres), `replied` (marcados `Respondió`), `notActive` (fuera por `Seguimiento`), `noPhone`, `upcomingVisit`, `removed` (borradores retirados) y `reviewRows` (filas con un valor que el código no interpreta).
+
 No pide permisos nuevos. Se subió con `clasp push` el 2026-10-09 junto con el cambio del activador de ID. Francisco ejecutó `buildNrcReactivationDrafts` desde el editor el 2026-10-11: la pestaña existe y el activador agrega el borrador de cada ID nuevo.
 
 Prueba: `node --test automation/apps-script/Reactivation.test.cjs`.
