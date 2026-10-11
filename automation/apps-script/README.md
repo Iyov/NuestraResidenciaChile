@@ -67,7 +67,7 @@ node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 
 - `buildNrcReactivationDrafts`: se ejecuta desde el editor. Crea la pestaña si falta y agrega una fila por prospecto `activo` al que le toca un mensaje. Devuelve y registra solo cantidades y números de fila.
 - El activador del formulario agrega una fila con el primer mensaje cuando asigna un ID nuevo, solo si la pestaña ya existe.
-- `onEdit`: activador simple que anota la fecha al marcar `Enviado`. No toca ninguna otra pestaña.
+- `onEdit`: activador simple, limitado a la pestaña `Recontacto`. Al marcar `Enviado` anota la fecha y, si es un recontacto, deja `Estado` = `recontactado`. Al elegir un `Resultado` marca `Respondió` y actualiza `Estado` del prospecto en la pestaña de respuestas; con `desistió` también cambia `Seguimiento`. No escribe ninguna otra celda de esa pestaña (subido el 2026-10-11).
 
 No pide permisos nuevos. Se subió con `clasp push` el 2026-10-09 junto con el cambio del activador de ID. Francisco ejecutó `buildNrcReactivationDrafts` desde el editor el 2026-10-11: la pestaña existe y el activador agrega el borrador de cada ID nuevo.
 

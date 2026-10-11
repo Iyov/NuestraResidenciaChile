@@ -50,7 +50,7 @@ Código en `automation/apps-script/Reactivation.gs`, con pruebas sintéticas (`n
 1. Lee `#`, `Tu Nombre y Apellido`, `Teléfono`, `Seguimiento`, `Agendo Visita`, `Fecha Visita`, `Visita realizada` y `Marca temporal`.
 2. Crea la pestaña `Recontacto` si no existe y agrega una fila por cada prospecto al que le toca un mensaje: `#`, segmento, número de toque, mensaje, texto listo, enlace `https://wa.me/<teléfono>?text=<texto>`, casilla `Enviado`, `Fecha de envío` y casilla `Respondió`. No borra las filas enviadas: son el historial del que sale el toque siguiente.
 3. Francisco abre la pestaña en el teléfono de NRC, toca el enlace, revisa, envía y marca `Enviado`. La fecha se anota sola al marcar.
-4. Si la persona contesta, Francisco marca `Respondió` y no se le prepara nada más.
+4. Si la persona contesta, Francisco elige en `Resultado` una de tres opciones: `quiere visita`, `sigue pensando` o `desistió`. Eso marca `Respondió` solo, deja de preparar mensajes y actualiza el estado del prospecto en la pestaña de respuestas (SPEC-009, etapa 1; subido el 2026-10-11). También puede marcar `Respondió` a mano, sin elegir resultado.
 5. La función se vuelve a ejecutar cuando se quiera: agrega el segundo mensaje a los 4 días del primero y el tercero a los 10, y nunca un cuarto.
 
 Cómo quedó aplicado:
@@ -62,6 +62,7 @@ Cómo quedó aplicado:
 - Si un prospecto deja de estar `activo`, su borrador sin enviar se retira de la pestaña.
 - Una fila marcada `Enviado` sin fecha detiene la secuencia de ese prospecto hasta que se corrija.
 - El horario de 10:00 a 19:00 y la regla de las 48 horas de conversación abierta no se controlan en esta etapa: el envío lo hace Francisco.
+- Un borrador marcado `Respondió` sin haberse enviado se conserva y no se vuelve a preparar; para que ese prospecto reciba mensaje hay que desmarcarlo.
 - Para abrir un ciclo nuevo a un prospecto se borran sus filas de `Recontacto`.
 
 Los datos no salen de la hoja ni pasan por un modelo. El registro de ejecución lleva solo cantidades y números de fila.

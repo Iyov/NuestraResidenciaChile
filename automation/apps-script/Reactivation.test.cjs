@@ -11,13 +11,15 @@ const scriptSource = ['AssignLeadId.gs', 'WhatsAppSheetAdapter.gs', 'Reactivatio
 
 const RESPONSES = 'Respuestas de formulario 1';
 const headers = ['Marca temporal', '#', 'Tu Nombre y Apellido', 'Teléfono', 'Nombre del Adulto Mayor',
-  'Agendo Visita', 'Fecha Visita', 'Visita realizada', 'Seguimiento', 'WhatsApp'];
+  'Agendo Visita', 'Fecha Visita', 'Visita realizada', 'Seguimiento', 'WhatsApp', 'Estado'];
+const FOLLOW_UP = 8;
+const STATUS = 10;
 const NOW = new Date('2026-10-20T15:00:00Z');
 const OLD = new Date('2026-08-01T15:00:00Z');
 
 // Synthetic rows only.
 const row = (id, name, phone, scheduled, visited, followUp, extra = {}) =>
-  [extra.at || OLD, id, name, phone, 'Persona de prueba', scheduled, extra.visitDate || '', visited, followUp, ''];
+  [extra.at || OLD, id, name, phone, 'Persona de prueba', scheduled, extra.visitDate || '', visited, followUp, '', extra.status || ''];
 
 class FakeSheet {
   constructor(name, rows, parent) { Object.assign(this, { name, rows, parent }); }
@@ -38,6 +40,7 @@ class FakeSheet {
       getValues: read,
       getDisplayValues: () => read().map((cells) => cells.map((value) => String(value))),
       insertCheckboxes: () => {},
+      setDataValidation: () => {},
       setValue: (value) => { this.rows[rowNumber - 1][column - 1] = value; },
     };
   }
@@ -58,7 +61,12 @@ function createContext(responseRows, { withTab = true, now = NOW } = {}) {
   }
   const context = {
     Date: FixedDate,
-    SpreadsheetApp: { getActiveSpreadsheet: () => spreadsheet, openById: () => spreadsheet, flush: () => {} },
+    SpreadsheetApp: {
+      getActiveSpreadsheet: () => spreadsheet,
+      openById: () => spreadsheet,
+      flush: () => {},
+      newDataValidation: () => ({ requireValueInList() { return this; }, build: () => ({}) }),
+    },
     LockService: { getScriptLock: () => ({ tryLock: () => true, releaseLock: () => {} }) },
     PropertiesService: { getScriptProperties: () => ({ getProperty: () => '' }) },
     ScriptApp: { EventType: {}, getProjectTriggers: () => [] },
@@ -226,7 +234,8 @@ test('the first run creates the tab with its headers', () => {
 
   context.buildNrcReactivationDrafts();
 
-  assert.equal(sheets.get('Recontacto').rows[0].length, 9);
+  assert.equal(sheets.get('Recontacto').rows[0].length, 10);
+  assert.equal(sheets.get('Recontacto').rows[0][9], 'Resultado');
   assert.equal(sheets.get('Recontacto').rows[0][6], 'Enviado');
   assert.equal(sheets.get('Recontacto').rows.length, 2);
 });
@@ -295,4 +304,97 @@ test('ticking Enviado stamps the date once, and only in the Recontacto tab', () 
   edit(responses, 2, 7, true);
   responses.rows[1][6] = '';
   assert.equal(JSON.stringify(responses.rows), before);
+});
+
+function withDrafts(responseRows) {
+  const run = createContext(responseRows);
+  run.context.buildNrcReactivationDrafts();
+  const tabSheet = run.sheets.get('Recontacto');
+  run.edit = (rowNumber, column, value) => {
+    tabSheet.rows[rowNumber - 1][column - 1] = value;
+    run.context.onEdit({ range: tabSheet.getRange(rowNumber, column) });
+  };
+  run.responses = run.sheets.get(RESPONSES).rows;
+  return run;
+}
+
+test('ticking Enviado on a re-contact marks the prospect as recontactado', () => {
+  const run = withDrafts([
+    row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo'),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
+  ]);
+
+  run.edit(2, 7, true);
+
+  assert.equal(run.responses[1][STATUS], 'recontactado');
+  assert.equal(run.responses[2][STATUS], '');
+});
+
+test('choosing desistió closes the prospect and no later draft is prepared', () => {
+  const run = withDrafts([
+    row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo'),
+    row(1, 'Ana Prueba', '56900000009', 'No', 'No', 'activo'),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
+  ]);
+  run.edit(2, 7, true);
+
+  run.edit(2, 10, 'desistió');
+
+  assert.equal(run.tab()[0][8], true);
+  // Both rows of the ID change; the other prospect is untouched.
+  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS]]),
+    [['desistió', 'desistió'], ['desistió', 'desistió'], ['activo', '']]);
+  assert.equal(run.context.buildNrcReactivationDrafts().queued, 0);
+});
+
+test('the other results tick Respondió and move Estado without touching Seguimiento', () => {
+  const run = withDrafts([
+    row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo'),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo'),
+  ]);
+
+  run.edit(2, 10, 'quiere visita');
+  run.edit(3, 10, 'Sigue pensando');
+  run.edit(3, 10, 'otra cosa');
+
+  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS]]),
+    [['activo', 'visita solicitada'], ['activo', 'en conversación']]);
+  assert.deepEqual(run.tab().map((cells) => cells[8]), [true, true]);
+});
+
+test('Estado never moves backwards and a hand-written value is left alone', () => {
+  const run = withDrafts([
+    row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'activo', { status: 'Visita realizada' }),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'activo', { status: 'Llamar en marzo' }),
+    row(3, 'Eva Ficticia', '56900000003', 'No', 'No', 'activo', { status: 'ingresó' }),
+  ]);
+
+  run.edit(2, 7, true);
+  run.edit(3, 10, 'quiere visita');
+  run.edit(4, 10, 'desistió');
+
+  assert.deepEqual(run.responses.slice(1).map((cells) => cells[STATUS]),
+    ['Visita realizada', 'Llamar en marzo', 'ingresó']);
+  // The withdrawal still blocks later drafts through Seguimiento.
+  assert.equal(run.responses[3][FOLLOW_UP], 'desistió');
+});
+
+test('a draft marked as answered without being sent stays and is not queued again', () => {
+  const run = withDrafts([row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo')]);
+  run.edit(2, 9, true);
+
+  const second = run.context.buildNrcReactivationDrafts();
+  const third = run.context.buildNrcReactivationDrafts();
+
+  assert.equal(run.tab().length, 1);
+  assert.deepEqual([second.replied, second.removed, third.queued], [1, 0, 0]);
+});
+
+test('a tab created before Resultado existed gets the header on the next run', () => {
+  const run = createContext([row(1, 'Ana Prueba', '56900000001', 'No', 'No', 'activo')]);
+  run.sheets.get('Recontacto').rows[0] = ['#', 'Segmento', 'Toque', 'Mensaje', 'Texto', 'Enlace', 'Enviado', 'Fecha de envío', 'Respondió'];
+
+  run.context.buildNrcReactivationDrafts();
+
+  assert.equal(run.sheets.get('Recontacto').rows[0][9], 'Resultado');
 });

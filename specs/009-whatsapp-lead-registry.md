@@ -1,6 +1,6 @@
 # SPEC-009 — Prospectos y estado en la hoja desde WhatsApp
 
-**Estado:** `borrador` (2026-10-09). Nada implementado. Cubre R8 de [requirements.md](requirements.md). Reemplaza dos reglas de [SPEC-002](002-whatsapp-frontdesk.md): que un número nuevo no crea fila ni ID, y que `Estado` y `Seguimiento` los escribe solo Francisco.
+**Estado:** etapa 1 activa desde el 2026-10-11 (estados escritos desde la pestaña `Recontacto`; ver la sección del mismo nombre). El alta de prospectos y la escritura desde WhatsApp siguen en `borrador`. Cubre R8 de [requirements.md](requirements.md). Reemplaza dos reglas de [SPEC-002](002-whatsapp-frontdesk.md): que un número nuevo no crea fila ni ID, y que `Estado` y `Seguimiento` los escribe solo Francisco.
 
 ## Problema y resultado
 
@@ -46,6 +46,23 @@ Reglas:
 - **REQ-013:** el retiro de RS-06 (SPEC-008) queda registrado aquí. Con esto se resuelve el pendiente de SPEC-004 sobre dónde se guardan los retiros.
 
 Comandos nuevos, solo desde el número personal de Francisco: `registrar` (crea el prospecto del último aviso), `visitó N`, `estado N <valor>` (fija cualquier valor de la lista, también hacia atrás) y `descartar N` (`Seguimiento` = `descartado`; el ID no se reutiliza).
+
+## Etapa 1 — estados desde la pestaña `Recontacto`
+
+Francisco pidió el 2026-10-11 no actualizar los estados a mano. Mientras el número no esté conectado, nadie puede leer las respuestas de WhatsApp, así que el estado se mueve con lo que él marca en `Recontacto` (`automation/apps-script/Reactivation.gs`, subido ese día):
+
+| Lo que marca Francisco | `Estado` | `Seguimiento` |
+|---|---|---|
+| `Enviado` en un mensaje RC | `recontactado` | sin cambio |
+| `Resultado` = `quiere visita` | `visita solicitada` | sin cambio |
+| `Resultado` = `sigue pensando` | `en conversación` | sin cambio |
+| `Resultado` = `desistió` | `desistió` | `desistió` |
+
+- Se escribe en todas las filas que comparten el ID.
+- Valen REQ-008 y REQ-010: el estado no retrocede, un valor escrito a mano fuera de la lista no se reemplaza, e `Ingresó?`, `Comisión` y `Comentario` no se tocan. `Seguimiento` = `residente` tampoco se cambia.
+- Un `desistió` sobre un valor a mano o sobre `ingresó` deja `Estado` como está, pero igual pone `Seguimiento` en `desistió`, que es lo que bloquea los envíos.
+- No se ha visto qué valores tiene hoy `Estado` en la hoja viva.
+- Quedan fuera de esta etapa `visita agendada`, `visita realizada` y `sin respuesta`, y el registro de cada cambio en la pestaña `WhatsApp` (REQ-012).
 
 ## Adaptador de la hoja
 
