@@ -183,6 +183,8 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 - **Campaña al máximo (Francisco, 2026-10-13):** pidió enfocar toda la documentación en la campaña y sacarle el mayor provecho. SPEC-013 se reescribió como fuente única. Ese día se agregaron 12 negativas (búsquedas de hogares de beneficencia y otros servicios que estaban recibiendo clics) y el anuncio pasó de 7 a 12 títulos y de 3 a 4 descripciones, con hechos aprobados. Las búsquedas por nombre de otras residencias privadas no se excluyen. Lo que más limita a la campaña es el destino: `/contact/` con un Google Form incrustado; una página propia necesita acceso al WordPress.
 
+- **Acceso al WordPress (2026-10-13):** Francisco creó una contraseña de aplicación y la guardó en `.env` (`NRC_WP_APP_PASSWORD`); el usuario es administrador y la API REST responde. El sitio usa Elementor. Con ese acceso se creó como borrador la página de destino `/visita/` (página 17773, plantilla sin encabezado ni pie): textos de hechos aprobados, cuatro fotos sin personas, botón de WhatsApp y formulario que se carga al pulsar. No está publicada ni enlazada desde el anuncio.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.

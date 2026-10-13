@@ -1,0 +1,87 @@
+<!-- wp:html -->
+<style>
+.nrc-lp{--verde:#2f6f5e;--verde-osc:#24574a;--crema:#f7f4ec;--texto:#1f2a30;font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--texto);line-height:1.5;max-width:1040px;margin:0 auto;padding:0 16px 48px}
+.nrc-lp *{box-sizing:border-box}
+.nrc-lp header{display:flex;align-items:center;gap:10px;padding:14px 0}
+.nrc-lp header img{width:54px;height:54px;object-fit:contain}
+.nrc-lp header strong{font-size:1.15rem;color:var(--verde-osc)}
+.nrc-hero{display:grid;gap:20px;align-items:center}
+.nrc-hero h1{font-size:1.9rem;line-height:1.15;margin:0 0 10px;color:var(--verde-osc)}
+.nrc-hero p{font-size:1.1rem;margin:0 0 18px}
+.nrc-hero img{width:100%;height:320px;object-fit:cover;border-radius:14px}
+.nrc-cta{display:flex;flex-wrap:wrap;gap:10px}
+.nrc-btn{display:inline-block;padding:14px 22px;border-radius:999px;font-weight:700;font-size:1.05rem;text-decoration:none;border:2px solid var(--verde);cursor:pointer;font-family:inherit}
+.nrc-btn.wa{background:#1fa855;border-color:#1fa855;color:#fff}
+.nrc-btn.form{background:var(--verde);color:#fff}
+.nrc-nota{font-size:.95rem;color:#51626a;margin-top:10px}
+.nrc-lp h2{font-size:1.45rem;color:var(--verde-osc);margin:36px 0 14px}
+.nrc-lista{display:grid;gap:10px;padding:0;margin:0;list-style:none}
+.nrc-lista li{background:var(--crema);border-radius:12px;padding:14px 16px;font-size:1.02rem}
+.nrc-lista li b{display:block;color:var(--verde-osc)}
+.nrc-fotos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.nrc-fotos img{width:100%;height:210px;object-fit:cover;border-radius:12px}
+.nrc-visita{background:var(--verde-osc);color:#fff;border-radius:16px;padding:22px 20px;margin-top:36px}
+.nrc-visita h2{color:#fff;margin-top:0}
+.nrc-visita a{color:#fff}
+.nrc-visita .nrc-btn.form{background:#fff;color:var(--verde-osc);border-color:#fff}
+#nrc-formulario{margin-top:20px}
+#nrc-formulario iframe{width:100%;height:1250px;border:0;border-radius:12px;background:#fff}
+.nrc-pie{font-size:.9rem;color:#51626a;margin-top:28px;text-align:center}
+@media(min-width:800px){.nrc-hero{grid-template-columns:1.05fr .95fr}.nrc-hero h1{font-size:2.5rem}.nrc-hero img{height:440px}.nrc-lista{grid-template-columns:repeat(2,1fr)}.nrc-fotos{grid-template-columns:repeat(4,1fr)}.nrc-fotos img{height:240px}}
+</style>
+<div class="nrc-lp">
+  <header>
+    <img src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/06/Nuestra-Residencia-Chile-Logo-simple-Con-Texto-768x768.png" alt="Nuestra Residencia Chile" width="54" height="54">
+    <strong>Nuestra Residencia · Las Condes</strong>
+  </header>
+
+  <section class="nrc-hero">
+    <div>
+      <h1>Residencia para adultos mayores autovalentes en Las Condes</h1>
+      <p>Un lugar para vivir con autonomía, en compañía y rodeado de jardines. Ven a conocerla: la visita es sin compromiso.</p>
+      <div class="nrc-cta">
+        <a class="nrc-btn wa" href="https://wa.me/56965291181?text=Hola%2C%20quiero%20agendar%20una%20visita%20a%20Nuestra%20Residencia" target="_blank" rel="noopener" onclick="nrcClic('whatsapp')">Escríbenos por WhatsApp</a>
+        <button type="button" class="nrc-btn form" onclick="nrcFormulario()">Agenda tu visita</button>
+      </div>
+      <p class="nrc-nota">Visitas de lunes a viernes, de 10:00 a 11:30 y de 14:00 a 16:00.</p>
+    </div>
+    <img src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/06/Nuestra-Residencia-para-Adultos-Mayores-Autovalentes-en-Las-Condes-06-768x1024.jpg" alt="Jardín y sendero de Nuestra Residencia en Las Condes" width="768" height="1024">
+  </section>
+
+  <h2>Lo que encuentras en Nuestra Residencia</h2>
+  <ul class="nrc-lista">
+    <li><b>Habitación individual</b>Con baño privado, aire acondicionado y WiFi.</li>
+    <li><b>Tu espacio, con tus cosas</b>Puedes traer tus muebles y pertenencias.</li>
+    <li><b>Tres comidas diarias</b>Desayuno, almuerzo y once o cena, con menús diseñados por nutricionistas.</li>
+    <li><b>Jardines y áreas verdes</b>Con senderos interiores para caminar.</li>
+    <li><b>Seguridad 24/7</b>Y personal capacitado para emergencias.</li>
+    <li><b>Vida activa y en comunidad</b>Talleres, actividad física, charlas y encuentros sociales.</li>
+    <li><b>Limpieza y mantenimiento</b>De las habitaciones y de las áreas comunes.</li>
+    <li><b>Más de 15 años de experiencia</b>Ven a conocernos y conversa directamente con el equipo.</li>
+  </ul>
+
+  <h2>Conoce el lugar</h2>
+  <div class="nrc-fotos">
+    <img loading="lazy" src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/06/Nuestra-Residencia-para-Adultos-Mayores-Autovalentes-en-Las-Condes-07-768x1024.jpg" alt="Edificio de Nuestra Residencia" width="768" height="1024">
+    <img loading="lazy" src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/09/Nuestra-Residencia-para-Adulto-Mayor-Autovalente-en-Las-Condes-16.jpg" alt="Jardines de Nuestra Residencia" width="694" height="925">
+    <img loading="lazy" src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/09/Nuestra-Residencia-para-Adulto-Mayor-Autovalente-en-Las-Condes-08.jpg" alt="Terraza de Nuestra Residencia" width="694" height="925">
+    <img loading="lazy" src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/09/Nuestra-Residencia-para-Adulto-Mayor-Autovalente-en-Las-Condes-15.jpg" alt="Áreas verdes de Nuestra Residencia" width="694" height="925">
+  </div>
+
+  <section class="nrc-visita" id="visita">
+    <h2>Agenda tu visita</h2>
+    <p>Te recibimos de lunes a viernes, de 10:00 a 11:30 y de 14:00 a 16:00, en <a href="https://www.google.com/maps/place/Cam.+Las+Flores+10961,+7591286+Santiago,+Las+Condes,+Regi%C3%B3n+Metropolitana/" target="_blank" rel="noopener">Camino Las Flores 10961, Las Condes</a>. Déjanos tus datos y te escribimos para coordinar el día.</p>
+    <div class="nrc-cta">
+      <a class="nrc-btn wa" href="https://wa.me/56965291181?text=Hola%2C%20quiero%20agendar%20una%20visita%20a%20Nuestra%20Residencia" target="_blank" rel="noopener" onclick="nrcClic('whatsapp')">Escríbenos por WhatsApp</a>
+      <button type="button" class="nrc-btn form" onclick="nrcFormulario()">Llenar el formulario</button>
+    </div>
+    <div id="nrc-formulario"></div>
+  </section>
+
+  <p class="nrc-pie">Nuestra Residencia Chile · Camino Las Flores 10961, Las Condes, Santiago · nuestraresidenciachile@gmail.com</p>
+</div>
+<script>
+function nrcClic(tipo){try{if(typeof gtag==='function'){gtag('event','contact_link_click',{link_type:tipo,page_name:'visita'});}}catch(e){}}
+function nrcFormulario(){var c=document.getElementById('nrc-formulario');if(!c.firstChild){var f=document.createElement('iframe');f.src='https://docs.google.com/forms/d/e/1FAIpQLSdy5CSOsYfDdOeTVZvDghzKk55hbGU68pL0BkT50ZD41UHCUw/viewform?embedded=true';f.title='Formulario de contacto';f.loading='lazy';c.appendChild(f);nrcClic('formulario');}c.scrollIntoView({behavior:'smooth',block:'start'});}
+</script>
+<!-- /wp:html -->

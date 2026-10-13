@@ -113,4 +113,4 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 ## Decisiones abiertas
 
 - Si parte del presupuesto va a Meta, que es lo que nombra el contrato.
-- Una página de destino propia para la campaña, con el formulario a la vista y sin el menú del sitio (necesita acceso al WordPress).
+- Publicar la página de destino `/visita/` y apuntar el anuncio a ella. Está creada como borrador en el WordPress (página 17773, sin menú, con botón de WhatsApp y el formulario que se abre al pulsar "Agenda tu visita"); su fuente es `automation/wordpress/landing-visita.html`. Falta la aprobación de Francisco. Al publicarla, la conversión "Contacto" deja de contar la llegada al anuncio: los clics en WhatsApp y en el formulario envían el evento `contact_link_click` a la etiqueta de Google, y hay que crear con él la conversión nueva.
