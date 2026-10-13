@@ -4,6 +4,7 @@
 
 ## Problema y resultado
 
+La campaña apunta a autovalentes en la zona oriente, pero partió sin una conversión medida y sin nadie que la revise.
 
 Resultado: la publicidad se revisa cada semana con una rutina fija, mide consultas, se mantiene bajo el tope y cada cambio que compromete gasto lo confirma Francisco.
 

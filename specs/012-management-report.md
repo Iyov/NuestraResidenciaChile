@@ -2,6 +2,8 @@
 
 **Estado:** `borrador` (2026-10-09). El formato existe en `automation/acquisition/report.cjs` como lógica local; nada lo alimenta. Cubre R4 de [requirements.md](requirements.md) y la letra f) de la cláusula primera del contrato.
 
+> **Cambio del 2026-10-13 (Francisco):** el informe para Don Humberto mantiene el formato de los informes de julio y agosto y sí nombra a los prospectos, con su detalle. REQ-001, AC-002 y AC-008 no aplican a ese informe; ver la decisión 13 de `MEMORY.md`. Lo que sigue describe el diseño anterior y está pendiente de reescribir.
+
 ## Problema y resultado
 
 Don Humberto pide informes de avance. Los de julio y agosto se armaron a mano con capturas, nombraban prospectos e incluían una imagen de la hoja. El de septiembre no se ha emitido. El código del informe existe, pero no lee ninguna fuente: alguien tiene que juntar los números.

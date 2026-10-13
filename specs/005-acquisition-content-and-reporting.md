@@ -48,6 +48,7 @@ El formulario es un Google Form incrustado, así que el sitio no puede leer lo q
 | Idioma | Español |
 | Palabras (concordancia de frase) | "residencia adulto mayor autovalente", "residencia adultos mayores autovalentes", "residencia adultos mayores las condes", "residencia adulto mayor las condes", "residencia senior las condes", "residencia tercera edad las condes", "senior living santiago" |
 | Negativas | "casa de reposo" (frase) y cuidado, cuidados, enfermería, postrado, baratas, gratis, trabajo, empleo, pensión (amplia) |
+| Anuncio | 7 títulos y 3 descripciones; destino `https://nuestraresidenciachile.cl/contact/` |
 | Opciones de IA de Google | IA Max, personalización de texto y expansión de la URL final desactivadas |
 | Conversión | Pendiente: importar `contact_link_click` desde Analytics cuando aparezca disponible |
 - Presupuesto: aprox. USD 80/mes, contemplado en contrato para Meta u otro medio acordado. Don Humberto confirmó destinarlo a Google Ads, según informó Francisco el 2026-10-08. Francisco fijó el tope de gasto de AC-003 en **$80.000 al mes** el 2026-10-09, en pesos porque así cobra la cuenta.
