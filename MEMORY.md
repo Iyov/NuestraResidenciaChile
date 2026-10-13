@@ -40,6 +40,7 @@
 10. **Agentes, Skills y MCP:** siguen previstos para el trabajo interno, pero no hay nada instalado. La atención a prospectos es un servicio propio (Worker + Apps Script), no un agente. Detalle en "Modelo de agentes" de `specs/constitution.md`.
 
 11. **Los requerimientos iniciales mandan (Francisco, 2026-10-09):** deben cumplirse los ocho requerimientos de `specs/requirements.md` tal como los pidió, no lo que ya había. Eso reemplaza la decisión 4 (WhatsApp ahora crea prospecto e ID) y la parte de la 5 que dejaba el recontacto solo como borrador manual y las derivaciones sin respuesta. El diseño está en SPEC-007 a SPEC-013, todas en `borrador`: sus textos, plazos y listas de estados son propuestas hasta que Francisco las apruebe, y nada de eso está implementado.
+12. **Carpetas solo locales (Francisco, 2026-10-12):** `PluginsWP/` (paquetes de plugins de WordPress), `Documentos/` (documentos de la empresa), `ValidaciónGoogle/` (verificación de anunciante) e `InformesNRC/` (informes mensuales y capturas de métricas; algunas hojas tienen datos de prospectos o residentes) existen solo en el disco de Francisco y no se versionan. Lo que se excluye de Git no se explica en `README.md`, `AGENTS.md` ni en las specs; se anota solo aquí.
 
 ## Contrato y atribución
 
