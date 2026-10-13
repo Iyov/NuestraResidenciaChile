@@ -82,7 +82,7 @@
   <p class="nrc-pie">Nuestra Residencia Chile · Camino Las Flores 10961, Las Condes, Santiago · nuestraresidenciachile@gmail.com</p>
 </div>
 <script>
-function nrcClic(tipo){try{if(typeof gtag==='function'){gtag('event','contact_link_click',{link_type:tipo,page_name:'visita'});}}catch(e){}}
+function nrcClic(tipo){try{if(typeof gtag==='function'){gtag('event','contact_link_click',{link_type:tipo,page_name:'visita'});gtag('event','conversion',{send_to:'AW-18362783645/CFweCPPDh5sdEJ2vh7RE'});}}catch(e){}}
 function nrcFormulario(){var c=document.getElementById('nrc-formulario');if(!c.firstChild){var f=document.createElement('iframe');f.src='https://docs.google.com/forms/d/e/1FAIpQLSdy5CSOsYfDdOeTVZvDghzKk55hbGU68pL0BkT50ZD41UHCUw/viewform?embedded=true';f.title='Formulario de contacto';f.loading='lazy';c.appendChild(f);nrcClic('formulario');}c.scrollIntoView({behavior:'smooth',block:'start'});}
 </script>
 <!-- /wp:html -->

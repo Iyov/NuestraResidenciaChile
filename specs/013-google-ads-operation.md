@@ -26,7 +26,7 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 | Puja | Maximizar clics, con límite de $400 por clic |
 | Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
 | Idioma | Español |
-| Destino | `https://nuestraresidenciachile.cl/contact/` |
+| Destino | `https://nuestraresidenciachile.cl/visita/`, página propia de la campaña (fuente en `automation/wordpress/landing-visita.html`) |
 | Opciones de IA de Google | IA Max, personalización de texto y expansión de la URL final desactivadas |
 
 **Palabras clave (concordancia de frase, 17):**
@@ -49,16 +49,16 @@ Las búsquedas por el nombre de otras residencias privadas no se excluyen: quien
 
 - Títulos: Agendar Visita y Cotizar · Nuestra Residencia · Contacto · Residencia En Las Condes · Adultos Mayores Autovalentes · Residencia de Adulto Mayor · Calidad de Vida Senior · Visita Sin Compromiso · Jardines y Áreas Verdes · Más de 15 Años de Experiencia · Habitación Individual · Agenda Tu Visita.
 - Descripciones: las tres originales y "Habitación individual, jardines y tres comidas diarias. Agenda tu visita sin compromiso."
-- Vínculos a sitio: "Agenda tu visita" (`/contact/`, con el horario de visitas) y "Conoce la residencia" (`/about-us/`).
+- Vínculos a sitio: "Agenda tu visita" (`/contact/`, con el horario de visitas; se mantiene ahí porque un vínculo debe llevar a una página distinta de la del anuncio) y "Conoce la residencia" (`/about-us/`).
 
 Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horario de visitas, experiencia, habitación individual) y [008-facts.md](008-facts.md) (H-02, H-07 y H-14).
 
 ## Medición
 
-- **Conversión "Contacto":** cuenta una vez por clic cuando alguien que llegó por un anuncio carga una página que comienza con `nuestraresidenciachile.cl/contact`. Es principal y no usa conversiones avanzadas.
-- **Qué significa:** interés en contactar. No es un formulario enviado: el formulario es un Google Form incrustado y el sitio no ve el envío (hallazgo S-1 del [anexo de SPEC-005](005-baseline-2026-10.md)). Como el anuncio lleva a `/contact/`, al principio casi todo clic contará; el número sirve para comparar palabras entre sí, no como cantidad de consultas.
+- **Conversión "Clic en WhatsApp o formulario":** principal. La página `/visita/` la envía cuando alguien pulsa el botón de WhatsApp o abre el formulario; cuenta una vez por clic de anuncio y no usa conversiones avanzadas. Es la señal más cercana a una consulta que el sitio puede dar.
+- **Conversión "Contacto (nuestraresidenciachile.cl/)":** cuenta la llegada a una página que comienza con `/contact`. Desde que el anuncio lleva a `/visita/` solo la activan quienes entran por el vínculo "Agenda tu visita" o navegan hasta ahí.
+- **Lo que no se puede medir:** el envío del formulario, porque es un Google Form incrustado (hallazgo S-1 del [anexo de SPEC-005](005-baseline-2026-10.md)).
 - **Consultas reales:** se cuentan en la hoja. La comparación semanal es clics → conversiones → prospectos nuevos con origen "Sitio Web" o "WhatsApp".
-- **Mejora pendiente:** medir el clic en WhatsApp y en el enlace del formulario como conversión (SPEC-011, P1). Necesita acceso al WordPress.
 
 ## Rutina semanal
 
@@ -89,7 +89,7 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 
 ## Criterios de aceptación
 
-- **AC-001:** Google Ads muestra conversiones de la acción "Contacto".
+- **AC-001:** Google Ads muestra conversiones de la acción "Clic en WhatsApp o formulario".
 - **AC-002:** hay una nota por cada semana con la campaña activa.
 - **AC-003:** el costo neto de cada mes cierra en el monto definido por Francisco.
 - **AC-004:** a las cuatro semanas, ningún término de búsqueda con más de 5 clics corresponde a cuidados, empleo, beneficencia o precios bajos.
@@ -113,4 +113,3 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 ## Decisiones abiertas
 
 - Si parte del presupuesto va a Meta, que es lo que nombra el contrato.
-- Terminar el paso a la página de destino `https://nuestraresidenciachile.cl/visita/`, publicada el 2026-10-13 (página 17773, sin menú, con botón de WhatsApp y el formulario que se abre al pulsar; fuente en `automation/wordpress/landing-visita.html`; revisada en ancho de celular, tablet y escritorio). El cambio de la URL final del anuncio quedó a la espera de que Francisco confirme su identidad en Google Ads; después hay que cambiar también el vínculo "Agenda tu visita". Con el anuncio en `/visita/`, la conversión "Contacto" deja de contar la llegada: los clics en WhatsApp y en el formulario envían el evento `contact_link_click` a la etiqueta de Google y con él hay que crear la conversión nueva.

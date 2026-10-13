@@ -14,6 +14,8 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-10-13 | Google Ads | Doce negativas: conapran, "hogar san jose", "hogar de cristo", "las rosas", fundacion, fundación, municipal, gratuito, jardin, jardín, "centro de dia", "centro de día" | Los términos de búsqueda mostraban clics de quienes buscan hogares de beneficencia y otros servicios | No | Francisco ("sacarle el máximo provecho") |
 | 2026-10-13 | Google Ads | Anuncio: cinco títulos nuevos (Visita Sin Compromiso, Jardines y Áreas Verdes, Más de 15 Años de Experiencia, Habitación Individual, Agenda Tu Visita) y una cuarta descripción | El anuncio tenía 7 de 15 títulos y calidad incompleta | No | Francisco |
 | 2026-10-13 | Sitio | Página de destino `/visita/` publicada | El anuncio llevaba a `/contact/`, con el menú del sitio y el formulario al final | No | Francisco ("publícala") |
+| 2026-10-13 | Google Ads | URL final del anuncio: de `/contact/` a `/visita/` | Llevar el clic a la página propia de la campaña | No | Francisco (confirmó identidad y guardó) |
+| 2026-10-13 | Google Ads y sitio | Acción de conversión "Clic en WhatsApp o formulario" (evento manual, principal); la página `/visita/` la envía desde sus botones | Medir el contacto y no solo la llegada | No | Francisco |
 
 ## Revisiones
 
