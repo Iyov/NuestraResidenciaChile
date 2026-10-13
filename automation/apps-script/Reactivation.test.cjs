@@ -369,6 +369,31 @@ test('the other results tick Respondió and add their note without touching Segu
   assert.deepEqual(run.tab().map((cells) => cells[8]), [true, true]);
 });
 
+test('a reply reported by Francisco is recorded like a result he picked, with its remark', () => {
+  const run = withDrafts([
+    row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'Activo', { status: 'Visitó.' }),
+    row(2, 'Luis Ejemplo', '56900000002', 'No', 'No', 'Activo'),
+    row(3, 'Eva Ficticia', '56900000003', 'No', 'No', 'Activo'),
+  ]);
+  const record = (...args) => run.context.recordNrcReply_(run.context.SpreadsheetApp.getActiveSpreadsheet(), ...args);
+
+  assert.equal(record(1, 'Sigue pensando', 'Retomar en noviembre'), true);
+  assert.equal(record(1, 'sigue pensando', 'Retomar en noviembre'), true);
+  assert.equal(record(2, '', 'No se concretó', new Date('2026-10-12T15:00:00Z')), true);
+  assert.equal(record(3, 'desistió'), true);
+  assert.equal(record(9, 'desistió'), false);
+  assert.throws(() => record(2, 'otra cosa'), /Unknown result/);
+
+  assert.deepEqual(run.tab().map((cells) => [cells[8], cells[9]]),
+    [[true, 'sigue pensando'], [true, ''], [true, 'desistió']]);
+  assert.deepEqual(run.responses.slice(1).map((cells) => [cells[FOLLOW_UP], cells[STATUS], cells[ADMISSION]]), [
+    ['Activo', 'Visitó. Sigue pensando 20/10. Retomar en noviembre.', 'No Aún'],
+    ['Activo', 'Respondió 12/10. No se concretó.', 'No Aún'],
+    ['Desistió', 'Desistió 20/10.', 'Desistió'],
+  ]);
+  assert.equal(run.context.buildNrcReactivationDrafts().queued, 0);
+});
+
 test('a withdrawal never changes a resident or an admission that is already decided', () => {
   const run = withDrafts([
     row(1, 'Ana Prueba', '56900000001', 'Sí', 'Sí', 'activo', { admission: 'Ingresó' }),

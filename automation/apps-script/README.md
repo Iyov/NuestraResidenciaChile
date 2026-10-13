@@ -70,6 +70,8 @@ node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 - `onOpen`: activador simple que actualiza la pestaña al abrir la hoja, solo si la pestaña ya existe.
 - `onEdit`: activador simple, limitado a la pestaña `Recontacto`. Al marcar `Enviado` anota la fecha y agrega `Recontactado dd/mm.` al final de `Estado` del prospecto. Al elegir un `Resultado` marca `Respondió` y agrega su nota; con `desistió` cambia además `Seguimiento` e `Ingresó?` (si estaba vacío o en `No Aún`). No escribe ninguna otra celda de la pestaña de respuestas (subido el 2026-10-11).
 
+- `recordNrcReply_(hoja, id, resultado, detalle, fecha)`: anota una respuesta que Francisco informó en vez de elegir `Resultado` él mismo. Marca `Respondió` en la última fila del prospecto, escribe el resultado y agrega la misma nota con fecha en `Estado`, más un detalle breve sin datos personales. El resultado puede ir vacío cuando la respuesta no calza con ninguna opción (subido el 2026-10-13).
+
 ### Uso (Francisco)
 
 1. **Preparar mensajes:** no hay que hacer nada. Cada vez que se abre la hoja, la pestaña `Recontacto` se actualiza sola (activador simple `onOpen`). Si hiciera falta forzarlo: **Extensiones → Apps Script**, abrir `Reactivation.gs`, elegir `buildNrcReactivationDrafts` y pulsar **Ejecutar**.

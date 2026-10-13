@@ -17,6 +17,7 @@ const NRC_REACTIVATION_CONFIG = Object.freeze({
   // Values of `Ingresó?` that a withdrawal may replace, after normalizeNrcText_.
   openAdmissionValues: ['', 'no aun'],
   sentNote: 'Recontactado',
+  repliedNote: 'Respondió',
   firstContactNote: 'Contactado',
   followUpHeader: 'Seguimiento',
   scheduledHeader: 'Agendo Visita',
@@ -145,6 +146,36 @@ function onEdit(e) {
     sheet.getRange(row, config.repliedColumn).setValue(true);
     addNrcProspectNote_(sheet.getParent(), id, note + ' ' + nrcShortDay_(new Date()), outcome === config.withdrawnOutcome);
   }
+}
+
+/**
+ * Records a reply that Francisco reported instead of picking `Resultado` himself
+ * (SPEC-009, stage 1). Ticks `Respondió` on the prospect's latest row of the tab,
+ * writes the result there and adds the same dated note to `Estado`. `outcome` may
+ * be empty for a reply that fits none of the options; `detail` is a short remark
+ * without personal data. Returns false when the tab has no row for the ID.
+ */
+function recordNrcReply_(spreadsheet, id, outcome, detail, date) {
+  const config = NRC_REACTIVATION_CONFIG;
+  const tab = spreadsheet.getSheetByName(config.sheetName);
+  if (!tab) throw new Error('The Recontacto sheet was not found.');
+  const result = String(outcome || '').trim().toLowerCase();
+  if (result && !config.outcomeNotes[result]) throw new Error('Unknown result.');
+
+  const dataRows = Math.max(0, tab.getLastRow() - 1);
+  const ids = dataRows ? tab.getRange(2, 1, dataRows, 1).getValues() : [];
+  let row = 0;
+  ids.forEach(function (cells, index) {
+    if (parseNrcId_(cells[0]) === id) row = index + 2;
+  });
+  if (!row) return false;
+
+  tab.getRange(row, config.repliedColumn).setValue(true);
+  if (result) tab.getRange(row, config.outcomeColumn).setValue(result);
+  const note = (result ? config.outcomeNotes[result] : config.repliedNote) + ' ' + nrcShortDay_(date || new Date());
+  addNrcProspectNote_(spreadsheet, id, note, result === config.withdrawnOutcome);
+  if (!isBlankNrcValue_(detail)) addNrcProspectNote_(spreadsheet, id, String(detail).trim(), false);
+  return true;
 }
 
 function nrcSentNote_(message, date) {
