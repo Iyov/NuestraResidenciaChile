@@ -22,3 +22,7 @@
 /InformesNRC/Informe Nuestra Residencia *.pdf
 # Caché local de wrangler (Cloudflare)
 .wrangler/
+/PluginsWP/
+/Documentos/
+/ValidaciónGoogle/
+/InformesNRC/
