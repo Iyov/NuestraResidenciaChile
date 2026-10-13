@@ -1,20 +1,64 @@
-# SPEC-013 — Operación de Google Ads y publicidad pagada
+# SPEC-013 — Operación de Google Ads
 
-**Estado:** `borrador` (2026-10-09). La campaña "Autovalentes zona oriente - Búsqueda" está activa desde ese día; esta especificación define cómo se opera. Cubre R5 y parte de R1 de [requirements.md](requirements.md). La configuración de la campaña y el tope están en [SPEC-005](005-acquisition-content-and-reporting.md).
+**Estado:** campaña "Autovalentes zona oriente - Búsqueda" activa desde el 2026-10-09 y con conversión medida desde el 2026-10-13. La rutina semanal parte el 2026-10-19. Cubre R5 y parte de R1 de [requirements.md](requirements.md). Esta especificación es la fuente única de la configuración de la campaña; cada cambio queda en [013-ads-log.md](013-ads-log.md).
 
-## Problema y resultado
+## Para qué sirve la campaña
 
-La campaña apunta a autovalentes en la zona oriente, pero partió sin una conversión medida y sin nadie que la revise.
+La meta de la residencia es **2 ingresos al mes**. La campaña no produce ingresos por sí sola: trae familias que buscan una residencia para una persona autovalente en la zona oriente. El ingreso se gana después, en el seguimiento ([SPEC-014](014-form-to-visit.md) y [SPEC-007](007-prospect-reactivation.md)).
 
-Resultado: la publicidad se revisa cada semana con una rutina fija, mide consultas, se mantiene bajo el tope y cada cambio que compromete gasto lo confirma Francisco.
+| Paso | Dónde se mide | Dato al 2026-10-13 |
+|---|---|---|
+| Ven el anuncio y entran al sitio | Google Ads: apariciones y clics | 113 apariciones, 15 clics en cinco días |
+| Recorren el sitio | Analytics: sesiones por anuncio con interacción | 8 de cada 10 |
+| Llegan a la página de contacto | Google Ads: conversión "Contacto" | Mide desde el 2026-10-13 |
+| Consultan | Hoja: prospectos nuevos | 3 en octubre |
+| Visitan | Hoja: `Visita realizada` | 3 de 3 |
+| Ingresan | Hoja: `Ingresó?` | 0 en octubre |
 
-## Puesta a punto (una vez)
+El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y que de 17 visitas salió 1 ingreso. Por eso la campaña se optimiza para **más consultas de personas autovalentes**, no para más clics, y todo lo que la campaña trae pasa al seguimiento el mismo día.
 
-1. Importar `contact_link_click` desde Analytics como conversión, y los eventos de WhatsApp y teléfono cuando existan (SPEC-011, P1).
-2. Corregir o eliminar los dos objetivos con error ("Enviar formulario de clientes potenciales" y "Contacto").
-3. Agregar recursos al anuncio: enlaces de sitio, llamada y ubicación (esta última necesita el Perfil de Negocio de SPEC-011).
-4. Revisar la promoción de anunciante nuevo (gastar USD 350 para recibir USD 350, vence el 2026-10-25). Con el tope de $80.000 al mes no se alcanza: se informa a Don Humberto y decide él.
-5. Confirmar la zona y las negativas contra lo publicado.
+## Configuración vigente
+
+| | Valor |
+|---|---|
+| Tipo | Búsqueda, sin socios de búsqueda ni Red de Display |
+| Presupuesto | $2.750 al día hasta el 31 de octubre; $2.200 al día desde el 1 de noviembre |
+| Puja | Maximizar clics, con límite de $400 por clic |
+| Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
+| Idioma | Español |
+| Destino | `https://nuestraresidenciachile.cl/contact/` |
+| Opciones de IA de Google | IA Max, personalización de texto y expansión de la URL final desactivadas |
+
+**Palabras clave (concordancia de frase, 17):**
+
+- Autovalentes: "residencia adulto mayor autovalente", "residencia adultos mayores autovalentes", "senior living santiago".
+- Las Condes: "residencia adultos mayores las condes", "residencia adulto mayor las condes", "residencia senior las condes", "residencia tercera edad las condes", "hogar adulto mayor las condes".
+- Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
+- Generales, limitadas por la zona: "residencia para adultos mayores", "residencia adulto mayor", "residencias adultos mayores", "residencia tercera edad".
+
+**Negativas (22):**
+
+- Cuidados que la residencia no ofrece: "casa de reposo", cuidado, cuidados, enfermería, postrado.
+- Precio y empleo: baratas, gratis, gratuito, pensión, trabajo, empleo.
+- Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "hogar de cristo", "las rosas", fundacion, fundación, municipal.
+- Otros servicios: jardin, jardín, "centro de dia", "centro de día".
+
+Las búsquedas por el nombre de otras residencias privadas no se excluyen: quien las busca es público de la residencia.
+
+**Anuncio (responsivo, 12 títulos y 4 descripciones):**
+
+- Títulos: Agendar Visita y Cotizar · Nuestra Residencia · Contacto · Residencia En Las Condes · Adultos Mayores Autovalentes · Residencia de Adulto Mayor · Calidad de Vida Senior · Visita Sin Compromiso · Jardines y Áreas Verdes · Más de 15 Años de Experiencia · Habitación Individual · Agenda Tu Visita.
+- Descripciones: las tres originales y "Habitación individual, jardines y tres comidas diarias. Agenda tu visita sin compromiso."
+- Vínculos a sitio: "Agenda tu visita" (`/contact/`, con el horario de visitas) y "Conoce la residencia" (`/about-us/`).
+
+Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horario de visitas, experiencia, habitación individual) y [008-facts.md](008-facts.md) (H-02, H-07 y H-14).
+
+## Medición
+
+- **Conversión "Contacto":** cuenta una vez por clic cuando alguien que llegó por un anuncio carga una página que comienza con `nuestraresidenciachile.cl/contact`. Es principal y no usa conversiones avanzadas.
+- **Qué significa:** interés en contactar. No es un formulario enviado: el formulario es un Google Form incrustado y el sitio no ve el envío (hallazgo S-1 del [anexo de SPEC-005](005-baseline-2026-10.md)). Como el anuncio lleva a `/contact/`, al principio casi todo clic contará; el número sirve para comparar palabras entre sí, no como cantidad de consultas.
+- **Consultas reales:** se cuentan en la hoja. La comparación semanal es clics → conversiones → prospectos nuevos con origen "Sitio Web" o "WhatsApp".
+- **Mejora pendiente:** medir el clic en WhatsApp y en el enlace del formulario como conversión (SPEC-011, P1). Necesita acceso al WordPress.
 
 ## Rutina semanal
 
@@ -22,49 +66,51 @@ Cada lunes, sobre los 7 días anteriores:
 
 | Paso | Qué se mira | Acción |
 |---|---|---|
-| 1 | Gasto de la semana y del mes frente al tope de $80.000 | Si la proyección del mes supera el tope, bajar el presupuesto diario |
-| 2 | Términos de búsqueda reales | Agregar como negativas los que no son de autovalentes (cuidados, empleo, precios bajos, otras comunas lejanas) |
-| 3 | Clics, costo por clic y conversiones por palabra | Pausar la palabra que lleve 30 clics o más sin ninguna conversión |
-| 4 | Anuncios | Reemplazar el título o la descripción con peor rendimiento, usando solo hechos aprobados |
-| 5 | Consultas de la semana en la hoja | Comparar con las conversiones medidas |
+| 1 | Costo neto del mes en Facturación | Ajustar el presupuesto diario para cerrar el mes en el monto definido |
+| 2 | Términos de búsqueda | Agregar como negativas los que no son de autovalentes o no son de residencias privadas |
+| 3 | Clics, costo por clic y conversiones por palabra | Pausar la palabra con 30 clics o más y sin conversiones; subir o bajar el límite de puja si la campaña no gasta o paga de más |
+| 4 | Estado de las palabras ("volumen bajo", "en revisión") | Reemplazar las que no reciben apariciones |
+| 5 | Títulos y descripciones | Cambiar el de peor rendimiento, solo con hechos aprobados |
+| 6 | Prospectos nuevos de la semana en la hoja | Comparar con clics y conversiones |
 
-El resultado es una nota de cinco líneas para Francisco: gasto, clics, conversiones, cambios hechos y cambios propuestos.
+El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conversiones, prospectos y cambios hechos.
 
 ## Requisitos
 
-- **REQ-001:** el gasto mensual cobrado no supera $80.000. El presupuesto diario se fija para que Google no pueda pasarlo.
-- **REQ-002:** agregar negativas y pausar palabras o anuncios no aumenta el gasto y se puede hacer en la rutina. Subir presupuesto, crear campañas, agregar palabras, cambiar la zona o la estrategia de puja requiere la confirmación de Francisco.
-- **REQ-003:** el clic de publicar y la confirmación de identidad que pide Google los hace Francisco.
-- **REQ-004:** los textos de los anuncios usan solo hechos aprobados. Sin afirmaciones de salud, sin precios y sin disponibilidad.
-- **REQ-005:** las palabras apuntan a personas autovalentes en la zona oriente; "casa de reposo", "cuidados" y "enfermería" se mantienen como negativas.
-- **REQ-006:** no se envían datos personales a Google Ads. Las conversiones mejoradas y la importación de datos de la hoja siguen apagadas hasta que Toto las apruebe (SPEC-004).
+- **REQ-001:** el presupuesto mensual lo define Francisco. El asistente ajusta presupuesto diario, pujas, palabras, negativas y textos dentro de ese monto y registra cada cambio.
+- **REQ-002:** crear otra campaña, cambiar la zona, activar otra red o pasar a otra plataforma lo decide Francisco.
+- **REQ-003:** cuando Google pide confirmar identidad, la confirma Francisco.
+- **REQ-004:** los textos usan solo hechos aprobados. Sin afirmaciones de salud, sin precios y sin disponibilidad.
+- **REQ-005:** la campaña apunta a personas autovalentes en la zona oriente.
+- **REQ-006:** no se envían datos personales a Google Ads. Las conversiones avanzadas y la importación de datos de la hoja siguen apagadas hasta que Toto las apruebe (SPEC-004).
 - **REQ-007:** las opciones automáticas de Google (IA Max, personalización de texto, expansión de la URL final, socios de búsqueda, Display) siguen desactivadas.
-- **REQ-008:** cada cambio queda anotado con fecha y motivo en `specs/013-ads-log.md`.
-- **REQ-009:** publicidad en Meta u otro medio solo con acuerdo de Don Humberto, dentro del mismo tope, y con su gasto informado aparte.
+- **REQ-008:** no se agrega recurso de llamada: la atención es por WhatsApp y formulario.
+- **REQ-009:** cada cambio queda con fecha y motivo en `specs/013-ads-log.md`.
 
 ## Criterios de aceptación
 
-- **AC-001:** Google Ads muestra conversiones desde el evento de contacto.
-- **AC-002:** hay una nota semanal por cada semana con la campaña activa.
-- **AC-003:** el costo neto de cada mes es menor o igual a $80.000.
-- **AC-004:** ningún cambio que aumente gasto figura en el registro sin la confirmación de Francisco.
-- **AC-005:** el informe mensual (SPEC-012) trae gasto, clics, costo por clic, conversiones y costo por consulta.
-- **AC-006:** a las cuatro semanas, ningún término de búsqueda con más de 5 clics corresponde a cuidados, empleo o precios bajos.
+- **AC-001:** Google Ads muestra conversiones de la acción "Contacto".
+- **AC-002:** hay una nota por cada semana con la campaña activa.
+- **AC-003:** el costo neto de cada mes cierra en el monto definido por Francisco.
+- **AC-004:** a las cuatro semanas, ningún término de búsqueda con más de 5 clics corresponde a cuidados, empleo, beneficencia o precios bajos.
+- **AC-005:** cada prospecto nuevo de la semana recibe su primer mensaje el mismo día (SPEC-014).
 
 ## Cómo volver atrás
 
-- Pausar la campaña desde Google Ads: el gasto se detiene de inmediato.
-- Un cambio puntual: el historial de cambios de la cuenta permite deshacerlo.
+- Pausar la campaña desde Google Ads detiene el gasto de inmediato.
+- El historial de cambios de la cuenta permite deshacer un cambio puntual.
 - El registro de cambios dice qué se tocó y cuándo.
 
-## Tareas
+## Calendario
 
-1. Puesta a punto, pasos 1 a 5.
-2. Primera revisión semanal el lunes 2026-10-19, con la primera semana completa de datos.
-3. Informar a Don Humberto la promoción antes del 2026-10-25.
-4. A las cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a una puja por conversiones.
+| Fecha | Qué |
+|---|---|
+| 2026-10-19 | Primera revisión semanal: términos de las palabras nuevas, estado de revisión de palabras y vínculos, primeras conversiones |
+| 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; Francisco decide si se usa |
+| 2026-11-01 | Bajar el presupuesto a $2.200 al día |
+| 2026-11-09 | Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
 
 ## Decisiones abiertas
 
-- Si se sube el tope para aprovechar la promoción.
 - Si parte del presupuesto va a Meta, que es lo que nombra el contrato.
+- Una página de destino propia para la campaña, con el formulario a la vista y sin el menú del sitio (necesita acceso al WordPress).

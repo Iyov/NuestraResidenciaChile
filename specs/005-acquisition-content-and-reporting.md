@@ -33,24 +33,8 @@ El formulario es un Google Form incrustado, así que el sitio no puede leer lo q
 
 ## Google Ads
 
-- Toda campaña nueva se crea con un máximo de $80.000 al mes, con un evento de contacto medido, palabras para autovalentes y palabras negativas.
+- La campaña "Autovalentes zona oriente - Búsqueda" está activa desde el 2026-10-09. Su configuración vigente, la medición y la rutina de revisión están en [SPEC-013](013-google-ads-operation.md), que es la fuente única; los cambios quedan en [013-ads-log.md](013-ads-log.md).
 
-### Campaña activa desde el 2026-10-09
-
-"Autovalentes zona oriente - Búsqueda", aprobada por Francisco. El asistente la armó en la sesión de Chrome de Francisco y él hizo la confirmación de identidad y el clic de publicar. Verificada después de publicar: habilitada, $2.600 al día, seis comunas y diez negativas.
-
-| | Valor |
-|---|---|
-| Objetivo y tipo | Tráfico del sitio web, campaña de Búsqueda, sin socios de búsqueda ni Red de Display |
-| Presupuesto | $2.600 al día (Google lo limita a unos $79.000 al mes) |
-| Puja | Maximizar clics |
-| Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
-| Idioma | Español |
-| Palabras (concordancia de frase) | "residencia adulto mayor autovalente", "residencia adultos mayores autovalentes", "residencia adultos mayores las condes", "residencia adulto mayor las condes", "residencia senior las condes", "residencia tercera edad las condes", "senior living santiago" |
-| Negativas | "casa de reposo" (frase) y cuidado, cuidados, enfermería, postrado, baratas, gratis, trabajo, empleo, pensión (amplia) |
-| Anuncio | 7 títulos y 3 descripciones; destino `https://nuestraresidenciachile.cl/contact/` |
-| Opciones de IA de Google | IA Max, personalización de texto y expansión de la URL final desactivadas |
-| Conversión | Pendiente: importar `contact_link_click` desde Analytics cuando aparezca disponible |
 - Presupuesto: aprox. USD 80/mes, contemplado en contrato para Meta u otro medio acordado. Don Humberto confirmó destinarlo a Google Ads, según informó Francisco el 2026-10-08. Francisco fijó el tope de gasto de AC-003 en **$80.000 al mes** el 2026-10-09, en pesos porque así cobra la cuenta.
 - Establecer límite de gasto, geografía/búsquedas de alta intención y medición del formulario/visita/ingreso antes de optimizar pujas.
 - Mantener leads iniciales como señal separada de visitas e ingresos. No enviar PII sin términos, base/consentimiento y configuración compatibles.
@@ -89,10 +73,9 @@ Ninguno lee la hoja, llama a Google ni publica.
 
 Desde el 2026-10-09 cada frente tiene su especificación, todas en borrador: operación de Google Ads en [SPEC-013](013-google-ads-operation.md), informe en [SPEC-012](012-management-report.md), sitio y posicionamiento en [SPEC-011](011-seo-and-site.md), blog y redes en [SPEC-010](010-blog-and-social.md). Los puntos de abajo se mantienen como lista de origen.
 
-- Revisar la campaña a la semana: términos de búsqueda reales, costo por clic y gasto contra el tope.
-- Importar `contact_link_click` a Google Ads como conversión.
+- Revisión semanal de la campaña desde el 2026-10-19 (SPEC-013).
 - Agregar a la hoja la columna `Fecha Pago`.
-- Informe de septiembre con el formato nuevo. Los informes de julio y agosto nombran prospectos; no reenviarlos.
+- Informe de septiembre: redactado el 2026-10-13 (SPEC-012).
 - Cadencia y destinatarios del informe de Don Humberto.
 - Acceso al WordPress para los hallazgos S-1 a S-9 del anexo.
 - Revisar las entradas publicadas que afirman efectos en la salud.

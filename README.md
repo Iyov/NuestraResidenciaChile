@@ -10,7 +10,7 @@ Proyecto para apoyar la captación y seguimiento de prospectos de Nuestra Reside
 - **Visitas y permisos del formulario:** lógica local con pruebas sintéticas en `automation/visits/` y `automation/consent/`; ningún flujo las usa todavía. El aviso y la política de privacidad son borradores sin aprobar.
 - **Captación e informes:** embudo mensual, tope de gasto, atribución, control de publicación e informe para dirección como lógica local con pruebas sintéticas en `automation/acquisition/`; ningún flujo la usa. La línea base y la auditoría del sitio están en [`specs/005-baseline-2026-10.md`](specs/005-baseline-2026-10.md).
 - **Avisos del buzón de NRC:** código y pruebas sintéticas en [`automation/gmail/`](automation/gmail/README.md), subido el 2026-10-09 a un proyecto de Apps Script propio de la cuenta NRC. Francisco lo autorizó e instaló el activador ese día: revisa la bandeja cada 15 minutos.
-- **Google Ads:** campaña de búsqueda activa desde el 2026-10-09, creada a mano en la cuenta ($2.600 al día); ningún código la opera. Detalle en [`specs/005-acquisition-content-and-reporting.md`](specs/005-acquisition-content-and-reporting.md).
+- **Google Ads:** campaña de búsqueda "Autovalentes zona oriente" activa desde el 2026-10-09, operada a mano en la cuenta con una revisión semanal; ningún código la toca. Configuración, medición y rutina en [`specs/013-google-ads-operation.md`](specs/013-google-ads-operation.md); cambios en [`specs/013-ads-log.md`](specs/013-ads-log.md).
 - **SEO y blog/redes:** requisitos y auditoría; no asumir que están implementados.
 - **Web activa:** [nuestraresidenciachile.cl](https://nuestraresidenciachile.cl/), WordPress externo. Los archivos de `Backup/` son respaldos, no código de producción.
 

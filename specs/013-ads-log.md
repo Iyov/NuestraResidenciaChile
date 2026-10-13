@@ -11,6 +11,8 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-10-13 | Google Ads | Diez palabras nuevas en concordancia de frase: "residencia para adultos mayores", "residencia adulto mayor", "residencias adultos mayores", "residencia tercera edad", "hogar adulto mayor las condes" y "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa | Solo dos de las siete palabras recibían apariciones | Sí, dentro del mismo presupuesto diario | Francisco ("sigue haciendo los ajustes") |
 | 2026-10-13 | Google Ads | Acción de conversión "Contacto (nuestraresidenciachile.cl/)": cuenta una vez por clic cuando alguien carga una página que comienza con `nuestraresidenciachile.cl/contact`; principal, sin conversiones avanzadas | La cuenta no medía ninguna conversión | No | Francisco |
 | 2026-10-13 | Google Ads | Dos vínculos a sitio a nivel de cuenta: "Agenda tu visita" (`/contact/`) y "Conoce la residencia" (`/about-us/`) | El anuncio no tenía recursos asociados | No | Francisco ("haz los cambios que sean necesarios") |
+| 2026-10-13 | Google Ads | Doce negativas: conapran, "hogar san jose", "hogar de cristo", "las rosas", fundacion, fundación, municipal, gratuito, jardin, jardín, "centro de dia", "centro de día" | Los términos de búsqueda mostraban clics de quienes buscan hogares de beneficencia y otros servicios | No | Francisco ("sacarle el máximo provecho") |
+| 2026-10-13 | Google Ads | Anuncio: cinco títulos nuevos (Visita Sin Compromiso, Jardines y Áreas Verdes, Más de 15 Años de Experiencia, Habitación Individual, Agenda Tu Visita) y una cuarta descripción | El anuncio tenía 7 de 15 títulos y calidad incompleta | No | Francisco |
 
 ## Revisiones
 
@@ -23,6 +25,7 @@ Lecturas de las cuentas, sin cambios. El gasto es el "Costo neto" de Facturació
 - **El tope y el IVA:** $2.600 al día son hasta $79.040 al mes antes de IVA, es decir, unos $94.000 cobrados. Octubre, con la campaña desde el día 9, proyecta unos $71.000 cobrados. El presupuesto mensual vigente está en la decisión 12 de `MEMORY.md`.
 - **Analytics, septiembre:** 198 sesiones (búsqueda sin anuncio 86, directo 68, asistentes de IA 19, redes 5), 0 eventos clave.
 - **Analytics, 1 al 13 de octubre:** 70 sesiones (búsqueda sin anuncio 30, directo 26, anuncios 10, asistentes de IA 3, redes 2) y 4 eventos clave, todos en sesiones directas. Las sesiones por anuncio tuvieron 80 % de interacción.
-- **Sin hacer:** `contact_link_click` sigue sin importarse como conversión (Google Ads muestra el aviso "Configura el seguimiento de conversiones"). La cuenta muestra un crédito publicitario de $322.508; vence el 2026-10-25.
+- **Términos de búsqueda de la campaña:** 3 clics de "hogar san jose las condes", 2 de "hogar adulto mayor las condes" y 1 cada uno de "residencia las condes", "conapran las condes", "jardin adulto mayor las condes" y dos búsquedas por nombre de otras residencias.
+- La cuenta muestra un crédito publicitario; vence el 2026-10-25.
 - **Hecho ese día:** límite de puja de $400 por clic, guardado y comprobado en la configuración.
 - **Más tarde ese día:** presupuesto en $2.750 al día y diez palabras nuevas, ambos comprobados en la cuenta; las palabras quedaron "en proceso de revisión".

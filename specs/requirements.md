@@ -18,7 +18,7 @@
 | R2 | Posicionar el sitio en Google y otros buscadores | [011](011-seo-and-site.md) | borrador |
 | R3 | Cada registro de `/contact/` llega a la hoja; contactar por WhatsApp a los prospectos en verde e instarlos a visitar o volver a visitar | [001](001-auto-lead-id.md) (activo), [007](007-prospect-reactivation.md), [014](014-form-to-visit.md) | 001 activo; 007 y 014 borrador |
 | R4 | Informes de avance para Don Humberto | [012](012-management-report.md) | borrador |
-| R5 | Ayuda con Google Ads y la publicidad pagada | [005](005-acquisition-content-and-reporting.md), [013](013-google-ads-operation.md) | campaña activa; operación en borrador |
+| R5 | Ayuda con Google Ads y la publicidad pagada | [005](005-acquisition-content-and-reporting.md), [013](013-google-ads-operation.md) | campaña activa y medida; revisión semanal desde el 2026-10-19 |
 | R6 | Publicaciones de blog que se replican en Facebook e Instagram | [010](010-blog-and-social.md) | borrador |
 | R7 | Atender al público por WhatsApp: dudas, aclaraciones y derivaciones; si Francisco no responde, responde el asistente | [002](002-whatsapp-frontdesk.md), [008](008-whatsapp-fallback-reply.md) | 002 local; 008 borrador |
 | R8 | Con lo que pase en WhatsApp, actualizar el estado de cada prospecto en la hoja y hacer crecer el número de prospectos | [009](009-whatsapp-lead-registry.md), [014](014-form-to-visit.md) | borrador |
@@ -43,7 +43,7 @@ El orden sigue la distancia a un ingreso, que es lo que mide Don Humberto y lo q
 
 1. **SPEC-014, etapa 1, y SPEC-007, etapa 1:** primer mensaje a cada formulario nuevo y recontacto a los prospectos activos, ambos con envío de un toque. No dependen de conectar el número.
 2. **SPEC-012:** informe de septiembre, atrasado.
-3. **SPEC-013:** conversión medida y revisión semanal de la campaña ya activa.
+3. **SPEC-013:** revisión semanal de la campaña, ya con conversión medida.
 4. **SPEC-002 + 008 + 009 + 014, etapa 2:** conectar el número y poner el asistente a responder, agendar visitas, registrar y actualizar la hoja.
 5. **SPEC-011:** acceso al WordPress, medición, indexación y velocidad.
 6. **SPEC-010:** calendario de blog y réplica en redes.
