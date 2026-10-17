@@ -32,3 +32,11 @@ Lecturas de las cuentas, sin cambios. El gasto es el "Costo neto" de Facturació
 - La cuenta muestra un crédito publicitario; vence el 2026-10-25.
 - **Hecho ese día:** límite de puja de $400 por clic, guardado y comprobado en la configuración.
 - **Más tarde ese día:** presupuesto en $2.750 al día y diez palabras nuevas, ambos comprobados en la cuenta; las palabras quedaron "en proceso de revisión".
+
+### 2026-10-17 (actualización de pendientes)
+
+- **Campaña (desde el 9 de octubre):** 382 apariciones, 56 clics, $23.931 antes de IVA, $427 por clic en promedio y 3 conversiones (unos $8.000 por conversión). Va al ritmo del presupuesto diario.
+- **El límite de $400 funcionó:** "residencia adulto mayor", una de las palabras nuevas, ya es la principal (186 apariciones, 28 clics, $294 por clic, 2 conversiones). "residencia tercera edad las condes" sigue cara ($786 por clic en el acumulado, que incluye los días sin límite) y lleva 1 conversión.
+- **Palabras:** todas en "Apto"; ya no hay ninguna en revisión. "residencia para adultos mayores" no tiene apariciones y "residencia tercera edad" tiene 18 apariciones sin clics.
+- **Conversiones:** "Clic en WhatsApp o formulario" está "Activa" y registra las 3. "Contacto (nuestraresidenciachile.cl/)" sigue "Esperando conversiones", porque el anuncio ya no lleva a `/contact/`. Hay otras dos acciones principales con "Configuración incorrecta", anteriores a la campaña: "Contactos (Objetivo predeterminado de la cuenta)" y la importación "Nuestra Residencia Chile (Respuestas)". Con "Maximizar clics" no afectan la puja, pero hay que resolverlas antes de pujar por conversiones.
+- **Hoja:** desde el 9 de octubre no hay filas nuevas en el formulario. Si las 3 conversiones fueron clics en WhatsApp, esos contactos no tienen fila ni ID hasta que Francisco los registre.
