@@ -174,7 +174,7 @@ function recordNrcReply_(spreadsheet, id, outcome, detail, date) {
   if (result) tab.getRange(row, config.outcomeColumn).setValue(result);
   const note = (result ? config.outcomeNotes[result] : config.repliedNote) + ' ' + nrcShortDay_(date || new Date());
   addNrcProspectNote_(spreadsheet, id, note, result === config.withdrawnOutcome);
-  if (!isBlankNrcValue_(detail)) addNrcProspectNote_(spreadsheet, id, String(detail).trim(), false);
+  if (!isBlankNrcValue_(detail)) addNrcProspectNote_(spreadsheet, id, String(detail).trim().replace(/\.+$/, ''), false);
   return true;
 }
 
