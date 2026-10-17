@@ -187,7 +187,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 ## Estado al 2026-10-17
 
-- **Hoja:** no hay prospectos nuevos desde los ID 22 y 23 (2026-10-09). Hay 8 activos: 11, 13, 14, 19, 20, 21, 22 y 23. El ID 15 quedó `desistió` el 2026-10-17: ya había respondido el 2026-09-04 que optaron por cuidado en su casa (el informe de septiembre lo daba como sin respuesta).
+- **Hoja:** no hay prospectos nuevos desde los ID 22 y 23 (2026-10-09). Hay 8 activos: 11, 13, 14, 19, 20, 21, 23 y 24. El ID 22 respondió el 2026-10-17 que su papá se queda en la residencia donde está: quedó `desistió`. El ID 15 quedó `desistió` el 2026-10-17: ya había respondido el 2026-09-04 que optaron por cuidado en su casa (el informe de septiembre lo daba como sin respuesta).
 - **Recontacto, 2026-10-17:** el asistente envió desde WhatsApp Web, con el sí de Francisco, RC-04 a 13, 14 y 21 y RC-03 a 22; quedaron marcados `Enviado` en la hoja. Sin respuesta previa en esos chats.
 - **ID 23:** tras la visita insistió en volver fuera del horario de visitas (lunes a viernes 10:00–11:30 y 14:00–16:00), que Frank fijó y ya exceptuó una vez. El 2026-10-17 Francisco le envió una versión del RC-03 que ofrece volver con su prima solo dentro de ese horario; quedó marcado `Enviado`. No ofrecerle horarios fuera de ese rango.
 - **ID 19:** respondió el 2026-10-13 "no se pudo concretar". El 2026-10-17 Francisco le preguntó si lo dejan para más adelante o si tomaron otra decisión; según la respuesta, `Resultado` pasa a `desistió` o `sigue pensando`.
