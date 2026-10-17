@@ -16,6 +16,8 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-10-13 | Sitio | Página de destino `/visita/` publicada | El anuncio llevaba a `/contact/`, con el menú del sitio y el formulario al final | No | Francisco ("publícala") |
 | 2026-10-13 | Google Ads | URL final del anuncio: de `/contact/` a `/visita/` | Llevar el clic a la página propia de la campaña | No | Francisco (confirmó identidad y guardó) |
 | 2026-10-13 | Google Ads y sitio | Acción de conversión "Clic en WhatsApp o formulario" (evento manual, principal); la página `/visita/` la envía desde sus botones | Medir el contacto y no solo la llegada | No | Francisco |
+| 2026-10-17 | Google Ads | Cinco negativas: gratuitos, gratuitas, "casa de acogida", "san vicente de paul", "san gerardo" | Primera revisión semanal: clics de quienes buscan hogares gratuitos o de beneficencia | No | Francisco ("agrégalas") |
+| 2026-10-17 | Google Ads | Dieciséis negativas. Otras comunas: macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel". Otras residencias y direcciones: acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección | Cerca de 10 de 40 clics de la semana buscaban otra residencia u hogar y ninguno trajo un prospecto; una de las 3 conversiones fue de alguien que buscaba otra residencia | No | Francisco ("agrega las 2"; las guardó él) |
 
 ## Revisiones
 
@@ -40,3 +42,15 @@ Lecturas de las cuentas, sin cambios. El gasto es el "Costo neto" de Facturació
 - **Palabras:** todas en "Apto"; ya no hay ninguna en revisión. "residencia para adultos mayores" no tiene apariciones y "residencia tercera edad" tiene 18 apariciones sin clics.
 - **Conversiones:** "Clic en WhatsApp o formulario" está "Activa" y registra las 3. "Contacto (nuestraresidenciachile.cl/)" sigue "Esperando conversiones", porque el anuncio ya no lleva a `/contact/`. Hay otras dos acciones principales con "Configuración incorrecta", anteriores a la campaña: "Contactos (Objetivo predeterminado de la cuenta)" y la importación "Nuestra Residencia Chile (Respuestas)". Con "Maximizar clics" no afectan la puja, pero hay que resolverlas antes de pujar por conversiones.
 - **Hoja:** desde el 9 de octubre no hay filas nuevas en el formulario. Si las 3 conversiones fueron clics en WhatsApp, esos contactos no tienen fila ni ID hasta que Francisco los registre.
+
+### 2026-10-17 (primera revisión semanal, adelantada del 19)
+
+Período: 13 al 17 de octubre, desde el límite de $400.
+
+- **Facturación:** octubre al día 17, $28.478. Al ritmo actual (unos $3.300 cobrados al día) cierra cerca de $78.000, dentro del presupuesto. Sin cambio de presupuesto.
+- **Campaña en el período:** unos 40 clics, cerca de $11.600 antes de IVA, 3 conversiones.
+- **"residencia tercera edad las condes":** 17 apariciones, 2 clics, $635, $318 por clic y 1 conversión: la conversión más barata de la campaña ("residencia adulto mayor" va en $4.114 por conversión). Lo caro del acumulado ($786 por clic) es de los días 9 al 12, sin límite. Con el límite pierde volumen: 17 apariciones en cinco días contra 79 en los cuatro anteriores. No cumple la regla de pausa (30 clics sin conversión). Francisco decidió mantenerla sin cambios hasta la próxima revisión.
+- **Términos de búsqueda:** 90 términos, casi todos de residencias privadas. Fuera de público: "hogares de ancianos gratuitos" y "hogares de ancianos gratuitos en santiago" (1 clic cada uno; la negativa `gratuito` no cubre el plural), "casa de acogida para adultos mayores", "hogar san vicente de paul ñuñoa" y "hogar san gerardo quilicura". Negativas propuestas: gratuitos, gratuitas, "casa de acogida", "san vicente de paul", "san gerardo". Agregadas ese día y comprobadas en la cuenta.
+- **Palabras:** "residencia para adultos mayores" sigue sin apariciones y "residencia tercera edad" lleva 18 apariciones sin clics.
+- **Hoja:** sin prospectos nuevos desde el 9 de octubre. Las 3 conversiones no tienen fila: si fueron clics en WhatsApp, esos contactos no se han registrado.
+- **WhatsApp, 13 al 17 de octubre:** un chat de una familia que cotiza para Providencia o Las Condes (16 de octubre), sin fila en la hoja. Los demás chats nuevos no son prospectos: una persona que buscaba a un familiar en otra residencia (14 de octubre; coincide con la conversión del término "acalis las condes direccion") y dos proveedores. Al menos una de las 3 conversiones no fue una consulta.

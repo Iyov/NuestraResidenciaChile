@@ -36,14 +36,16 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 - Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
 - Generales, limitadas por la zona: "residencia para adultos mayores", "residencia adulto mayor", "residencias adultos mayores", "residencia tercera edad".
 
-**Negativas (22):**
+**Negativas (43):**
 
 - Cuidados que la residencia no ofrece: "casa de reposo", cuidado, cuidados, enfermería, postrado.
-- Precio y empleo: baratas, gratis, gratuito, pensión, trabajo, empleo.
-- Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "hogar de cristo", "las rosas", fundacion, fundación, municipal.
+- Precio y empleo: baratas, gratis, gratuito, gratuitos, gratuitas, pensión, trabajo, empleo.
+- Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "hogar de cristo", "las rosas", "san vicente de paul", "san gerardo", "casa de acogida", fundacion, fundación, municipal.
 - Otros servicios: jardin, jardín, "centro de dia", "centro de día".
+- Comunas fuera de la zona: macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
+- Otras residencias y búsquedas de dirección: acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
 
-Las búsquedas por el nombre de otras residencias privadas no se excluyen: quien las busca es público de la residencia.
+Las búsquedas por el nombre de otras residencias se excluyen a medida que aparecen en los términos de búsqueda (Francisco, 2026-10-17): en la primera semana con límite de puja, cerca de un cuarto de los clics fueron de esas búsquedas y ninguno trajo un prospecto.
 
 **Anuncio (responsivo, 12 títulos y 4 descripciones):**
 

@@ -4,7 +4,7 @@
 
 1. **Personas primero:** ayudar a adultos mayores y familias con información clara, digna y comprobable; nunca presionar ni explotar su situación.
 2. **Humanos deciden el ingreso:** la IA no determina autovalencia, elegibilidad, necesidad clínica, admisión, precio excepcional ni capacidad disponible.
-3. **Datos mínimos:** consultar/escribir solo los datos necesarios para la tarea. No poner registros de prospectos, conversaciones completas, credenciales ni identificadores publicitarios en prompts, logs o fixtures.
+3. **Datos mínimos:** consultar/escribir solo los datos necesarios para la tarea. No poner registros de prospectos, conversaciones completas, credenciales ni identificadores publicitarios en logs, fixtures ni en el repositorio. El asistente que trabaja con Francisco sí puede leer la hoja completa y los chats de NRC (Francisco, 2026-10-17).
 4. **Permisos mínimos y separados:** lectura por defecto; acceso de escritura solo a campos autorizados. Enviar WhatsApp, publicar, modificar campañas o gastar requiere autorización explícita según la especificación funcional.
 5. **Fuente verificable:** usar hechos aprobados por NRC. Ante falta de información, responder que se confirmará y derivar a Francisco; no inventar tarifas, disponibilidad, salud, servicios ni testimonios.
 6. **Reversibilidad e idempotencia:** no sobrescribir IDs/estados de forma silenciosa; soportar reintentos sin duplicar mensajes, leads o citas; registrar eventos mínimos y reversibles.
