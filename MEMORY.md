@@ -190,7 +190,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - **Hoja:** no hay prospectos nuevos desde los ID 22 y 23 (2026-10-09). Hay 9 activos: 11, 13, 14, 15, 19, 20, 21, 22 y 23.
 - **Recontacto, segundo mensaje (RC-04):** los borradores para 13, 14, 15 y 21 están listos y sin enviar desde el 2026-10-15. Lo envía Francisco desde WhatsApp Web.
 - **Recontacto, primer mensaje a 22 y 23 (RC-03):** sigue sin enviar. Ya pasaron 8 días desde su visita, el plazo que Francisco quería esperar.
-- **ID 19:** respondió el 2026-10-13 "no se pudo concretar" y sigue `activo` sin `Resultado`; Francisco debe aclarar si desistió.
+- **ID 19:** respondió el 2026-10-13 "no se pudo concretar". El 2026-10-17 Francisco le preguntó si lo dejan para más adelante o si tomaron otra decisión; según la respuesta, `Resultado` pasa a `desistió` o `sigue pensando`.
 - **ID 11 y 20:** sin acción hasta noviembre. El 11 retoma en noviembre y el 20 volverá a visitar con su papá cerca de mediados de noviembre.
 - **Google Ads:** la primera revisión semanal se adelantó al 2026-10-17 (otra sesión; detalle en `specs/013-ads-log.md`): 21 negativas nuevas y "residencia tercera edad las condes" se mantiene. De las 3 conversiones, al menos una no fue consulta (alguien que buscaba otra residencia).
 - **Prospecto sin fila:** una familia que cotiza para Providencia o Las Condes escribió por WhatsApp el 2026-10-16 y no tiene fila ni ID. Francisco debe ingresarla con el formulario (origen WhatsApp).
