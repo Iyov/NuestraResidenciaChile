@@ -1,6 +1,6 @@
 # SPEC-013 — Operación de Google Ads
 
-**Estado:** campaña "Autovalentes zona oriente - Búsqueda" activa desde el 2026-10-09 y con conversión medida desde el 2026-10-13. La rutina semanal parte el 2026-10-19. Cubre R5 y parte de R1 de [requirements.md](requirements.md). Esta especificación es la fuente única de la configuración de la campaña; cada cambio queda en [013-ads-log.md](013-ads-log.md).
+**Estado:** campaña "Autovalentes zona oriente - Búsqueda" activa desde el 2026-10-09 y con conversión medida desde el 2026-10-13. La rutina semanal partió el 2026-10-17, adelantada del 19. Cubre R5 y parte de R1 de [requirements.md](requirements.md). Esta especificación es la fuente única de la configuración de la campaña; cada cambio queda en [013-ads-log.md](013-ads-log.md).
 
 ## Para qué sirve la campaña
 
@@ -107,7 +107,8 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 
 | Fecha | Qué |
 |---|---|
-| 2026-10-19 | Primera revisión semanal: términos de las palabras nuevas, estado de revisión de palabras y vínculos, primeras conversiones |
+| 2026-10-17 | Primera revisión semanal, adelantada del 19: hecha (ver el registro) |
+| 2026-10-26 | Segunda revisión semanal: efecto de las 21 negativas y de "residencia tercera edad las condes" |
 | 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; Francisco decide si se usa |
 | 2026-11-01 | Bajar el presupuesto a $2.200 al día |
 | 2026-11-09 | Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
