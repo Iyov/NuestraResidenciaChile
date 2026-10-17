@@ -187,9 +187,9 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 ## Estado al 2026-10-17
 
-- **Hoja:** no hay prospectos nuevos desde los ID 22 y 23 (2026-10-09). Hay 9 activos: 11, 13, 14, 15, 19, 20, 21, 22 y 23.
-- **Recontacto, segundo mensaje (RC-04):** los borradores para 13, 14, 15 y 21 están listos y sin enviar desde el 2026-10-15. Lo envía Francisco desde WhatsApp Web.
-- **Recontacto, primer mensaje a 22 y 23 (RC-03):** sigue sin enviar. Ya pasaron 8 días desde su visita, el plazo que Francisco quería esperar.
+- **Hoja:** no hay prospectos nuevos desde los ID 22 y 23 (2026-10-09). Hay 8 activos: 11, 13, 14, 19, 20, 21, 22 y 23. El ID 15 quedó `desistió` el 2026-10-17: ya había respondido el 2026-09-04 que optaron por cuidado en su casa (el informe de septiembre lo daba como sin respuesta).
+- **Recontacto, 2026-10-17:** el asistente envió desde WhatsApp Web, con el sí de Francisco, RC-04 a 13, 14 y 21 y RC-03 a 22; quedaron marcados `Enviado` en la hoja. Sin respuesta previa en esos chats.
+- **ID 23:** su RC-03 queda sin enviar por decisión de Francisco: tras la visita insistió en volver fuera del horario de visitas (lunes a viernes 10:00–11:30 y 14:00–16:00), que Frank fijó y ya exceptuó una vez. No ofrecerle horarios fuera de ese rango.
 - **ID 19:** respondió el 2026-10-13 "no se pudo concretar". El 2026-10-17 Francisco le preguntó si lo dejan para más adelante o si tomaron otra decisión; según la respuesta, `Resultado` pasa a `desistió` o `sigue pensando`.
 - **ID 11 y 20:** sin acción hasta noviembre. El 11 retoma en noviembre y el 20 volverá a visitar con su papá cerca de mediados de noviembre.
 - **Google Ads:** la primera revisión semanal se adelantó al 2026-10-17 (otra sesión; detalle en `specs/013-ads-log.md`): 21 negativas nuevas y "residencia tercera edad las condes" se mantiene. De las 3 conversiones, al menos una no fue consulta (alguien que buscaba otra residencia).
