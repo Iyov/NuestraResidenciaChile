@@ -4,7 +4,7 @@
 
 ## Reglas
 
-- El ID es un entero positivo: con los IDs actuales 1–21, la siguiente persona nueva recibe el 22.
+- El ID es un entero positivo: la siguiente persona nueva recibe el mayor ID de la columna `#` más uno. Si la columna tiene un valor que no es entero, el script se detiene.
 - Las filas en blanco se ignoran; el activador procesa la fila real del envío, no filas vacías o espaciadoras.
 - Un reintento del mismo activador no vuelve a asignar ID ni sobrescribe uno existente.
 - Para conservar el ID de un prospecto que vuelve a enviar el formulario, se compara el nombre normalizado del adulto mayor y el teléfono normalizado. Si hay coincidencias con IDs distintos, el script se detiene para revisión manual.

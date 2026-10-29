@@ -35,7 +35,7 @@ La hoja no se abre desde el Worker. La atiende una aplicación web de Apps Scrip
 
 Está activo salvo que `SHADOW_MODE` valga exactamente `off`. En modo sombra ningún mensaje llega a un prospecto: Francisco recibe "Modo sombra · habría respondido: …" con el texto aprobado, además de los avisos normales. Los comandos y las pausas funcionan igual.
 
-## Puesta en marcha (hechos: el paso 2 y, del paso 1, el `clasp push` y las dos columnas)
+## Puesta en marcha (hechos: el paso 2 y todo el paso 1 salvo publicar la aplicación web)
 
 Cada paso lo ejecuta Francisco con las cuentas de NRC. Los secretos se escriben en la terminal o en el panel correspondiente, nunca en el repositorio ni en un chat.
 
@@ -68,6 +68,7 @@ El servicio solo responde a mensajes entrantes; no tiene ninguna ruta para inici
 3. Plantilla de aviso para cuando Francisco no le ha escrito al número de NRC en 24 horas. Sin ella, ese aviso falla y solo queda el registro del Worker.
 4. Verificar si se puede responder a un contacto que llega sin teléfono.
 5. Dos mensajes simultáneos del mismo chat pueden pisar el estado entre sí; con el volumen de NRC es improbable, pero no está resuelto.
+6. MSG-07 (Francisco, 2026-10-19): a un número desconocido que pide visita o evaluación se le envía MSG-07 en vez del formulario (MSG-02). El código todavía envía MSG-02.
 
 ## Datos
 
