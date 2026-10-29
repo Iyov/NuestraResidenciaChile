@@ -18,6 +18,7 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-10-13 | Google Ads y sitio | Acción de conversión "Clic en WhatsApp o formulario" (evento manual, principal); la página `/visita/` la envía desde sus botones | Medir el contacto y no solo la llegada | No | Francisco |
 | 2026-10-17 | Google Ads | Cinco negativas: gratuitos, gratuitas, "casa de acogida", "san vicente de paul", "san gerardo" | Primera revisión semanal: clics de quienes buscan hogares gratuitos o de beneficencia | No | Francisco ("agrégalas") |
 | 2026-10-17 | Google Ads | Dieciséis negativas. Otras comunas: macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel". Otras residencias y direcciones: acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección | Cerca de 10 de 40 clics de la semana buscaban otra residencia u hogar y ninguno trajo un prospecto; una de las 3 conversiones fue de alguien que buscaba otra residencia | No | Francisco ("agrega las 2"; las guardó él) |
+| 2026-10-19 | Google Ads | Cuatro negativas: "nenita y rosario", concepcion, concepción, "senior suite" | Revisión adicional: clics del 18 y 19 de octubre de búsquedas de otro lugar, otra ciudad y otra residencia ("senior suites" no cubre el singular) | No | Francisco ("agrega las 4 palabras negativas, yo apruebo") |
 
 ## Revisiones
 
@@ -54,3 +55,12 @@ Período: 13 al 17 de octubre, desde el límite de $400.
 - **Palabras:** "residencia para adultos mayores" sigue sin apariciones y "residencia tercera edad" lleva 18 apariciones sin clics.
 - **Hoja:** sin prospectos nuevos desde el 9 de octubre. Las 3 conversiones no tienen fila: si fueron clics en WhatsApp, esos contactos no se han registrado.
 - **WhatsApp, 13 al 17 de octubre:** un chat de una familia que cotiza para Providencia o Las Condes (16 de octubre), sin fila en la hoja. Los demás chats nuevos no son prospectos: una persona que buscaba a un familiar en otra residencia (14 de octubre; coincide con la conversión del término "acalis las condes direccion") y dos proveedores. Al menos una de las 3 conversiones no fue una consulta.
+
+### 2026-10-19 (revisión adicional)
+
+Motivo: correo automático de Google Ads ("deja de desperdiciar tu presupuesto en clics no deseados"), que es una sugerencia genérica.
+
+- **Campaña (9 al 18 de octubre):** 528 apariciones, 78 clics, $30.530 antes de IVA, 4 conversiones. Presupuesto de $2.750 al día, sin problemas de publicación. Va dentro del presupuesto del mes.
+- **Negativas:** 43 en la campaña, agregadas el 13 y el 17 de octubre; cubren casi todos los términos que el correo podía señalar.
+- **18 y 19 de octubre (después de las negativas del 17):** 13 clics, $3.988 y 1 conversión. Fuera de público: "nenita y rosario" (2 clics, nombre de otro lugar), "casa del adulto mayor concepcion" (otra ciudad) y "senior suite precios" (la negativa "senior suites" no cubre el singular).
+- **Hecho ese día:** cuatro negativas ("nenita y rosario", concepcion, concepción, "senior suite"); la campaña quedó con 47, comprobado en la cuenta.

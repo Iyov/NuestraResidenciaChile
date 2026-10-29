@@ -65,6 +65,9 @@ Notas de las filas:
 | MSG-03 | Consulta fuera de la base o derivada | Gracias por tu consulta. Déjame revisarlo bien para darte la información correcta; te respondo a la brevedad. | aprobada (Francisco, 2026-10-08) |
 | MSG-05 | La persona solo saluda o dice su nombre, ya saludada | Mucho gusto. Cuéntame, ¿en qué te puedo ayudar? | aprobada (Francisco, 2026-10-08) |
 | MSG-06 | Primer mensaje de un chat, cuando el nombre ya está en el formulario | ¡Hola {nombre}, buenas tardes! Mucho gusto, hablas con Francisco Barrientos, asesor de Nuestra Residencia Chile. | aprobada (Francisco, 2026-10-09) |
+| MSG-07 | Persona nueva (sin fila en la hoja) que pide visita o evaluación | ¡Hola {nombre}, buenas tardes! Te saluda Francisco Barrientos, de Nuestra Residencia Chile, una residencia para personas mayores autovalentes en Las Condes. Con gusto coordinamos una visita. Las visitas son de lunes a viernes, entre 10:00 y 11:30 o entre 14:00 y 16:00. Para agendarla, ¿me ayudas con estos datos? Tu nombre y apellido; tu email; nombre y edad de la persona mayor; si es autovalente, es decir, si se maneja de forma independiente en su día a día. Y cuéntame qué día y hora te acomoda. | aprobada (Francisco, 2026-10-19; él mismo lo envió ese día) |
+
+MSG-07 pide en el chat los datos del formulario para que el prospecto se pueda ingresar a la hoja (Francisco, 2026-10-19): nombre y apellido, email, nombre del adulto mayor, si es o no autovalente y su edad. El teléfono no se pide: se toma del mismo chat, y el origen es WhatsApp. Los datos se piden cuando la persona quiere visitar; quien solo pregunta precio o disponibilidad no se ingresa todavía. Con los datos y la intención de visita, se ingresa por el formulario. En WhatsApp, a quien pide visita se le envía MSG-07 en vez del enlace de MSG-02. Si no se sabe el nombre, el saludo va sin `{nombre}`.
 
 MSG-02 depende de SPEC-004: el formulario aún no tiene aviso de privacidad aprobado.
 
