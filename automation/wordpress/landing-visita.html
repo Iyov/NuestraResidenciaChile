@@ -27,7 +27,9 @@
 #nrc-formulario{margin-top:20px}
 #nrc-formulario iframe{width:100%;height:1250px;border:0;border-radius:12px;background:#fff}
 .nrc-pie{font-size:.9rem;color:#51626a;margin-top:28px;text-align:center}
+.nrc-fija{display:none}
 @media(max-width:600px){.nrc-visita{padding:18px 10px}#nrc-formulario iframe{height:1700px}}
+@media(max-width:799px){.nrc-lp{padding-bottom:96px}.nrc-fija{display:block;position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);box-shadow:0 -2px 10px rgba(0,0,0,.12)}.nrc-fija .nrc-btn{display:block;width:100%;text-align:center}}
 @media(min-width:800px){.nrc-hero{grid-template-columns:1.05fr .95fr}.nrc-hero h1{font-size:2.5rem}.nrc-hero img{height:440px}.nrc-lista{grid-template-columns:repeat(2,1fr)}.nrc-fotos{grid-template-columns:repeat(4,1fr)}.nrc-fotos img{height:240px}}
 </style>
 <div class="nrc-lp">
@@ -45,6 +47,7 @@
         <button type="button" class="nrc-btn form" onclick="nrcFormulario()">Agenda tu visita</button>
       </div>
       <p class="nrc-nota">Visitas de lunes a viernes, de 10:00 a 11:30 y de 14:00 a 16:00.</p>
+      <p class="nrc-nota">Autovalente: persona mayor que se maneja de forma independiente en su día a día.</p>
     </div>
     <img src="https://nuestraresidenciachile.cl/wp-content/uploads/2026/06/Nuestra-Residencia-para-Adultos-Mayores-Autovalentes-en-Las-Condes-06-768x1024.jpg" alt="Jardín y sendero de Nuestra Residencia en Las Condes" width="768" height="1024">
   </section>
@@ -80,6 +83,9 @@
   </section>
 
   <p class="nrc-pie">Nuestra Residencia Chile · Camino Las Flores 10961, Las Condes, Santiago · nuestraresidenciachile@gmail.com</p>
+  <div class="nrc-fija">
+    <a class="nrc-btn wa" href="https://wa.me/56965291181?text=Hola%2C%20quiero%20agendar%20una%20visita%20a%20Nuestra%20Residencia" target="_blank" rel="noopener" onclick="nrcClic('whatsapp')">Escríbenos por WhatsApp</a>
+  </div>
 </div>
 <script>
 function nrcClic(tipo){try{if(typeof gtag==='function'){gtag('event','contact_link_click',{link_type:tipo,page_name:'visita'});gtag('event','conversion',{send_to:'AW-18362783645/CFweCPPDh5sdEJ2vh7RE'});}}catch(e){}}

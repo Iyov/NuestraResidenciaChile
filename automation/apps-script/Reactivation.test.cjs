@@ -262,6 +262,41 @@ test('a new form gets its ID and a first-contact draft, even before Seguimiento 
   assert.match(run.tab()[0][4], /^Hola Ana, ¿cómo estás\? .*Recibí tu solicitud/);
 });
 
+test('opening the sheet keeps the first-contact draft while Seguimiento is still blank', () => {
+  const run = createContext([
+    row(21, 'Luis Ejemplo', '56900000021', 'No', 'No', 'activo'),
+    row('', 'Ana Prueba', '56900000022', '', '', '', { at: NOW }),
+  ]);
+
+  submit(run, 3);
+  run.context.buildNrcReactivationDrafts();
+
+  assert.deepEqual(run.tab().map((cells) => [cells[0], cells[3]]), [[22, 'PC-01'], [21, 'RC-01']]);
+});
+
+test('a form from the last days gets its first-contact draft when the sheet is opened', () => {
+  const run = createContext([
+    row(22, 'Ana Prueba', '56900000022', '', '', '', { at: new Date('2026-10-19T15:00:00Z') }),
+    row(23, 'Eva Antigua', '56900000023', '', '', ''),
+  ]);
+
+  run.context.buildNrcReactivationDrafts();
+
+  // The old row with a blank Seguimiento still waits for Francisco.
+  assert.deepEqual(run.tab().map((cells) => [cells[0], cells[1], cells[3]]), [[22, 'nuevo', 'PC-01']]);
+});
+
+test('a prospect whose first contact was sent keeps its follow-ups with a blank Seguimiento', () => {
+  const run = createContext([
+    row(22, 'Ana Prueba', '56900000022', '', '', '', { at: new Date('2026-10-10T15:00:00Z') }),
+  ]);
+  run.sheets.get('Recontacto').appendRow([22, 'nuevo', 1, 'PC-01', 'texto', 'enlace', true, new Date('2026-10-11T15:00:00Z'), false, '']);
+
+  run.context.buildNrcReactivationDrafts();
+
+  assert.deepEqual(run.tab().map((cells) => [cells[0], cells[3]]), [[22, 'PC-01'], [22, 'RC-04']]);
+});
+
 test('a repeated form reuses the ID and does not queue another first contact', () => {
   const run = createContext([
     row(21, 'Luis Ejemplo', '56900000021', 'No', 'No', 'activo'),

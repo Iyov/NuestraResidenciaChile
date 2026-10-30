@@ -301,8 +301,16 @@ function chooseNrcNextTouch_(prospect, history, options, result) {
     Array.prototype.push.apply(result.reviewRows, prospect.reviewRows);
     return null;
   }
+  // A form arrives with `Seguimiento` blank: a recent one, or one already in the
+  // first-contact flow, counts as active until Francisco fills the cell.
+  const firstContact = history.pending.concat(history.sent).some(function (entry) {
+    return entry.message === 'PC-01';
+  });
+  const recentForm = !prospect.scheduled && !prospect.visited && prospect.submittedAt
+    && nrcDaysBetween_(prospect.submittedAt, options.now) <= config.freshLeadDays;
+  const blankAllowed = options.allowBlankFollowUp || firstContact || recentForm;
   const allowed = prospect.followUps.every(function (value) {
-    return value === 'activo' || (options.allowBlankFollowUp && value === '');
+    return value === 'activo' || (blankAllowed && value === '');
   });
   if (!allowed) { result.notActive += 1; return null; }
   if (!prospect.phone) { result.noPhone += 1; return null; }

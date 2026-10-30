@@ -67,6 +67,7 @@ node --test automation/apps-script/WhatsAppSheetAdapter.test.cjs
 
 - `buildNrcReactivationDrafts`: se ejecuta desde el editor. Crea la pestaña si falta y agrega una fila por prospecto `activo` al que le toca un mensaje. Devuelve y registra solo cantidades y números de fila.
 - El activador del formulario agrega una fila con el primer mensaje cuando asigna un ID nuevo, solo si la pestaña ya existe.
+- Con `Seguimiento` vacío, un prospecto cuenta como activo si su formulario tiene 3 días o menos o si ya tiene el primer mensaje (PC-01) en la pestaña; si no, espera a que Francisco llene la celda. Antes del 2026-10-29, al abrir la hoja se borraba el borrador PC-01 de todo formulario nuevo.
 - `onOpen`: activador simple que actualiza la pestaña al abrir la hoja, solo si la pestaña ya existe.
 - `onEdit`: activador simple, limitado a la pestaña `Recontacto`. Al marcar `Enviado` anota la fecha y agrega `Recontactado dd/mm.` al final de `Estado` del prospecto. Al elegir un `Resultado` marca `Respondió` y agrega su nota; con `desistió` cambia además `Seguimiento` e `Ingresó?` (si estaba vacío o en `No Aún`). No escribe ninguna otra celda de la pestaña de respuestas (subido el 2026-10-11).
 

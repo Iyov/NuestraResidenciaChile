@@ -23,20 +23,21 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 |---|---|
 | Tipo | Búsqueda, sin socios de búsqueda ni Red de Display |
 | Presupuesto | $2.750 al día hasta el 31 de octubre; $2.200 al día desde el 1 de noviembre |
-| Puja | Maximizar clics, con límite de $400 por clic |
+| Puja | Maximizar clics, con límite de $300 por clic (desde el 2026-10-29; antes $400) |
 | Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
+| Dispositivos | Celulares y tablets; computadores con ajuste de -80 % desde el 2026-10-29 (se puja el 20 % de lo normal) |
 | Idioma | Español |
 | Destino | `https://nuestraresidenciachile.cl/visita/`, página propia de la campaña (fuente en `automation/wordpress/landing-visita.html`) |
 | Opciones de IA de Google | IA Max, personalización de texto y expansión de la URL final desactivadas |
 
-**Palabras clave (concordancia de frase, 17):**
+**Palabras clave (17 activas, en concordancia de frase salvo [residencia adulto mayor], exacta desde el 2026-10-29):**
 
 - Autovalentes: "residencia adulto mayor autovalente", "residencia adultos mayores autovalentes", "senior living santiago".
 - Las Condes: "residencia adultos mayores las condes", "residencia adulto mayor las condes", "residencia senior las condes", "residencia tercera edad las condes", "hogar adulto mayor las condes".
 - Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
-- Generales, limitadas por la zona: "residencia para adultos mayores", "residencia adulto mayor", "residencias adultos mayores", "residencia tercera edad".
+- Generales, limitadas por la zona: "residencia para adultos mayores", [residencia adulto mayor] (exacta; la de frase quedó detenida el 2026-10-29 por su costo por conversión), "residencias adultos mayores", "residencia tercera edad".
 
-**Negativas (43):**
+**Negativas (59 desde el 2026-10-29; el detalle de las agregadas después del 13 está en el registro):**
 
 - Cuidados que la residencia no ofrece: "casa de reposo", cuidado, cuidados, enfermería, postrado.
 - Precio y empleo: baratas, gratis, gratuito, gratuitos, gratuitas, pensión, trabajo, empleo.
@@ -109,9 +110,10 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 |---|---|
 | 2026-10-17 | Primera revisión semanal, adelantada del 19: hecha (ver el registro) |
 | 2026-10-19 | Revisión adicional pedida por Francisco: hecha (ver el registro); 4 negativas más |
-| 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; Francisco decide si se usa |
-| 2026-10-26 | Segunda revisión semanal: efecto de las 25 negativas del 17 y del 19 y de "residencia tercera edad las condes" |
-| 2026-11-01 | Bajar el presupuesto a $2.200 al día |
+| 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; el 2026-10-29 el resumen de facturación ya no muestra crédito |
+| 2026-10-26 | Segunda revisión semanal: hecha el 2026-10-29 (ver el registro); 12 negativas más |
+| 2026-11-01 | Bajar el presupuesto a $2.200 al día: lo hace una regla automática creada el 2026-10-29 |
+| 2026-11-02 | Revisión semanal; comprobar que la regla dejó el presupuesto en $2.200 |
 | 2026-11-09 | Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
 
 ## Decisiones abiertas
