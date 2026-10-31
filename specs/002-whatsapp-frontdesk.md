@@ -1,6 +1,8 @@
 # SPEC-002 — Recepción y respuesta por WhatsApp
 
-**Estado:** `local`. Reglas, base de respuestas ([Anexo A](002-faq-base.md)) y proveedor definidos el 2026-10-08; la lógica y el adaptador de YCloud están en `automation/whatsapp/` con pruebas sintéticas. No hay número conectado, servicio desplegado ni mensaje enviado a prospectos.
+**Archivado el 2026-10-29 (Francisco):** la atención por WhatsApp se hace con WhatsApp Web supervisado: el asistente lee los chats en Chrome DEV, prepara las respuestas y Francisco las aprueba (o las envía él). La respuesta inmediata a contactos nuevos la da el mensaje de bienvenida de WhatsApp Business (MSG-08 del [Anexo A](002-faq-base.md)), que se configura en la app del teléfono. YCloud, el Worker de Cloudflare y la aplicación web de la hoja quedan sin desplegar; el código se conserva por si el volumen de consultas lo justifica. El número de NRC ya usa WhatsApp Business.
+
+**Estado:** `local`, archivado. Reglas, base de respuestas ([Anexo A](002-faq-base.md)) y proveedor definidos el 2026-10-08; la lógica y el adaptador de YCloud están en `automation/whatsapp/` con pruebas sintéticas. No hay número conectado, servicio desplegado ni mensaje enviado a prospectos.
 
 **Reglas reemplazadas el 2026-10-09** (ver [requirements.md](requirements.md)); las tres especificaciones nuevas están en borrador y este documento describe lo que el código hace hoy:
 

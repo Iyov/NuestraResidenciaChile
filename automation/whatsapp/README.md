@@ -1,6 +1,8 @@
 # Asistente de WhatsApp (SPEC-002) — lógica local
 
-**Estado: local.** Este código no está conectado a WhatsApp, a YCloud ni a la hoja de Google, y no está desplegado en ninguna parte. Solo se ha ejecutado con pruebas sintéticas.
+**Estado: archivado (2026-10-29).** Francisco decidió atender WhatsApp con WhatsApp Web supervisado y el mensaje de bienvenida de WhatsApp Business; ver [SPEC-002](../../specs/002-whatsapp-frontdesk.md). La puesta en marcha de abajo queda como referencia.
+
+**Estado del código: local.** Este código no está conectado a WhatsApp, a YCloud ni a la hoja de Google, y no está desplegado en ninguna parte. Solo se ha ejecutado con pruebas sintéticas.
 
 Requisitos y decisiones: [`specs/002-whatsapp-frontdesk.md`](../../specs/002-whatsapp-frontdesk.md). Textos y su estado de aprobación: [`specs/002-faq-base.md`](../../specs/002-faq-base.md).
 
