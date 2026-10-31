@@ -1,6 +1,6 @@
 # Memoria de proyecto — Nuestra Residencia Chile
 
-**Actualizada:** 2026-10-29. Esta memoria guarda decisiones reutilizables para futuras sesiones; los datos de prospectos/residentes no pertenecen aquí.
+**Actualizada:** 2026-10-31. Esta memoria guarda decisiones reutilizables para futuras sesiones; los datos de prospectos/residentes no pertenecen aquí.
 
 ## Propósito y objetivo comercial
 
@@ -185,8 +185,15 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 - **Acceso al WordPress (2026-10-13):** Francisco creó una contraseña de aplicación y la guardó en `.env` (`NRC_WP_APP_PASSWORD`); el usuario es administrador y la API REST responde. El sitio usa Elementor. Con ese acceso se creó como borrador la página de destino `/visita/` (página 17773, plantilla sin encabezado ni pie): textos de hechos aprobados, cuatro fotos sin personas, botón de WhatsApp y formulario que se carga al pulsar. Francisco la aprobó y se publicó ese mismo día en `/visita/`, revisada en celular, tablet y escritorio. Francisco confirmó identidad y el anuncio apunta a `/visita/` desde ese día. La página envía a Google Ads la conversión "Clic en WhatsApp o formulario" cuando alguien pulsa uno de sus botones; el 2026-10-17 la acción estaba "Activa" y llevaba 3 registros.
 
-## Estado al 2026-10-29
+## Estado al 2026-10-31
 
+- **Lectura del 2026-10-31 (WhatsApp y hoja desde el 29 por la noche):**
+  - **ID 26: visita agendada el lunes 2026-11-02 a las 16:00**, confirmada con Frank el 30. Respondió el 30 a las 9:05: su abuela tiene 76 años y se maneja de forma independiente, con ayuda en algunas cosas. El asistente anotó en la hoja edad, `Agendo Visita`, fecha, hora y `Seguimiento` = Activo, y `quiere visita` en `Recontacto` (con fecha de visita futura no se le prepara recordatorio).
+  - **Frank respondió el 29 a las 21:55 "Si no hay problema"** a la consulta del ID 24 (detergente propio y comida sin gluten). Falta recontactar al ID 24 con esa información e invitarla a visitar.
+  - **Quien pidió visita el 21 (sin fila) se cerró:** el 29 respondió que encontraron una residencia en Providencia que pudieron visitar un fin de semana. Nota de Francisco del 30: varios prospectos no pueden visitar en la semana por trabajo y las visitas deberían poder ser el fin de semana. Hoy el horario lo fija Frank (lunes a viernes); es una decisión pendiente con él y Don Humberto.
+  - **Contacto nuevo del 29 a las 23:29 (sin fila):** escribió con el texto del botón de `/visita/` ("Hola, quiero agendar una visita…") y preguntó por disponibilidad. Francisco le respondió el 30 a las 8:52 con el horario de visitas; no ha contestado. Es el primer contacto llegado por el botón después de los cambios del 29.
+  - **MSG-08 (bienvenida):** Francisco se envió el texto a su número el 29 a las 21:40, pero el contacto de las 23:29 no recibió respuesta automática: el mensaje de bienvenida no estaba activo esa noche. Comprobarlo en el próximo contacto nuevo.
+  - Sin respuesta: ID 25 (desde el 20), ID 13 (RC-05, último mensaje) e ID 19. El ID 14 quedó `sigue pensando` el 29. Un vendedor de servicio de rescate escribió el 30: no es prospecto.
 - **Lectura del 2026-10-29 (hoja, WhatsApp y Google Ads desde el 19):**
   - Filas nuevas: ID 25 (2026-10-19; es la consulta de WhatsApp que pidió "evaluación" y luego llenó el formulario; Francisco le preguntó la edad del adulto mayor el 20 y no ha respondido) e ID 26 (2026-10-28, Sitio Web; escribió por WhatsApp el 28 y el 29 sin respuesta de NRC hasta esta lectura). Ambos marcaron "No sé a qué se refiere" en autovalencia. `Seguimiento` está vacío en los dos.
   - Sin fila: una persona que pidió visita el 21 (quería fin de semana; el 22 pidió viernes en la tarde y Francisco le pidió hora y los datos de MSG-07, sin respuesta) y una que llegó desde el sitio el 23 (Francisco le envió el enlace de servicios el 25, sin respuesta). Un estudiante universitario pidió el 29 hacer una actividad con residentes (no es prospecto; decide Francisco).
@@ -207,7 +214,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - **ID 23:** respondió el 2026-10-17 solo agradeciendo, sin pedir visita; quedó `Respondió` sin resultado.
 - **Consultas nuevas del 2026-10-17 por WhatsApp (sin fila):** una por un hombre de 82 años con Parkinson en silla de ruedas (no autovalente; Francisco respondió él mismo) y otra por pieza individual para una persona con Alzheimer. A esta última se le preguntó edad, etapa y si necesita ayuda para vestirse, comer o moverse; si resulta autovalente, ingresarla por el formulario.
 - **Prospecto sin fila:** una familia que cotiza para Providencia o Las Condes escribió por WhatsApp el 2026-10-16 y no tiene fila ni ID. El 2026-10-19 dio su nombre y pidió información (ver arriba). Se ingresa con el formulario (origen WhatsApp) solo cuando haya más datos y muestre interés en visitar (Francisco, 2026-10-19).
-- **Calendario:** 2026-11-01 presupuesto a $2.200 al día (regla automática); 2026-11-02 revisión semanal y comprobar el presupuesto; 2026-11-09 decidir si se puja por conversiones (antes, resolver las dos acciones con "Configuración incorrecta").
+- **Calendario:** 2026-11-01 presupuesto a $2.200 al día (regla automática); 2026-11-02 visita del ID 26 a las 16:00, revisión semanal de Google Ads y comprobar el presupuesto; 2026-11-09 decidir si se puja por conversiones (antes, resolver las dos acciones con "Configuración incorrecta").
 
 ## Decisiones abiertas / bloqueos
 
@@ -215,10 +222,11 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - Confirmar el responsable legal de los datos, datos de contacto de privacidad y períodos de retención.
 - El asistente no puede inferir elegibilidad ni inventar datos: las respuestas de `specs/002-faq-base.md` describen la residencia en general y nunca dicen si una persona puede ingresar.
 - **WhatsApp (decisión de Francisco, 2026-10-29):** se atiende con WhatsApp Web supervisado en Chrome DEV y el mensaje de bienvenida de WhatsApp Business (MSG-08, se configura en el teléfono). YCloud, el Worker y la aplicación web de la hoja quedan archivados; el número ya usa WhatsApp Business. Revisar los chats en cada sesión. Pulsar enviar en WhatsApp Web requiere un permiso de Claude Code que Francisco no ha dado: mientras tanto, el asistente deja borradores y él los envía.
-- SPEC-003: sin integración (2026-10-29); la consulta a Nico y Frank se hace por WhatsApp Web. Falta decidir dónde se registra la visita por prospecto.
-- Acordar cadencia y destinatarios del informe; el formato quedó definido en `automation/acquisition/report.cjs`.
+- SPEC-003: sin integración (2026-10-29); la consulta a Nico y Frank se hace por WhatsApp Web y la visita se anota en `Agendo Visita`, `Fecha Visita` y `Hora Visita` de la hoja.
+- **Visitas el fin de semana (nota de Francisco, 2026-10-30):** varios prospectos no pueden visitar de lunes a viernes por trabajo, y uno se fue a otra residencia que sí recibía el fin de semana. Proponerlo a Frank y Don Humberto; mientras no cambie, no ofrecer horarios fuera de lunes a viernes, 10:00–11:30 y 14:00–16:00.
+- Informe para Don Humberto: el formato vigente es el de la decisión 13 (DOCX con nombres, en Drive). SPEC-012 y `automation/acquisition/report.cjs` siguen el diseño anterior y falta reescribirlos.
 - Google Ads: campaña "Autovalentes zona oriente - Búsqueda" activa desde el 2026-10-09; configuración vigente, medición y calendario en SPEC-013. Próximos hitos: revisión semanal (la próxima, el 2026-11-02) y presupuesto a $2.200 al día el 2026-11-01, por regla automática. Al operar Google Ads desde el Chrome de Francisco, el entorno bloquea de forma intermitente los pasos que comprometen gasto y Google pide confirmar identidad: el clic de publicar y esa confirmación los hace Francisco. Revisar consentimientos antes de habilitar conversiones avanzadas/importaciones.
-- Obtener acceso al WordPress activo o su fuente fiable/staging antes de cambiar el sitio. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
+- WordPress: hay acceso por API desde el 2026-10-13 (`automation/wordpress/wp.cjs`); cambiar páginas sigue requiriendo el sí de Francisco. Validar local pages, disponibilidad, datos del equipo, testimonios e imágenes antes de SEO/social.
 - SPEC-006: enviar el correo de prueba, confirmar que el aviso llega y ajustar las reglas con las primeras semanas de avisos.
 
 ## Referencias operativas
