@@ -118,6 +118,20 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-11-02 | Revisión semanal: adelantada al 2026-11-01 (ver el registro); límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
 | 2026-11-09 | Medir el gasto diario con el límite de $350. Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
 
+## Pendientes (al 2026-11-01)
+
+Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
+
+1. **Revisión del 2026-11-09:** gasto diario con el límite de $350 (si sigue bajo $2.200, subirlo de nuevo), costo por conversión de la semana y prospectos nuevos en la hoja y WhatsApp.
+2. **Puja por conversiones (decidir el 2026-11-09):** antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario"; "Contacto (nuestraresidenciachile.cl/)" y "Enviar formularios de clientes potenciales" no registran nada.
+3. **Palabras sin apariciones:** "residencia para adultos mayores", "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes" (paso 4 de la rutina: reemplazarlas).
+4. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
+5. **"residencias adultos mayores":** pasó a ser la principal sin conversiones (8 clics en octubre, 6 desde el 29); pausar si llega a 30 clics sin conversión.
+6. **Negativa candidata "casas de reposo":** la negativa de frase "casa de reposo" no cubre el plural, que trajo clics desde el 29.
+7. **Recursos sugeridos por Google:** textos destacados e imágenes (fotos sin personas de `/visita/`), solo con hechos aprobados.
+8. **AC-004 a las cuatro semanas (2026-11-09):** ningún término con más de 5 clics de cuidados, empleo, beneficencia o precios bajos.
+
 ## Decisiones abiertas
 
 - Si parte del presupuesto va a Meta, que es lo que nombra el contrato.
+- Conversiones avanzadas e importación desde la hoja: siguen apagadas hasta que Toto las apruebe (REQ-006).
