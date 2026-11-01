@@ -112,8 +112,8 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-10-19 | Revisión adicional pedida por Francisco: hecha (ver el registro); 4 negativas más |
 | 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; el 2026-10-29 el resumen de facturación ya no muestra crédito |
 | 2026-10-26 | Segunda revisión semanal: hecha el 2026-10-29 (ver el registro); 12 negativas más |
-| 2026-11-01 | Bajar el presupuesto a $2.200 al día: lo hace una regla automática creada el 2026-10-29 |
-| 2026-11-02 | Revisión semanal; comprobar que la regla dejó el presupuesto en $2.200 |
+| 2026-11-01 | Bajar el presupuesto a $2.200 al día: la regla automática lo hizo (comprobado el 2026-11-01) |
+| 2026-11-02 | Revisión semanal: medir el costo por conversión desde los cambios del 29 y si el límite de $300 deja presupuesto sin gastar |
 | 2026-11-09 | Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
 
 ## Decisiones abiertas

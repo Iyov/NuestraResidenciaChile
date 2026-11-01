@@ -187,6 +187,7 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 
 ## Estado al 2026-10-31
 
+- **2026-11-01:** Google Ads revisado (detalle en `specs/013-ads-log.md`): la regla dejó el presupuesto en $2.200 al día; octubre cerró en $73.879 cobrados; con el límite de $300 la campaña gasta cerca de $1.500 al día. Informe de octubre para Don Humberto redactado en el formato de septiembre (DOCX en `InformesNRC/2026-10/` y en la carpeta de Drive `InformesNRC`); Francisco lo revisa y lo envía. Lleva 27 prospectos, 11 en proceso y 7 nuevos en octubre.
 - **Lectura del 2026-10-31 (WhatsApp y hoja desde el 29 por la noche):**
   - **ID 26: visita agendada el lunes 2026-11-02 a las 16:00**, confirmada con Frank el 30. Respondió el 30 a las 9:05: su abuela tiene 76 años y se maneja de forma independiente, con ayuda en algunas cosas. El asistente anotó en la hoja edad, `Agendo Visita`, fecha, hora y `Seguimiento` = Activo, y `quiere visita` en `Recontacto` (con fecha de visita futura no se le prepara recordatorio).
   - **Frank respondió el 29 a las 21:55 "Si no hay problema"** a la consulta del ID 24 (detergente propio y comida sin gluten). El 2026-10-31 a las 13:21 el asistente le envió al ID 24, a pedido de Francisco, esa respuesta y una invitación a visitar en el horario vigente. El borrador PC-01 del ID 24 en `Recontacto` sigue sin marcar: no se envió ni corresponde.
