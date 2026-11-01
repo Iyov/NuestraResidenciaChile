@@ -26,6 +26,9 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-10-29 | Google Ads | Límite de puja de $400 a $300 por clic (sigue en "Maximizar clics") | El clic promedio iba en $329; bajar el costo por conversión | No: lo baja | Francisco ("Haz los Otros 3 cambios que puedes hacer") |
 | 2026-10-29 | Sitio | Página `/visita/`: botón fijo de WhatsApp en celulares y una línea que explica "autovalente" con el texto aprobado de MSG-07 | Al bajar por la página no quedaba ningún botón a la vista, y dos formularios recientes respondieron "No sé a qué se refiere" en autovalencia | No | Francisco ("Haz los Otros 3 cambios que puedes hacer") |
 | 2026-10-29 | Google Ads | Computadores de -100 % a -80 %: se puja el 20 % de lo normal | Francisco prefirió no excluirlos del todo | No: lo baja respecto de sin ajuste | Francisco ("En Computadoras que aparezca un 20%, no más") |
+| 2026-11-01 | Google Ads | Límite de puja de $300 a $350 por clic (sigue en "Maximizar clics") | Del 29 de octubre al 1 de noviembre gastó $5.516 en cuatro días, unos $1.400 al día contra un presupuesto de $2.200 | Sí, dentro del presupuesto diario de $2.200 | Francisco ("subir el límite de $300 a $350" si no gasta su presupuesto) |
+| 2026-11-01 | Google Ads | Tres negativas: quillota, asilo, asilos | Términos con clics del 29 de octubre al 1 de noviembre: otra ciudad y búsquedas de asilos con precios; "asilo" en concordancia amplia no cubre el plural | No | Francisco ("agregar quillota y asilo") |
+| 2026-11-01 | Google Ads | "Contactos (Objetivo predeterminado de la cuenta)" y la importación "Nuestra Residencia Chile (Respuestas)" pasan de principales a secundarias | Estaban en "Configuración incorrecta" desde agosto: la etiqueta de "Contactos" nunca recibió datos y la importación desde la hoja nunca se usó (REQ-006). Como principales entrarían en una puja por conversiones | No | Francisco ("corregir las dos acciones de conversión") |
 
 ## Revisiones
 
@@ -94,3 +97,13 @@ Período: 20 al 28 de octubre.
 - **Términos desde los cambios:** 36 términos; los de más clics son de precio ("cuanto sale un asilo de ancianos en chile", "casas de reposo en ñuñoa precios"), "asilos de ancianos", "casas de reposo adulto mayor" y uno de otra ciudad ("casa adulto mayor quillota"). Posibles negativas: quillota y asilo.
 - **Conversiones:** sin cambios. "Clic en WhatsApp o formulario" activa; "Contactos (Objetivo predeterminado de la cuenta)" y la importación "Nuestra Residencia Chile (Respuestas)" siguen en "Configuración incorrecta" (resolver antes del 9 de noviembre); "Enviar formularios de clientes potenciales" y "Contacto (nuestraresidenciachile.cl/)" esperan conversiones.
 - **Para la revisión del 2 de noviembre:** con cuatro días no se puede medir el costo por conversión. Lo que sí se ve es que el límite de $300 deja presupuesto sin gastar; si en la semana sigue bajo $2.200 al día, subirlo a $350.
+
+### 2026-11-01 (revisión semanal del 2, adelantada)
+
+Período: 29 de octubre al 1 de noviembre, desde los cambios del 29.
+
+- **Campaña:** 173 apariciones, 18 clics (10,4 %), $5.516 antes de IVA, $306 por clic, 1 conversión. Presupuesto de $2.200 al día; "Apto (en aprendizaje)".
+- **Gasto bajo el presupuesto:** unos $1.400 al día. Se cumplió la condición del 1 de noviembre y el límite pasó a $350 (comprobado en la configuración).
+- **Negativas:** quillota, asilo y asilos; la campaña quedó con 62 (comprobado en la cuenta).
+- **Conversiones:** "Contactos" y la importación de la hoja quedaron "Secundario" y fuera de los objetivos de la cuenta (comprobado en la lista). Principales: "Clic en WhatsApp o formulario" (activa), "Contacto (nuestraresidenciachile.cl/)" y "Enviar formularios de clientes potenciales" (SUBMIT_LEAD_FORM), estas dos esperando conversiones.
+- **Para el 9 de noviembre:** medir si con $350 la campaña gasta su presupuesto y el costo por conversión de la semana. Antes de pujar por conversiones conviene dejar como principal solo "Clic en WhatsApp o formulario": las otras dos no registran nada y diluyen la señal.

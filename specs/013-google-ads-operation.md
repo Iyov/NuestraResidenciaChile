@@ -22,8 +22,8 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 | | Valor |
 |---|---|
 | Tipo | Búsqueda, sin socios de búsqueda ni Red de Display |
-| Presupuesto | $2.750 al día hasta el 31 de octubre; $2.200 al día desde el 1 de noviembre |
-| Puja | Maximizar clics, con límite de $300 por clic (desde el 2026-10-29; antes $400) |
+| Presupuesto | $2.200 al día desde el 1 de noviembre (antes $2.750) |
+| Puja | Maximizar clics, con límite de $350 por clic (desde el 2026-11-01; $300 desde el 29 de octubre y antes $400) |
 | Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
 | Dispositivos | Celulares y tablets; computadores con ajuste de -80 % desde el 2026-10-29 (se puja el 20 % de lo normal) |
 | Idioma | Español |
@@ -37,13 +37,14 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 - Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
 - Generales, limitadas por la zona: "residencia para adultos mayores", [residencia adulto mayor] (exacta; la de frase quedó detenida el 2026-10-29 por su costo por conversión), "residencias adultos mayores", "residencia tercera edad".
 
-**Negativas (59 desde el 2026-10-29; el detalle de las agregadas después del 13 está en el registro):**
+**Negativas (62 desde el 2026-11-01; el detalle de las agregadas después del 13 está en el registro):**
 
 - Cuidados que la residencia no ofrece: "casa de reposo", cuidado, cuidados, enfermería, postrado.
+- Asilos: asilo, asilos.
 - Precio y empleo: baratas, gratis, gratuito, gratuitos, gratuitas, pensión, trabajo, empleo.
 - Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "hogar de cristo", "las rosas", "san vicente de paul", "san gerardo", "casa de acogida", fundacion, fundación, municipal.
 - Otros servicios: jardin, jardín, "centro de dia", "centro de día".
-- Comunas fuera de la zona: macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
+- Comunas y ciudades fuera de la zona: quillota, macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
 - Otras residencias y búsquedas de dirección: acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
 
 Las búsquedas por el nombre de otras residencias se excluyen a medida que aparecen en los términos de búsqueda (Francisco, 2026-10-17): en la primera semana con límite de puja, cerca de un cuarto de los clics fueron de esas búsquedas y ninguno trajo un prospecto.
@@ -60,6 +61,7 @@ Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horari
 
 - **Conversión "Clic en WhatsApp o formulario":** principal. La página `/visita/` la envía cuando alguien pulsa el botón de WhatsApp o abre el formulario; cuenta una vez por clic de anuncio y no usa conversiones avanzadas. Es la señal más cercana a una consulta que el sitio puede dar.
 - **Conversión "Contacto (nuestraresidenciachile.cl/)":** cuenta la llegada a una página que comienza con `/contact`. Desde que el anuncio lleva a `/visita/` solo la activan quienes entran por el vínculo "Agenda tu visita" o navegan hasta ahí.
+- **Acciones secundarias (desde el 2026-11-01):** "Contactos (Objetivo predeterminado de la cuenta)", con una etiqueta que nunca se instaló, y la importación "Nuestra Residencia Chile (Respuestas)" desde Google Sheets, que nunca importó (REQ-006). Ambas, de agosto y anteriores a la campaña, estaban en "Configuración incorrecta"; como secundarias no cuentan en la columna Conversiones ni en la puja. La fuente de Sheets sigue conectada, sin uso.
 - **Lo que no se puede medir:** el envío del formulario, porque es un Google Form incrustado (hallazgo S-1 del [anexo de SPEC-005](005-baseline-2026-10.md)).
 - **Consultas reales:** se cuentan en la hoja. La comparación semanal es clics → conversiones → prospectos nuevos con origen "Sitio Web" o "WhatsApp".
 
@@ -113,8 +115,8 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; el 2026-10-29 el resumen de facturación ya no muestra crédito |
 | 2026-10-26 | Segunda revisión semanal: hecha el 2026-10-29 (ver el registro); 12 negativas más |
 | 2026-11-01 | Bajar el presupuesto a $2.200 al día: la regla automática lo hizo (comprobado el 2026-11-01) |
-| 2026-11-02 | Revisión semanal: medir el costo por conversión desde los cambios del 29 y si el límite de $300 deja presupuesto sin gastar |
-| 2026-11-09 | Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
+| 2026-11-02 | Revisión semanal: adelantada al 2026-11-01 (ver el registro); límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
+| 2026-11-09 | Medir el gasto diario con el límite de $350. Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
 
 ## Decisiones abiertas
 
