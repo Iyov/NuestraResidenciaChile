@@ -29,6 +29,7 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-11-01 | Google Ads | Límite de puja de $300 a $350 por clic (sigue en "Maximizar clics") | Del 29 de octubre al 1 de noviembre gastó $5.516 en cuatro días, unos $1.400 al día contra un presupuesto de $2.200 | Sí, dentro del presupuesto diario de $2.200 | Francisco ("subir el límite de $300 a $350" si no gasta su presupuesto) |
 | 2026-11-01 | Google Ads | Tres negativas: quillota, asilo, asilos | Términos con clics del 29 de octubre al 1 de noviembre: otra ciudad y búsquedas de asilos con precios; "asilo" en concordancia amplia no cubre el plural | No | Francisco ("agregar quillota y asilo") |
 | 2026-11-01 | Google Ads | "Contactos (Objetivo predeterminado de la cuenta)" y la importación "Nuestra Residencia Chile (Respuestas)" pasan de principales a secundarias | Estaban en "Configuración incorrecta" desde agosto: la etiqueta de "Contactos" nunca recibió datos y la importación desde la hoja nunca se usó (REQ-006). Como principales entrarían en una puja por conversiones | No | Francisco ("corregir las dos acciones de conversión") |
+| 2026-11-02 | Google Ads | Cinco negativas de frase: "casas de reposo", "san jose", "san josé", "hogar italiano", "garden senior" | Revisión semanal: "casa de reposo" no cubría el plural; "hogar san jose" no cubría "hogar de ancianos san josé lo barnechea" (3 clics); búsquedas de otras residencias | No | Asistente, dentro de lo autorizado (REQ-001) |
 
 ## Revisiones
 
@@ -107,3 +108,16 @@ Período: 29 de octubre al 1 de noviembre, desde los cambios del 29.
 - **Negativas:** quillota, asilo y asilos; la campaña quedó con 62 (comprobado en la cuenta).
 - **Conversiones:** "Contactos" y la importación de la hoja quedaron "Secundario" y fuera de los objetivos de la cuenta (comprobado en la lista). Principales: "Clic en WhatsApp o formulario" (activa), "Contacto (nuestraresidenciachile.cl/)" y "Enviar formularios de clientes potenciales" (SUBMIT_LEAD_FORM), estas dos esperando conversiones.
 - **Para el 9 de noviembre:** medir si con $350 la campaña gasta su presupuesto y el costo por conversión de la semana. Antes de pujar por conversiones conviene dejar como principal solo "Clic en WhatsApp o formulario": las otras dos no registran nada y diluyen la señal.
+
+### 2026-11-02 (revisión semanal)
+
+Período: 26 de octubre al 1 de noviembre.
+
+- **Facturación:** noviembre va en $3.177 cobrados al 2 de noviembre. El límite de $350 rige desde la tarde del 1: todavía no se puede medir si la campaña gasta sus $2.200 al día.
+- **Campaña en la semana:** 506 apariciones, 51 clics (10,1 %), $16.630 antes de IVA, $326 por clic, 3 conversiones ($5.543 por conversión).
+- **Palabras:** "residencias adultos mayores" 14 clics y 1 conversión (ya no está en cero); "residencia tercera edad" 2 clics y 1; "senior living santiago" 1 clic y 1. "residencia adulto mayor autovalente" 5 clics, "residencia tercera edad las condes" 4 y "residencia adulto mayor ñuñoa" 3, sin conversión. [residencia adulto mayor] exacta: 15 apariciones y 2 clics. Ninguna palabra cumple la regla de pausa.
+- **Estado de las palabras:** "residencia adultos mayores autovalentes" y "residencia senior las condes" pasaron a "No apta" por volumen de búsquedas bajo; "residencia adulto mayor lo barnechea" sigue "Apto (limitado)" por nivel de calidad bajo. Sin apariciones en la semana: "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes"; "residencia para adultos mayores" tuvo 12 sin clics.
+- **Términos:** 110. Fuera de público: "hogar de ancianos san josé lo barnechea" (3 clics, 1 conversión; hogar de beneficencia que la negativa "hogar san jose" no cubría) y "hogar de ancianos san josé fotos", "casas de reposo adulto mayor" y "casas de reposo en ñuñoa precios", "hogar italiano ñuñoa" y "garden senior apartments precio" (otras residencias). Los de asilos, económicos, Quillota y otras residencias ya excluidas son de antes de esas negativas. "departamentos para adultos mayores autovalentes" (1 clic) se deja.
+- **Hoja y WhatsApp:** dos filas nuevas, el ID 26 (28 de octubre, Sitio Web; visita hoy) y el ID 27 (31 de octubre, llamó por teléfono). Por WhatsApp, un contacto del 29 llegó por el botón de `/visita/` y no tiene fila. Tres contactos para tres conversiones, aunque una conversión fue de la búsqueda del Hogar San José.
+- **Hecho ese día:** cinco negativas de frase; la campaña quedó con 67 (comprobado en la cuenta).
+- **Sin cambios:** límite de puja y palabras. Se espera al 9 de noviembre para medir una semana completa con $350 antes de agregar palabras.

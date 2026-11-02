@@ -37,15 +37,15 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 - Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
 - Generales, limitadas por la zona: "residencia para adultos mayores", [residencia adulto mayor] (exacta; la de frase quedó detenida el 2026-10-29 por su costo por conversión), "residencias adultos mayores", "residencia tercera edad".
 
-**Negativas (62 desde el 2026-11-01; el detalle de las agregadas después del 13 está en el registro):**
+**Negativas (67 desde el 2026-11-02; el detalle de las agregadas después del 13 está en el registro):**
 
-- Cuidados que la residencia no ofrece: "casa de reposo", cuidado, cuidados, enfermería, postrado.
+- Cuidados que la residencia no ofrece: "casa de reposo", "casas de reposo", cuidado, cuidados, enfermería, postrado.
 - Asilos: asilo, asilos.
 - Precio y empleo: baratas, gratis, gratuito, gratuitos, gratuitas, pensión, trabajo, empleo.
-- Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "hogar de cristo", "las rosas", "san vicente de paul", "san gerardo", "casa de acogida", fundacion, fundación, municipal.
+- Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "san jose", "san josé", "hogar de cristo", "las rosas", "san vicente de paul", "san gerardo", "casa de acogida", fundacion, fundación, municipal.
 - Otros servicios: jardin, jardín, "centro de dia", "centro de día".
 - Comunas y ciudades fuera de la zona: quillota, macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
-- Otras residencias y búsquedas de dirección: acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
+- Otras residencias y búsquedas de dirección: "hogar italiano", "garden senior", acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
 
 Las búsquedas por el nombre de otras residencias se excluyen a medida que aparecen en los términos de búsqueda (Francisco, 2026-10-17): en la primera semana con límite de puja, cerca de un cuarto de los clics fueron de esas búsquedas y ninguno trajo un prospecto.
 
@@ -115,21 +115,20 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-10-25 | Vence el crédito publicitario que muestra la cuenta; el 2026-10-29 el resumen de facturación ya no muestra crédito |
 | 2026-10-26 | Segunda revisión semanal: hecha el 2026-10-29 (ver el registro); 12 negativas más |
 | 2026-11-01 | Bajar el presupuesto a $2.200 al día: la regla automática lo hizo (comprobado el 2026-11-01) |
-| 2026-11-02 | Revisión semanal: adelantada al 2026-11-01 (ver el registro); límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
+| 2026-11-01 | Revisión adelantada (ver el registro): límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
+| 2026-11-02 | Revisión semanal: hecha (ver el registro); 5 negativas más |
 | 2026-11-09 | Medir el gasto diario con el límite de $350. Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
 
-## Pendientes (al 2026-11-01)
+## Pendientes (al 2026-11-02)
 
 Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
 
 1. **Revisión del 2026-11-09:** gasto diario con el límite de $350 (si sigue bajo $2.200, subirlo de nuevo), costo por conversión de la semana y prospectos nuevos en la hoja y WhatsApp.
 2. **Puja por conversiones (decidir el 2026-11-09):** antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario"; "Contacto (nuestraresidenciachile.cl/)" y "Enviar formularios de clientes potenciales" no registran nada.
-3. **Palabras sin apariciones:** "residencia para adultos mayores", "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes" (paso 4 de la rutina: reemplazarlas).
+3. **Palabras sin apariciones o "No apta":** "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes" sin apariciones; "residencia adultos mayores autovalentes" y "residencia senior las condes" "No apta" por volumen bajo desde el 2026-11-02 (paso 4 de la rutina: reemplazarlas; se decide el 2026-11-09, con una semana medida con $350).
 4. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
-5. **"residencias adultos mayores":** pasó a ser la principal sin conversiones (8 clics en octubre, 6 desde el 29); pausar si llega a 30 clics sin conversión.
-6. **Negativa candidata "casas de reposo":** la negativa de frase "casa de reposo" no cubre el plural, que trajo clics desde el 29.
-7. **Recursos sugeridos por Google:** textos destacados e imágenes (fotos sin personas de `/visita/`), solo con hechos aprobados.
-8. **AC-004 a las cuatro semanas (2026-11-09):** ningún término con más de 5 clics de cuidados, empleo, beneficencia o precios bajos.
+5. **Recursos sugeridos por Google:** textos destacados e imágenes (fotos sin personas de `/visita/`), solo con hechos aprobados.
+6. **AC-004 a las cuatro semanas (2026-11-09):** ningún término con más de 5 clics de cuidados, empleo, beneficencia o precios bajos.
 
 ## Decisiones abiertas
 
