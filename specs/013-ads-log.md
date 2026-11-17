@@ -30,6 +30,9 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-11-01 | Google Ads | Tres negativas: quillota, asilo, asilos | Términos con clics del 29 de octubre al 1 de noviembre: otra ciudad y búsquedas de asilos con precios; "asilo" en concordancia amplia no cubre el plural | No | Francisco ("agregar quillota y asilo") |
 | 2026-11-01 | Google Ads | "Contactos (Objetivo predeterminado de la cuenta)" y la importación "Nuestra Residencia Chile (Respuestas)" pasan de principales a secundarias | Estaban en "Configuración incorrecta" desde agosto: la etiqueta de "Contactos" nunca recibió datos y la importación desde la hoja nunca se usó (REQ-006). Como principales entrarían en una puja por conversiones | No | Francisco ("corregir las dos acciones de conversión") |
 | 2026-11-02 | Google Ads | Cinco negativas de frase: "casas de reposo", "san jose", "san josé", "hogar italiano", "garden senior" | Revisión semanal: "casa de reposo" no cubría el plural; "hogar san jose" no cubría "hogar de ancianos san josé lo barnechea" (3 clics); búsquedas de otras residencias | No | Asistente, dentro de lo autorizado (REQ-001) |
+| 2026-11-08 | Google Ads | Límite de puja de $350 a $400 por clic (sigue en "Maximizar clics") | Del 2 al 7 de noviembre gastó unos $1.900 al día contra $2.200; estado "Apto (limitado): parámetro de configuración de ofertas limitado" y el CPC promedio de todas las palabras iba entre $332 y $350 | Sí, dentro del presupuesto diario | Francisco ("ajusta los parámetros para que mejore") |
+| 2026-11-08 | Google Ads | Presupuesto diario de $2.200 a $2.300 | Noviembre va en $16.860 cobrados al día 8; con $2.300 al día cierra cerca de $79.800 cobrados, dentro de los $80.000 | Sí, dentro del presupuesto mensual | Francisco ("ajusta los parámetros para que mejore") |
+| 2026-11-08 | Google Ads | Dos negativas: pirque, cisroco | Términos con clic del 2 al 7 de noviembre: otra comuna fuera de la zona y otro hogar | No | Francisco ("ajusta los parámetros para que mejore") |
 
 ## Revisiones
 
@@ -121,3 +124,15 @@ Período: 26 de octubre al 1 de noviembre.
 - **Hoja y WhatsApp:** dos filas nuevas, el ID 26 (28 de octubre, Sitio Web; visita hoy) y el ID 27 (31 de octubre, llamó por teléfono). Por WhatsApp, un contacto del 29 llegó por el botón de `/visita/` y no tiene fila. Tres contactos para tres conversiones, aunque una conversión fue de la búsqueda del Hogar San José.
 - **Hecho ese día:** cinco negativas de frase; la campaña quedó con 67 (comprobado en la cuenta).
 - **Sin cambios:** límite de puja y palabras. Se espera al 9 de noviembre para medir una semana completa con $350 antes de agregar palabras.
+
+### 2026-11-08 (revisión semanal del 9, adelantada)
+
+Período: 2 al 7 de noviembre, con el límite de $350.
+
+- **Facturación:** noviembre va en $16.860 cobrados al día 8 (unos $2.100 al día con IVA).
+- **Campaña:** 335 apariciones, 34 clics (10,2 %), $11.498 antes de IVA, $338 por clic, 2 conversiones ($5.749 por conversión). Gastó unos $1.900 al día: con $350 tampoco alcanza el presupuesto. Estado "Apto (limitado): parámetro de configuración de ofertas limitado".
+- **Palabras:** "residencias adultos mayores" 23 clics y 1 conversión; "residencia adulto mayor ñuñoa" 3 clics y 1. Con 1 o 2 clics y sin conversión: "la reina", "autovalente", [residencia adulto mayor] exacta, "vitacura", "providencia" y "residencia tercera edad las condes". Sin apariciones: "hogar adulto mayor las condes", "residencia adulto mayor las condes", "residencia adultos mayores las condes" y "lo barnechea" (nivel de calidad bajo). Ninguna cumple la regla de pausa.
+- **Términos:** Google muestra 8 de los 34 clics. Fuera de público: "hogar de ancianos en pirque" y "hogar de ancianos cisroco". "residencia adulto mayor precios" (2 clics) y "precios de hogares de ancianos" se dejan: quien cotiza puede ser prospecto.
+- **AC-004 (cuatro semanas):** ningún término visible con más de 5 clics es de cuidados, empleo, beneficencia o precios bajos.
+- **Hecho ese día:** límite de puja a $400, presupuesto a $2.300 y negativas pirque y cisroco; la campaña quedó con 69 (todo comprobado en la cuenta).
+- **Puja por conversiones:** no por ahora; 2 conversiones por semana no bastan para que Google aprenda.

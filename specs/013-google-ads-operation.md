@@ -22,8 +22,8 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 | | Valor |
 |---|---|
 | Tipo | Búsqueda, sin socios de búsqueda ni Red de Display |
-| Presupuesto | $2.200 al día desde el 1 de noviembre (antes $2.750) |
-| Puja | Maximizar clics, con límite de $350 por clic (desde el 2026-11-01; $300 desde el 29 de octubre y antes $400) |
+| Presupuesto | $2.300 al día desde el 8 de noviembre ($2.200 desde el 1 de noviembre y antes $2.750) |
+| Puja | Maximizar clics, con límite de $400 por clic (desde el 2026-11-08; $350 desde el 1 de noviembre, $300 desde el 29 de octubre y antes $400) |
 | Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
 | Dispositivos | Celulares y tablets; computadores con ajuste de -80 % desde el 2026-10-29 (se puja el 20 % de lo normal) |
 | Idioma | Español |
@@ -37,15 +37,15 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 - Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
 - Generales, limitadas por la zona: "residencia para adultos mayores", [residencia adulto mayor] (exacta; la de frase quedó detenida el 2026-10-29 por su costo por conversión), "residencias adultos mayores", "residencia tercera edad".
 
-**Negativas (67 desde el 2026-11-02; el detalle de las agregadas después del 13 está en el registro):**
+**Negativas (69 desde el 2026-11-08; el detalle de las agregadas después del 13 está en el registro):**
 
 - Cuidados que la residencia no ofrece: "casa de reposo", "casas de reposo", cuidado, cuidados, enfermería, postrado.
 - Asilos: asilo, asilos.
 - Precio y empleo: baratas, gratis, gratuito, gratuitos, gratuitas, pensión, trabajo, empleo.
 - Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "san jose", "san josé", "hogar de cristo", "las rosas", "san vicente de paul", "san gerardo", "casa de acogida", fundacion, fundación, municipal.
 - Otros servicios: jardin, jardín, "centro de dia", "centro de día".
-- Comunas y ciudades fuera de la zona: quillota, macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
-- Otras residencias y búsquedas de dirección: "hogar italiano", "garden senior", acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
+- Comunas y ciudades fuera de la zona: pirque, quillota, macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
+- Otras residencias y búsquedas de dirección: cisroco, "hogar italiano", "garden senior", acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
 
 Las búsquedas por el nombre de otras residencias se excluyen a medida que aparecen en los términos de búsqueda (Francisco, 2026-10-17): en la primera semana con límite de puja, cerca de un cuarto de los clics fueron de esas búsquedas y ninguno trajo un prospecto.
 
@@ -117,18 +117,18 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-11-01 | Bajar el presupuesto a $2.200 al día: la regla automática lo hizo (comprobado el 2026-11-01) |
 | 2026-11-01 | Revisión adelantada (ver el registro): límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
 | 2026-11-02 | Revisión semanal: hecha (ver el registro); 5 negativas más |
-| 2026-11-09 | Medir el gasto diario con el límite de $350. Cuatro semanas: decidir con datos si se mantiene "Maximizar clics" o se pasa a puja por conversiones |
+| 2026-11-08 | Revisión semanal adelantada del 9 (ver el registro): límite de puja a $400, presupuesto a $2.300 y 2 negativas; se mantiene "Maximizar clics" |
+| 2026-11-16 | Revisión semanal: medir si con $400 la campaña gasta sus $2.300 al día y el costo por conversión |
 
-## Pendientes (al 2026-11-02)
+## Pendientes (al 2026-11-08)
 
 Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
 
-1. **Revisión del 2026-11-09:** gasto diario con el límite de $350 (si sigue bajo $2.200, subirlo de nuevo), costo por conversión de la semana y prospectos nuevos en la hoja y WhatsApp.
-2. **Puja por conversiones (decidir el 2026-11-09):** antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario"; "Contacto (nuestraresidenciachile.cl/)" y "Enviar formularios de clientes potenciales" no registran nada.
-3. **Palabras sin apariciones o "No apta":** "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes" sin apariciones; "residencia adultos mayores autovalentes" y "residencia senior las condes" "No apta" por volumen bajo desde el 2026-11-02 (paso 4 de la rutina: reemplazarlas; se decide el 2026-11-09, con una semana medida con $350).
+1. **Revisión del 2026-11-16:** si con $400 la campaña gasta sus $2.300 al día; si el costo por conversión sube sobre unos $7.000, volver a $350. Ajustar el presupuesto para cerrar noviembre en $80.000 cobrados.
+2. **Puja por conversiones:** se mantiene "Maximizar clics" (decisión del 2026-11-08): con unas 2 conversiones por semana, y siendo la conversión un clic en WhatsApp que a veces no es una consulta, la puja automática no tiene señal suficiente. Antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario".
+3. **Palabras sin apariciones o "No apta":** "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes" siguen sin apariciones; con el límite de $400 se ve si entran. Si el 16 siguen en cero, reemplazarlas.
 4. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
-5. **Recursos sugeridos por Google:** textos destacados e imágenes (fotos sin personas de `/visita/`), solo con hechos aprobados.
-6. **AC-004 a las cuatro semanas (2026-11-09):** ningún término con más de 5 clics de cuidados, empleo, beneficencia o precios bajos.
+5. **Recursos sugeridos por Google:** textos destacados e imágenes (fotos sin personas de `/visita/`), solo con hechos aprobados; Google estima +4,7 % de clics con imágenes.
 
 ## Decisiones abiertas
 
