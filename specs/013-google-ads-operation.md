@@ -55,6 +55,7 @@ Las búsquedas por el nombre de otras residencias se excluyen a medida que apare
 - Descripciones: las tres originales y "Habitación individual, jardines y tres comidas diarias. Agenda tu visita sin compromiso."
 - Textos destacados (desde el 2026-11-17, a nivel de cuenta): Habitación Individual · Baño Privado · Tres Comidas Diarias · Menú de Nutricionistas · Actividades Diarias · Jardines y Áreas Verdes · Más de 15 Años · Visita Sin Compromiso. Salen de FAQ-05, 06, 07, 11 y 14 y del horario de visitas.
 - Imágenes (desde el 2026-11-17, en la campaña): cuatro fotos sin personas de la biblioteca de la cuenta: comedor (cuadrada y horizontal), jardín y pileta. Las de la entrada quedaron fuera porque no se ve claro si aparece alguien.
+- Mensaje de WhatsApp (desde el 2026-11-17, a nivel de cuenta): botón "Enviar un mensaje" que abre un chat con el WhatsApp de NRC (el mismo número del botón de `/visita/`), con el mensaje de inicio "Hola, quiero agendar una visita a Nuestra Residencia" y la descripción "Agenda tu visita por WhatsApp". Google no pidió código de verificación.
 - Vínculos a sitio: "Agenda tu visita" (`/contact/`, con el horario de visitas; se mantiene ahí porque un vínculo debe llevar a una página distinta de la del anuncio) y "Conoce la residencia" (`/about-us/`).
 
 Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horario de visitas, experiencia, habitación individual) y [008-facts.md](008-facts.md) (H-02, H-07 y H-14).
@@ -62,6 +63,7 @@ Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horari
 ## Medición
 
 - **Conversión "Clic en WhatsApp o formulario":** principal. La página `/visita/` la envía cuando alguien pulsa el botón de WhatsApp o abre el formulario; cuenta una vez por clic de anuncio y no usa conversiones avanzadas. Es la señal más cercana a una consulta que el sitio puede dar.
+- **Conversión "Conversation started" (desde el 2026-11-17):** alojada en Google y principal; cuenta cada chat de WhatsApp abierto desde el botón de mensaje del anuncio, sin pasar por el sitio. La creó Google al activar el recurso de mensaje.
 - **Conversión "Contacto (nuestraresidenciachile.cl/)":** cuenta la llegada a una página que comienza con `/contact`. Desde que el anuncio lleva a `/visita/` solo la activan quienes entran por el vínculo "Agenda tu visita" o navegan hasta ahí.
 - **Acciones secundarias (desde el 2026-11-01):** "Contactos (Objetivo predeterminado de la cuenta)", con una etiqueta que nunca se instaló, y la importación "Nuestra Residencia Chile (Respuestas)" desde Google Sheets, que nunca importó (REQ-006). Ambas, de agosto y anteriores a la campaña, estaban en "Configuración incorrecta"; como secundarias no cuentan en la columna Conversiones ni en la puja. La fuente de Sheets sigue conectada, sin uso.
 - **Lo que no se puede medir:** el envío del formulario, porque es un Google Form incrustado (hallazgo S-1 del [anexo de SPEC-005](005-baseline-2026-10.md)).
@@ -91,7 +93,7 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 - **REQ-005:** la campaña apunta a personas autovalentes en la zona oriente.
 - **REQ-006:** no se envían datos personales a Google Ads. Las conversiones avanzadas y la importación de datos de la hoja siguen apagadas hasta que Toto las apruebe (SPEC-004).
 - **REQ-007:** las opciones automáticas de Google (IA Max, personalización de texto, expansión de la URL final, socios de búsqueda, Display) siguen desactivadas.
-- **REQ-008:** no se agrega recurso de llamada: la atención es por WhatsApp y formulario.
+- **REQ-008:** no se agrega recurso de llamada: la atención es por WhatsApp y formulario. El recurso de mensaje de WhatsApp está activo desde el 2026-11-17 (Francisco).
 - **REQ-009:** cada cambio queda con fecha y motivo en `specs/013-ads-log.md`.
 
 ## Criterios de aceptación
@@ -120,7 +122,7 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-11-01 | Revisión adelantada (ver el registro): límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
 | 2026-11-02 | Revisión semanal: hecha (ver el registro); 5 negativas más |
 | 2026-11-08 | Revisión semanal adelantada del 9 (ver el registro): límite de puja a $400, presupuesto a $2.300 y 2 negativas; se mantiene "Maximizar clics" |
-| 2026-11-17 | Revisión semanal del 16 (ver el registro): 8 textos destacados, 4 imágenes y 2 negativas; puja y presupuesto sin cambios |
+| 2026-11-17 | Revisión semanal del 16 (ver el registro): 8 textos destacados, 4 imágenes, 2 negativas y botón de WhatsApp; puja y presupuesto sin cambios |
 | 2026-11-23 | Revisión semanal: efecto de los textos destacados y las imágenes en el CTR y las conversiones; cierre de noviembre |
 
 ## Pendientes (al 2026-11-17)
@@ -128,7 +130,7 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
 
 1. **Revisión del 2026-11-23:** CTR y conversiones con los textos destacados y las imágenes; si las conversiones siguen sobre $10.000, volver el límite a $350. Noviembre cierra solo bajo $67.068 antes de IVA (unos $79.800 cobrados), el tope que Google calcula con $2.300 al día. Al empezar diciembre, presupuesto de unos $2.200 al día para $80.000 en el mes.
-2. **Recurso de mensaje de WhatsApp (propuesto a Francisco el 2026-11-17):** Google ofrece en la campaña un botón para abrir un chat de WhatsApp directo desde el anuncio. Casi todas las consultas llegan por WhatsApp. Vincular el número lo confirma Francisco (código de verificación).
+2. **Botón de WhatsApp (activo desde el 2026-11-17, aprobado por Francisco):** el 23, revisar si Google lo aprobó, cuántos chats abrió ("Conversation started") y si esos chats aparecen en WhatsApp con el mensaje de inicio.
 3. **Puja por conversiones:** se mantiene "Maximizar clics" (decisión del 2026-11-08): unas 2 conversiones por semana no bastan. Antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario".
 4. **Palabras sin apariciones:** "hogar adulto mayor las condes", "residencia adultos mayores las condes" y "residencia adulto mayor providencia" (esta, 0 del 8 al 16) no gastan ni estorban; las búsquedas que buscan caen igual en "residencias adultos mayores".
 5. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
