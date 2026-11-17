@@ -33,6 +33,9 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-11-08 | Google Ads | Límite de puja de $350 a $400 por clic (sigue en "Maximizar clics") | Del 2 al 7 de noviembre gastó unos $1.900 al día contra $2.200; estado "Apto (limitado): parámetro de configuración de ofertas limitado" y el CPC promedio de todas las palabras iba entre $332 y $350 | Sí, dentro del presupuesto diario | Francisco ("ajusta los parámetros para que mejore") |
 | 2026-11-08 | Google Ads | Presupuesto diario de $2.200 a $2.300 | Noviembre va en $16.860 cobrados al día 8; con $2.300 al día cierra cerca de $79.800 cobrados, dentro de los $80.000 | Sí, dentro del presupuesto mensual | Francisco ("ajusta los parámetros para que mejore") |
 | 2026-11-08 | Google Ads | Dos negativas: pirque, cisroco | Términos con clic del 2 al 7 de noviembre: otra comuna fuera de la zona y otro hogar | No | Francisco ("ajusta los parámetros para que mejore") |
+| 2026-11-17 | Google Ads | Dos negativas de frase: "san bernardo", "casa reposo" | Términos con clic del 8 al 16 de noviembre: otra comuna y casas de reposo ("casa de reposo" no cubre la forma sin "de") | No | Francisco ("ajusta lo que corresponda para que FUNCIONE bien") |
+| 2026-11-17 | Google Ads | Ocho textos destacados a nivel de cuenta: Habitación Individual, Baño Privado, Tres Comidas Diarias, Menú de Nutricionistas, Actividades Diarias, Jardines y Áreas Verdes, Más de 15 Años, Visita Sin Compromiso | El anuncio no tenía textos destacados; agrandan el anuncio y suben el CTR. Todos salen de respuestas aprobadas (FAQ-05, 06, 07, 11, 14) | No | Francisco ("ajusta lo que corresponda para que FUNCIONE bien") |
+| 2026-11-17 | Google Ads | Cuatro imágenes en la campaña, de la biblioteca de la cuenta y sin personas: comedor (cuadrada y horizontal), jardín y pileta | Google estimaba +4,6 % de CTR con imágenes; pendiente 5 de la revisión del 8 | No | Francisco ("ajusta lo que corresponda para que FUNCIONE bien") |
 
 ## Revisiones
 
@@ -136,3 +139,15 @@ Período: 2 al 7 de noviembre, con el límite de $350.
 - **AC-004 (cuatro semanas):** ningún término visible con más de 5 clics es de cuidados, empleo, beneficencia o precios bajos.
 - **Hecho ese día:** límite de puja a $400, presupuesto a $2.300 y negativas pirque y cisroco; la campaña quedó con 69 (todo comprobado en la cuenta).
 - **Puja por conversiones:** no por ahora; 2 conversiones por semana no bastan para que Google aprenda.
+
+### 2026-11-17 (revisión semanal del 16)
+
+Período: 8 al 16 de noviembre, con el límite de $400 y $2.300 al día.
+
+- **Facturación:** noviembre va en $43.427 cobrados al 17. Con $2.300 al día, Google indica que noviembre no pasará de $67.068 antes de IVA (unos $79.800 cobrados): presupuesto sin cambios.
+- **Campaña:** 504 apariciones, 59 clics (11,7 %), $21.880 antes de IVA (unos $2.430 al día: ya gasta todo su presupuesto), $371 por clic, 2 conversiones ($10.940 por conversión, casi el doble que la semana anterior). Las dos conversiones fueron el 15 y el 16. Estado "Apto".
+- **Palabras:** "residencias adultos mayores" 41 clics, 2 conversiones y el 69 % del gasto ($7.593 por conversión). Con 2 o 3 clics sin conversión: "residencia tercera edad", [residencia adulto mayor], "ñuñoa", "autovalente", "la reina", "vitacura", "residencia tercera edad las condes". Sin apariciones: "hogar adulto mayor las condes", "residencia adultos mayores las condes", "providencia". Ninguna cumple la regla de pausa.
+- **Términos:** Google muestra 21 de los 59 clics. Fuera de público: "hogar de ancianos san bernardo" (2 clics) y "casa reposo adulto mayor". "hogar español precios" (otra residencia) trajo 1 conversión: se deja, como "vitali suites". "departamentos para adultos mayores autovalentes" (2 clics) se deja.
+- **Consultas reales (de la lectura del 17 en `MEMORY.md`):** del 8 al 16 llegaron por WhatsApp cuatro consultas desde el sitio (11, 11, 14 y 16 de noviembre), más que las 2 conversiones medidas; ninguna tiene fila todavía porque aún no piden visita.
+- **Hecho ese día:** 2 negativas (la campaña quedó con 71), 8 textos destacados y 4 imágenes, todos comprobados en la cuenta; textos e imágenes quedaron "En proceso de revisión".
+- **Sin cambios:** límite de $400 (con $350 no gastaba el presupuesto) y "Maximizar clics".

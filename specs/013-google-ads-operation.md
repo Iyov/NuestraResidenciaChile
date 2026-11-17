@@ -37,14 +37,14 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 - Otras comunas: "residencia adulto mayor" + vitacura, lo barnechea, la reina, providencia y ñuñoa.
 - Generales, limitadas por la zona: "residencia para adultos mayores", [residencia adulto mayor] (exacta; la de frase quedó detenida el 2026-10-29 por su costo por conversión), "residencias adultos mayores", "residencia tercera edad".
 
-**Negativas (69 desde el 2026-11-08; el detalle de las agregadas después del 13 está en el registro):**
+**Negativas (71 desde el 2026-11-17; el detalle de las agregadas después del 13 está en el registro):**
 
-- Cuidados que la residencia no ofrece: "casa de reposo", "casas de reposo", cuidado, cuidados, enfermería, postrado.
+- Cuidados que la residencia no ofrece: "casa de reposo", "casas de reposo", "casa reposo", cuidado, cuidados, enfermería, postrado.
 - Asilos: asilo, asilos.
 - Precio y empleo: baratas, gratis, gratuito, gratuitos, gratuitas, pensión, trabajo, empleo.
 - Hogares de beneficencia y servicios públicos: conapran, "hogar san jose", "san jose", "san josé", "hogar de cristo", "las rosas", "san vicente de paul", "san gerardo", "casa de acogida", fundacion, fundación, municipal.
 - Otros servicios: jardin, jardín, "centro de dia", "centro de día".
-- Comunas y ciudades fuera de la zona: pirque, quillota, macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
+- Comunas y ciudades fuera de la zona: "san bernardo", pirque, quillota, macul, "la florida", quilicura, maipu, maipú, "puente alto", "la cisterna", "san miguel".
 - Otras residencias y búsquedas de dirección: cisroco, "hogar italiano", "garden senior", acalis, aurum, "villa soleares", "senior suites", "el atardecer", "otoño dorado", direccion, dirección.
 
 Las búsquedas por el nombre de otras residencias se excluyen a medida que aparecen en los términos de búsqueda (Francisco, 2026-10-17): en la primera semana con límite de puja, cerca de un cuarto de los clics fueron de esas búsquedas y ninguno trajo un prospecto.
@@ -53,6 +53,8 @@ Las búsquedas por el nombre de otras residencias se excluyen a medida que apare
 
 - Títulos: Agendar Visita y Cotizar · Nuestra Residencia · Contacto · Residencia En Las Condes · Adultos Mayores Autovalentes · Residencia de Adulto Mayor · Calidad de Vida Senior · Visita Sin Compromiso · Jardines y Áreas Verdes · Más de 15 Años de Experiencia · Habitación Individual · Agenda Tu Visita.
 - Descripciones: las tres originales y "Habitación individual, jardines y tres comidas diarias. Agenda tu visita sin compromiso."
+- Textos destacados (desde el 2026-11-17, a nivel de cuenta): Habitación Individual · Baño Privado · Tres Comidas Diarias · Menú de Nutricionistas · Actividades Diarias · Jardines y Áreas Verdes · Más de 15 Años · Visita Sin Compromiso. Salen de FAQ-05, 06, 07, 11 y 14 y del horario de visitas.
+- Imágenes (desde el 2026-11-17, en la campaña): cuatro fotos sin personas de la biblioteca de la cuenta: comedor (cuadrada y horizontal), jardín y pileta. Las de la entrada quedaron fuera porque no se ve claro si aparece alguien.
 - Vínculos a sitio: "Agenda tu visita" (`/contact/`, con el horario de visitas; se mantiene ahí porque un vínculo debe llevar a una página distinta de la del anuncio) y "Conoce la residencia" (`/about-us/`).
 
 Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horario de visitas, experiencia, habitación individual) y [008-facts.md](008-facts.md) (H-02, H-07 y H-14).
@@ -118,17 +120,18 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-11-01 | Revisión adelantada (ver el registro): límite de puja a $350, 3 negativas y dos acciones de conversión a secundarias |
 | 2026-11-02 | Revisión semanal: hecha (ver el registro); 5 negativas más |
 | 2026-11-08 | Revisión semanal adelantada del 9 (ver el registro): límite de puja a $400, presupuesto a $2.300 y 2 negativas; se mantiene "Maximizar clics" |
-| 2026-11-16 | Revisión semanal: medir si con $400 la campaña gasta sus $2.300 al día y el costo por conversión |
+| 2026-11-17 | Revisión semanal del 16 (ver el registro): 8 textos destacados, 4 imágenes y 2 negativas; puja y presupuesto sin cambios |
+| 2026-11-23 | Revisión semanal: efecto de los textos destacados y las imágenes en el CTR y las conversiones; cierre de noviembre |
 
-## Pendientes (al 2026-11-08)
+## Pendientes (al 2026-11-17)
 
 Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
 
-1. **Revisión del 2026-11-16:** si con $400 la campaña gasta sus $2.300 al día; si el costo por conversión sube sobre unos $7.000, volver a $350. Ajustar el presupuesto para cerrar noviembre en $80.000 cobrados.
-2. **Puja por conversiones:** se mantiene "Maximizar clics" (decisión del 2026-11-08): con unas 2 conversiones por semana, y siendo la conversión un clic en WhatsApp que a veces no es una consulta, la puja automática no tiene señal suficiente. Antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario".
-3. **Palabras sin apariciones o "No apta":** "hogar adulto mayor las condes", "residencia adulto mayor las condes" y "residencia adultos mayores las condes" siguen sin apariciones; con el límite de $400 se ve si entran. Si el 16 siguen en cero, reemplazarlas.
-4. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
-5. **Recursos sugeridos por Google:** textos destacados e imágenes (fotos sin personas de `/visita/`), solo con hechos aprobados; Google estima +4,7 % de clics con imágenes.
+1. **Revisión del 2026-11-23:** CTR y conversiones con los textos destacados y las imágenes; si las conversiones siguen sobre $10.000, volver el límite a $350. Noviembre cierra solo bajo $67.068 antes de IVA (unos $79.800 cobrados), el tope que Google calcula con $2.300 al día. Al empezar diciembre, presupuesto de unos $2.200 al día para $80.000 en el mes.
+2. **Recurso de mensaje de WhatsApp (propuesto a Francisco el 2026-11-17):** Google ofrece en la campaña un botón para abrir un chat de WhatsApp directo desde el anuncio. Casi todas las consultas llegan por WhatsApp. Vincular el número lo confirma Francisco (código de verificación).
+3. **Puja por conversiones:** se mantiene "Maximizar clics" (decisión del 2026-11-08): unas 2 conversiones por semana no bastan. Antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario".
+4. **Palabras sin apariciones:** "hogar adulto mayor las condes", "residencia adultos mayores las condes" y "residencia adulto mayor providencia" (esta, 0 del 8 al 16) no gastan ni estorban; las búsquedas que buscan caen igual en "residencias adultos mayores".
+5. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
 
 ## Decisiones abiertas
 
