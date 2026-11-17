@@ -223,6 +223,45 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - **Prospecto sin fila:** una familia que cotiza para Providencia o Las Condes escribió por WhatsApp el 2026-10-16 y no tiene fila ni ID. El 2026-10-19 dio su nombre y pidió información (ver arriba). Se ingresa con el formulario (origen WhatsApp) solo cuando haya más datos y muestre interés en visitar (Francisco, 2026-10-19).
 - **Calendario:** 2026-11-02 visita del ID 26 a las 16:00; 2026-11-09 revisión de Google Ads: medir el gasto con el límite de $350 y decidir si se puja por conversiones (las dos acciones con "Configuración incorrecta" ya son secundarias).
 
+## Pendientes priorizados (al 2026-11-17)
+
+Revisado con la hoja viva (`Seguimiento` = Activo y pestaña `Recontacto`) y las lecturas hasta el 2026-11-17. Reemplaza como lista de trabajo a "Pendientes para continuar (al 2026-10-09)", que queda como detalle por especificación.
+
+**Alta (esta semana)**
+
+1. **Centro de Día — reunión de Don Humberto, jueves 2026-11-19, 17:30.** Esperar que defina horario, qué incluye y valores (propuesta enviada: 1,2 / 1,4 / 18 UF + IVA). Con eso: agregar la respuesta a `specs/002-faq-base.md`, avisar a la hija que consultó el 2026-11-16 y responder a quien pregunte.
+2. **ID 26: recordatorio del presupuesto.** Se envió el 2026-11-03 y no ha respondido. El 2026-11-17 quedó un borrador en su chat de WhatsApp (pregunta si lo revisaron en familia y ofrece otra visita): lo envía Francisco.
+3. **ID 11: seguimiento después de la visita del 2026-11-09.** Está evaluando alternativas (respondió el 2026-11-12). El 2026-11-17 quedó un borrador en su chat, para enviarlo el 19 o 20: pregunta cómo va la evaluación y ofrece ayuda con condiciones, contrato, fecha de ingreso o una segunda visita.
+4. **Consultas de WhatsApp sin fila:**
+   - la hija que visitaría sola (2026-11-12) no ha confirmado el día;
+   - la de la suegra de 91 años no ha respondido;
+   - la del 2026-11-14 tiene un borrador con el precio sin enviar;
+   - la hija del Centro de Día (2026-11-16) avisará antes de venir.
+
+   Se ingresan por el formulario cuando confirmen visita.
+5. **ID 28 (resuelto el 2026-11-17):** en `Recontacto` se marcó `Respondió` en su PC-01 (había respondido por audio el 2026-11-04) y se borró el borrador RC-04 ("por si no viste mi mensaje"), que no correspondía; con `Respondió` marcado el sistema no vuelve a prepararlo. Ella coordinará la visita cuando su marido venga a Chile.
+
+**Media (antes de fin de mes)**
+
+6. **Privacidad (SPEC-004):** la Ley 21.719 entra en vigencia el 2026-12-01. Falta la revisión de Toto del aviso y la política antes de esa fecha.
+7. **ID 24:** el hijo no responde desde el 2026-11-03. Decidir con Francisco si se hace un último seguimiento o se espera a la señora.
+8. **Search Console:** abrir el informe del 2026-11-15 y ver qué URL da 403. El inicio, `/visita/`, `/contact/` y la entrada de la habitación individual responden 200.
+9. **Pedir a Don Humberto** el "consentimiento voluntario de ingreso" y el Reglamento Interno, que el contrato tipo exige y no tenemos.
+10. **Visitas el sábado:** actualizar `/visita/` (con el sí de Francisco) y el horario en la base de respuestas.
+11. **Informe de noviembre para Don Humberto** (formato de la decisión 13), para entregar a inicios de diciembre.
+
+**Baja / cuando haya tiempo**
+
+12. **Google Ads:** seguir la lista de SPEC-013 ("Pendientes al 2026-11-17") en su sesión dedicada.
+13. **Google Business:** responder la reseña y completar el perfil. Retomar las publicaciones de contenido.
+14. **Vendedores sin reenviar** (equipamiento XRS del 2026-11-04 y asesoría ELEAM del 2026-11-10): reenviarlos a Don Humberto solo si Francisco quiere.
+15. **Pendientes técnicos:**
+    - reescribir SPEC-012 y `report.cjs` al formato vigente;
+    - agregar la columna `Fecha Pago`;
+    - correo de prueba de SPEC-006;
+    - eliminar la hoja auxiliar sobrante de `clasp create`.
+16. **ID 13, 14, 19, 20, 21 y 23:** visitaron entre agosto y octubre y siguen activos, sin respuesta reciente. Revisar en diciembre si se cierran o se recontactan.
+
 ## Decisiones abiertas / bloqueos
 
 - Aprobar por Toto la política/aviso de privacidad y el lenguaje del formulario sobre respuesta, WhatsApp, seguimientos, terceros/proveedores, conservación y derechos.
