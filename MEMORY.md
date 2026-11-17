@@ -230,8 +230,8 @@ Revisado con la hoja viva (`Seguimiento` = Activo y pestaña `Recontacto`) y las
 **Alta (esta semana)**
 
 1. **Centro de Día — reunión de Don Humberto, jueves 2026-11-19, 17:30.** Esperar que defina horario, qué incluye y valores (propuesta enviada: 1,2 / 1,4 / 18 UF + IVA). Con eso: agregar la respuesta a `specs/002-faq-base.md`, avisar a la hija que consultó el 2026-11-16 y responder a quien pregunte.
-2. **ID 26: recordatorio del presupuesto.** Se envió el 2026-11-03 y no ha respondido. El 2026-11-17 quedó un borrador en su chat de WhatsApp (pregunta si lo revisaron en familia y ofrece otra visita): lo envía Francisco.
-3. **ID 11: seguimiento después de la visita del 2026-11-09.** Está evaluando alternativas (respondió el 2026-11-12). El 2026-11-17 quedó un borrador en su chat, para enviarlo el 19 o 20: pregunta cómo va la evaluación y ofrece ayuda con condiciones, contrato, fecha de ingreso o una segunda visita.
+2. **ID 26: recordatorio del presupuesto.** Se envió el 2026-11-03 y no ha respondido. Francisco le envió el recordatorio el 2026-11-17 y ella respondió que lo pensaron y su abuela aún no está segura. Francisco le respondió ese día (comprensión, visita de la abuela sin compromiso y aviso del servicio de día cuando esté listo). Avisarle cuando se defina el Centro de Día.
+3. **ID 11: seguimiento después de la visita del 2026-11-09.** Está evaluando alternativas (respondió el 2026-11-12). Francisco le envió el seguimiento el 2026-11-17 (cómo va la evaluación; ayuda con condiciones, contrato, fecha de ingreso o una segunda visita). Esperar su respuesta.
 4. **Consultas de WhatsApp sin fila:**
    - la hija que visitaría sola (2026-11-12) no ha confirmado el día;
    - la de la suegra de 91 años no ha respondido;
