@@ -223,20 +223,29 @@ El archivo de referencia es `Contrato/CTTO [NR FB].pdf`; revisar el contrato ori
 - **Prospecto sin fila:** una familia que cotiza para Providencia o Las Condes escribió por WhatsApp el 2026-10-16 y no tiene fila ni ID. El 2026-10-19 dio su nombre y pidió información (ver arriba). Se ingresa con el formulario (origen WhatsApp) solo cuando haya más datos y muestre interés en visitar (Francisco, 2026-10-19).
 - **Calendario:** 2026-11-02 visita del ID 26 a las 16:00; 2026-11-09 revisión de Google Ads: medir el gasto con el límite de $350 y decidir si se puja por conversiones (las dos acciones con "Configuración incorrecta" ya son secundarias).
 
-## Pendientes priorizados (al 2026-11-17)
+## Pendientes priorizados (al 2026-11-23)
 
-Revisado con la hoja viva (`Seguimiento` = Activo y pestaña `Recontacto`) y las lecturas hasta el 2026-11-17. Reemplaza como lista de trabajo a "Pendientes para continuar (al 2026-10-09)", que queda como detalle por especificación.
+Revisado con la hoja viva (`Seguimiento` = Activo y pestaña `Recontacto`) y las lecturas hasta el 2026-11-23 (correo de NRC y WhatsApp). Reemplaza como lista de trabajo a "Pendientes para continuar (al 2026-10-09)", que queda como detalle por especificación.
 
 **Alta (esta semana)**
 
-1. **Centro de Día — reunión de Don Humberto, jueves 2026-11-19, 17:30.** Esperar que defina horario, qué incluye y valores (propuesta enviada: 1,2 / 1,4 / 18 UF + IVA). Con eso: agregar la respuesta a `specs/002-faq-base.md`, avisar a la hija que consultó el 2026-11-16 y responder a quien pregunte.
-2. **ID 26: recordatorio del presupuesto.** Se envió el 2026-11-03 y no ha respondido. Francisco le envió el recordatorio el 2026-11-17 y ella respondió que lo pensaron y su abuela aún no está segura. Francisco le respondió ese día (comprensión, visita de la abuela sin compromiso y aviso del servicio de día cuando esté listo). Avisarle cuando se defina el Centro de Día.
-3. **ID 11: seguimiento después de la visita del 2026-11-09.** Está evaluando alternativas (respondió el 2026-11-12). Francisco le envió el seguimiento el 2026-11-17 (cómo va la evaluación; ayuda con condiciones, contrato, fecha de ingreso o una segunda visita). Esperar su respuesta.
+1. **Centro de Día — la reunión de Don Humberto fue el jueves 2026-11-19, 17:30.** Francisco no asistió. Ese día Don Humberto escribió al correo USACH de Francisco que Vanessa está a cargo de organizar el Centro de Día y pidió intercambiar ideas con ella. El 2026-11-20 Vanessa contó lo acordado:
+   - Se venden primero los servicios que ya operan como "programación diaria". Hoy, lunes y miércoles hay gimnasia y estimulación física en la mañana y estimulación cognitiva en la tarde (manualidades, juegos, conversación), a cargo de la terapeuta ocupacional, y se pueden sumar las comidas. Falta escribir la propuesta, decidir el horario y habilitar espacios para estos "residentes flotantes".
+   - Nicolás hará el presupuesto de las jornadas, incluida la posibilidad de estadía por noche.
+   - Otras actividades (arte, oficios) se suman cuando haya flujo para costearlas.
+   - El equipo es la terapeuta ocupacional, Frank y el equipo de Vanessa.
+
+   Vanessa le pidió a Francisco una reunión (presencial o virtual) y su opinión de marketing: qué insumos necesita para vender, si profundizó la investigación de mercado y cómo ve la puesta en marcha. Francisco respondió el 2026-11-23 desde su correo USACH, con copia a Don Humberto, Nico, Cristian y NRC: se disculpó por no asistir, propuso una reunión virtual esta semana, listó los insumos para vender (producto en una línea, valor y paquetes o jornada de prueba, condiciones, fotos autorizadas y contacto en la residencia), resumió la investigación y la primera consulta real, y propuso partir simple (lunes y miércoles, precio por jornada y jornada de prueba, primero a quienes ya consultaron, medir cuatro semanas). Siguiente paso: coordinar la reunión con Vanessa y esperar el presupuesto de Nicolás.
+   Propuesta inicial ya enviada: 1,2 / 1,4 / 18 UF + IVA. Con eso: agregar la respuesta a `specs/002-faq-base.md`, avisar a la hija que consultó el 2026-11-16 y responder a quien pregunte.
+2. **ID 26: recordatorio del presupuesto.** Se envió el 2026-11-03 y no ha respondido. Francisco le envió el recordatorio el 2026-11-17 y ella respondió que lo pensaron y su abuela aún no está segura. Francisco le respondió ese día (comprensión, visita de la abuela sin compromiso y aviso del servicio de día cuando esté listo). Ella agradeció. Avisarle cuando se defina el Centro de Día.
+3. **ID 11: seguimiento después de la visita del 2026-11-09.** Está evaluando alternativas (respondió el 2026-11-12). Francisco le envió el seguimiento el 2026-11-17; al 2026-11-23 no ha respondido.
 4. **Consultas de WhatsApp sin fila:**
    - la hija que visitaría sola (2026-11-12) no ha confirmado el día;
    - la de la suegra de 91 años no ha respondido;
    - la del 2026-11-14 tiene un borrador con el precio sin enviar;
-   - la hija del Centro de Día (2026-11-16) avisará antes de venir.
+   - la hija del Centro de Día (2026-11-16) cerró el 2026-11-17 con un agradecimiento; avisará antes de venir;
+   - **nueva, 2026-11-18 (23:19):** pide agendar una visita y solo recibió la bienvenida automática; falta responderle (pedir día y los datos de MSG-07);
+   - **nueva, 2026-11-18 (18:32), desde el sitio:** tras la bienvenida preguntó si sirve para un adulto mayor "semi valente"; falta responderle. La elegibilidad no la decide el asistente (FAQ-04: conversarlo con calma); se deriva a Francisco.
 
    Se ingresan por el formulario cuando confirmen visita.
 5. **ID 28 (resuelto el 2026-11-17):** en `Recontacto` se marcó `Respondió` en su PC-01 (había respondido por audio el 2026-11-04) y se borró el borrador RC-04 ("por si no viste mi mensaje"), que no correspondía; con `Respondió` marcado el sistema no vuelve a prepararlo. Ella coordinará la visita cuando su marido venga a Chile.
