@@ -244,8 +244,8 @@ Revisado con la hoja viva (`Seguimiento` = Activo y pestaña `Recontacto`) y las
    - la de la suegra de 91 años no ha respondido;
    - la del 2026-11-14 tiene un borrador con el precio sin enviar;
    - la hija del Centro de Día (2026-11-16) cerró el 2026-11-17 con un agradecimiento; avisará antes de venir;
-   - **nueva, 2026-11-18 (23:19):** pide agendar una visita y solo recibió la bienvenida automática; falta responderle (pedir día y los datos de MSG-07);
-   - **nueva, 2026-11-18 (18:32), desde el sitio:** tras la bienvenida preguntó si sirve para un adulto mayor "semi valente"; falta responderle. La elegibilidad no la decide el asistente (FAQ-04: conversarlo con calma); se deriva a Francisco.
+   - **nueva, 2026-11-18 (23:19), escribe desde una cuenta de empresa:** pide agendar una visita. El 2026-11-23 Francisco le pidió día, hora y los datos de MSG-07. Ingresarla por el formulario cuando confirme;
+   - **nueva, 2026-11-18 (18:32), desde el sitio:** tras la bienvenida preguntó si sirve para un adulto mayor "semi valente". El 2026-11-23 Francisco le respondió que la residencia es para autovalentes y le preguntó en qué necesita ayuda la persona mayor. Con su respuesta decide Francisco: la elegibilidad no la decide el asistente (FAQ-04).
 
    Se ingresan por el formulario cuando confirmen visita.
 5. **ID 28 (resuelto el 2026-11-17):** en `Recontacto` se marcó `Respondió` en su PC-01 (había respondido por audio el 2026-11-04) y se borró el borrador RC-04 ("por si no viste mi mensaje"), que no correspondía; con `Respondió` marcado el sistema no vuelve a prepararlo. Ella coordinará la visita cuando su marido venga a Chile.
