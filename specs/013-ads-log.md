@@ -161,3 +161,4 @@ Período: 8 al 16 de noviembre, con el límite de $400 y $2.300 al día.
 - **Términos de búsqueda:** todos de residencias o hogares de adultos mayores; ninguna negativa nueva.
 - **Límite de puja:** se queda en $400, porque la conversión cuesta menos de $10.000.
 - **Hecho ese día:** presupuesto a $2.200 al día.
+- **Chats de WhatsApp con el mensaje de inicio (lectura del mismo día):** desde el 17 llegó uno, el 18 de noviembre; recibió la bienvenida y el 23 se le respondió pidiendo día y datos, sin respuesta aún. El mensaje de inicio es igual al del botón de `/visita/`, así que no se puede saber si vino del anuncio o del sitio. Con 12 clics en el botón y un solo chat, casi nadie que lo toca llega a escribir.
