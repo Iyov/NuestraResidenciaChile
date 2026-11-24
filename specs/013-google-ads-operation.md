@@ -22,7 +22,7 @@ El histórico de la hoja dice que de cada 10 consultas, 7 terminan en visita, y 
 | | Valor |
 |---|---|
 | Tipo | Búsqueda, sin socios de búsqueda ni Red de Display |
-| Presupuesto | $2.300 al día desde el 8 de noviembre ($2.200 desde el 1 de noviembre y antes $2.750) |
+| Presupuesto | $2.200 al día desde el 24 de noviembre (tope de Google: unos $66.900 al mes antes de IVA, cerca de $79.600 cobrados); $2.300 desde el 8 de noviembre, $2.200 desde el 1 de noviembre y antes $2.750 |
 | Puja | Maximizar clics, con límite de $400 por clic (desde el 2026-11-08; $350 desde el 1 de noviembre, $300 desde el 29 de octubre y antes $400) |
 | Zona | Personas que están en Las Condes, Vitacura, Lo Barnechea, La Reina, Providencia y Ñuñoa |
 | Dispositivos | Celulares y tablets; computadores con ajuste de -80 % desde el 2026-10-29 (se puja el 20 % de lo normal) |
@@ -123,14 +123,15 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 | 2026-11-02 | Revisión semanal: hecha (ver el registro); 5 negativas más |
 | 2026-11-08 | Revisión semanal adelantada del 9 (ver el registro): límite de puja a $400, presupuesto a $2.300 y 2 negativas; se mantiene "Maximizar clics" |
 | 2026-11-17 | Revisión semanal del 16 (ver el registro): 8 textos destacados, 4 imágenes, 2 negativas y botón de WhatsApp; puja y presupuesto sin cambios |
-| 2026-11-23 | Revisión semanal: efecto de los textos destacados y las imágenes en el CTR y las conversiones; cierre de noviembre |
+| 2026-11-24 | Revisión semanal del 23 (ver el registro): CTR de 15 %, 4 conversiones a $4.356, botón de WhatsApp aprobado; presupuesto a $2.200 para diciembre, límite sin cambios |
+| 2026-11-30 | Revisión semanal y cierre de noviembre |
 
-## Pendientes (al 2026-11-17)
+## Pendientes (al 2026-11-24)
 
 Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
 
-1. **Revisión del 2026-11-23:** CTR y conversiones con los textos destacados y las imágenes; si las conversiones siguen sobre $10.000, volver el límite a $350. Noviembre cierra solo bajo $67.068 antes de IVA (unos $79.800 cobrados), el tope que Google calcula con $2.300 al día. Al empezar diciembre, presupuesto de unos $2.200 al día para $80.000 en el mes.
-2. **Botón de WhatsApp (activo desde el 2026-11-17, aprobado por Francisco):** el 23, revisar si Google lo aprobó, cuántos chats abrió ("Conversation started") y si esos chats aparecen en WhatsApp con el mensaje de inicio.
+1. **Revisión del 2026-11-30:** si el costo por conversión sube de $10.000, volver el límite a $350. Cierre de noviembre en Facturación. El presupuesto de $2.200 al día ya rige para diciembre.
+2. **Botón de WhatsApp (aprobado por Google; 12 clics del 17 al 24):** "Conversation started" sigue en 0. El 30, ver si Google la empieza a contar y si los chats llegaron a WhatsApp con el mensaje de inicio (eso último se mira en la sesión de prospectos).
 3. **Puja por conversiones:** se mantiene "Maximizar clics" (decisión del 2026-11-08): unas 2 conversiones por semana no bastan. Antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario".
 4. **Palabras sin apariciones:** "hogar adulto mayor las condes", "residencia adultos mayores las condes" y "residencia adulto mayor providencia" (esta, 0 del 8 al 16) no gastan ni estorban; las búsquedas que buscan caen igual en "residencias adultos mayores".
 5. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.

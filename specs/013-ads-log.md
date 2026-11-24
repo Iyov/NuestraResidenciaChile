@@ -37,6 +37,7 @@ Un renglón por cambio en Google Ads, Analytics u otra plataforma de publicidad 
 | 2026-11-17 | Google Ads | Ocho textos destacados a nivel de cuenta: Habitación Individual, Baño Privado, Tres Comidas Diarias, Menú de Nutricionistas, Actividades Diarias, Jardines y Áreas Verdes, Más de 15 Años, Visita Sin Compromiso | El anuncio no tenía textos destacados; agrandan el anuncio y suben el CTR. Todos salen de respuestas aprobadas (FAQ-05, 06, 07, 11, 14) | No | Francisco ("ajusta lo que corresponda para que FUNCIONE bien") |
 | 2026-11-17 | Google Ads | Cuatro imágenes en la campaña, de la biblioteca de la cuenta y sin personas: comedor (cuadrada y horizontal), jardín y pileta | Google estimaba +4,6 % de CTR con imágenes; pendiente 5 de la revisión del 8 | No | Francisco ("ajusta lo que corresponda para que FUNCIONE bien") |
 | 2026-11-17 | Google Ads | Recurso de mensaje de WhatsApp a nivel de cuenta: botón "Enviar un mensaje" al número de NRC, mensaje de inicio "Hola, quiero agendar una visita a Nuestra Residencia", descripción "Agenda tu visita por WhatsApp". Google agregó la conversión principal "Conversation started" | Casi todas las consultas llegan por WhatsApp; el botón abre el chat directo desde el anuncio | No | Francisco ("sí, activa el botón de WhatsApp") |
+| 2026-11-24 | Google Ads | Presupuesto de $2.300 a $2.200 al día | El acordado para diciembre ($80.000 al mes); se adelanta para no dejar un cambio para el 1. En noviembre baja apenas el tope | No | Francisco ("revisa Google ADS y si hay que cambiar o actualizar alguna configuración") |
 
 ## Revisiones
 
@@ -152,3 +153,11 @@ Período: 8 al 16 de noviembre, con el límite de $400 y $2.300 al día.
 - **Consultas reales (de la lectura del 17 en `MEMORY.md`):** del 8 al 16 llegaron por WhatsApp cuatro consultas desde el sitio (11, 11, 14 y 16 de noviembre), más que las 2 conversiones medidas; ninguna tiene fila todavía porque aún no piden visita.
 - **Hecho ese día:** 2 negativas (la campaña quedó con 71), 8 textos destacados, 4 imágenes y, con el sí de Francisco, el botón de WhatsApp; todo comprobado en la cuenta y "En proceso de revisión".
 - **Sin cambios:** límite de $400 (con $350 no gastaba el presupuesto) y "Maximizar clics".
+
+### 2026-11-24 (revisión semanal del 23)
+
+- **Campaña, 17 al 24 de noviembre:** 357 apariciones, 55 clics, CTR 15,4 % (10,5 % la semana del 8 al 14), $17.423 antes de IVA, 4 conversiones a $4.356 cada una. Todas son "Clic en WhatsApp o formulario" del sitio; dos vienen de "hogar de ancianos".
+- **Botón de WhatsApp:** Google lo aprobó ("Apto"). 149 apariciones y 12 clics ($3.727). "Conversation started" sigue en 0.
+- **Términos de búsqueda:** todos de residencias o hogares de adultos mayores; ninguna negativa nueva.
+- **Límite de puja:** se queda en $400, porque la conversión cuesta menos de $10.000.
+- **Hecho ese día:** presupuesto a $2.200 al día.
