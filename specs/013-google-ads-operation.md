@@ -55,7 +55,7 @@ Las búsquedas por el nombre de otras residencias se excluyen a medida que apare
 - Descripciones: las tres originales y "Habitación individual, jardines y tres comidas diarias. Agenda tu visita sin compromiso."
 - Textos destacados (desde el 2026-11-17, a nivel de cuenta): Habitación Individual · Baño Privado · Tres Comidas Diarias · Menú de Nutricionistas · Actividades Diarias · Jardines y Áreas Verdes · Más de 15 Años · Visita Sin Compromiso. Salen de FAQ-05, 06, 07, 11 y 14 y del horario de visitas.
 - Imágenes (desde el 2026-11-17, en la campaña): cuatro fotos sin personas de la biblioteca de la cuenta: comedor (cuadrada y horizontal), jardín y pileta. Las de la entrada quedaron fuera porque no se ve claro si aparece alguien.
-- Mensaje de WhatsApp (desde el 2026-11-17, a nivel de cuenta): botón "Enviar un mensaje" que abre un chat con el WhatsApp de NRC (el mismo número del botón de `/visita/`), con el mensaje de inicio "Hola, quiero agendar una visita a Nuestra Residencia" y la descripción "Agenda tu visita por WhatsApp". Google no pidió código de verificación.
+- Mensaje de WhatsApp (desde el 2026-11-17, a nivel de cuenta): botón "Enviar un mensaje" que abre un chat con el WhatsApp de NRC (el mismo número del botón de `/visita/`), con el mensaje de inicio "Hola, vi su anuncio y quiero agendar una visita" (desde el 2026-11-24; antes era el mismo del botón de `/visita/` y no se distinguían los chats) y la descripción "Agenda tu visita por WhatsApp". Google no pidió código de verificación.
 - Vínculos a sitio: "Agenda tu visita" (`/contact/`, con el horario de visitas; se mantiene ahí porque un vínculo debe llevar a una página distinta de la del anuncio) y "Conoce la residencia" (`/about-us/`).
 
 Cada texto sale de un hecho aprobado: [002-faq-base.md](002-faq-base.md) (horario de visitas, experiencia, habitación individual) y [008-facts.md](008-facts.md) (H-02, H-07 y H-14).
@@ -131,7 +131,7 @@ El resultado es una nota en [013-ads-log.md](013-ads-log.md): gasto, clics, conv
 Google Ads se trabaja en la sesión dedicada a la campaña (Francisco, 2026-11-01).
 
 1. **Revisión del 2026-11-30:** si el costo por conversión sube de $10.000, volver el límite a $350. Cierre de noviembre en Facturación. El presupuesto de $2.200 al día ya rige para diciembre.
-2. **Botón de WhatsApp (aprobado por Google; 12 clics del 17 al 24):** "Conversation started" sigue en 0. El 30, ver si Google la empieza a contar y si los chats llegaron a WhatsApp con el mensaje de inicio (eso último se mira en la sesión de prospectos).
+2. **Botón de WhatsApp (12 clics del 17 al 24; mensaje de inicio cambiado el 24, de nuevo en revisión):** "Conversation started" sigue en 0. El 30, ver si Google aprobó el cambio y buscar en WhatsApp los chats con "vi su anuncio": esos vienen del anuncio.
 3. **Puja por conversiones:** se mantiene "Maximizar clics" (decisión del 2026-11-08): unas 2 conversiones por semana no bastan. Antes de cambiar, dejar como principal solo "Clic en WhatsApp o formulario".
 4. **Palabras sin apariciones:** "hogar adulto mayor las condes", "residencia adultos mayores las condes" y "residencia adulto mayor providencia" (esta, 0 del 8 al 16) no gastan ni estorban; las búsquedas que buscan caen igual en "residencias adultos mayores".
 5. **"residencia adulto mayor lo barnechea":** "Apto (limitado)" por nivel de calidad bajo.
