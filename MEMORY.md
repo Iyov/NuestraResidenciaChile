@@ -248,28 +248,29 @@ Revisado con la hoja viva (`Seguimiento` = Activo y pestaña `Recontacto`) y las
    - **nueva, 2026-11-18 (18:32), desde el sitio:** tras la bienvenida preguntó si sirve para un adulto mayor "semi valente". El 2026-11-23 Francisco le respondió que la residencia es para autovalentes y le preguntó en qué necesita ayuda la persona mayor. Con su respuesta decide Francisco: la elegibilidad no la decide el asistente (FAQ-04).
 
    Se ingresan por el formulario cuando confirmen visita.
-5. **ID 28 (resuelto el 2026-11-17):** en `Recontacto` se marcó `Respondió` en su PC-01 (había respondido por audio el 2026-11-04) y se borró el borrador RC-04 ("por si no viste mi mensaje"), que no correspondía; con `Respondió` marcado el sistema no vuelve a prepararlo. Ella coordinará la visita cuando su marido venga a Chile.
+5. **ID 29 (nuevo, 2026-11-26, por correo):** escribió al correo de NRC por una familiar de 72 años; prefiere un hogar pequeño y preguntó cuántos residentes hay, el valor y si se incluyen pañales. Francisco aprobó las respuestas (hoy viven entre 12 y 15 personas mayores; pañales no incluidos porque la residencia es para autovalentes), el asistente dejó el borrador con el folleto y Francisco lo envió ese día; se le preguntó cómo está su familiar en el día a día. Se ingresó por el formulario a pedido de Francisco (origen Otro; sin teléfono ni nombre de la familiar, autovalencia por confirmar) con edad, `Estado`, `Comentario` y `Seguimiento` = Activo. No tiene WhatsApp registrado: el seguimiento es por correo y su borrador PC-01 en `Recontacto` no se envía. Siguiente paso: esperar su respuesta sobre la autovalencia; si no contesta en una semana, recordárselo a Francisco.
+6. **ID 28 (resuelto el 2026-11-17):** en `Recontacto` se marcó `Respondió` en su PC-01 (había respondido por audio el 2026-11-04) y se borró el borrador RC-04 ("por si no viste mi mensaje"), que no correspondía; con `Respondió` marcado el sistema no vuelve a prepararlo. Ella coordinará la visita cuando su marido venga a Chile.
 
 **Media (antes de fin de mes)**
 
-6. **Privacidad (SPEC-004):** la Ley 21.719 entra en vigencia el 2026-12-01. Falta la revisión de Toto del aviso y la política antes de esa fecha.
-7. **ID 24:** el hijo no responde desde el 2026-11-03. Decidir con Francisco si se hace un último seguimiento o se espera a la señora.
-8. **Search Console:** abrir el informe del 2026-11-15 y ver qué URL da 403. El inicio, `/visita/`, `/contact/` y la entrada de la habitación individual responden 200.
-9. **Pedir a Don Humberto** el "consentimiento voluntario de ingreso" y el Reglamento Interno, que el contrato tipo exige y no tenemos.
-10. **Visitas el sábado:** actualizar `/visita/` (con el sí de Francisco) y el horario en la base de respuestas.
-11. **Informe de noviembre para Don Humberto** (formato de la decisión 13), para entregar a inicios de diciembre.
+7. **Privacidad (SPEC-004):** la Ley 21.719 entra en vigencia el 2026-12-01. Falta la revisión de Toto del aviso y la política antes de esa fecha.
+8. **ID 24:** el hijo no responde desde el 2026-11-03. Decidir con Francisco si se hace un último seguimiento o se espera a la señora.
+9. **Search Console:** abrir el informe del 2026-11-15 y ver qué URL da 403. El inicio, `/visita/`, `/contact/` y la entrada de la habitación individual responden 200.
+10. **Pedir a Don Humberto** el "consentimiento voluntario de ingreso" y el Reglamento Interno, que el contrato tipo exige y no tenemos.
+11. **Visitas el sábado:** actualizar `/visita/` (con el sí de Francisco) y el horario en la base de respuestas.
+12. **Informe de noviembre para Don Humberto** (formato de la decisión 13), para entregar a inicios de diciembre.
 
 **Baja / cuando haya tiempo**
 
-12. **Google Ads:** seguir la lista de SPEC-013 ("Pendientes al 2026-11-17") en su sesión dedicada.
-13. **Google Business:** responder la reseña y completar el perfil. Retomar las publicaciones de contenido.
-14. **Vendedores sin reenviar** (equipamiento XRS del 2026-11-04 y asesoría ELEAM del 2026-11-10): reenviarlos a Don Humberto solo si Francisco quiere.
-15. **Pendientes técnicos:**
+13. **Google Ads:** seguir la lista de SPEC-013 ("Pendientes al 2026-11-17") en su sesión dedicada.
+14. **Google Business:** responder la reseña y completar el perfil. Retomar las publicaciones de contenido.
+15. **Vendedores sin reenviar** (equipamiento XRS del 2026-11-04 y asesoría ELEAM del 2026-11-10): reenviarlos a Don Humberto solo si Francisco quiere.
+16. **Pendientes técnicos:**
     - reescribir SPEC-012 y `report.cjs` al formato vigente;
     - agregar la columna `Fecha Pago`;
     - correo de prueba de SPEC-006;
     - eliminar la hoja auxiliar sobrante de `clasp create`.
-16. **ID 13, 14, 19, 20, 21 y 23:** visitaron entre agosto y octubre y siguen activos, sin respuesta reciente. Revisar en diciembre si se cierran o se recontactan.
+17. **ID 13, 14, 19, 20, 21 y 23:** visitaron entre agosto y octubre y siguen activos, sin respuesta reciente. Revisar en diciembre si se cierran o se recontactan.
 
 ## Decisiones abiertas / bloqueos
 
